@@ -475,6 +475,7 @@ const EVENTS = {
 };
 function maybeEvent() {
   if (W.noEvents || P.pending || P.jail || P.intro || P.eventDay === day()) return;
+  if (!P.shifts && !P.runs) return; // no surprises until the first job is done
   const h = hourF(); if (h < 8 || h > 21) return;
   if (rnd() > 0.25) return;
   const fits = Object.keys(EVENTS).filter(k => EVENTS[k].fits()); if (!fits.length) return;
