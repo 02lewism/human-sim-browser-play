@@ -381,6 +381,52 @@ nav.tabs button[data-t="me"] img{border-radius:50%;object-fit:cover;object-posit
 .shelf.over{outline:4px dashed var(--gold);outline-offset:-4px}.shelf.empty{animation:warnp 1s infinite;border-color:var(--bad)}.shelf.good{animation:gflash .5s}.shelf.no{animation:shake .4s}
 .van{background:#ffffff10;border:1px solid #ffffff22;border-radius:16px;padding:8px}.van b{display:block;text-align:center;color:var(--mut);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
 .crates{display:flex;justify-content:space-around}.crate{width:84px;height:84px;border-radius:14px;background:#ffffff14;display:flex;align-items:center;justify-content:center;cursor:grab}.crate img{width:74px;height:74px;object-fit:contain;pointer-events:none}
+/* ---- v0.8 hot dog scene: a visible line, bigger customers, grill and plate ---- */
+.hdline{display:flex;align-items:center;justify-content:center;gap:0;height:58px;margin-top:6px}
+.hdline .lab{background:#1a0f08cc;color:#ffdf8a;font-weight:800;font-size:12px;padding:3px 9px;border-radius:10px;margin-right:8px;white-space:nowrap}
+.hdline img{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid #ffffff88;background:#2a2450;margin-left:-8px;box-shadow:0 2px 6px #0009;opacity:calc(1 - var(--k) * .14);animation:bob 1.2s ease-in-out calc(var(--k) * .2s) infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.hdq{min-height:220px;padding-bottom:4px;gap:6px}
+.pring{width:min(28vw,112px);height:min(28vw,112px)}
+.cust .cn{font-size:13px}
+.oi img{width:30px;height:30px}
+.hdcounter{height:31%;min-height:196px;gap:4px}
+.hdgrill{flex:1.5;padding:9% 7%}
+.slot .gs img{height:50px;max-width:110px}
+.hdplate{flex:1.1}
+.dog{width:min(28vw,108px);height:min(10.5vw,42px)}
+.hdplate .cup img{width:42px;height:42px}
+.tray .src img{width:42px;height:42px}
+@media (max-height:760px){.hdline{height:46px}.hdline img{width:36px;height:36px}.hdq{min-height:170px}.pring{width:min(23vw,84px);height:min(23vw,84px)}.hdcounter{min-height:150px;height:27%}.tray .src{min-height:48px}.tray .src span{display:none}.slot .gs img{height:40px}}
+.obub{min-height:86px;justify-content:flex-start;padding-top:6px}
+@media (max-height:760px){.obub{min-height:72px}}
+.achip{position:relative;display:inline-flex;align-items:center;vertical-align:middle;margin-left:6px;height:18px;padding:0 7px;border-radius:9px;background:#ffffff14;border:1px solid #ffffff2e;overflow:hidden;font-size:11px;font-weight:800;color:var(--mut)}
+.achip i{position:absolute;left:0;top:0;bottom:0;background:#3ddc9740}.achip em{position:relative;font-style:normal;white-space:nowrap}
+.mstrip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0;padding:8px 10px;border-radius:14px;background:#ffffff0c;border:1px solid #ffffff1a}
+.mstrip div{display:flex;flex-direction:column;min-width:0}.mstrip small{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.06em}.mstrip b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* v0.8 polish */
+.gprog{display:inline-block;vertical-align:middle;margin-left:6px;font:800 11px system-ui;color:var(--teal);background:#3ddc9718;border:1px solid #3ddc9744;border-radius:9px;padding:1px 7px;white-space:nowrap}
+.needw{animation:warnp 1s infinite}
+.btn.food{border-color:#ffb02e66}
+.toast .trep{display:inline-block;margin-top:3px;font-size:12px}.toast .tmore{display:block;color:var(--mut);font-size:11px;margin-top:2px}
+.sheet h2 .por,.card h2 .por{margin:0;flex:none}
+.goalbar .gn{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.2}
+.lets .lrow{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid #ffffff12}.lets .lrow .btn{width:auto;flex:none;min-width:96px;margin:0}
+.lets .lrow .btn .lab{flex:none}.lart{width:64px;height:64px;object-fit:contain;flex:none}.li{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.li small{color:var(--mut);font-size:12px}
+.tcands{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0 8px}
+.tcand{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:8px 4px;border-radius:12px;border:1px solid var(--line);background:#262e60;color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+.tcand b{font-size:12px}.tcand small{font-size:10.5px;color:var(--mut);line-height:1.15}.tcand span{font-weight:800;font-size:12px}.tcand em{font-size:10px;color:#c9cdf0;line-height:1.15}
+.tcand .por{margin:0 auto 2px}
+.lissue{border:1px solid #ff5d7355;background:#ff5d7312;border-radius:12px;padding:8px;margin:2px 0 8px;display:flex;flex-direction:column;gap:2px}.lissue small{color:#d9dcff}
+.sfbox{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px;background:radial-gradient(90% 60% at 50% 35%,#1d2a44,#070a14)}
+.sfdoor{position:relative;width:min(86vw,340px);aspect-ratio:1;touch-action:none}.sfdoor .door{width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 10px 18px #000c)}
+.sfdial{position:absolute;left:28%;top:26%;width:40%;height:40%;border-radius:50%;cursor:grab}.sfdial img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.sfmark{position:absolute;left:calc(48% - 4px);top:22%;width:0;height:0;border:8px solid transparent;border-top:12px solid #ff5d73;filter:drop-shadow(0 2px 2px #000)}
+.sfread{display:flex;align-items:center;gap:14px}.sfread .num{font:40px var(--hf);color:var(--gold2);min-width:62px;text-align:center}
+.sfset{display:flex;gap:6px}.sfset i{font-style:normal;font-weight:800;min-width:40px;text-align:center;padding:4px 6px;border-radius:9px;background:#ffffff12;border:2px solid #ffffff22}.sfset i.on{background:#3ddc9733;border-color:var(--good)}.sfset i.cur{border-color:var(--gold)}
+.sfmeters{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:360px}.sfmeters small{color:var(--mut);font-weight:800}.sfmeters i{display:block;height:12px;border-radius:7px;background:#0007;overflow:hidden}.sfmeters b{display:block;height:100%;width:0}.sfmeters .al b{background:linear-gradient(90deg,#ffb02e,#ff5d73)}
+
+.lets .lrow:not(.own){flex-wrap:wrap}.lets .lrow:not(.own) .li{flex:1 1 calc(100% - 80px)}.lets .lrow:not(.own) .btn{flex:1 1 100%;min-height:44px}
 </style></head><body>
 <div id="app"><header><div class="hrow"><div id="clock" class="clock"></div></div><div id="money" class="money"></div><div id="meters" class="meters"></div><div id="goal"></div></header>
 <main></main>
@@ -389,7 +435,7 @@ nav.tabs button[data-t="me"] img{border-radius:50%;object-fit:cover;object-posit
 <div id="modal"><div class="sheet"><div id="mbody"></div><div id="mbtns"></div></div></div><div id="toasts" class="toasts"></div><div id="fx"></div><div id="title" class="off"></div>
 <script>window.MAP={"extent":{"x_min":-1100.0,"x_max":1330.0,"z_min":-1520.0,"z_max":336.0},"areas":[["business","Downtown - Business District",[175,595,-700,-266]],["shopping","Westgate - Shopping District",[-320,168,-960,-252]],["poor","Bayside - Poor Residential",[595,1050,-133,336]],["medium","Maple Vale - Medium Residential",[-320,252,-360,336]],["rich","Kingsridge Hill - Rich Residential",[210,1050,-1064,-700]],["farm","Oakbridge Countryside - Farmland",[-1100,-320,-1520,480]],["port","Port Maple - Harbour & Industrial Docks",[861,1330,-700,-133]],["oldtown","Old Town & University",[595,861,-700,-168]],["lake","Lake Wren - Lakeside Leisure",[-320,210,-1520,-672]],["southbank","Southbank (in-between: hospital, flats, interchange)",[252,595,-266,336]]],"roads":[["hi",[[-360,-480],[-290,-421],[-234,-362],[-153,-279],[-103,-251],[-47,-236],[38,-223],[123,-204],[175,-189],[330,-138],[360,-131],[385,-130],[690,-145],[741,-151],[784,-162],[802,-169],[819,-178],[834,-190],[846,-203],[873,-238],[913,-312]]],["co",[[-360,-480],[-450,-506],[-480,-519],[-550,-556],[-596,-573],[-632,-580],[-660,-579],[-689,-572],[-760,-546],[-818,-519],[-839,-512],[-862,-509],[-927,-513],[-1005,-523],[-1100,-540]]],["co",[[-360,-480],[-392,-398],[-398,-373],[-401,-347],[-399,-291],[-388,-206],[-348,2],[-348,20],[-355,43],[-362,55],[-378,70],[-390,78],[-405,84],[-452,89],[-504,90],[-628,79],[-683,78],[-900,90],[-1100,95]]],["ra",[[445,-119],[413,-118],[422,-115],[428,-110],[433,-102],[433,-95],[431,-87],[426,-81],[418,-76],[410,-76],[400,-80],[393,-89],[390,-127]]],["ra",[[500,-118],[473,-114],[462,-109],[429,-69],[422,-63],[408,-58],[401,-52],[396,-43],[388,-17]]],["ra",[[445,-137],[414,-140],[422,-141],[429,-146],[434,-154],[435,-161],[434,-169],[429,-176],[421,-181],[413,-182],[402,-178],[395,-170],[390,-132]]],["ra",[[501,-135],[474,-140],[464,-146],[432,-188],[425,-193],[412,-200],[405,-206],[401,-215],[394,-241]]],["ra",[[325,-122],[356,-119],[348,-118],[341,-113],[336,-105],[335,-98],[336,-90],[341,-83],[349,-78],[357,-77],[368,-81],[375,-89],[380,-127]]],["ra",[[269,-124],[296,-119],[306,-113],[338,-71],[345,-66],[358,-59],[365,-53],[369,-44],[376,-18]]],["ra",[[325,-140],[357,-141],[348,-144],[342,-149],[337,-157],[337,-164],[339,-172],[344,-178],[352,-183],[360,-183],[370,-179],[377,-170],[380,-132]]],["ra",[[270,-141],[297,-145],[308,-150],[341,-190],[348,-196],[362,-201],[369,-207],[374,-216],[382,-242]]],["ma",[[-318,-480],[-322,-463],[-331,-450],[-344,-441],[-361,-438],[-376,-441],[-389,-450],[-399,-465],[-402,-480],[-399,-495],[-389,-510],[-376,-519],[-361,-522],[-344,-519],[-331,-510],[-322,-497],[-318,-480]]],["ra",[[-347,-440],[-326,-422],[-314,-415],[-243,-370],[-167,-298]]],["ra",[[-319,-493],[-284,-470],[-266,-453],[-209,-376],[-152,-303]]],["ra",[[-400,-467],[-428,-475],[-439,-481],[-472,-514],[-512,-546]]],["ra",[[-373,-520],[-394,-538],[-405,-544],[-452,-553],[-500,-568]]],["ma",[[963,-336],[962,-329],[958,-323],[952,-319],[944,-318],[937,-319],[931,-324],[928,-330],[927,-336],[928,-342],[931,-348],[937,-353],[944,-354],[952,-353],[958,-349],[962,-343],[963,-336]]],["ma",[[490,-1018],[456,-991],[452,-983],[453,-977],[460,-971],[497,-956],[534,-929],[550,-913],[554,-903],[549,-887],[540,-877],[529,-867],[511,-854],[498,-848],[446,-837],[433,-828],[424,-816],[421,-805],[424,-798],[432,-793],[469,-782],[480,-777],[484,-770],[483,-761],[476,-747],[458,-724],[421,-691],[402,-666],[390,-643],[382,-623],[373,-593],[366,-561],[356,-502],[353,-445],[358,-385],[369,-309],[380,-209],[385,-156],[385,-130],[383,-90],[380,-70],[374,-48],[362,-16],[346,14],[327,39],[303,60],[270,84],[235,106],[212,124],[159,159]]],["ma",[[354,-507],[426,-515],[495,-528],[527,-538],[626,-580],[656,-591],[688,-597],[731,-599],[756,-596],[780,-591],[804,-583],[833,-568],[866,-545],[945,-476]]],["ma",[[969,-700],[956,-630],[949,-558],[945,-476],[948,-364],[948,-350],[945,-336],[944,-252],[939,-201],[933,-173],[922,-153],[863,-75],[825,-20],[728,140],[701,176],[672,210],[626,249],[609,266],[596,286],[574,336]]],["ma",[[-360,-650],[-187,-512],[-124,-443],[-92,-435],[-44,-413],[-28,-407],[7,-401],[48,-399],[63,-399],[83,-403],[169,-427],[252,-442],[354,-469]]],["ma",[[-360,-480],[-330,-620],[-280,-743],[-199,-804],[-183,-795],[-158,-761],[-139,-736],[-123,-731],[-84,-738],[-68,-740],[-8,-740],[23,-746],[52,-757],[75,-770],[102,-794],[111,-799],[132,-807],[155,-811],[194,-817],[230,-819],[322,-812],[397,-819],[424,-812]]],["st",[[-167,-775],[-250,-1005],[-280,-1090],[-301,-1160],[-314,-1217],[-318,-1250],[-318,-1280],[-305,-1331],[-290,-1340],[-268,-1325],[-238,-1274],[-219,-1234],[-178,-1130],[-141,-1039],[-105,-1028],[-74,-1034],[-44,-1036],[-15,-1035],[24,-1029],[52,-1021],[89,-1006],[112,-993],[133,-976],[151,-957],[164,-938],[170,-924],[174,-903],[175,-862],[168,-813]]],["ma",[[-360,-480],[-332,-383],[-316,-348],[-290,-307],[-240,-244],[-186,-183],[-162,-157],[-140,-140],[-107,-124],[-66,-113],[-37,-109],[27,-106],[124,-98],[153,-86],[166,-72],[176,-55],[194,0],[211,47],[213,60],[214,72],[209,98],[197,126],[187,137],[159,159]]],["ma",[[159,159],[73,274],[64,298],[56,336]]],["ma",[[378,-63],[445,-69],[487,-66],[622,-43],[647,-36],[696,-19],[723,-12],[812,0]]],["ma",[[554,-903],[672,-826],[718,-800],[733,-786],[752,-761],[764,-741],[770,-728],[774,-715],[775,-697],[771,-652],[756,-596]]],["st",[[770,-728],[804,-766],[812,-784],[811,-797],[794,-833],[791,-847],[793,-861],[805,-883],[823,-905],[845,-930],[862,-945],[880,-957],[896,-966],[906,-969],[941,-967]]],["st",[[616,-542],[616,-536],[619,-522],[648,-469],[668,-414],[680,-397],[695,-384],[713,-373],[725,-369],[738,-367],[753,-368],[775,-374],[790,-380],[802,-388],[812,-400],[820,-414],[831,-438],[836,-462],[837,-478],[835,-504],[828,-529],[820,-542],[805,-558],[778,-573],[748,-583],[713,-589],[687,-589],[665,-584],[643,-574],[626,-559],[618,-548],[616,-542]]],["st",[[676,-402],[685,-188],[688,-171],[696,-133],[704,-70],[714,-14]]],["la",[[595,-259],[672,-248],[735,-237],[798,-233],[837,-237],[942,-259]]],["co",[[-650,-580],[-676,-651],[-682,-680],[-687,-723],[-687,-757],[-683,-792],[-656,-864],[-650,-888],[-650,-900],[-656,-924],[-691,-982],[-700,-1007],[-698,-1034],[-682,-1079],[-666,-1110],[-639,-1150],[-621,-1169],[-602,-1182],[-572,-1196],[-519,-1213],[-420,-1235],[-389,-1247],[-318,-1280]]],["co",[[-685,-780],[-771,-793],[-822,-805],[-845,-813],[-874,-830],[-915,-869],[-938,-885],[-984,-906],[-1100,-950]]],["co",[[-850,-510],[-810,-320],[-798,-281],[-767,-201],[-752,-140],[-750,-120],[-754,-79],[-794,44],[-800,82],[-797,134],[-790,166],[-780,197],[-767,226],[-752,254],[-732,280],[-697,317],[-629,379],[-587,413],[-534,451],[-480,480]]],["co",[[-700,-1020],[-775,-1052],[-799,-1064],[-830,-1090],[-859,-1124],[-890,-1175],[-903,-1212],[-903,-1236],[-896,-1296],[-900,-1320],[-911,-1345],[-935,-1382],[-988,-1450],[-1060,-1520]]],["co",[[-630,-1160],[-573,-1276],[-542,-1329],[-519,-1359],[-493,-1388],[-462,-1418],[-438,-1439],[-411,-1455],[-368,-1473],[-337,-1480],[-320,-1480],[-312,-1474],[-295,-1445],[-238,-1274]]],["st",[[234,-634],[281,-659],[307,-667],[350,-670],[393,-666],[414,-661],[434,-654],[464,-638],[495,-613],[518,-586],[535,-555],[542,-534],[547,-512],[550,-490],[549,-476],[543,-440],[536,-420],[529,-408],[517,-390],[503,-374],[484,-356],[441,-330]]],["st",[[182,-542],[242,-533],[274,-533],[296,-538],[336,-552],[379,-573],[398,-576],[418,-578],[462,-577],[532,-561]]],["st",[[354,-469],[448,-458],[483,-457],[496,-460],[509,-465],[550,-490]]],["st",[[182,-507],[203,-574],[234,-634]]],["st",[[357,-392],[427,-385],[447,-380],[493,-364]]],["st",[[203,-343],[237,-354],[252,-357],[263,-357],[291,-352],[308,-354],[323,-362],[357,-392]]],["st",[[-295,-757],[-197,-693],[-168,-655],[-141,-619],[-110,-607],[-5,-588],[20,-582],[49,-572],[70,-564],[87,-552],[97,-542],[104,-530],[111,-507],[118,-463],[118,-414]]],["pe",[[-154,-445],[-100,-387],[-66,-368],[-21,-351],[1,-346],[23,-343],[43,-343],[68,-346],[84,-351],[98,-358],[105,-364],[110,-371],[118,-406]]],["st",[[-322,-450],[-143,-305],[-64,-289],[-30,-288],[12,-291],[51,-296],[80,-302],[97,-308],[112,-316],[120,-324],[123,-331],[125,-341],[125,-354],[118,-406]]],["la",[[-28,-407],[0,-469],[35,-578]]],["st",[[-112,-441],[-104,-375],[-98,-350],[-87,-329],[-56,-288]]],["st",[[-110,0],[110,0]]],["la",[[-85,29],[78,29]]],["st",[[-81,-184],[-81,-153],[-87,-125],[-118,81],[-124,117],[-131,145],[-136,159],[-149,181],[-151,188],[-155,207],[-181,283]]],["st",[[103,-113],[115,-50],[110,0],[120,72],[125,93],[136,136],[134,176],[147,231]]],["st",[[-189,-265],[-130,-216],[-112,-211],[-91,-211],[-52,-220],[-28,-223],[15,-217],[41,-210],[56,-204],[70,-197],[91,-187],[124,-166],[142,-151],[178,-98]]],["la",[[-28,-223],[-42,-192],[-44,-184],[-40,-178],[-20,-168]]],["st",[[-119,89],[-47,107],[5,115],[32,117],[48,115],[63,111],[121,80]]],["la",[[-39,109],[-32,143],[-26,153],[-17,161],[8,174]]],["st",[[-151,188],[-66,197],[4,210],[30,211],[68,206],[109,196],[121,190],[134,176]]],["la",[[21,212],[32,244],[38,255],[49,264],[77,276]]],["st",[[-295,79],[-244,121],[-220,138],[-197,155],[-151,188]]],["st",[[-295,-226],[-253,-131],[-253,-112],[-262,-84],[-269,-41],[-274,0],[-295,79]]],["st",[[-181,283],[-91,268],[23,302],[48,310],[77,324],[91,329],[106,331],[140,329]]],["st",[[252,-220],[328,-221],[391,-218],[414,-213],[473,-190],[498,-185],[524,-186],[574,-192]]],["st",[[382,-196],[417,-182],[461,-168],[482,-162],[497,-161],[511,-162],[525,-167],[574,-192]]],["st",[[346,14],[393,61],[413,74],[436,84],[459,90],[475,91],[500,89],[527,82],[544,74],[550,69],[560,56],[562,48],[563,38],[561,17],[546,-56]]],["st",[[483,91],[485,138],[488,161],[499,191],[516,220],[532,238],[545,246],[560,252],[609,266]]],["st",[[280,-70],[322,-28],[331,-15],[346,14]]],["st",[[259,126],[372,202],[419,231],[440,241],[455,245],[470,246],[532,238]]],["st",[[223,115],[259,126]]],["st",[[616,0],[672,14],[729,33],[765,41],[779,42],[794,41],[833,28]]],["st",[[609,56],[666,82],[691,90],[716,96],[748,98],[798,91]]],["st",[[616,126],[685,139],[717,142],[749,142],[770,140],[781,137],[812,119]]],["st",[[700,196],[751,191],[784,183],[812,168],[840,145],[851,131],[857,121],[863,104],[867,86],[868,70],[867,61],[854,28]]],["st",[[896,-119],[938,-70],[976,-33],[997,-3],[1007,21],[1009,35],[1009,61],[1006,88],[1001,112],[993,131],[966,168]]],["la",[[609,56],[626,16],[630,0],[628,-14],[616,-42]]],["st",[[770,70],[788,119],[791,140],[788,161],[770,210]]],["st",[[812,0],[861,-35],[910,-56],[938,-70]]],["la",[[648,-469],[676,-449],[690,-437],[732,-368]]],["la",[[700,-420],[721,-443],[729,-459],[735,-504],[756,-581]]],["la",[[700,-420],[749,-426],[770,-430],[790,-438],[836,-462]]],["la",[[676,-402],[700,-350],[726,-317],[735,-301],[739,-283],[742,-237]]],["la",[[802,-388],[798,-344],[798,-322],[812,-234]]],["la",[[616,-542],[655,-536],[678,-530],[728,-511],[734,-508],[735,-504]]],["la",[[648,-469],[680,-485],[693,-486],[704,-481],[728,-458]]],["la",[[770,-430],[820,-542]]],["la",[[732,-368],[756,-396],[766,-402],[777,-402],[802,-388]]],["la",[[700,-350],[740,-349],[756,-346],[770,-341],[798,-322]]],["la",[[679,-294],[735,-301]]],["st",[[672,210],[728,241],[765,255],[797,264],[812,266],[826,266],[875,252]]],["st",[[728,140],[778,178],[811,200],[828,207],[840,210],[853,210],[910,196]]],["st",[[581,294],[638,288],[679,278],[708,265],[735,244]]],["la",[[609,168],[631,195],[640,203],[650,207],[672,210]]],["st",[[945,-476],[1001,-483],[1030,-483],[1232,-462]]],["st",[[953,-609],[1015,-596],[1067,-594],[1136,-597],[1183,-601],[1208,-606],[1239,-616]]],["st",[[948,-364],[1001,-329],[1029,-317],[1057,-311],[1092,-307],[1155,-308]]],["la",[[969,-658],[1022,-658],[1078,-672]]],["st",[[942,-224],[1070,-251],[1102,-253],[1183,-254]]],["la",[[931,-168],[987,-154],[1043,-154]]],["la",[[1099,-595],[1115,-509],[1120,-469],[1123,-423],[1127,-308]]],["st",[[556,-917],[555,-905],[551,-894],[546,-887],[537,-877],[517,-866],[504,-862],[490,-861],[476,-862],[463,-866],[443,-877],[434,-887],[429,-894],[425,-905],[424,-917],[425,-929],[429,-940],[434,-947],[443,-957],[463,-968],[476,-972],[490,-973],[504,-972],[517,-968],[537,-957],[546,-947],[551,-940],[555,-929],[556,-917]]],["st",[[554,-903],[589,-931],[598,-945],[600,-956],[599,-973],[588,-1001],[578,-1016],[565,-1029],[556,-1036],[546,-1040],[530,-1038],[490,-1018]]],["st",[[424,-798],[307,-872],[284,-882],[245,-896]]],["st",[[451,-980],[414,-989],[399,-994],[355,-1020],[317,-1033],[300,-1036],[283,-1036],[238,-1029]]],["st",[[424,-812],[397,-780],[383,-766],[368,-758],[351,-754],[299,-752],[271,-755],[251,-763],[217,-784]]],["st",[[791,-854],[860,-863],[875,-868],[889,-875],[912,-892],[934,-914],[942,-927],[952,-952]]],["st",[[672,-826],[660,-791],[657,-775],[662,-760],[674,-746],[689,-733],[706,-726],[726,-725],[770,-728]]],["la",[[609,-868],[627,-827],[630,-812],[625,-802],[602,-784]]],["la",[[511,-854],[581,-784]]],["st",[[483,-774],[590,-747],[644,-728]]],["st",[[672,-826],[716,-868],[754,-895],[783,-908],[840,-924]]],["la",[[451,-980],[409,-966],[396,-959],[389,-950],[385,-924]]],["la",[[301,-875],[277,-844],[266,-833],[253,-825],[220,-812]]],["la",[[357,-840],[370,-873],[378,-886],[390,-896],[424,-917]]],["st",[[598,-945],[764,-997],[787,-998],[826,-994]]],["la",[[840,-924],[848,-958],[854,-973],[863,-988],[889,-1022]]],["st",[[896,-519],[889,-443],[887,-374],[888,-336],[892,-286],[897,-265],[906,-249],[914,-242],[942,-224]]],["st",[[953,-553],[1002,-562],[1022,-564],[1041,-563],[1082,-556]]],["la",[[889,-574],[920,-577],[931,-581],[939,-588],[953,-609]]],["st",[[266,-98],[322,-84],[378,-63]]],["st",[[546,-56],[574,-7],[581,14],[582,30],[582,47],[578,70],[573,85],[569,80],[560,56]]],["la",[[164,-938],[130,-945],[123,-949],[112,-959]]],["la",[[-238,-1274],[-174,-1076],[-154,-1022],[-143,-1001],[-126,-1008]]],["la",[[-685,-780],[-713,-803],[-726,-810],[-738,-807],[-752,-792],[-759,-776],[-759,-758],[-740,-700]]],["la",[[-680,-670],[-635,-679],[-615,-686],[-600,-699],[-589,-717],[-582,-737],[-581,-757],[-588,-777],[-610,-820]]],["la",[[-685,80],[-687,98],[-685,105],[-679,110],[-660,120]]],["la",[[-590,85],[-588,140],[-592,162]]],["la",[[-540,86],[-523,118],[-509,126],[-491,131],[-480,130],[-475,125],[-460,90]]],["la",[[-322,46],[-320,59],[-322,63],[-345,70]]]],"water":{"river":[[[98,-804],[106,-761],[108,-742],[95,-697],[94,-672],[100,-653],[141,-560],[147,-539],[151,-511],[150,-472],[134,-412],[135,-393],[138,-368],[149,-337],[164,-314],[183,-294],[206,-277],[227,-268],[251,-261],[389,-237],[460,-220],[491,-218],[552,-226],[591,-221],[646,-208],[717,-182],[754,-175],[783,-171],[828,-172],[972,-194],[1101,-193],[1111,-196],[1117,-204],[1120,-213],[1117,-223],[1109,-232],[1099,-234],[970,-232],[933,-227],[823,-206],[770,-206],[724,-213],[656,-236],[598,-249],[553,-253],[495,-245],[469,-245],[394,-260],[254,-283],[233,-288],[216,-296],[196,-310],[179,-328],[167,-346],[157,-373],[153,-411],[168,-469],[169,-494],[167,-524],[157,-565],[118,-654],[110,-675],[110,-694],[122,-730],[123,-747],[112,-804],[107,-809],[98,-804]]],"lake":[[[137,-879],[141,-926],[138,-937],[132,-947],[121,-957],[92,-974],[61,-987],[35,-995],[8,-1000],[-40,-999],[-67,-995],[-83,-990],[-202,-1128],[-228,-1184],[-241,-1195],[-225,-1075],[-203,-1005],[-169,-905],[-135,-825],[-111,-809],[-1,-792],[27,-793],[57,-798],[84,-806],[98,-814],[113,-830],[130,-858],[137,-879]]],"sea":[[[1022,-1064],[987,-1023],[973,-997],[972,-968],[984,-927],[1000,-898],[1046,-840],[1087,-751],[1088,-692],[1162,-692],[1162,-677],[1088,-677],[1089,-644],[1253,-644],[1284,-681],[1313,-759],[1322,-758],[1292,-677],[1253,-625],[1253,-294],[1211,-286],[1088,-286],[1088,-266],[1190,-266],[1190,-242],[1088,-242],[1085,-133],[1080,-86],[1076,-80],[1061,-94],[1034,-55],[1026,-28],[1036,27],[1078,27],[1037,31],[1040,63],[1026,112],[1001,161],[973,195],[895,262],[784,336],[1330,336],[1330,-1064],[1022,-1064]]],"island":[[[0,-914],[-2,-900],[-25,-890],[-53,-892],[-61,-896],[-59,-922],[-51,-925],[-37,-925],[-6,-918],[0,-914]]]},"blds":[[255,-498,70,44],[204,-480,28,34],[240,-567,50,40],[306,-613,64,42],[403,-432,42,42],[457,-603,36,36],[342,-691,40,28],[223,-690,36,26],[492,-424,40,30],[510,-626,30,26],[332,-524,30,24],[444,-434,26,17],[447,-414,24,17],[456,-476,24,17],[300,-419,26,20],[231,-378,30,30],[307,-370,16,11],[462,-303,52,36],[472,-677,50,32],[522,-300,52,38],[568,-385,34,50],[291,-325,56,24],[582,-494,40,30],[-49,-528,200,112],[88,-475,34,26],[79,-438,46,38],[-149,-375,58,40],[-41,-380,22,15],[4,-361,15,12],[53,-362,22,16],[-99,-272,58,34],[-40,-272,32,22],[-14,-255,24,18],[-212,-427,36,24],[-251,-497,30,24],[-180,-435,24,16],[64,-277,26,16],[136,-310,26,20],[642,36,22,22],[683,56,22,22],[630,100,22,22],[758,-30,34,14],[801,66,26,16],[697,1,16,12],[718,7,14,11],[674,-5,14,10],[899,-77,30,20],[927,-28,28,18],[659,174,30,20],[895,237,50,36],[771,14,14,10],[-41,-19,30,16],[20,-12,14,10],[42,-13,12,10],[64,-13,14,10],[62,9,4,4],[-66,16,10,10],[-46,16,10,10],[-26,16,10,10],[-6,16,10,10],[14,16,10,10],[34,16,10,10],[54,16,10,10],[-62,42,10,10],[-42,42,10,10],[-22,42,10,10],[-2,42,10,10],[18,42,10,10],[38,42,10,10],[58,42,10,10],[31,-168,60,30],[160,30,22,40],[147,-58,24,18],[142,-118,20,16],[-244,152,32,16],[617,-995,34,24],[434,-1046,42,24],[329,-740,18,12],[350,-742,12,10],[372,-743,16,12],[688,-707,56,32],[888,-909,36,26],[952,-971,9,9],[-520,115,9,8],[-504,115,9,8],[-488,115,9,8],[-472,115,9,8],[-520,133,9,8],[-504,133,9,8],[-488,133,9,8],[-472,133,9,8],[-505,95,6,4],[-548,108,10,8],[-685,124,10,8],[-660,126,14,10],[-628,141,4,4],[-662,145,20,8],[-588,172,12,9],[-565,178,22,10],[-420,31,60,4],[-760,225,14,10],[-600,340,18,12],[-856,-74,40,18],[-645,-772,18,13],[-742,-765,14,28],[-710,-772,14,10],[-714,-1041,14,11],[-667,-1051,26,16],[-917,-851,14,11],[-887,-872,30,13],[-840,-1220,14,10],[-512,-1385,9,9],[994,-442,60,34],[1022,-623,40,24],[910,-662,40,22],[1038,-531,48,26],[915,-392,40,24],[867,-291,30,18],[910,-451,24,14],[1031,-366,70,38],[1137,-276,40,12],[1029,-171,40,24],[1063,-688,30,13],[1158,-685,16,11],[1110,-295,20,12],[719,-667,80,28],[804,-657,40,28],[640,-665,30,40],[680,-509,40,26],[708,-560,28,20],[749,-467,22,22],[678,-432,12,10],[719,-404,5,4],[797,-419,28,18],[853,-396,28,56],[818,-350,14,20],[783,-348,16,12],[844,-257,22,14],[790,-255,26,16],[715,-266,18,12],[136,-1005,30,14],[-56,-774,6,4],[-220,-823,50,30],[-102,-692,40,24],[-138,-1076,18,8],[-35,-899,6,6],[-22,-784,4,4],[465,-205,80,46],[409,134,16,10],[308,-68,30,20],[495,-23,50,26]]};
 // ---- Game data (numbers from the Godot reference where they exist; see DESIGN.md) ----
-const VERSION = 'v0.7';
+const VERSION = 'v0.8';
 const DECAY = {hunger:5.5, energy:4.5, mood:0.36}; // per game hour (Godot hunger/energy/mental)
 const NEEDS = ['hunger', 'energy', 'mood'];
 const NEED_NAMES = {hunger:'Hunger', energy:'Energy', mood:'Mood', health:'Health'};
@@ -572,6 +618,25 @@ const BACKGROUNDS = {
   street: {n:'Street kid', art:'p_bg_street', line:'You grew up on these corners. Nobody sees you coming.', perk:'Stealth +1.5: cameras and patrols miss you more', flaw:'No references: Sal pays you 10% less'},
 };
 if (typeof module !== 'undefined') Object.assign(module.exports, {BACKGROUNDS});
+// v0.8 lettings: buy a flat with clean money, pick a tenant, collect rent, handle one tenant issue per tenancy
+const LETS = {
+  studio: {n:'Studio on Elm Row', art:'b_lets_t1', cost:300000, rent:6000, d:'One room, a kettle and a view of the bus stop.'},
+  twobed: {n:'Two-bed in Maple Vale', art:'b_lets_t2', cost:750000, rent:14000, d:'Family-sized, near the park.'},
+  town:   {n:'Townhouse in Northgate', art:'b_lets_t3', cost:1600000, rent:30000, d:'Three floors and a garden. Tenants expect a lot.'},
+};
+const TENANT_TYPES = [
+  {k:'steady', t:'Steady payer', rel:0.97, mult:0.9, line:'"I have paid every rent on time for nine years."'},
+  {k:'normal', t:'Young professional', rel:0.9, mult:1.0, line:'"Work is busy, but I am tidy."'},
+  {k:'risky', t:'Offers top rent', rel:0.72, mult:1.25, line:'"I can pay more than anyone. Mostly on time."'},
+];
+const TENANT_NAMES = ['Mia Novak', 'Owen Hart', 'Priya Shah', 'Dev Kapoor', 'Lena Fischer', 'Tomasz Wolski', 'Ruth Adeyemi', 'Carl Jensen', 'Ana Silva', 'Joe Brennan', 'Zara Malik', 'Finn Doyle'];
+const LET_ISSUES = {
+  boiler: {t:'The boiler broke', d:'No hot water. Your tenant is texting in capitals.', a:['Call a plumber', 15000, 'fix'], b:['Tell them to wait', 0, 'wait']},
+  leak:   {t:'Water through the ceiling', d:'The flat upstairs had a bath. The ceiling did not enjoy it.', a:['Pay for repairs', 25000, 'fix'], b:['Patch it yourself (2 h)', 0, 'diy']},
+  late:   {t:'Rent will be late', d:'Your tenant lost a shift and asks for a week\'s grace.', a:['Give them the week', 0, 'grace'], b:['Insist on paying now', 0, 'insist']},
+  noise:  {t:'Neighbours complain', d:'Loud parties three nights in a row. The neighbours want you to act.', a:['Have a word', 0, 'warn'], b:['Ignore it', 0, 'ignore']},
+};
+if (typeof module !== 'undefined') Object.assign(module.exports, {LETS, TENANT_TYPES, TENANT_NAMES, LET_ISSUES});
 
 // ===== Human Sim engine: pure, deterministic, no DOM =====
 // state = {v, world:{t, rng, force, noEvents, biz, crews, districts}, players:{id:{...}}}
@@ -653,7 +718,7 @@ const bizTier = k => BIZ[k].tiers[Math.max(0, W.biz[k].tier - 1)];
 function bizValue(k) { const b = W.biz[k]; let v = 0; for (let i = 0; i < b.tier; i++) v += BIZ[k].tiers[i].cost; return v; }
 const distValue = k => DISTRICTS[k].inc * 25;
 const myDistricts = (pid = PID) => Object.keys(W.districts).filter(k => W.districts[k].control === pid);
-function netWorth(pl = P, pid = PID) { let w = pl.cash + pl.dirty + pl.bank - loanLeft(pl) + mktWorth(pl); for (const k in W.biz) if (W.biz[k].owner === pid) w += bizValue(k); for (const k of myDistricts(pid)) w += distValue(k) * (W.districts[k].clean ? CLEAN_VALUE : 1); return w; }
+function netWorth(pl = P, pid = PID) { let w = pl.cash + pl.dirty + pl.bank - loanLeft(pl) + mktWorth(pl) + letsValue(pl); for (const k in W.biz) if (W.biz[k].owner === pid) w += bizValue(k); for (const k of myDistricts(pid)) w += distValue(k) * (W.districts[k].clean ? CLEAN_VALUE : 1); return w; }
 const launderCap = (pid = PID) => Object.keys(W.biz).filter(k => W.biz[k].owner === pid).reduce((a, k) => a + bizTier(k).launder, 0);
 function ownsBiz(pid = PID) { return Object.values(W.biz).some(b => b.owner === pid); }
 const crewOf = (pl = P) => pl.crew ? W.crews[pl.crew] : null;
@@ -724,6 +789,9 @@ const G = {
   meetCarlo: {t: 'Meet Carlo "The Captain" Marino', hint: 'He holds court at The Rusty Anchor from 12:00. Say hello.', go: 'anchor', rw: {street: 3}, ok: () => P.metCarlo},
   run: {t: 'Run a package for Carlo', hint: 'Back alleys are slower but safer. Pays dirty cash.', go: 'anchor', rw: {street: 2}, ok: () => P.runs > 0},
   day100: {t: 'Make $100 in a single day', hint: "A shift plus a job for Carlo does it. So does a kiosk.", rw: {cash: 2500}, ok: () => Math.max(P.bestDay, P.dayEarn) >= 10000},
+  // v0.8: the honest path learns to eat and to grill instead of being sent to Carlo
+  fridge: {t: 'Stock your fridge', hint: 'Buy groceries at the Corner Shop, then cook at home. Fed and rested, you never faint.', go: 'shop', rw: {cash: 1500}, ok: () => P.fridge > 0 || (P.stats.cooked || 0) > 0},
+  star3: {t: 'Earn a 3-star lunch rush', hint: "Serve every customer at Sal's, burn fewer than 2. Three stars pay the best wage and tips.", go: 'sal', rw: {cash: 2500}, ok: () => (P.bestStars || 0) >= 3 || P.shifts >= 4},
   loan: {t: 'Get a business loan', hint: 'First City Bank lends up to $2,500 once you have an income.', go: 'bank', rw: {business: 2}, ok: () => !!P.loan || ownsBiz()},
   biz1: {t: 'Buy your first business', hint: 'The Street Eats kiosk in Old Town: $2,600 clean money (bank).', go: 'kiosk', rw: {business: 5}, ok: () => ownsBiz()},
   staff: {t: 'Hire someone to run the kiosk', hint: 'Talk to Tom (City Park) until friendship 10, then hire him (Empire tab).', go: 'kiosk', rw: {business: 3}, ok: () => !!W.biz.kiosk.staff && W.biz.kiosk.owner === PID},
@@ -740,7 +808,7 @@ const G = {
   ruler: {t: 'Rule Maple City: 7 districts', hint: 'Win the showdown and hold 7 of the 10 districts.', rw: {cash: 500000}, ok: () => rankOf() >= 6},
   done: {t: 'You rule Maple City', hint: 'Keep Vance down and your empire growing.', rw: {}, ok: () => false},
 };
-const PATHS = {legit: ['hired', 'shift', 'meetCarlo', 'day100', 'loan', 'biz1', 'staff', 'upgrade', 'operator', 'crew1', 'district1', 'crew2', 'boss', 'kingpin', 'finale', 'ruler', 'done'],
+const PATHS = {legit: ['hired', 'shift', 'fridge', 'star3', 'loan', 'biz1', 'staff', 'upgrade', 'operator', 'crew1', 'district1', 'crew2', 'boss', 'kingpin', 'finale', 'ruler', 'done'],
                street: ['meetCarlo', 'run', 'day100', 'prot', 'loan', 'biz1', 'launder', 'crew1', 'district1', 'staff', 'operator', 'upgrade', 'crew2', 'boss', 'kingpin', 'finale', 'ruler', 'done']};
 const goalList = (pl = P) => PATHS[pl.path || 'legit'];
 const curGoal = (pl = P) => { const id = goalList(pl)[Math.min(pl.goal, goalList(pl).length - 1)]; return {id, ...G[id]}; };
@@ -795,8 +863,9 @@ function tickPlayer(pl, h, mode, comfort) {
 function faint(why, pl = P, pid = PID) {
   pl.loc = 'hospital'; pl.pending = null; pl.shift = null;
   const sv = [P, PID]; P = pl; PID = pid;
-  advance(180, 'hospital'); refillAll(pl); charge(partnerPerk('grace', pl) ? HOSPITAL_BILL / 2 : HOSPITAL_BILL, 'Hospital');
-  popup('You fainted', `<p>You collapsed from ${why} and woke up in St. Mary's Hospital three hours later.</p><p>Grace patched you up: <b>health, hunger, energy and mood are full again</b>.</p><p class="bad">Hospital bill: -${moneyTxt(HOSPITAL_BILL)} (bank)</p>`, 'health');
+  advance(180, 'hospital'); refillAll(pl); const bill = partnerPerk('grace', pl) ? HOSPITAL_BILL / 2 : HOSPITAL_BILL, fromCash = Math.min(Math.max(0, pl.cash), bill);
+  if (fromCash) { pl.cash -= fromCash; ledger(-fromCash, 'Hospital', pl); } if (bill > fromCash) charge(bill - fromCash, 'Hospital', pl);   // v0.8: cash in your pocket first, the bank only for the rest
+  popup('You fainted', `<p>You collapsed from ${why} and woke up in St. Mary's Hospital three hours later.</p><p>Grace patched you up: <b>health, hunger, energy and mood are full again</b>.</p><p class="bad">Hospital bill: -${moneyTxt(bill)}${bill > fromCash ? ` (${fromCash ? moneyTxt(fromCash) + ' cash, the rest from the bank' : 'from the bank'})` : ' (cash)'}</p><p class="sub">Next time: eat when Food is low and sleep when Energy is low. When either runs low, the goal bar warns you and lights up food or bed.</p>`, 'health');
   log('Fainted, woke up in hospital. All stats refilled.', 'health', 'bad');
   [P, PID] = sv;
 }
@@ -810,7 +879,21 @@ function newDay(ended) {
   for (const pid in ST.players) { P = ST.players[pid]; PID = pid; playerDay(ended); }
   [P, PID] = sv; LEDGER_DAY = 0;
 }
+// ---- v0.8 lettings ----
+const letsValue = (pl = P) => Object.keys(pl.lets || {}).reduce((a, k) => a + Math.round(LETS[k].cost * 0.9), 0);
+const letRent = f => f.tenant ? Math.round(LETS[f.k].rent * f.tenant.mult) : 0;
+function letCands() { const used = new Set(); return TENANT_TYPES.map(tt => { let n; do { n = TENANT_NAMES[Math.floor(rnd() * TENANT_NAMES.length)]; } while (used.has(n)); used.add(n); return {n, k: tt.k, t: tt.t, rel: tt.rel, mult: tt.mult, line: tt.line}; }); }
+function letLeave(f, why) { log(`${f.tenant.n} moved out of ${LETS[f.k].n}${why ? ': ' + why : ''}. Pick a new tenant (Empire tab).`, 'b_home', 'bad'); f.tenant = null; f.issue = null; f.cands = letCands(); }
+function letsNight() { if (!P.lets) return;
+  for (const k in P.lets) { const f = P.lets[k]; if (!f.tenant) continue;
+    if (f.issue) { f.issue.days++; if (f.issue.days >= 3) { const id = f.issue.id; f.issue = null; f.issueDone = true; if (id === 'boiler' || id === 'leak') { letLeave(f, 'nobody fixed the ' + (id === 'boiler' ? 'boiler' : 'ceiling')); continue; } } else continue; }   // no rent while an issue is open
+    if (f.grace > 0) { f.grace--; continue; }
+    if (rnd() < f.tenant.rel) f.due += letRent(f); else { f.late = (f.late || 0) + 1; log(`${f.tenant.n} is late with the rent for ${LETS[k].n}.`, 'b_home', 'bad'); if (f.late >= 3) { letLeave(f, 'three missed rents, and they did a runner'); continue; } }
+    if (!f.issue && !f.issueDone && day() - f.since >= 1 && (rnd() < 0.3 || day() - f.since >= 4)) { const ids = Object.keys(LET_ISSUES), id = ids[Math.floor(rnd() * ids.length)]; f.issue = {id, days: 0};
+      popup(`${LETS[k].n}: ${LET_ISSUES[id].t}`, `<p>${LET_ISSUES[id].d}</p><p class="sub">Rent is on hold until you deal with it (Empire tab, Lettings). Leave it 3 days and things get worse.</p>`, 'b_home'); }
+  } }
 function playerDay(ended) {
+  letsNight();
   if (P.bgDebt > 0) { P.bgDebt--; charge(1000, 'Student loan'); }
   const R = P.rent;
   if (ended >= R.due) {
@@ -959,7 +1042,7 @@ function startBg(bg) {
 }
 function endShift(served, failed, tips, mult = 1, stars = 2) {
   let base = Math.round(4000 * mult * (0.85 + 0.075 * stars) * (P.bg === 'street' ? 0.9 : 1)); if (failed > served) base = Math.round(base * 0.75);
-  P.lastShiftDay = day(); P.shifts++; P.tips += tips; P.shift = null; P.pending = null; if (P.shifts === 1) moment('First shift at Sal\'s Hot Dogs', 'hotdog');
+  P.lastShiftDay = day(); P.shifts++; P.tips += tips; if (mult === 1) P.bestStars = Math.max(P.bestStars || 0, stars); P.shift = null; P.pending = null; if (P.shifts === 1) moment('First shift at Sal\'s Hot Dogs', 'hotdog');
   const ok = advance(240, 'work');
   applyFx({energy: -8}); const sk = Math.min(3, served * 0.45); addSkill('cooking', 0.08 * sk); addSkill('charisma', 0.03 * sk);   // v0.7: 7 customers a shift, same skill pace as the old 3 addSkill('speed', 0.05);
   earn(base, "Wages (Sal's)", 'bank'); earn(tips, 'Tips'); addRel('sal', 2); addRep('business', 2); addRep('civic', 0.5);
@@ -1064,6 +1147,24 @@ function endGame(id, cash = 0) {
 
 // ---- the action table ----
 const ACTIONS = {
+  letBuy({flat}) { const L = LETS[flat]; if (!L || P.jail) return; P.lets = P.lets || {}; if (P.lets[flat]) return;
+    if (!pay(L.cost, 'bank', 'Property')) return log(`${L.n} costs ${moneyTxt(L.cost)} in clean money (bank or clean cash).`, 'bank', 'bad');
+    P.lets[flat] = {k: flat, tenant: null, due: 0, since: day(), issue: null, issueDone: false, cands: letCands()}; addRep('business', 3); advance(30);
+    moment(`Bought ${L.n}`, 'b_home'); log(`You own ${L.n}. Pick a tenant to start the rent.`, 'b_home', 'good'); },
+  letTenant({flat, i}) { const f = P.lets && P.lets[flat]; if (!f || f.tenant || !f.cands || !f.cands[i]) return; f.tenant = f.cands[i]; f.cands = null; f.since = day(); f.issueDone = false; f.late = 0; advance(20);
+    log(`${f.tenant.n} moves into ${LETS[flat].n}: ${moneyTxt(letRent(f))} a day.`, 'b_home', 'good'); },
+  letCollect() { if (!P.lets) return; const t = Object.values(P.lets).reduce((a, f) => a + f.due, 0); if (!t) return log('No rent waiting yet. It comes in every night.', 'b_home');
+    for (const f of Object.values(P.lets)) f.due = 0; earn(t, 'Rent from tenants', 'bank'); log(`Collected ${moneyTxt(t)} rent into the bank.`, 'bank', 'good'); },
+  letIssue({flat, pick}) { const f = P.lets && P.lets[flat]; if (!f || !f.issue) return; const I = LET_ISSUES[f.issue.id], [lab, cost, how] = pick === 'a' ? I.a : I.b, n = f.tenant.n.split(' ')[0];
+    if (cost && !pay(cost, 'bank', 'Property repairs')) return log(`That costs ${moneyTxt(cost)}.`, 'cash', 'bad');
+    f.issue = null; f.issueDone = true;
+    if (how === 'fix') { f.tenant.rel = Math.min(0.99, f.tenant.rel + 0.05); addRep('civic', 1); return log(`Fixed. ${n} is grateful and pays more reliably.`, 'b_home', 'good'); }
+    if (how === 'wait') { f.tenant.rel -= 0.15; if (rnd() < 0.3) return letLeave(f, 'they found somewhere with hot water'); return log(`${n} grumbles, but stays. Reliability down.`, 'b_home', 'bad'); }
+    if (how === 'diy') { advance(120, 'work'); if (rnd() < 0.6 + P.skills.strength * 0.05) return log(`You patched the ceiling yourself. ${n} is impressed.`, 'b_home', 'good'); pay(30000, 'bank', 'Property repairs') || charge(30000, 'Property repairs'); return log('Your patch failed: the pro repair cost $300.00 in the end.', 'b_home', 'bad'); }
+    if (how === 'grace') { f.grace = 7; f.tenant.rel = Math.min(0.99, f.tenant.rel + 0.1); addRep('civic', 2); return log(`You gave ${n} a week. They won't forget it.`, 'b_home', 'good'); }
+    if (how === 'insist') { if (rnd() < 0.25) return letLeave(f, 'they could not pay and left'); f.tenant.rel -= 0.08; return log(`${n} scrapes it together. Things are frosty.`, 'b_home', 'bad'); }
+    if (how === 'warn') { addRep('civic', 1); if (rnd() < 0.2) return letLeave(f, 'they did not like being told off'); return log(`You had a word. The parties stopped.`, 'b_home', 'good'); }
+    if (how === 'ignore') { addRep('civic', -3); return log('The neighbours are not happy with you. Civic -3.', 'b_home', 'bad'); } },
   start({path, look, bg}) {
     if (!P.intro) return; P.intro = false; startBg(bg); P.choices.push(path === 'street' ? 'Started with Carlo' : 'Started at Sal\'s'); moment('Stepped off the bus in Maple City with $450', 'here'); P.path = path === 'street' ? 'street' : 'legit'; P.look = look === 'f' ? 'f' : 'm';
     log(P.path === 'street' ? 'You chose the street: Carlo "The Captain" Marino has work for you.' : "You chose the honest way: Sal is hiring.", P.path === 'street' ? 'street' : 'business', 'good');
@@ -1091,7 +1192,7 @@ const ACTIONS = {
   home({a}) {
     const R = P.rent; if (P.loc !== 'home' || R.evicted) return;
     if (a === 'sleep8' || a === 'nap') { const h = a === 'nap' ? 2 : 8; advance(h * 60, 'sleep', 0.75); log(`Slept ${h} hours.`, 'sleep'); }
-    if (a === 'cook') { if (!P.fridge) return log('No meals in the fridge. Buy groceries.', 'hunger', 'bad'); P.fridge--; advance(30); const g = Math.round(35 + P.skills.cooking); applyFx({hunger: g, health: 1, mood: 2}); addSkill('cooking', 0.05); log(`Cooked a home meal: Hunger +${g}.`, 'hunger', 'good'); }
+    if (a === 'cook') { if (!P.fridge) return log('No meals in the fridge. Buy groceries.', 'hunger', 'bad'); P.fridge--; P.stats.cooked = (P.stats.cooked || 0) + 1; advance(30); const g = Math.round(35 + P.skills.cooking); applyFx({hunger: g, health: 1, mood: 2}); addSkill('cooking', 0.05); log(`Cooked a home meal: Hunger +${g}.`, 'hunger', 'good'); }
   },
   payRent() {
     const R = P.rent; if (P.jail) return;
@@ -1179,10 +1280,10 @@ const ACTIONS = {
     if (P.loc !== 'sal' || !canShift()) return log('Shifts start between 10:00 and 14:00, once a day.', 'business');
     if (quick) { if (P.shifts < 3) return log('Auto shifts unlock after 3 hands-on shifts.', 'business'); return endShift(5, 0, 5 * (55 + 6 * P.skills.cooking), 0.85 / 0.925, 1); }
     // v0.7 rush: a queue of customers (2-3 waiting at once), orders up to 3 dogs + a drink, a rush wave near the end
-    const tops = Object.keys(TOP), first = P.shifts === 0, at = first ? [0, 6, 13, 20] : [0, 4, 9, 14, 22, 24.5, 27];
+    const tops = Object.keys(TOP), first = P.shifts === 0, at = first ? [0, 2, 7, 12] : [0, 2.5, 7, 12, 21, 23, 25.5];
     P.shift = {orders: at.map((t, i) => { const rush = !first && i >= 4, dogs = first ? 1 : 1 + (rnd() < 0.45 ? 1 : 0) + (rnd() < 0.2 ? 1 : 0);
       const tp = first ? (i % 2 ? [] : ['ketchup']) : tops.filter(() => rnd() < 0.3).slice(0, 2), drink = first ? i === 2 : rnd() < 0.5;
-      return {dogs, tops: tp, drink, at: t, pat: (first ? 26 : rush ? 15 : 20) + Math.floor(P.skills.cooking), rush, who: HD_CUSTOMERS[Math.floor(rnd() * HD_CUSTOMERS.length)]}; }), started: W.t};
+      return {dogs, tops: tp, drink, at: t, pat: (first ? 30 : rush ? 16 : 22) + Math.floor(P.skills.cooking), rush, who: HD_CUSTOMERS[Math.floor(rnd() * HD_CUSTOMERS.length)]}; }), started: W.t};
     P.pending = {kind: 'shift'};
   },
   // results: one per customer {ok, perfect, secs (waited), left (walked off)} in serving order; burnt = sausages binned
@@ -1418,7 +1519,7 @@ const ACTIONS = {
     P.researchDay = day(); advance(120); addSkill('intelligence', 0.1); P.vance.evidence++;
     log(`You dug through Vance Holdings filings: evidence ${P.vance.evidence}/${FINALE.evidence}.`, 'business', 'good');
   },
-  finale({how}) {
+  finale({how, res = null}) {
     if (P.loc !== 'tower' || !isOpen('tower') || P.jail || !finaleOpen() || !['buy', 'expose', 'raid', 'family'].includes(how)) return;
     if (!finaleReq(how).ok) return log('You are not ready for that yet.', 'm_lock', 'bad');
     P.rankBest = Math.max(P.rankBest || 0, rankOf());
@@ -1426,7 +1527,9 @@ const ACTIONS = {
     if (how === 'expose') { mktNudge('VNC', -0.45, 'Vance Holdings collapses after press expose'); advance(60); addRep('civic', 10); P.stats.helped += 5; P.choices.push('Exposed Vance to the press'); return endGame('reformer'); }
     if (P.vance.raidDay === day()) return log('Your crew needs a day to regroup.', 'm_crew', 'bad');
     P.vance.raidDay = day(); advance(120, 'work');
-    const kind = how === 'family' ? 'family' : 'raid', won = rnd() < partsChance(chanceParts(kind)), seen = rnd() < seenMult();
+    const kind = how === 'family' ? 'family' : 'raid', st = res && how === 'raid' ? clamp(Math.round(+res.stars || 0), 0, 3) : null; if (st != null) mgCount('safe');
+    // v0.8 safe-crack: a clean crack helps the raid (+/-9%), a tripped alarm means the cameras catch you for sure
+    const won = rnd() < clamp(partsChance(chanceParts(kind)) + (st != null ? 0.06 * (st - 1.5) : 0), 0.05, 0.95), seen = st === 0 || rnd() < seenMult() * (st === 3 ? 0.6 : 1);
     if (seen) { addHeat(30); P.crimes.push({what: 'storming Vance Tower', day: day()}); addRep('civic', -8); }
     showdown(how === 'family' ? 'The Marino family vs Vance' : 'Raid on Vance Tower', kind, null, ['enforcer', 'vance'], won, seen ? 'The tower\'s cameras saw everything: Heat +30.' : 'Your Lookout cut the tower cameras.');
     if (won) { mktNudge('VNC', -0.35, 'Vance Tower stormed: Vance Holdings in freefall'); P.stats.hurt += 3; addRep('street', 10); if (how === 'family') { P.stats.hurt++; P.choices.push('Betrayed Carlo and took the family'); return endGame('captain'); } P.choices.push('Raided Vance Tower'); return endGame('warlord'); }
@@ -1469,7 +1572,7 @@ function applyAction(state, pid, action) {
 }
 // read-only helpers for the UI (no mutation)
 function view(state, pid, fn) { const sv = [ST, W, P, PID]; ST = state; W = state.world; P = state.players[pid]; PID = pid; try { return fn(); } finally { [ST, W, P, PID] = sv; } }
-if (typeof module !== 'undefined') module.exports = {shiftScore, liqLine: x => liqPrice(x), mktWorth, optPrem, contractPay, investCost, investReq, bail, bribeCost, bribeChance, partnerOf, staffWage, applyAction, newGame, newPlayer, view, ACTIONS, ENGINE_VERSION, rankOf, netWorth, curGoal, nextStop, myDistricts, contestChance, crewFee, loanMax, rankCheck, runInfo, chanceParts, partsChance, finaleReq, finaleOpen, holdChance};
+if (typeof module !== 'undefined') module.exports = {shiftScore, liqLine: x => liqPrice(x), mktWorth, mktPL, optPrem, contractPay, investCost, investReq, bail, bribeCost, bribeChance, partnerOf, staffWage, applyAction, newGame, newPlayer, view, ACTIONS, ENGINE_VERSION, rankOf, netWorth, curGoal, nextStop, myDistricts, contestChance, crewFee, loanMax, rankCheck, runInfo, chanceParts, partsChance, finaleReq, finaleOpen, holdChance};
 
 // ===== v0.7 Maple City Exchange: pure, deterministic from the seed, own rng (W.mkt.r) so the life sim's rolls never change =====
 function mrnd() { let t = (W.mkt.r = (W.mkt.r + 0x6D2B79F5) >>> 0); t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
@@ -1539,8 +1642,10 @@ function optPrem(s, K, k, days) {
   return iv + p * coOf(s).vol * Math.sqrt(Math.max(0, days)) * 0.4;
 }
 function mktWorth(pl = P) { const m = pl.mkt; if (!m || !W.mkt) return 0; let w = 0; for (const s in m.hold) w += holdVal(pl, s); for (const x of m.pos) w += Math.max(0, posVal(x)); return w; }
+// profit and loss: open value minus what it cost, plus everything already banked (m.pl). pl0 is the snapshot at midnight, for "today".
+function mktPL(pl = P) { const m = pl.mkt; if (!m) return 0; let c = 0; for (const s in m.hold) c += m.hold[s].cost; for (const x of m.pos) c += x.paid || x.m; return mktWorth(pl) - c + m.pl; }
 function mktPlayer(pl, pid, hh, dayEnd) {
-  const m = pl.mkt; if (!m) return;
+  const m = pl.mkt; if (!m) return; if (m.pl0 == null) m.pl0 = 0;
   for (const x of [...m.pos]) {
     const v = posVal(x);
     if (x.k === 'long' || x.k === 'short') {
@@ -1554,6 +1659,7 @@ function mktPlayer(pl, pid, hh, dayEnd) {
       log(got > 0 ? `Your ${x.s} ${x.k} expired in the money: +${moneyTxt(got)} to the bank.` : `Your ${x.s} ${x.k} expired worthless (-${moneyTxt(x.paid)}).`, 'm_market', got > x.paid ? 'good' : 'bad', pl, pid);
     }
   }
+  if (dayEnd) m.pl0 = mktPL(pl);
   if (hh === 20 && !pl.jail) {                                                       // a friend over-shares about their work
     const ids = Object.keys(TIPSTERS).filter(id => pl.rel[id] && pl.rel[id].f >= MKT.tipF && !m.tips.some(t => t.who === id && t.until > W.t));
     if (ids.length && mrnd() < MKT.tipP) {
@@ -1626,6 +1732,8 @@ const col = v => v > 60 ? 'var(--good)' : v > 30 ? 'var(--warn)' : 'var(--bad)';
 const q = a => JSON.stringify(a).replace(/"/g, '&quot;');
 const D_ = a => `dispatch(${q(a)})`;
 const actOf = fn => { const m = /type&quot;:&quot;(\w+)/.exec(fn) || /^(\w+)\(/.exec(fn); return m ? m[1] : ''; };
+// a small 'Auto 1/3' progress chip: auto play unlocks after 3 hands-on plays
+const autoChip = n => n >= 3 ? '' : `<span class="achip" title="Auto unlocks after 3 plays"><i style="width:${n / 3 * 100}%"></i><em>Auto ${n}/3</em></span>`;
 const B = (label, fn, right = '', cls = '', dis = false, icon = '') => `<button class="btn ${cls}" data-act="${actOf(fn)}" ${dis ? 'disabled' : ''} onclick="${fn}">${icon ? ic(icon, 'l') : ''}<span class="lab">${label}</span><span class="r">${right}</span></button>`;
 function areaOf(x, z) { for (const a of MAP.areas) { const [x0, x1, z0, z1] = a[2]; if (x >= x0 && x <= x1 && z >= z0 && z <= z1) return a[1].split(' - ')[0].split(' (')[0]; } return 'Maple City'; }
 const fxTxt = fx => Object.entries(fx).map(([k, v]) => `${NEED_NAMES[k] || k} ${v > 0 ? '+' : ''}${v}`).join(', ');
@@ -1647,19 +1755,23 @@ function dispatch(a) {
   const before = snap();
   const r = applyAction(GS, ME, a); GS = r.state;
   const after = snap();
+  const tq = [];   // v0.8: queue the messages, then show at most two toasts so they never pile up over the screen
   for (const e of r.events) if (e.pid === ME) {
-    if (e.kind === 'goal') { toast(`<b>Goal complete!</b> ${e.t}<br><span class="gold">${e.reward}</span>`, 'check', 'goal'); beep('goal'); }
+    if (e.kind === 'goal') { tq.push({p: 3, m: `<b>Goal complete!</b> ${e.t}<br><span class="gold">${e.reward}</span>`, ic: 'check', tone: 'goal'}); beep('goal'); }
     else if (e.kind === 'rank') { buzz([80, 60, 160]); if (!r.events.some(x => x.kind === 'ending')) celebrate(e.rank); }
     else if (e.kind === 'showdown' || e.kind === 'ending' || e.kind === 'away') { popups.push(e); if (e.kind === 'ending' || e.win) buzz(e.kind === 'ending' ? [120, 80, 120, 80, 300] : [60, 40, 120]); }
     else if (e.kind === 'talk') popups.push(e);
     else if (e.title) popups.push(e);
-    else if (e.msg) { toast(e.msg, e.ic, e.tone); if (e.tone === 'bad') beep('bad'); }
+    else if (e.msg) { tq.push({p: e.tone === 'bad' ? 2 : e.tone === 'good' ? 1 : 0, m: e.msg, ic: e.ic, tone: e.tone}); if (e.tone === 'bad') beep('bad'); }
   }
   render();
   floatMoney(after.cash - before.cash, '#mcash'); floatMoney(after.dirty - before.dirty, '#mdirty'); floatMoney(after.bank - before.bank, '#mbank');
   if (after.t - before.t >= 90) { const c = $('#clock'); c.classList.remove('fast'); void c.offsetWidth; c.classList.add('fast'); }
   const rd = ['street', 'business', 'civic'].map(k => [k, +(after.rep[k] - before.rep[k]).toFixed(1)]).filter(x => Math.abs(x[1]) >= 0.5);
-  if (rd.length) toast(rd.map(([k, v]) => `${ic(k, 's')} <b class="${v > 0 ? 'good' : 'bad'}">${v > 0 ? '+' : ''}${v}</b> ${k[0].toUpperCase() + k.slice(1)}`).join(' &nbsp; '), null, rd.every(x => x[1] > 0) ? 'good' : 'bad');
+  const rline = rd.length ? `<span class="trep">${rd.map(([k, v]) => `${ic(k, 's')} <b class="${v > 0 ? 'good' : 'bad'}">${v > 0 ? '+' : ''}${v}</b> ${k[0].toUpperCase() + k.slice(1)}`).join(' &nbsp; ')}</span>` : '';
+  const top = tq.map((t, i) => ({...t, i})).sort((a, b) => b.p - a.p || b.i - a.i).slice(0, 2).sort((a, b) => a.i - b.i);
+  if (!top.length && rline) toast(rline, null, rd.every(x => x[1] > 0) ? 'good' : 'bad');
+  top.forEach((t, i) => toast(t.m + (i === top.length - 1 && rline ? '<br>' + rline : '') + (i === top.length - 1 && tq.length > 2 ? `<small class="tmore">+${tq.length - 2} more in Latest</small>` : ''), t.ic, t.tone));
   const gain = after.cash + after.bank + after.dirty - before.cash - before.bank - before.dirty; if (gain > 0) beep('coin'); if (gain >= 20000) { buzz(40); pulse(); }
   if (a.type === 'travel' && after.loc === a.to) {
     if (tab === 'map' && trip) { trip.to = a.to; animateTrip(); }
@@ -1675,7 +1787,7 @@ function hintHtml(h, pd) {
     const good = num ? (k === 'heat' ? val < 0 : val > 0) : (val === 'clear' || k === 'unlock');
     return `<span class="hint ${good ? 'good' : 'bad'}">${ic(IC[k], 's')}${txt}</span>`; }).join('') + '</span>';
 }
-function toast(m, icon, tone = 'info') { const box = $('#toasts'), el = document.createElement('div'); el.className = 'toast ' + tone; el.innerHTML = (icon ? ic(icon) : '') + `<span>${m}</span>`; box.appendChild(el); while (box.children.length > 3) box.firstChild.remove(); setTimeout(() => el.remove(), 3100); }
+function toast(m, icon, tone = 'info') { const box = $('#toasts'), el = document.createElement('div'); el.className = 'toast ' + tone; el.innerHTML = (icon ? ic(icon) : '') + `<span>${m}</span>`; box.appendChild(el); while (box.children.length > 2) box.firstChild.remove(); setTimeout(() => el.remove(), 3100); }
 function celebrate(i) {
   beep('rank'); const fx = $('#fx'), R = RANKS[i], nx = RANKS[i + 1];
   fx.innerHTML = `<img src="${A('m_rank' + i)}" alt=""><div class="sub" style="letter-spacing:.2em;font-weight:800;color:var(--teal)">NEW RANK</div><h1>${R.n}</h1><p style="max-width:320px">${R.teaser}</p>${nx ? `<p class="sub">Next: ${nx.n}</p>` : ''}<button class="btn pri" style="max-width:300px;justify-content:center" onclick="document.getElementById('fx').classList.remove('on')"><span class="lab" style="text-align:center">Let's go</span></button>`;
@@ -1786,13 +1898,14 @@ function tutTarget() {
   if (P.pending && P.pending.kind === 'shift') return null; // the minigame has its own hint line
   if (P.pending && P.pending.kind === 'carlo') return ['#mbtns .btn:first-child', 'Do the run yourself: dodge the cameras'];
   if (mo) { if (modalOpen === 'ui' && trip === null && $('#mbtns .btn') && /Walk/.test($('#mbtns').textContent)) return ['#mbtns .btn:first-child', 'Walk there (free)']; if (['popup', 'summary'].includes(modalOpen)) return ['#mbtns .btn:first-child', 'Tap to continue']; return null; }
+  const nu = view(GS, ME, () => needUrgent()); if (nu) { const gs0 = view(GS, ME, () => goalSel()); if (gs0 && document.querySelector(gs0)) return [gs0, nu.why]; }
   const go = g.go || (g.id === 'day100' ? (P.path === 'street' ? 'anchor' : 'sal') : null); if (!go) return null;
   if (P.loc !== go && tab === 'here' && document.querySelector('main [data-act="openPlace"]')) return ['main [data-act="openPlace"]', `Head to ${PLACES[go].n}`];
   if (P.loc !== go) { if (tab !== 'map') return ['nav.tabs button[data-t="map"]', `Open the map to find ${PLACES[go].n}`]; return [`.mk[data-k="${go}"]`, `Tap ${PLACES[go].n}`]; }
   if (tab !== 'here') return ['nav.tabs button[data-t="here"]', 'Back to where you are'];
-  const sel = {hired: '[data-act="hire"]:not([disabled])', shift: '[data-act="shiftStart"]:not([disabled])', meetCarlo: '.ph[data-npc="carlo"]', run: '[data-act="carloStart"]:not([disabled])', day100: P.path === 'street' ? '[data-act="carloStart"]:not([disabled])' : '[data-act="shiftStart"]:not([disabled])'}[g.id];
+  const sel = {hired: '[data-act="hire"]:not([disabled])', shift: '[data-act="shiftStart"]:not([disabled])', meetCarlo: '.ph[data-npc="carlo"]', run: '[data-act="carloStart"]:not([disabled])', day100: P.path === 'street' ? '[data-act="carloStart"]:not([disabled])' : '[data-act="shiftStart"]:not([disabled])', fridge: '[data-act="buy"][onclick*="groceries"]:not([disabled])', star3: '[data-act="shiftStart"]:not([disabled])'}[g.id];
   const gs = view(GS, ME, () => goalSel()); if (gs && document.querySelector(gs) && !(sel && document.querySelector('main ' + sel))) return [gs, document.querySelector(gs).querySelector('.lab') ? 'This gets you closer: ' + document.querySelector(gs).querySelector('.lab').firstChild.textContent.trim() : 'This is next'];
-  if (sel && document.querySelector('main ' + sel)) return ['main ' + sel, {hired: 'Ask Sal for a job', shift: 'Work your first shift', meetCarlo: 'Say hello to Carlo', run: 'Take the delivery job', day100: 'Earn more today'}[g.id]];
+  if (sel && document.querySelector('main ' + sel)) return ['main ' + sel, {hired: 'Ask Sal for a job', shift: 'Work your first shift', meetCarlo: 'Say hello to Carlo', run: 'Take the delivery job', day100: 'Earn more today', fridge: 'Buy groceries: 3 home meals', star3: 'Serve everyone for 3 stars'}[g.id]];
   if (document.querySelector('main [data-act="skip"]')) return ['main [data-act="skip"]', 'Skip ahead: time flies to the next moment'];
   return null;
 }
@@ -1820,16 +1933,29 @@ function render() { save(); view(GS, ME, renderInner); setTimeout(tutApply, 0); 
 // where the current goal wants you: its own place, or for crew goals wherever a possible recruit is right now
 // crew goals: the person you are befriending gets Hang out / Recruit buttons right in the Here list
 function staffPick() { return Object.keys(STAFF).filter(id => P.rel[id]).sort((a, b) => P.rel[b].f - P.rel[a].f)[0]; }
-function crewGoalActs(here) { const g = curGoal();
+// v0.8: district goals get a real button: the best district to take next, opening its sheet (it was "go find it on the map")
+function districtTarget() { const ks = Object.keys(DISTRICTS).filter(k => W.districts[k].control !== PID && !(W.districts[k].control === 'carlo' && !P.story.broke));
+  const sc = k => (W.districts[k].control ? 0 : 1) * 2 + (crewSize() ? contestChance(k) : 0) - (W.districts[k].control === 'vance' ? 0.5 : 0); return ks.sort((a, b) => sc(b) - sc(a))[0]; }
+function districtAct() { const g = curGoal(); if (!['district1', 'kingpin', 'ruler'].includes(g.id) || P.jail) return ''; const k = districtTarget(); if (!k) return '';
+  const D = DISTRICTS[k], d = W.districts[k], bl = contestBlock(k), who = d.control === 'vance' ? 'Vance runs it' : 'nobody runs it';
+  const how = bl ? bl : crewSize() ? `${who} · ${Math.round(contestChance(k) * 100)}% with your crew${d.control ? '' : ` · or buy it out for ${moneyTxt(buyPrice(k))}`}` : `${who} · recruit a crew to muscle in${d.control ? '' : `, or buy it out for ${moneyTxt(buyPrice(k))}`}`;
+  return B(`Take ${D.n}<small>${how}</small>`, `districtSheet('${k}')`, '', '', !!bl, 'm_flag'); }
+function crewGoalActs(here) { const g = curGoal(); const da = districtAct(); if (da) return da;
   if (g.id === 'staff' && W.biz.kiosk.owner === PID && !W.biz.kiosk.staff) { const id = staffPick(); if (id && P.rel[id].f >= 10) return B(`Hire ${first(npc(id))} to run the kiosk<small>${moneyTxt(staffWage(id))} a day · sells while you are away</small>`, D_({type: 'bizHire', biz: 'kiosk', npc: id}), '', 'biz', false, 'people'); return ''; }
   if (g.id !== 'crew1' && g.id !== 'crew2') return ''; const c = crewOf(), mem = c ? c.members.map(m => m.npc) : [];
   return here.filter(p => CREW[p.id] && !mem.includes(p.id)).map(p => { const r = P.rel[p.id], nm = first(p);
     if (r.f >= 20 && Math.max(P.rep.street, P.rep.business) >= 10) return B(`Recruit ${nm} to your crew<small>${CREW[p.id].role}</small>`, D_({type: 'crewRecruit', npc: p.id}), moneyTxt(crewFee()), 'crime', false, 'm_crew');
     if (r.f >= 15 && r.lastHang !== day()) return B(`Hang out with ${nm}<small>1 h · Friendship +10 (${Math.round(r.f)}/20 to recruit)</small>`, D_({type: 'hangout', npc: p.id}), '', '', false, 'people');
     return ''; }).join(''); }
-function goalPlace() { const g = curGoal();
+// v0.8: when Food or Energy is about to run out, eating or sleeping beats any goal (so nobody faints without warning)
+function needUrgent() { if (P.jail || P.pending || P.intro) return null; const n = P.needs;
+  if (n.energy < 15) return {k: 'home', sel: 'main [data-act="home"][onclick*="sleep8"]:not([disabled])', why: 'Exhausted: sleep at home before you faint', m: 'energy'};
+  if (n.hunger < 20) { const k = ['sal', 'bakery', 'cafe', 'pub', 'shop'].includes(P.loc) && isOpen(P.loc) ? P.loc : P.fridge > 0 ? 'home' : ['sal', 'bakery', 'cafe', 'pub'].find(x => isOpen(x)) || 'shop';
+    return {k, sel: P.loc === 'home' && P.fridge > 0 ? 'main [data-act="home"][onclick*="cook"]:not([disabled])' : 'main .btn.food:not([disabled])', why: 'Starving: eat before you faint', m: 'hunger'}; }
+  return null; }
+function goalPlace() { const g = curGoal(); const nu = needUrgent(); if (nu) return {k: nu.k, why: nu.why};
   if (g.id === 'staff' && W.biz.kiosk.owner === PID) { const id = staffPick(), p = id && npc(id); if (p && P.rel[id].f < 10 && whereIs(p)) return {k: whereIs(p), why: `${first(p)} is there now: friendship 10 and you can hire them (${Math.round(P.rel[id].f)}/10)`}; }
-  if (g.id === 'upgrade') { const b = W.biz.kiosk, T = BIZ.kiosk.tiers; if (b.owner === PID && b.tier < T.length && P.bank + P.cash < T[b.tier].cost) { const k = P.job && P.lastShiftDay !== day() ? 'sal' : 'anchor'; return {k, why: `Save up ${moneyTxt(T[b.tier].cost)} for the upgrade: ${k === 'sal' ? 'work a shift' : 'Carlo pays well'}`}; } }
+  if (g.id === 'upgrade') { const b = W.biz.kiosk, T = BIZ.kiosk.tiers; if (b.owner === PID && b.tier < T.length && P.bank + P.cash < T[b.tier].cost) { const k = P.job && P.lastShiftDay !== day() ? 'sal' : P.path === 'street' ? 'anchor' : 'home'; return {k, why: `Save up ${moneyTxt(T[b.tier].cost)} for the upgrade: ${k === 'sal' ? 'work a shift' : k === 'home' ? 'shift done, the kiosk earns while you sleep' : 'Carlo pays well'}`}; } }
   if (g.go) return {k: g.go};
   if (g.id === 'day100') { const k = P.path === 'street' || !P.job ? 'anchor' : (P.lastShiftDay === day() ? 'anchor' : 'sal'); return {k, why: k === 'sal' ? 'A shift at Sal\'s pays toward your $100 today' : 'Carlo\'s jobs pay toward your $100 today'}; }
   if (g.id === 'crew1' || g.id === 'crew2') { const c = crewOf(), mem = c ? c.members.map(m => m.npc) : [];
@@ -1838,14 +1964,15 @@ function goalPlace() { const g = curGoal();
   return null; }
 function goalSel() {
   const g = curGoal(), en = ':not([disabled])';
+  const nu = needUrgent(); if (nu) { if (nu.k !== P.loc && document.querySelector('main [data-act="openPlace"]')) return 'main [data-act="openPlace"]'; if (document.querySelector(nu.sel)) return nu.sel; }
   const gp = goalPlace(); if (gp && gp.k !== P.loc && !P.jail && document.querySelector('main [data-act="openPlace"]')) return 'main [data-act="openPlace"]';
   if (g.id === 'launder') return 'main [data-act="skip"]';
   const M = {hired: '[data-act="hire"]', shift: '[data-act="shiftStart"]', meetCarlo: '.ph[data-npc="carlo"]', run: '[data-act="carloStart"][onclick*="run"]', prot: '[data-act="carloStart"][onclick*="prot"]',
-    day100: P.path === 'street' ? '[data-act="carloStart"][onclick*="run"]' : '[data-act="shiftStart"]', loan: '[data-act="loanTake"]', biz1: '[data-act="bizBuy"]', staff: '[data-act="bizHire"]', launder: '[data-act="carloLaunder"]',
-    upgrade: '[data-act="bizUpgrade"], [data-act="bizBuy"]', crew1: '[data-act="crewRecruit"]', crew2: '[data-act="crewRecruit"]', finale: '[data-act="finale"]', district1: '[data-act="contest"]', kingpin: '[data-act="contest"]', ruler: '[data-act="contest"]'}[g.id];
+    day100: P.path === 'street' ? '[data-act="carloStart"][onclick*="run"]' : '[data-act="shiftStart"]', fridge: '[data-act="buy"][onclick*="groceries"]', star3: '[data-act="shiftStart"]', loan: '[data-act="loanTake"]', biz1: '[data-act="bizBuy"]', staff: '[data-act="bizHire"]', launder: '[data-act="carloLaunder"]',
+    upgrade: '[data-act="bizUpgrade"], [data-act="bizBuy"]', crew1: '[data-act="crewRecruit"]', crew2: '[data-act="crewRecruit"]', finale: '[data-act="finale"]', district1: '[data-act="districtSheet"]', kingpin: '[data-act="districtSheet"]', ruler: '[data-act="districtSheet"]'}[g.id];
   const sel = M ? M.split(', ').map(x => 'main ' + x + (x.startsWith('.ph') ? '' : en)).join(', ') : null;
   // the goal's own action is locked behind a requirement: light up the action that gets you there instead
-  const FB = {prot: '[data-act="carloStart"][onclick*="run"]', launder: '[data-act="carloStart"][onclick*="run"]'}[g.id];
+  const FB = {hired: '[data-act="skip"]', prot: '[data-act="carloStart"][onclick*="run"]', launder: '[data-act="carloStart"][onclick*="run"]', upgrade: P.loc === 'home' ? '[data-act="skip"]' : '[data-act="shiftStart"], [data-act="skip"]'}[g.id];
   if (sel && !document.querySelector(sel) && FB) return FB.split(', ').map(x => 'main ' + x + en).join(', ');
   if (g.id === 'staff' && !(sel && document.querySelector(sel))) { const id = staffPick(), ph = id && document.querySelector(`main .ph[data-npc="${id}"]`); if (ph) return W.t - P.rel[id].lastTalk >= 60 ? `main .ph[data-npc="${id}"]` : 'main [data-act="skip"]'; }
   if ((g.id === 'crew1' || g.id === 'crew2') && !(sel && document.querySelector(sel))) { const c = crewOf(), mem = c ? c.members.map(m => m.npc) : []; const ph = [...document.querySelectorAll('main .ph[data-npc]')].find(e => CREW[e.dataset.npc] && !mem.includes(e.dataset.npc)); if (document.querySelector('main [data-act="hangout"]:not([disabled])')) return 'main [data-act="hangout"]'; if (ph) return W.t - P.rel[ph.dataset.npc].lastTalk >= 60 ? `main .ph[data-npc="${ph.dataset.npc}"]` : 'main [data-act="skip"]'; }
@@ -1868,6 +1995,27 @@ const METER_TXT = {health: 'Health drops when you are starving or exhausted, and
   energy: 'Energy drains while awake and working. Sleep at home (best) or on a bench. At 0 you faint.',
   mood: 'Mood rises with friends, fun and good food, and falls with hard work and jail. Low mood makes work slower.'};
 function meterInfo(k) { view(GS, ME, () => { const v = Math.round(k === 'health' ? P.health : P.needs[k]); toast(`<b>${k === 'hunger' ? 'Food' : NEED_NAMES[k]} ${v}/100.</b> ${METER_TXT[k]}`, k, v > 30 ? 'info' : 'bad'); }); }
+// v0.8: when the goal is waiting on time (Street 10, laundering overnight, a 2-day contest cooldown), suggest something useful instead of only Skip
+function idleIdeas() { const L = document.querySelector('main .dolist'); if (!L || document.querySelector('main .btn.pri') || P.jail || P.pending || needUrgent()) return; const h = hourF(W.t); if (h < 8 || h >= 20) return;
+  const ideas = []; const add = (k, why) => { if (k !== P.loc && PLACES[k] && isOpen(k) && ideas.length < 2) ideas.push(B(`${PLACES[k].n}<small>${why}</small>`, `openPlace('${k}')`, '', '', false, 'map')); };
+  const c = crewOf(), mem = c ? c.members.map(m => m.npc) : [];
+  const fr = Object.keys(CREW).map(id => npc(id)).filter(p => p && !mem.includes(p.id) && whereIs(p) && P.rel[p.id] && P.rel[p.id].f < 20)[0];
+  if (fr) add(whereIs(fr), `${first(fr)} is there: friends become crew and staff`);
+  if (W.biz.kiosk.owner === PID && P.bizShiftDay !== day()) add('kiosk', 'Run your kiosk for extra sales');
+  if (P.path === 'street') add('gym', 'Workout: Strength helps intimidate'); else add('library', 'Study: Smarts sell more at a kiosk');
+  add(P.path === 'street' ? 'library' : 'gym', P.path === 'street' ? 'Study: Smarts sell more at a kiosk' : 'Workout: Strength helps in a fight');
+  if (ideas.length) L.insertAdjacentHTML('afterend', `<h3>While you wait</h3><div class="dolist idle">${ideas.join('')}</div>`); }
+// v0.8: locked goals say how far along you are (Street 6/10, Tom 4/10...) instead of leaving you guessing
+function goalProg(g) { let t = '';
+  const fr = (ids, need) => { const c = crewOf(), mem = c ? c.members.map(m => m.npc) : []; const id = ids.filter(i => P.rel[i] && !mem.includes(i)).sort((a, b) => P.rel[b].f - P.rel[a].f)[0]; return id ? `${first(npc(id))} ${Math.floor(Math.min(need, P.rel[id].f))}/${need}` : ''; };
+  if (g.id === 'prot' && P.rep.street < 10 && !P.story.favour) t = `Street ${Math.floor(P.rep.street)}/10`;
+  else if (g.id === 'day100') t = `${moneyTxt(Math.max(0, P.dayEarn))} today`;
+  else if (g.id === 'staff' && W.biz.kiosk.owner === PID) t = fr(Object.keys(STAFF), 10);
+  else if (g.id === 'crew1' || g.id === 'crew2') t = Math.max(P.rep.street, P.rep.business) < 10 ? `Respect ${Math.floor(Math.max(P.rep.street, P.rep.business))}/10` : fr(Object.keys(CREW), 20);
+  else if (g.id === 'star3') t = `best ${P.bestStars || 0}/3 stars`;
+  else if (['operator', 'boss', 'kingpin', 'ruler'].includes(g.id)) { const r = RANKS[{operator: 3, boss: 4, kingpin: 5, ruler: 6}[g.id]]; if (r && !r.stub) { const c = rankCheck(r); t = `${c.parts.filter(x => x.ok).length}/${c.parts.length} done`; } }
+  else if (g.id === 'district1' && rankOf() < 2) t = 'rank Hustler first';
+  return t ? ` <span class="gprog">${t}</span>` : ''; }
 function renderInner() {
   const n = P.needs, d = day();
   $('#clock').innerHTML = `Day ${d} · ${clockTxt()}<small>${weekday(d)}</small><span class="ver">${VERSION}</span>`;
@@ -1875,13 +2023,13 @@ function renderInner() {
   countUp();
   $('#meters').innerHTML = [['health', P.health], ['hunger', n.hunger], ['energy', n.energy], ['mood', n.mood]].map(([k, v]) => `<button class="meter" data-m="${k}" onclick="meterInfo('${k}')" aria-label="${NEED_NAMES[k]}">${ic(k)}<span class="mcol"><span class="ml">${k === 'hunger' ? 'Food' : NEED_NAMES[k]}</span><i><b style="width:${v}%;background:${col(v)}"></b></i></span></button>`).join('');
   const nm = document.querySelector('nav [data-t="me"] img'); if (nm && !nm.src.endsWith(meArt())) nm.src = meArt();
-  const g = curGoal(), R_ = P.rent, rentWarn = R_.back > 0 ? ' <span class="rw bad">Rent overdue</span>' : R_.paidThrough < R_.due && R_.due - d <= 3 ? ` <span class="rw bad">Rent due Day ${R_.due}</span>` : '';
-  $('#goal').innerHTML = P.intro ? '' : `<div class="goalbar ${goalOpen ? 'open' : ''}" onclick="goalOpen=!goalOpen;render()">${ic('trophy', 'l')}<div class="gt"><div class="gl">NEXT GOAL <span class="rw">${rewardTxt(g.rw)}</span>${rentWarn}</div><div class="gn">${g.t}</div>${goalOpen ? `<div class="gh">${g.hint}</div>${g.go && g.go !== P.loc ? `<button class="sbtn pri" onclick="event.stopPropagation();goalOpen=false;openPlace('${g.go}')">${ic('map', 's')} Go to ${PLACES[g.go].n}</button>` : ''}` : ''}</div><span class="chev">${goalOpen ? '-' : '+'}</span></div>`;
+  const g = curGoal(), nu = needUrgent(), R_ = P.rent, rentWarn = (nu ? ` <span class="rw bad needw">${nu.m === 'energy' ? 'Exhausted: sleep' : 'Starving: eat'}</span>` : '') + (R_.back > 0 ? ' <span class="rw bad">Rent overdue</span>' : R_.paidThrough < R_.due && R_.due - d <= 3 ? ` <span class="rw bad">Rent due Day ${R_.due}</span>` : '');
+  $('#goal').innerHTML = P.intro ? '' : `<div class="goalbar ${goalOpen ? 'open' : ''}" onclick="goalOpen=!goalOpen;render()">${ic('trophy', 'l')}<div class="gt"><div class="gl">NEXT GOAL <span class="rw">${rewardTxt(g.rw)}</span>${rentWarn}</div><div class="gn">${g.t}${goalProg(g)}</div>${goalOpen ? `<div class="gh">${g.hint}</div>${g.go && g.go !== P.loc ? `<button class="sbtn pri" onclick="event.stopPropagation();goalOpen=false;openPlace('${g.go}')">${ic('map', 's')} Go to ${PLACES[g.go].n}</button>` : ''}` : ''}</div><span class="chev">${goalOpen ? '-' : '+'}</span></div>`;
   document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
   $('main').classList.toggle('mapmode', tab === 'map');
   $('main').innerHTML = ({here: renderHere, map: renderMap, me: renderMe, people: renderPeople, empire: renderEmpire})[tab]();
   if (tab === 'map') initMap();
-  goalHighlight(); orderDo();
+  goalHighlight(); orderDo(); if (tab === 'here') idleIdeas();
   showModals();
 }
 function goalInfo() { goalOpen = true; render(); }
@@ -1910,7 +2058,7 @@ function renderHere() {
       B(`Pay rent early<small>${P.rent.paidThrough >= P.rent.due ? 'This week is paid' : 'Due end of Day ' + P.rent.due}</small>`, D_({type: 'payRent'}), moneyTxt(RENT_WEEKLY), '', false, 'bank');
   } else if (id === 'sal') {
     if (!P.job) a += B('Ask Sal for a job<small>$10/hr, 4 h shifts, plus tips</small>', D_({type: 'hire'}), '', 'pri', whereIs(PEOPLE[0]) !== 'sal', 'business');
-    else { const ok = canShift(); a += B(`Work a shift<small>Grill, build and serve: about 40 s · faster and neater = bigger tips</small>`, D_({type: 'shiftStart', quick: false}), ok ? '4 h' : P.lastShiftDay === day() ? 'done today' : '10:00-14:00', '', !ok, 'hotdog') + (P.shifts >= 3 ? B('Auto shift<small>Skip the minigame · about 15% less pay, small tips</small>', D_({type: 'shiftStart', quick: true}), '4 h', '', !ok, 'business') : `<p class="sub">Auto shifts unlock after 3 hands-on shifts (${P.shifts}/3).</p>`); }
+    else { const ok = canShift(); a += B(`Work a shift${autoChip(P.shifts)}<small>Grill, build and serve: about 40 s · faster and neater = bigger tips</small>`, D_({type: 'shiftStart', quick: false}), ok ? '4 h' : P.lastShiftDay === day() ? 'done today' : '10:00-14:00', '', !ok, 'hotdog') + (P.shifts >= 3 ? B('Auto shift<small>Skip the minigame · about 15% less pay, small tips</small>', D_({type: 'shiftStart', quick: true}), '4 h', '', !ok, 'business') : ''); }
     a += shopList('sal');
   } else if (id === 'shop') {
     if (P.banned) a += `<p class="wanted">Raj has banned you until tomorrow.</p>`;
@@ -1948,9 +2096,9 @@ function towerCard() {
   if (!finaleOpen()) { const ch = rankCheck(RANKS[5]); return h + `<p class="sub">${ic('lock', 's')} Vance won't see you until you are Kingpin.</p>` + ch.parts.map(p => progRow(p.t, p.v, p.max, p.have, p.ok)).join(''); }
   const opts = [['buy', 'Buy him out', 'Clean money and a gold pen. The Tycoon (good).', 'biz', 'm_chest'], ['expose', 'Expose him to the press', 'Your evidence, every front page. The Reformer (good).', 'biz', 'civic'], ['raid', 'Raid the tower with your crew', `${Math.round(partsChance(chanceParts('raid')) * 100)}% · 2 h · the tower's cameras see you unless you have a Lookout. The Warlord (neutral).`, 'crime', 'm_contest']];
   if (P.story.broke || P.path === 'street') opts.push(['family', 'Betray Carlo and lead the family', `${Math.round(partsChance(chanceParts('family')) * 100)}% · take the Marino family, then the tower. The New Captain (bad).`, 'crime', 'p_carlo']);
-  return h + opts.map(([how, t, d, cls, icn]) => { const rq = finaleReq(how); return `<div class="fin ${rq.ok ? 'ready' : ''}">${B(`${t}<small>${d}</small>`, D_({type: 'finale', how}), rq.ok ? 'Go' : '', rq.ok ? 'pri' : cls, !rq.ok || P.vance.raidDay === day() && ['raid', 'family'].includes(how), icn)}${rq.ok ? '' : rq.parts.map(p => progRow(p.t, p.v, p.max, p.have, p.ok)).join('')}</div>`; }).join('');
+  return h + opts.map(([how, t, d, cls, icn]) => { const rq = finaleReq(how); return `<div class="fin ${rq.ok ? 'ready' : ''}">${B(`${t}<small>${how === 'raid' ? d + ' · crack the vault first (35 s)' : d}</small>`, how === 'raid' ? "mgPlay('safe')" : D_({type: 'finale', how}), rq.ok ? 'Go' : '', rq.ok ? 'pri' : cls, !rq.ok || P.vance.raidDay === day() && ['raid', 'family'].includes(how), icn)}${how === 'raid' && rq.ok && (P.mg && P.mg.safe || 0) >= 3 ? B('Raid: skip the vault<small>No safe-crack bonus</small>', D_({type: 'finale', how}), '', '', P.vance.raidDay === day(), 'm_skip') : ''}${rq.ok ? '' : rq.parts.map(p => progRow(p.t, p.v, p.max, p.have, p.ok)).join('')}</div>`; }).join('');
 }
-function shopList(id) { return SHOP_STOCK[id].map(k => B(ITEMS[k].n + (ITEMS[k].fx ? `<small>${fxTxt(ITEMS[k].fx)}</small>` : '<small>Goes in the fridge</small>'), D_({type: 'buy', item: k}), moneyTxt(ITEMS[k].p), '', false, 'f_' + ITEMS[k].art)).join(''); }
+function shopList(id) { return SHOP_STOCK[id].map(k => { const it = ITEMS[k], food = it.where === 'now' && it.fx && it.fx.hunger >= 15 || k === 'groceries'; return B(it.n + (it.fx ? `<small>${fxTxt(it.fx)}</small>` : '<small>Goes in the fridge</small>'), D_({type: 'buy', item: k}), moneyTxt(it.p), food ? 'food' : '', false, 'f_' + it.art); }).join(''); }
 
 function loanCard(onSite) {
   const L = P.loan;
@@ -1976,14 +2124,14 @@ function bizCard(k, onSite) {
   else if (nx) h += `<button class="btn biz upg" onclick="${D_({type: 'bizUpgrade', biz: k})}"><img class="ic xl" src="${A(nx.art)}" alt=""><span class="lab">Upgrade to ${nx.n}<small>${k === 'kiosk' ? `x${nx.mult} customers` : `+${moneyTxt(nx.income - nx.upkeep)}/day`} · launders ${moneyTxt(nx.launder)}/night</small></span><span class="r">${moneyTxt(nx.cost)}</span></button>`;
   else h += `<p class="gold">${ic('m_crown', 's')} Top tier.</p>`;
   if (k !== 'kiosk') { if (onSite) { const done = P.laundDay === day(), au = (P.mg && P.mg.laund || 0) >= 3;
-      h += B(`Work a laundry rush<small>30 s: sort whites, colours, darks, towels · clean cash</small>`, "mgPlay('laund')", done ? 'done today' : '1 h', 'biz', done || !!P.jail, 'm_laundry') + (au && !done ? B('Laundry rush: auto<small>Skip the sorting, smaller pay</small>', D_({type: 'laundWork', auto: true}), '1 h', '', false, 'm_skip') : ''); }
+      h += B(`Work a laundry rush${autoChip(P.mg && P.mg.laund || 0)}<small>30 s: sort whites, colours, darks, towels · clean cash</small>`, "mgPlay('laund')", done ? 'done today' : '1 h', 'biz', done || !!P.jail, 'm_laundry') + (au && !done ? B('Laundry rush: auto<small>Skip the sorting, smaller pay</small>', D_({type: 'laundWork', auto: true}), '1 h', '', false, 'm_skip') : ''); }
     return h; }
   const st = b.staff ? npc(b.staff) : null;
   h += `<h3>Price per wrap</h3><div class="seg">${Object.keys(D.prices).map(p => `<button class="sbtn ${+p === b.price ? 'pri' : ''}" onclick="${D_({type: 'bizPrice', price: +p})}">${moneyTxt(+p)}</button>`).join('')}</div>
    <h3>Staff</h3>${st ? `<div class="person"><img class="por s" src="${pArt(b.staff)}" alt=""><div class="info"><b>${st.n}</b><div class="sub">${moneyTxt(staffWage(b.staff))}/day · turns up ${Math.round(STAFF[b.staff].rel * 100)}%</div></div><button class="sbtn" onclick="${D_({type: 'bizFire'})}">Let go</button></div>` :
      `<p class="bad">Nobody runs it: no sales unless you work it yourself.</p>` + Object.keys(STAFF).map(s2 => { const p = npc(s2), f = P.rel[s2].f; return `<div class="person ${f < 10 ? 'dim' : ''}" style="margin:8px 0"><img class="por s" src="${pArt(s2)}" alt=""><div class="info"><b>${p.n}</b><div class="sub">${moneyTxt(staffWage(s2))}/day${f >= 50 ? ' (friend)' : ''} · skill ${STAFF[s2].skill}${f < 10 ? ` · <span class="bad">friendship ${Math.round(f)}/10</span>` : ''}</div></div><button class="sbtn pri" ${f < 10 ? 'disabled' : ''} onclick="${D_({type: 'bizHire', npc: s2})}">Hire</button></div>`; }).join('')}
    <div class="kv"><span>${ic('package', 's')} Wraps in stock</span><b class="${b.stock < 30 ? 'bad' : ''}">${b.stock}</b></div>`;
-  if (onSite) h += B('Restock 50 wraps', D_({type: 'bizStock', n: 50}), moneyTxt(50 * D.unitCost), '', false, 'package') + B('Run it yourself<small>30 s: keep the shelves stocked · sales paid tonight</small>', "mgPlay('stock')", P.bizShiftDay === day() ? 'done today' : '4 h', 'biz', P.bizShiftDay === day(), 'business') + ((P.mg && P.mg.stock || 0) >= 3 && P.bizShiftDay !== day() ? B('Run it: auto<small>Skip the minigame, sells a bit less</small>', D_({type: 'bizWork', auto: true}), '4 h', '', false, 'm_skip') : '');
+  if (onSite) h += B('Restock 50 wraps', D_({type: 'bizStock', n: 50}), moneyTxt(50 * D.unitCost), '', false, 'package') + B(`Run it yourself${autoChip(P.mg && P.mg.stock || 0)}<small>30 s: keep the shelves stocked · sales paid tonight</small>`, "mgPlay('stock')", P.bizShiftDay === day() ? 'done today' : '4 h', 'biz', P.bizShiftDay === day(), 'business') + ((P.mg && P.mg.stock || 0) >= 3 && P.bizShiftDay !== day() ? B('Run it: auto<small>Skip the minigame, sells a bit less</small>', D_({type: 'bizWork', auto: true}), '4 h', '', false, 'm_skip') : '');
   else h += '<p class="sub">Restock and work it on site (Old Town).</p>';
   return h;
 }
@@ -2043,6 +2191,16 @@ function propSection() {
 function mktCard() { const w = mktWorth(), n = Object.keys(P.mkt.hold).length + P.mkt.pos.length, k = W.mkt.co;
   return `<div class="card mkcard"><h2>${ic('m_market')} Stock market</h2><div class="mticks">${COMPANIES.map(c => { const d = mPct(k[c.s].p, k[c.s].days[k[c.s].days.length - 1]); return `<span>${c.s} ${pctTxt(d)}</span>`; }).join('')}</div>
   <div class="kv"><span>Your portfolio${n ? ` (${n})` : ''}</span><b>${money(w)}</b></div>${B('Open the Maple City Exchange<small>Buy and sell shares with clean money</small>', 'mktOpenUI()', '', 'biz', false, 'm_chart')}</div>`; }
+// v0.8 lettings: flats you own, their tenants, rent waiting, and the one issue each tenancy brings
+function letsCard() { const own = P.lets || {}, ks = Object.keys(LETS), due = Object.values(own).reduce((a, f) => a + f.due, 0);
+  const rows = ks.map(k => { const L = LETS[k], f = own[k];
+    if (!f) return `<div class="lrow"><img class="lart" src="${A(L.art)}" alt=""><div class="li"><b>${L.n}</b><small>${L.d}</small><small>About ${moneyTxt(L.rent)} a day in rent</small></div>${B('Buy', D_({type: 'letBuy', flat: k}), moneyTxt(L.cost), 'biz', !canPay(L.cost), 'b_home')}</div>`;
+    let h = `<div class="lrow own"><img class="lart" src="${A(L.art)}" alt=""><div class="li"><b>${L.n}</b>`;
+    if (!f.tenant) return h + `<small class="gold">Empty: pick a tenant</small></div></div><div class="tcands">${f.cands.map((c, i) => `<button class="tcand" onclick="${D_({type: 'letTenant', flat: k, i})}"><img class="por s" src="${A('p_tenant')}" alt=""><b>${c.n}</b><small>${c.t}</small><span class="gold">${moneyTxt(Math.round(L.rent * c.mult))}/day</span><small>Pays on time ${Math.round(c.rel * 100)}%</small><em>${c.line}</em></button>`).join('')}</div>`;
+    h += `<small>${f.tenant.n} · ${moneyTxt(letRent(f))}/day · on time ${Math.round(f.tenant.rel * 100)}%</small>${f.grace ? `<small>Grace week: ${f.grace} days left</small>` : ''}</div><img class="por s" src="${A('p_tenant')}" alt=""></div>`;
+    if (f.issue) { const I = LET_ISSUES[f.issue.id]; h += `<div class="lissue"><b class="bad">${I.t}</b><small>${I.d} Rent is on hold (${3 - f.issue.days} day${3 - f.issue.days === 1 ? '' : 's'} before it gets worse).</small>${B(I.a[0], D_({type: 'letIssue', flat: k, pick: 'a'}), I.a[1] ? moneyTxt(I.a[1]) : '', '', I.a[1] && !canPay(I.a[1]), 'b_home')}${B(I.b[0], D_({type: 'letIssue', flat: k, pick: 'b'}), I.b[1] ? moneyTxt(I.b[1]) : '', '', false, 'm_skip')}</div>`; }
+    return h; }).join('');
+  return `<div class="card lets"><h2>${ic('b_home')} Lettings</h2><p class="sub">Buy a flat with clean money, pick a tenant, collect the rent. Each tenancy brings one problem to handle.</p>${rows}${Object.keys(own).length ? B(`Collect rent<small>Goes into the bank, clean</small>`, D_({type: 'letCollect'}), moneyTxt(due), due ? 'biz' : '', !due, 'bank') : ''}</div>`; }
 function renderEmpire() {
   const R = P.rent, Bl = P.bills, cr = crewOf(), mine = myDistricts(), vance = Object.keys(W.districts).filter(k => W.districts[k].control === 'vance');
   const bizV = Object.keys(W.biz).filter(k => W.biz[k].owner === ME).reduce((a, k) => a + bizValue(k), 0), distV = mine.reduce((a, k) => a + distValue(k), 0);
@@ -2052,6 +2210,7 @@ function renderEmpire() {
    <div class="kv"><span>Income per day (est.)</span><b class="${perDay >= 0 ? 'good' : 'bad'}">${perDay >= 0 ? '+' : ''}${moneyTxt(perDay)}</b></div></div>
   ${mktCard()}
   <h3 class="sect">Properties</h3>${propSection()}
+  ${letsCard()}
   ${P.dirty > 0 || ownsBiz() || P.stats.dirtyEver ? `<div class="card"><h2>${ic('m_dirty')} Dirty money</h2><div class="kv"><span>Dirty cash</span><b>${money(P.dirty)}</b></div><div class="kv"><span>Your fronts launder per night</span><b>${moneyTxt(launderCap())}</b></div><p class="sub">Crime pays dirty cash. It buys street things, but rent, the bank, businesses and buy-outs need clean money. Each night your businesses launder dirty cash into the bank (10% fee). If you're jailed, the police seize it.</p></div>` : ''}
   <div class="card"><h2>${ic('m_flag')} Turf</h2><div class="kv"><span>Your districts</span><b>${mine.length ? mine.map(k => DISTRICTS[k].n).join(', ') : 'none yet'}</b></div><div class="kv"><span>${ic('p_vance', 's')} Sterling Vance</span><b class="bad">${vance.length} districts</b></div><div class="kv"><span>${ic('civic', 's')} City contracts per night</span><b>${contractPay() ? moneyTxt(contractPay()) : `<small class="sub">Civic ${INVEST.civic} + Business ${INVEST.business}</small>`}</b></div>${B('Open the city map', "go('map')", '', 'pri', false, 'map')}</div>
   <div class="card"><h2>${ic('m_crew')} Your crew</h2>${cr && cr.members.length ? cr.members.map(m => `<div class="person" style="margin:6px 0"><img class="por s" src="${pArt(m.npc)}" alt=""><div class="info"><b>${npc(m.npc).n}</b><div class="sub">${m.role} · ${ROLES[m.role]}</div></div></div>`).join('') + B('Send the crew on jobs<small>$50-$80 dirty each, once a day</small>', D_({type: 'crewJob'}), P.crewJobDay === day() ? 'done today' : '', 'crime', P.crewJobDay === day() || !!P.jail, 'street') : `<p class="sub">No crew yet. Needs Street or Business respect 10 and friendship 20.</p>${Object.keys(CREW).map(id => `<div class="person" style="margin:6px 0"><img class="por s" src="${pArt(id)}" alt=""><div class="info"><b>${npc(id).n} · ${CREW[id].role}</b><div class="sub">${ROLES[CREW[id].role]}</div></div></div>`).join('')}`}</div>
@@ -2079,7 +2238,8 @@ function mgPlay(kind, how) { closeModal(); modalOpen = 'mg';
   if (kind === 'dial') return dialOpen(how, res => dispatch({type: 'protChoice', how, res}));
   if (kind === 'getaway') return getawayOpen(res => dispatch({type: 'police', choice: 'run', res}));
   if (kind === 'laund') return laundOpen(res => dispatch({type: 'laundWork', res}));
-  if (kind === 'stock') return stockOpen(res => dispatch({type: 'bizWork', res})); }
+  if (kind === 'stock') return stockOpen(res => dispatch({type: 'bizWork', res}));
+  if (kind === 'safe') return safeOpen(res => dispatch({type: 'finale', how: 'raid', res})); }
 function heistGo(auto) { if (auto) return dispatch({type: 'heist'}); modalOpen = 'mg'; lockOpen(res => dispatch({type: 'heist', lock: res})); }
 function go(t) { tab = t; if (modalOpen === 'ui') closeModal(); render(); $('main').scrollTop = 0; }
 function openPlace(id) {
@@ -2267,7 +2427,7 @@ function mktCandles(k, range) {
   if (range === '1W') return [...grp(k.hrs, 4), k.ch];
   return [...grp(k.days, 1), k.cd];
 }
-function mktChart(s, range, lastC) {
+function mktChart(s, range, lastC, an = null) {
   const k = W.mkt.co[s], cs = mktCandles(k, range).map(c => c.slice());
   if (lastC != null) { const c = cs[cs.length - 1]; c[3] = lastC; c[1] = Math.max(c[1], lastC); c[2] = Math.min(c[2], lastC); }
   const lines = [];
@@ -2279,10 +2439,13 @@ function mktChart(s, range, lastC) {
   let hi = Math.max(...cs.map(c => c[1])), lo = Math.min(...cs.map(c => c[2]));
   const span0 = hi - lo || hi * 0.01; for (const l of lines) if (Math.abs(l.v - (hi + lo) / 2) < span0 * 1.6) { hi = Math.max(hi, l.v); lo = Math.min(lo, l.v); }
   const pad = (hi - lo) * 0.08 || 1; hi += pad; lo -= pad;
+  MK.scale = [hi, lo, cs.length];                       // the target scale, read by the tick animation
+  if (an) { hi = an.hi; lo = an.lo; }
   const Wd = 360, H = 190, R = 52, cw = (Wd - R) / cs.length, y = v => (hi - v) / (hi - lo) * H;
   let g = '';
   for (let i = 0; i <= 3; i++) { const v = lo + (hi - lo) * (0.1 + 0.8 * i / 3); g += `<line x1="0" x2="${Wd - R}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}" class="gl"/><text x="${Wd - R + 4}" y="${(y(v) + 4).toFixed(1)}" class="ax">${(v / 100).toFixed(2)}</text>`; }
-  cs.forEach(([o, h, l, c], i) => { const x = i * cw + cw / 2, up = c >= o, top = y(Math.max(o, c)), bh = Math.max(1.2, Math.abs(y(o) - y(c)));
+  const sh = an ? an.shift * cw : 0;                   // a new candle slides in from the right
+  cs.forEach(([o, h, l, c], i) => { const x = i * cw + cw / 2 + sh, up = c >= o, top = y(Math.max(o, c)), bh = Math.max(1.2, Math.abs(y(o) - y(c)));
     g += `<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${y(h).toFixed(1)}" y2="${y(l).toFixed(1)}" class="${up ? 'wu' : 'wd'}"/><rect x="${(x - cw * 0.36).toFixed(1)}" width="${(cw * 0.72).toFixed(1)}" y="${top.toFixed(1)}" height="${bh.toFixed(1)}" rx="1" class="${up ? 'cu' : 'cd'}${i === cs.length - 1 ? ' now' : ''}"/>`; });
   // labels never overlap: sort by height and push each at least 13 units below the one above
   const ls = lines.map(l => ({...l, yy: Math.max(6, Math.min(H - 2, y(l.v)))})).sort((a, b) => a.yy - b.yy); let prev = -99;
@@ -2309,6 +2472,10 @@ function mktGo() { view(GS, ME, () => { const a = mktAmt(); if (a < 1000) return
   const act = MK.mode === 'shares' ? (MK.side === 'buy' ? {type: 'mktBuy', s: MK.s, amt: a} : {type: 'mktSell', s: MK.s, frac: MK.pct / 100}) : MK.mode === 'lev' ? {type: 'mktOpen', s: MK.s, k: MK.dir, amt: a, lev: MK.lev} : {type: 'mktOpen', s: MK.s, k: MK.ok, amt: a, K: MK.K, days: MK.days};
   MK._act = act; }); buzz(30); dispatch(MK._act); }
 const seg = (opts, cur, set) => `<div class="mseg">${opts.map(([v, l]) => `<button class="${v === cur ? 'on' : ''}" onclick="${set}=${typeof v === 'string' ? `'${v}'` : v};mktRender()">${l}</button>`).join('')}</div>`;
+// a small portfolio strip: value, today's P&L and the all-time P&L (realised + open)
+function mktStrip() { const v = mktWorth(), pl = Math.round(mktPL()), td = Math.round(pl - (P.mkt.pl0 || 0)), sg = c => `<b class="${c > 0 ? 'good' : c < 0 ? 'bad' : ''}">${c > 0 ? '+' : ''}${moneyTxt(c)}</b>`;
+  if (!v && !P.mkt.trades) return '';
+  return `<div class="mstrip"><div><small>Portfolio</small><b>${moneyTxt(v)}</b></div><div><small>Today</small>${sg(td)}</div><div><small>All time</small>${sg(pl)}</div></div>`; }
 function mktRender() { const el = $('#mkt'); if (!el || !MK.open) return; view(GS, ME, () => {
   const M = W.mkt, k = M.co[MK.s], c = coOf(MK.s), pro = mktUnlocked(), day0 = k.days.length ? k.days[k.days.length - 1] : k.open;
   if (pro && !P.mkt.proSeen && !modalOpen) setTimeout(() => mktExplain(true), 50);
@@ -2325,8 +2492,10 @@ function mktRender() { const el = $('#mkt'); if (!el || !MK.open) return; view(G
     : MK.mode === 'lev' ? seg([['long', 'Long (up)'], ['short', 'Short (down)']], MK.dir, 'MK.dir') + seg(MKT.levs.map(l => [l, l + 'x']), MK.lev, 'MK.lev')
     : seg([['call', 'Call (up)'], ['put', 'Put (down)']], MK.ok, 'MK.ok') + seg(MKT.optK.map(v => [v, v ? (v > 0 ? '+' : '-') + Math.abs(v * 100) + '%' : 'At price']), MK.K, 'MK.K') + seg(MKT.optDays.map(d => [d, d + (d > 1 ? ' days' : ' day')]), MK.days, 'MK.days');
   const canSell = MK.mode !== 'shares' || MK.side === 'buy' || hold[MK.s];
+  const sc = el.querySelector('.mkbody'), scTop = sc ? sc.scrollTop : 0;
   el.innerHTML = `<div class="mkhead"><button class="sbtn" onclick="mktCloseUI()">Close</button><div class="mkt1"><b>Maple City Exchange</b><small>Day ${day()} · ${clockTxt()}</small></div><button id="mklive" class="sbtn live ${MK.live ? 'on' : ''}" onclick="mktLive(!MK.live);mktRender()">${MK.live ? 'Pause' : 'Live'}</button></div>
   <div class="mkbody"><div class="mchips">${chips}</div>
+  ${mktStrip()}
   <div class="mco"><img src="${A('s_' + c.s.toLowerCase())}" alt=""><div><b>${c.n}</b><small>${c.about}</small></div><div class="mpx"><b>${px(k.p)}</b>${pctTxt(mPct(k.p, day0))}</div></div>
   <div class="mchart">${mktChart(MK.s, MK.range)}${MK.live ? '<i class="livedot"></i>' : ''}</div>
   ${seg([['1D', '1D'], ['1W', '1W'], ['1M', '1M']], MK.range, 'MK.range')}
@@ -2339,11 +2508,14 @@ function mktRender() { const el = $('#mkt'); if (!el || !MK.open) return; view(G
   <h3 class="sect">Your portfolio <span class="gold">${moneyTxt(total)}</span></h3>${port || '<p class="sub">Nothing yet. Start small.</p>'}
   <h3 class="sect">${ic('m_ticker', 's')} Headlines</h3>${news}
   <button class="sbtn" style="margin:10px 0 24px" onclick="mktExplain(${pro})">How the market works</button></div>`;
-  // ticking candle: glide the live candle from the last price to the new one
-  const prev = MK.last[MK.s + MK.range]; MK.last[MK.s + MK.range] = k.p;
-  if (prev != null && prev !== k.p) { const t0 = performance.now(), ch = el.querySelector('.mchart'), to = k.p;
-    const step = t => { if (!MK.open || !ch.isConnected) return; const f = Math.min(1, (t - t0) / 700), v = prev + (to - prev) * (1 - Math.pow(1 - f, 3)); view(GS, ME, () => { ch.firstElementChild.outerHTML = mktChart(MK.s, MK.range, v); }); if (f < 1) requestAnimationFrame(step); };
-    requestAnimationFrame(step); }
+  const sc2 = el.querySelector('.mkbody'); if (sc2 && scTop) sc2.scrollTop = scTop;
+  // live ticks glide: the price, the axis scale and a new candle all ease over most of the 1.8 s tick, so the chart never jumps
+  const key = MK.s + MK.range, prev = MK.last[key], tgt = MK.scale.slice(); MK.last[key] = {p: k.p, hi: tgt[0], lo: tgt[1], n: tgt[2]};
+  if (prev && (prev.p !== k.p || prev.n !== tgt[2])) { const t0 = performance.now(), ch = el.querySelector('.mchart'), d0 = MK.disp && MK.disp.key === key ? MK.disp : prev, dur = MK.live ? 1600 : 700, newC = tgt[2] > prev.n;
+    const step = t => { if (!MK.open || !ch.isConnected) return; const f = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - f, 3), L = (a, b) => a + (b - a) * e;
+      const v = L(d0.p, k.p), an = {hi: L(d0.hi, tgt[0]), lo: L(d0.lo, tgt[1]), shift: newC ? 1 - e : 0}; MK.disp = {key, p: v, hi: an.hi, lo: an.lo};
+      view(GS, ME, () => { ch.firstElementChild.outerHTML = mktChart(MK.s, MK.range, v, an); }); MK.scale = tgt; if (f < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step); } else MK.disp = {key, p: k.p, hi: tgt[0], lo: tgt[1]};
 }); }
 
 // ===== Sal's Hot Dogs v0.7: the lunch rush (pointer-event drag and drop, touch and mouse) =====
@@ -2353,7 +2525,8 @@ function mktRender() { const el = $('#mkt'); if (!el || !MK.open) return; view(G
 const HD_COOK = 2.6, HD_OK = [1, 1.45], HD_BURN = 1.85, HD_LIMIT = 40, HD_SLOTS = 4, HD_PLATE = 3, HD_Q = 3;
 const HD_TOP_COL = {ketchup: '#d62828', mustard: '#f2b705', onions: '#9c5b20', relish: '#4f9d2d'};
 let HD = null;
-const HD_BIN = '<svg viewBox="0 0 48 48" class="binsvg"><path d="M12 14h24l-2.5 28h-19z" fill="#5b6178" stroke="#1b1f33" stroke-width="2.5" stroke-linejoin="round"/><rect x="9" y="9" width="30" height="6" rx="2" fill="#7a819c" stroke="#1b1f33" stroke-width="2.5"/><path d="M19 5h10v4H19z" fill="#7a819c" stroke="#1b1f33" stroke-width="2.5"/><path d="M19 20v17M24 20v17M29 20v17" stroke="#1b1f33" stroke-width="2.5" stroke-linecap="round"/></svg>';
+// v0.8: the tray and order bubbles use the repainted stall icons (the bun keeps its v0.6 art)
+const hdIc = k => k === 'bun' ? 'g_bun' : 'g_tray_' + k;
 const hdSpeed = () => window.HD_SPEED || 1;
 const hdState = d => d < HD_OK[0] ? 'raw' : d >= HD_BURN ? 'burnt' : 'cooked';
 function hdOpen() {
@@ -2364,12 +2537,13 @@ function hdOpen() {
   el.innerHTML = `<div class="hdbg" style="background-image:url(${A('hd_scene')})"></div><div class="hdstage">
    <div class="hdtop"><b class="hf">Sal's Hot Dogs</b><div class="hdtime"><b id="hdbar"></b></div><span id="hdn"></span></div>
    <div class="hdstat"><span id="hdserved"></span><span id="hdcombo"></span><span class="gold" id="hdtips">$0.00</span></div>
+   <div class="hdline" id="hdline"></div>
    <div class="hdq" id="hdq">${Array.from({length: HD_Q}, (_, i) => `<div class="qslot" data-q="${i}"></div>`).join('')}</div>
    <div class="hdrush" id="hdrush">RUSH HOUR</div>
    <div class="hdcounter"><div class="hdgrill dz" data-z="grill"><img class="bg" src="${A('g_grill')}" alt="">${Array.from({length: HD_SLOTS}, (_, i) => `<div class="slot dz" data-z="grill" data-g="${i}"></div>`).join('')}</div>
     <div class="hdplate dz" data-z="plate" data-src="plate"><img class="bg" src="${A('g_plate')}" alt=""><div class="dogs" id="hddogs"></div><div class="cup" id="hdcup"></div><span class="plab">Drag the plate to a customer</span></div></div>
    <div class="hdhint" id="hdhint"></div>
-   <div class="tray">${[['raw', 'Sausage'], ['bun', 'Bun'], ['ketchup', 'Ketchup'], ['mustard', 'Mustard'], ['onions', 'Onions'], ['relish', 'Relish'], ['soda', 'Drink'], ['bin', 'Bin']].map(([k, n]) => `<div class="src ${k === 'bin' ? 'dz bin' : ''}" data-src="${k === 'bin' ? '' : k}" ${k === 'bin' ? 'data-z="bin"' : ''} role="button" aria-label="${n}">${k === 'bin' ? HD_BIN : `<img src="${A('g_' + k)}" alt="">`}<span>${n}</span></div>`).join('')}</div></div>
+   <div class="tray">${[['raw', 'Sausage'], ['bun', 'Bun'], ['ketchup', 'Ketchup'], ['mustard', 'Mustard'], ['onions', 'Onions'], ['relish', 'Relish'], ['soda', 'Drink'], ['bin', 'Bin']].map(([k, n]) => `<div class="src ${k === 'bin' ? 'dz bin' : ''}" data-src="${k === 'bin' ? '' : k}" ${k === 'bin' ? 'data-z="bin"' : ''} role="button" aria-label="${n}"><img src="${A(hdIc(k))}" alt=""><span>${n}</span></div>`).join('')}</div></div>
    <div class="hdres" id="hdres"></div>`;
   el.addEventListener('pointerdown', hdDown);
   hdDraw(); requestAnimationFrame(hdTick);
@@ -2378,7 +2552,7 @@ function hdSpawn() {
   const H = HD; while (H.next < H.orders.length && H.t >= H.orders[H.next].at && H.q.length < HD_Q) {
     const i = H.next++, o = H.orders[i], slot = [0, 1, 2].find(s => !H.q.some(c => c.slot === s));
     H.q.push({i, slot, shown: H.t}); const el = document.querySelector(`#hdq .qslot[data-q="${slot}"]`);
-    const icons = [`<span class="oi"><img src="${A('g_dog')}" alt="">${o.dogs > 1 ? `<b>x${o.dogs}</b>` : ''}</span>`, ...o.tops.map(t => `<span class="oi"><img src="${A('g_' + t)}" alt=""></span>`), o.drink ? `<span class="oi"><img src="${A('g_soda')}" alt=""></span>` : ''].join('');
+    const icons = [`<span class="oi"><img src="${A('g_dog')}" alt="">${o.dogs > 1 ? `<b>x${o.dogs}</b>` : ''}</span>`, ...o.tops.map(t => `<span class="oi"><img src="${A(hdIc(t))}" alt=""></span>`), o.drink ? `<span class="oi"><img src="${A(hdIc('soda'))}" alt=""></span>` : ''].join('');
     const words = `${o.dogs > 1 ? o.dogs + ' dogs' : '1 dog'}${o.tops.length ? ', ' + o.tops.join(' + ') : ', plain'}${o.drink ? ', drink' : ''}`;
     el.innerHTML = `<div class="cust dz walkin ${o.rush ? 'rushc' : ''}" data-z="cust" data-c="${i}"><div class="pring"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" class="pbg"/><circle cx="50" cy="50" r="46" class="pfg" pathLength="100"/></svg><img src="${pArt(o.who)}" alt=""></div><b class="cn">${npc(o.who).n.split(' ')[0].replace(/'/g, '')}</b><div class="obub" aria-label="${words}"><div class="oicons">${icons}</div><small>${words}</small></div></div>`;
     if (o.rush && !H.rushShown) { H.rushShown = true; const r = $('#hdrush'); r.classList.add('on'); buzz([40, 30, 40]); setTimeout(() => r.classList.remove('on'), 1600); }
@@ -2406,6 +2580,7 @@ function hdDraw() {
   const H = HD, left = Math.max(0, HD_LIMIT - H.t);
   $('#hdbar').style.width = (left / HD_LIMIT * 100) + '%'; $('#hdbar').className = left < 10 ? 'low' : '';
   $('#hdn').textContent = Math.ceil(left) + 's';
+  const wait = H.orders.slice(H.next), lh = wait.length ? `<span class="lab">In line ${wait.length}</span>${wait.slice(0, 5).map((o, k) => `<img src="${pArt(o.who)}" alt="" style="--k:${k}">`).join('')}` : '<span class="lab">Last customers</span>', ln = $('#hdline'); if (ln.dataset.h !== lh) { ln.innerHTML = lh; ln.dataset.h = lh; }
   const served = H.res.filter(r => r && r.ok).length; $('#hdserved').textContent = `Served ${served}/${H.orders.length}`;
   $('#hdcombo').innerHTML = H.streak >= 2 ? `<b class="combo">Combo x${H.streak}</b>` : ''; $('#hdtips').textContent = 'Tips ' + moneyTxt(H.tips);
   for (const c of H.q) { const el = document.querySelector(`#hdq .cust[data-c="${c.i}"]`); if (!el) continue; const o = H.orders[c.i], f = Math.max(0, 1 - (H.t - c.shown) / o.pat);
@@ -2415,7 +2590,7 @@ function hdDraw() {
     if (el.dataset.h !== html) { el.innerHTML = html; el.dataset.h = html; }
     if (g) el.querySelector('.done b').style.width = Math.min(100, g.d / HD_BURN * 100) + '%'; });
   const p = H.plate, dh = p.dogs.map(hdDogHtml).join(''), dd = $('#hddogs'); if (dd.dataset.h !== dh) { dd.innerHTML = dh; dd.dataset.h = dh; }
-  const ch = p.drink ? `<img src="${A('g_soda')}" alt="">` : '', cu = $('#hdcup'); if (cu.dataset.h !== ch) { cu.innerHTML = ch; cu.dataset.h = ch; }
+  const ch = p.drink ? `<img src="${A(hdIc('soda'))}" alt="">` : '', cu = $('#hdcup'); if (cu.dataset.h !== ch) { cu.innerHTML = ch; cu.dataset.h = ch; }
   $('#hd .hdplate').classList.toggle('ready', p.dogs.length > 0);
   // the hint line: what to do next for the customer who has waited longest
   let hint = '', tgt = null; const c0 = H.q.slice().sort((a, b) => (H.t - b.shown) / H.orders[b.i].pat - (H.t - a.shown) / H.orders[a.i].pat)[0], o = c0 && H.orders[c0.i];
@@ -2728,4 +2903,40 @@ function stockTick(now) {
 }
 function stockDone() { const K = MG.k, pc = K.up / Math.max(1, K.tot), stars = pc >= 0.95 ? 3 : pc >= 0.8 ? 2 : pc >= 0.6 ? 1 : 0;
   mgEnd({stars}, 'Shift over', [['Shelves stocked', Math.round(pc * 100) + '% of the time', pc >= 0.8 ? 'good' : 'bad'], ['Sales', stars >= 2 ? 'up' : stars === 1 ? 'a little down' : 'well down', stars >= 2 ? 'good' : 'bad']], 'Close up'); }
+
+// ---- v0.8 tower safe-crack: turn the dial and feel for each of 3 numbers; spinning fast trips the alarm ----
+function safeOpen(onResult) {
+  mgFrame('safe', "Vance's vault", 'Turn the dial slowly. When the stethoscope lights up, stop and hold to set the number. Spin too fast and the alarm hears you.', 35, onResult);
+  const nums = [0, 1, 2].map(() => 8 + Math.floor(Math.random() * 84));
+  MG.s = {a: 0, nums, cur: 0, hold: 0, alarm: 0, lastA: 0, drag: false, a0: 0, p0: 0, set: []};
+  $('#mgstage').innerHTML = `<div class="sfbox"><div class="sfdoor" id="sfdoor"><img class="door" src="${A('g_safe_door')}" alt=""><div class="sfdial" id="sfdial"><img src="${A('g_safe_dial')}" alt=""></div><i class="sfmark"></i></div>
+    <div class="sfread"><span class="num" id="sfnum">00</span><div class="sfset" id="sfset"></div></div>
+    <div class="sfmeters"><div><small>Stethoscope</small><i><b id="sfsteth"></b></i></div><div><small>Alarm</small><i class="al"><b id="sfalarm"></b></i></div></div></div>`;
+  const dial = $('#sfdial'), ang = e => { const r = dial.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI; };
+  const mv = e => { const S = MG && MG.s; if (!S || !S.drag) return; let d = ang(e) - S.p0; if (d > 180) d -= 360; if (d < -180) d += 360; S.a += d; S.p0 = ang(e); };
+  const up = () => { if (MG && MG.s) MG.s.drag = false; window.removeEventListener('pointermove', mv); };
+  $('#sfdoor').addEventListener('pointerdown', e => { e.preventDefault(); const S = MG.s; S.drag = true; S.p0 = ang(e); window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up, {once: true}); window.addEventListener('pointercancel', up, {once: true}); });
+  requestAnimationFrame(safeTick);
+}
+const sfNum = a => ((Math.round(a / 3.6) % 100) + 100) % 100;
+function safeTick(now) {
+  if (!MG || !MG.live || MG.kind !== 'safe') return; const S = MG.s, dt = Math.min(0.05, (now - MG.last) / 1000) * mgSpeed(); MG.last = now; MG.t += dt;
+  const sp = Math.abs(S.a - S.lastA) / Math.max(dt, 0.001); S.lastA = S.a;                 // degrees per second
+  S.alarm = Math.max(0, Math.min(1, S.alarm + (sp > 420 ? dt * (sp - 420) / 900 : -dt * 0.06)));
+  const n = sfNum(S.a), tgt = S.nums[S.cur], dist = Math.min(Math.abs(n - tgt), 100 - Math.abs(n - tgt)), near = Math.max(0, 1 - dist / 12);
+  S.hold = dist <= 1 && sp < 60 ? S.hold + dt : Math.max(0, S.hold - dt * 2);
+  if (S.hold >= 0.6) { S.set.push(tgt); S.cur++; S.hold = 0; beep('coin'); buzz(50); }
+  $('#sfdial').style.transform = `rotate(${S.a.toFixed(1)}deg)`; $('#sfnum').textContent = String(n).padStart(2, '0');
+  $('#sfsteth').style.width = (near * 100) + '%'; $('#sfsteth').style.background = near > 0.9 ? 'var(--good)' : near > 0.5 ? 'var(--warn)' : '#7fb2ff';
+  $('#sfalarm').style.width = (S.alarm * 100) + '%';
+  $('#sfset').innerHTML = [0, 1, 2].map(i => `<i class="${i < S.set.length ? 'on' : i === S.cur ? 'cur' : ''}">${i < S.set.length ? String(S.set[i]).padStart(2, '0') : '--'}</i>`).join('');
+  $('#mghint').innerHTML = S.alarm > 0.6 ? '<span class="bad">Too fast: the alarm is listening</span>' : near > 0.9 ? `<span class="good">Click... hold still ${Math.round(S.hold / 0.6 * 100)}%</span>` : near > 0.4 ? 'Warmer...' : 'Turn the dial slowly';
+  if (Math.random() < near * near * dt * 8) buzz(10);
+  const left = mgTime();
+  if (S.cur >= 3 || S.alarm >= 1 || left <= 0) return safeDone(left);
+  requestAnimationFrame(safeTick);
+}
+function safeDone(left) { const S = MG.s, open = S.cur >= 3, stars = S.alarm >= 1 ? 0 : !open ? Math.min(1, S.cur) : left > 15 && S.alarm < 0.5 ? 3 : left > 5 ? 2 : 1;
+  if (open) { const d = $('#sfdoor'); if (d) d.innerHTML = `<img class="door" src="${A('g_safe_open')}" alt="">`; }
+  setTimeout(() => mgEnd({stars}, S.alarm >= 1 ? 'Alarm!' : open ? 'The vault swings open' : 'Out of time', [['Numbers set', `${S.cur}/3`], ['Alarm', S.alarm >= 1 ? 'tripped' : S.alarm > 0.5 ? 'close call' : 'quiet', S.alarm > 0.5 ? 'bad' : 'good'], ['The raid', stars >= 2 ? 'easier' : stars === 1 ? 'a little harder' : 'they know you are coming', stars >= 2 ? 'good' : 'bad']], 'Storm the tower'), open ? 700 : 0); }
 </script></body></html>
