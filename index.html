@@ -1,0 +1,818 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#22262b"><title>Human Sim · Browser Edition</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏙️</text></svg>">
+<style>:root{--bg:#f4f1ea;--card:#fff;--ink:#22262b;--mut:#6b7280;--acc:#2f6fdb;--good:#2e9e5b;--warn:#e0a21a;--bad:#d64045;--line:#e3ded3;--tab:64px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{max-width:760px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative}
+header{background:#22262b;color:#fff;padding:8px 12px calc(8px) 12px;padding-top:max(8px,env(safe-area-inset-top))}
+.hrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.clock{font-weight:700;font-size:17px}.clock small{font-weight:400;opacity:.75;font-size:13px}
+.money{display:flex;gap:10px;font-size:14px;font-variant-numeric:tabular-nums}
+.money b{font-size:15px}.neg{color:#ff6b6b!important;font-weight:700}
+.mini{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:6px}
+.mini div{font-size:11px;opacity:.95}.mini i{display:block;height:5px;border-radius:3px;background:#444;margin-top:2px;overflow:hidden}
+.mini i b{display:block;height:100%}
+.menu-btn{background:#3a3f46;color:#fff;border:0;border-radius:10px;min-width:44px;min-height:44px;font-size:20px}
+main{flex:1;overflow-y:auto;padding:12px 12px calc(var(--tab) + 16px);-webkit-overflow-scrolling:touch}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;max-width:760px;margin:0 auto;height:calc(var(--tab) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);display:flex;z-index:20}
+nav.tabs button{flex:1;border:0;background:none;font-size:12px;color:var(--mut);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:44px}
+nav.tabs button span{font-size:22px}nav.tabs button.on{color:var(--acc);font-weight:700}
+.card{background:var(--card);border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.06);border:1px solid var(--line)}
+.card h2{margin:0 0 8px;font-size:18px}.card h3{margin:10px 0 6px;font-size:15px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.place-h{display:flex;gap:12px;align-items:center}.place-h .em{font-size:40px}
+.sub{color:var(--mut);font-size:14px}
+.btn{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:48px;padding:10px 14px;margin:6px 0;border-radius:12px;border:1px solid var(--line);background:#fafaf7;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.btn:active{transform:scale(.99);background:#eef2fb}.btn .r{color:var(--mut);font-size:13px;white-space:nowrap;text-align:right}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.pri .r{color:#dfe8ff}
+.btn.crime{border-color:#e7b3b5;background:#fff5f5}
+.btn[disabled]{opacity:.45;cursor:default}
+.row{display:flex;gap:8px}.row .btn{flex:1;justify-content:center;text-align:center}
+.bar{height:10px;background:#ece8df;border-radius:6px;overflow:hidden}.bar b{display:block;height:100%;border-radius:6px}
+.stat{display:grid;grid-template-columns:120px 1fr 44px;gap:8px;align-items:center;margin:7px 0;font-size:15px}
+.stat .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--mut)}
+.kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line)}.kv:last-child{border:0}
+.kv b{font-variant-numeric:tabular-nums}
+.log{font-size:14px;color:#444}.log div{padding:4px 0;border-bottom:1px solid #f0ece4}.log div:first-child{font-weight:600;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:#eef2fb;border-radius:20px;padding:6px 10px;font-size:14px}
+.person{display:flex;gap:10px;align-items:flex-start}.av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex:none}
+.person .info{flex:1;min-width:0}.person .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.sbtn{min-height:44px;min-width:44px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:#fafaf7;font:inherit;font-size:14px;cursor:pointer}
+.sbtn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.sbtn[disabled]{opacity:.4}
+.obj{display:flex;gap:8px;padding:6px 0}.obj .ck{width:24px;text-align:center}
+#mapwrap{position:relative;height:min(62vh,560px);border-radius:14px;overflow:hidden;background:#cfe3ef;touch-action:none;border:1px solid var(--line)}
+#mapwrap svg{position:absolute;inset:0;width:100%;height:100%}
+.mk{position:absolute;transform:translate(-50%,-50%);min-width:44px;min-height:44px;border-radius:50%;border:2px solid #fff;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.3);font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.mk.here{background:#ffd84d;border-color:#22262b}.mk.closed{filter:grayscale(.8);opacity:.75}
+.mklab{position:absolute;transform:translate(-50%,0);font-size:11px;font-weight:700;background:rgba(255,255,255,.85);padding:1px 5px;border-radius:6px;white-space:nowrap;pointer-events:none}
+.zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:6px;z-index:5}
+.zoom button{width:44px;height:44px;border-radius:10px;border:0;background:#fff;font-size:22px;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+#modal{position:fixed;inset:0;background:rgba(20,22,26,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#modal.on{display:flex}#modal .sheet{background:#fff;width:100%;max-width:760px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom))}
+@media(min-width:700px){#modal{align-items:center}#modal .sheet{border-radius:18px;max-width:520px}}
+.sheet h2{margin:0 0 8px}.sheet p{margin:6px 0 10px}
+.stations{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stations button{min-height:64px;border-radius:12px;border:1px solid var(--line);background:#fafaf7;font-size:15px}
+.stations button span{display:block;font-size:26px}
+.boardv{font-size:28px;min-height:44px;background:#f6f3ec;border-radius:10px;padding:8px;margin:8px 0;text-align:center}
+.wanted{color:var(--bad);font-weight:700}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--tab) + 14px);background:#22262b;color:#fff;padding:10px 14px;border-radius:12px;font-size:14px;z-index:40;max-width:90%;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.btn small{display:block;margin-top:2px}
+</style></head><body>
+<div id="app"><header><div class="hrow"><div id="clock" class="clock"></div><div id="money" class="money"></div></div><div id="mini" class="mini"></div></header>
+<main></main>
+<nav class="tabs"><button data-t="here"><span>📍</span>Here</button><button data-t="map"><span>🗺️</span>Map</button><button data-t="me"><span>🧍</span>Me</button><button data-t="people"><span>👥</span>People</button><button data-t="life"><span>🏠</span>Life</button></nav>
+</div>
+<div id="modal"><div class="sheet"><div id="mbody"></div><div id="mbtns"></div></div></div><div id="toast" class="toast"></div>
+<script>window.MAP={"extent":{"x_min":-1100.0,"x_max":1330.0,"z_min":-1520.0,"z_max":336.0},"areas":[["business","Downtown - Business District",[175,595,-700,-266]],["shopping","Westgate - Shopping District",[-320,168,-960,-252]],["poor","Bayside - Poor Residential",[595,1050,-133,336]],["medium","Maple Vale - Medium Residential",[-320,252,-360,336]],["rich","Kingsridge Hill - Rich Residential",[210,1050,-1064,-700]],["farm","Oakbridge Countryside - Farmland",[-1100,-320,-1520,480]],["port","Port Maple - Harbour & Industrial Docks",[861,1330,-700,-133]],["oldtown","Old Town & University",[595,861,-700,-168]],["lake","Lake Wren - Lakeside Leisure",[-320,210,-1520,-672]],["southbank","Southbank (in-between: hospital, flats, interchange)",[252,595,-266,336]]],"roads":[["hi",[[-360,-480],[-290,-421],[-234,-362],[-153,-279],[-103,-251],[-47,-236],[38,-223],[123,-204],[175,-189],[330,-138],[360,-131],[385,-130],[690,-145],[741,-151],[784,-162],[802,-169],[819,-178],[834,-190],[846,-203],[873,-238],[913,-312]]],["co",[[-360,-480],[-450,-506],[-480,-519],[-550,-556],[-596,-573],[-632,-580],[-660,-579],[-689,-572],[-760,-546],[-818,-519],[-839,-512],[-862,-509],[-927,-513],[-1005,-523],[-1100,-540]]],["co",[[-360,-480],[-392,-398],[-398,-373],[-401,-347],[-399,-291],[-388,-206],[-348,2],[-348,20],[-355,43],[-362,55],[-378,70],[-390,78],[-405,84],[-452,89],[-504,90],[-628,79],[-683,78],[-900,90],[-1100,95]]],["ra",[[445,-119],[413,-118],[422,-115],[428,-110],[433,-102],[433,-95],[431,-87],[426,-81],[418,-76],[410,-76],[400,-80],[393,-89],[390,-127]]],["ra",[[500,-118],[473,-114],[462,-109],[429,-69],[422,-63],[408,-58],[401,-52],[396,-43],[388,-17]]],["ra",[[445,-137],[414,-140],[422,-141],[429,-146],[434,-154],[435,-161],[434,-169],[429,-176],[421,-181],[413,-182],[402,-178],[395,-170],[390,-132]]],["ra",[[501,-135],[474,-140],[464,-146],[432,-188],[425,-193],[412,-200],[405,-206],[401,-215],[394,-241]]],["ra",[[325,-122],[356,-119],[348,-118],[341,-113],[336,-105],[335,-98],[336,-90],[341,-83],[349,-78],[357,-77],[368,-81],[375,-89],[380,-127]]],["ra",[[269,-124],[296,-119],[306,-113],[338,-71],[345,-66],[358,-59],[365,-53],[369,-44],[376,-18]]],["ra",[[325,-140],[357,-141],[348,-144],[342,-149],[337,-157],[337,-164],[339,-172],[344,-178],[352,-183],[360,-183],[370,-179],[377,-170],[380,-132]]],["ra",[[270,-141],[297,-145],[308,-150],[341,-190],[348,-196],[362,-201],[369,-207],[374,-216],[382,-242]]],["ma",[[-318,-480],[-322,-463],[-331,-450],[-344,-441],[-361,-438],[-376,-441],[-389,-450],[-399,-465],[-402,-480],[-399,-495],[-389,-510],[-376,-519],[-361,-522],[-344,-519],[-331,-510],[-322,-497],[-318,-480]]],["ra",[[-347,-440],[-326,-422],[-314,-415],[-243,-370],[-167,-298]]],["ra",[[-319,-493],[-284,-470],[-266,-453],[-209,-376],[-152,-303]]],["ra",[[-400,-467],[-428,-475],[-439,-481],[-472,-514],[-512,-546]]],["ra",[[-373,-520],[-394,-538],[-405,-544],[-452,-553],[-500,-568]]],["ma",[[963,-336],[962,-329],[958,-323],[952,-319],[944,-318],[937,-319],[931,-324],[928,-330],[927,-336],[928,-342],[931,-348],[937,-353],[944,-354],[952,-353],[958,-349],[962,-343],[963,-336]]],["ma",[[490,-1018],[456,-991],[452,-983],[453,-977],[460,-971],[497,-956],[534,-929],[550,-913],[554,-903],[549,-887],[540,-877],[529,-867],[511,-854],[498,-848],[446,-837],[433,-828],[424,-816],[421,-805],[424,-798],[432,-793],[469,-782],[480,-777],[484,-770],[483,-761],[476,-747],[458,-724],[421,-691],[402,-666],[390,-643],[382,-623],[373,-593],[366,-561],[356,-502],[353,-445],[358,-385],[369,-309],[380,-209],[385,-156],[385,-130],[383,-90],[380,-70],[374,-48],[362,-16],[346,14],[327,39],[303,60],[270,84],[235,106],[212,124],[159,159]]],["ma",[[354,-507],[426,-515],[495,-528],[527,-538],[626,-580],[656,-591],[688,-597],[731,-599],[756,-596],[780,-591],[804,-583],[833,-568],[866,-545],[945,-476]]],["ma",[[969,-700],[956,-630],[949,-558],[945,-476],[948,-364],[948,-350],[945,-336],[944,-252],[939,-201],[933,-173],[922,-153],[863,-75],[825,-20],[728,140],[701,176],[672,210],[626,249],[609,266],[596,286],[574,336]]],["ma",[[-360,-650],[-187,-512],[-124,-443],[-92,-435],[-44,-413],[-28,-407],[7,-401],[48,-399],[63,-399],[83,-403],[169,-427],[252,-442],[354,-469]]],["ma",[[-360,-480],[-330,-620],[-280,-743],[-199,-804],[-183,-795],[-158,-761],[-139,-736],[-123,-731],[-84,-738],[-68,-740],[-8,-740],[23,-746],[52,-757],[75,-770],[102,-794],[111,-799],[132,-807],[155,-811],[194,-817],[230,-819],[322,-812],[397,-819],[424,-812]]],["st",[[-167,-775],[-250,-1005],[-280,-1090],[-301,-1160],[-314,-1217],[-318,-1250],[-318,-1280],[-305,-1331],[-290,-1340],[-268,-1325],[-238,-1274],[-219,-1234],[-178,-1130],[-141,-1039],[-105,-1028],[-74,-1034],[-44,-1036],[-15,-1035],[24,-1029],[52,-1021],[89,-1006],[112,-993],[133,-976],[151,-957],[164,-938],[170,-924],[174,-903],[175,-862],[168,-813]]],["ma",[[-360,-480],[-332,-383],[-316,-348],[-290,-307],[-240,-244],[-186,-183],[-162,-157],[-140,-140],[-107,-124],[-66,-113],[-37,-109],[27,-106],[124,-98],[153,-86],[166,-72],[176,-55],[194,0],[211,47],[213,60],[214,72],[209,98],[197,126],[187,137],[159,159]]],["ma",[[159,159],[73,274],[64,298],[56,336]]],["ma",[[378,-63],[445,-69],[487,-66],[622,-43],[647,-36],[696,-19],[723,-12],[812,0]]],["ma",[[554,-903],[672,-826],[718,-800],[733,-786],[752,-761],[764,-741],[770,-728],[774,-715],[775,-697],[771,-652],[756,-596]]],["st",[[770,-728],[804,-766],[812,-784],[811,-797],[794,-833],[791,-847],[793,-861],[805,-883],[823,-905],[845,-930],[862,-945],[880,-957],[896,-966],[906,-969],[941,-967]]],["st",[[616,-542],[616,-536],[619,-522],[648,-469],[668,-414],[680,-397],[695,-384],[713,-373],[725,-369],[738,-367],[753,-368],[775,-374],[790,-380],[802,-388],[812,-400],[820,-414],[831,-438],[836,-462],[837,-478],[835,-504],[828,-529],[820,-542],[805,-558],[778,-573],[748,-583],[713,-589],[687,-589],[665,-584],[643,-574],[626,-559],[618,-548],[616,-542]]],["st",[[676,-402],[685,-188],[688,-171],[696,-133],[704,-70],[714,-14]]],["la",[[595,-259],[672,-248],[735,-237],[798,-233],[837,-237],[942,-259]]],["co",[[-650,-580],[-676,-651],[-682,-680],[-687,-723],[-687,-757],[-683,-792],[-656,-864],[-650,-888],[-650,-900],[-656,-924],[-691,-982],[-700,-1007],[-698,-1034],[-682,-1079],[-666,-1110],[-639,-1150],[-621,-1169],[-602,-1182],[-572,-1196],[-519,-1213],[-420,-1235],[-389,-1247],[-318,-1280]]],["co",[[-685,-780],[-771,-793],[-822,-805],[-845,-813],[-874,-830],[-915,-869],[-938,-885],[-984,-906],[-1100,-950]]],["co",[[-850,-510],[-810,-320],[-798,-281],[-767,-201],[-752,-140],[-750,-120],[-754,-79],[-794,44],[-800,82],[-797,134],[-790,166],[-780,197],[-767,226],[-752,254],[-732,280],[-697,317],[-629,379],[-587,413],[-534,451],[-480,480]]],["co",[[-700,-1020],[-775,-1052],[-799,-1064],[-830,-1090],[-859,-1124],[-890,-1175],[-903,-1212],[-903,-1236],[-896,-1296],[-900,-1320],[-911,-1345],[-935,-1382],[-988,-1450],[-1060,-1520]]],["co",[[-630,-1160],[-573,-1276],[-542,-1329],[-519,-1359],[-493,-1388],[-462,-1418],[-438,-1439],[-411,-1455],[-368,-1473],[-337,-1480],[-320,-1480],[-312,-1474],[-295,-1445],[-238,-1274]]],["st",[[234,-634],[281,-659],[307,-667],[350,-670],[393,-666],[414,-661],[434,-654],[464,-638],[495,-613],[518,-586],[535,-555],[542,-534],[547,-512],[550,-490],[549,-476],[543,-440],[536,-420],[529,-408],[517,-390],[503,-374],[484,-356],[441,-330]]],["st",[[182,-542],[242,-533],[274,-533],[296,-538],[336,-552],[379,-573],[398,-576],[418,-578],[462,-577],[532,-561]]],["st",[[354,-469],[448,-458],[483,-457],[496,-460],[509,-465],[550,-490]]],["st",[[182,-507],[203,-574],[234,-634]]],["st",[[357,-392],[427,-385],[447,-380],[493,-364]]],["st",[[203,-343],[237,-354],[252,-357],[263,-357],[291,-352],[308,-354],[323,-362],[357,-392]]],["st",[[-295,-757],[-197,-693],[-168,-655],[-141,-619],[-110,-607],[-5,-588],[20,-582],[49,-572],[70,-564],[87,-552],[97,-542],[104,-530],[111,-507],[118,-463],[118,-414]]],["pe",[[-154,-445],[-100,-387],[-66,-368],[-21,-351],[1,-346],[23,-343],[43,-343],[68,-346],[84,-351],[98,-358],[105,-364],[110,-371],[118,-406]]],["st",[[-322,-450],[-143,-305],[-64,-289],[-30,-288],[12,-291],[51,-296],[80,-302],[97,-308],[112,-316],[120,-324],[123,-331],[125,-341],[125,-354],[118,-406]]],["la",[[-28,-407],[0,-469],[35,-578]]],["st",[[-112,-441],[-104,-375],[-98,-350],[-87,-329],[-56,-288]]],["st",[[-110,0],[110,0]]],["la",[[-85,29],[78,29]]],["st",[[-81,-184],[-81,-153],[-87,-125],[-118,81],[-124,117],[-131,145],[-136,159],[-149,181],[-151,188],[-155,207],[-181,283]]],["st",[[103,-113],[115,-50],[110,0],[120,72],[125,93],[136,136],[134,176],[147,231]]],["st",[[-189,-265],[-130,-216],[-112,-211],[-91,-211],[-52,-220],[-28,-223],[15,-217],[41,-210],[56,-204],[70,-197],[91,-187],[124,-166],[142,-151],[178,-98]]],["la",[[-28,-223],[-42,-192],[-44,-184],[-40,-178],[-20,-168]]],["st",[[-119,89],[-47,107],[5,115],[32,117],[48,115],[63,111],[121,80]]],["la",[[-39,109],[-32,143],[-26,153],[-17,161],[8,174]]],["st",[[-151,188],[-66,197],[4,210],[30,211],[68,206],[109,196],[121,190],[134,176]]],["la",[[21,212],[32,244],[38,255],[49,264],[77,276]]],["st",[[-295,79],[-244,121],[-220,138],[-197,155],[-151,188]]],["st",[[-295,-226],[-253,-131],[-253,-112],[-262,-84],[-269,-41],[-274,0],[-295,79]]],["st",[[-181,283],[-91,268],[23,302],[48,310],[77,324],[91,329],[106,331],[140,329]]],["st",[[252,-220],[328,-221],[391,-218],[414,-213],[473,-190],[498,-185],[524,-186],[574,-192]]],["st",[[382,-196],[417,-182],[461,-168],[482,-162],[497,-161],[511,-162],[525,-167],[574,-192]]],["st",[[346,14],[393,61],[413,74],[436,84],[459,90],[475,91],[500,89],[527,82],[544,74],[550,69],[560,56],[562,48],[563,38],[561,17],[546,-56]]],["st",[[483,91],[485,138],[488,161],[499,191],[516,220],[532,238],[545,246],[560,252],[609,266]]],["st",[[280,-70],[322,-28],[331,-15],[346,14]]],["st",[[259,126],[372,202],[419,231],[440,241],[455,245],[470,246],[532,238]]],["st",[[223,115],[259,126]]],["st",[[616,0],[672,14],[729,33],[765,41],[779,42],[794,41],[833,28]]],["st",[[609,56],[666,82],[691,90],[716,96],[748,98],[798,91]]],["st",[[616,126],[685,139],[717,142],[749,142],[770,140],[781,137],[812,119]]],["st",[[700,196],[751,191],[784,183],[812,168],[840,145],[851,131],[857,121],[863,104],[867,86],[868,70],[867,61],[854,28]]],["st",[[896,-119],[938,-70],[976,-33],[997,-3],[1007,21],[1009,35],[1009,61],[1006,88],[1001,112],[993,131],[966,168]]],["la",[[609,56],[626,16],[630,0],[628,-14],[616,-42]]],["st",[[770,70],[788,119],[791,140],[788,161],[770,210]]],["st",[[812,0],[861,-35],[910,-56],[938,-70]]],["la",[[648,-469],[676,-449],[690,-437],[732,-368]]],["la",[[700,-420],[721,-443],[729,-459],[735,-504],[756,-581]]],["la",[[700,-420],[749,-426],[770,-430],[790,-438],[836,-462]]],["la",[[676,-402],[700,-350],[726,-317],[735,-301],[739,-283],[742,-237]]],["la",[[802,-388],[798,-344],[798,-322],[812,-234]]],["la",[[616,-542],[655,-536],[678,-530],[728,-511],[734,-508],[735,-504]]],["la",[[648,-469],[680,-485],[693,-486],[704,-481],[728,-458]]],["la",[[770,-430],[820,-542]]],["la",[[732,-368],[756,-396],[766,-402],[777,-402],[802,-388]]],["la",[[700,-350],[740,-349],[756,-346],[770,-341],[798,-322]]],["la",[[679,-294],[735,-301]]],["st",[[672,210],[728,241],[765,255],[797,264],[812,266],[826,266],[875,252]]],["st",[[728,140],[778,178],[811,200],[828,207],[840,210],[853,210],[910,196]]],["st",[[581,294],[638,288],[679,278],[708,265],[735,244]]],["la",[[609,168],[631,195],[640,203],[650,207],[672,210]]],["st",[[945,-476],[1001,-483],[1030,-483],[1232,-462]]],["st",[[953,-609],[1015,-596],[1067,-594],[1136,-597],[1183,-601],[1208,-606],[1239,-616]]],["st",[[948,-364],[1001,-329],[1029,-317],[1057,-311],[1092,-307],[1155,-308]]],["la",[[969,-658],[1022,-658],[1078,-672]]],["st",[[942,-224],[1070,-251],[1102,-253],[1183,-254]]],["la",[[931,-168],[987,-154],[1043,-154]]],["la",[[1099,-595],[1115,-509],[1120,-469],[1123,-423],[1127,-308]]],["st",[[556,-917],[555,-905],[551,-894],[546,-887],[537,-877],[517,-866],[504,-862],[490,-861],[476,-862],[463,-866],[443,-877],[434,-887],[429,-894],[425,-905],[424,-917],[425,-929],[429,-940],[434,-947],[443,-957],[463,-968],[476,-972],[490,-973],[504,-972],[517,-968],[537,-957],[546,-947],[551,-940],[555,-929],[556,-917]]],["st",[[554,-903],[589,-931],[598,-945],[600,-956],[599,-973],[588,-1001],[578,-1016],[565,-1029],[556,-1036],[546,-1040],[530,-1038],[490,-1018]]],["st",[[424,-798],[307,-872],[284,-882],[245,-896]]],["st",[[451,-980],[414,-989],[399,-994],[355,-1020],[317,-1033],[300,-1036],[283,-1036],[238,-1029]]],["st",[[424,-812],[397,-780],[383,-766],[368,-758],[351,-754],[299,-752],[271,-755],[251,-763],[217,-784]]],["st",[[791,-854],[860,-863],[875,-868],[889,-875],[912,-892],[934,-914],[942,-927],[952,-952]]],["st",[[672,-826],[660,-791],[657,-775],[662,-760],[674,-746],[689,-733],[706,-726],[726,-725],[770,-728]]],["la",[[609,-868],[627,-827],[630,-812],[625,-802],[602,-784]]],["la",[[511,-854],[581,-784]]],["st",[[483,-774],[590,-747],[644,-728]]],["st",[[672,-826],[716,-868],[754,-895],[783,-908],[840,-924]]],["la",[[451,-980],[409,-966],[396,-959],[389,-950],[385,-924]]],["la",[[301,-875],[277,-844],[266,-833],[253,-825],[220,-812]]],["la",[[357,-840],[370,-873],[378,-886],[390,-896],[424,-917]]],["st",[[598,-945],[764,-997],[787,-998],[826,-994]]],["la",[[840,-924],[848,-958],[854,-973],[863,-988],[889,-1022]]],["st",[[896,-519],[889,-443],[887,-374],[888,-336],[892,-286],[897,-265],[906,-249],[914,-242],[942,-224]]],["st",[[953,-553],[1002,-562],[1022,-564],[1041,-563],[1082,-556]]],["la",[[889,-574],[920,-577],[931,-581],[939,-588],[953,-609]]],["st",[[266,-98],[322,-84],[378,-63]]],["st",[[546,-56],[574,-7],[581,14],[582,30],[582,47],[578,70],[573,85],[569,80],[560,56]]],["la",[[164,-938],[130,-945],[123,-949],[112,-959]]],["la",[[-238,-1274],[-174,-1076],[-154,-1022],[-143,-1001],[-126,-1008]]],["la",[[-685,-780],[-713,-803],[-726,-810],[-738,-807],[-752,-792],[-759,-776],[-759,-758],[-740,-700]]],["la",[[-680,-670],[-635,-679],[-615,-686],[-600,-699],[-589,-717],[-582,-737],[-581,-757],[-588,-777],[-610,-820]]],["la",[[-685,80],[-687,98],[-685,105],[-679,110],[-660,120]]],["la",[[-590,85],[-588,140],[-592,162]]],["la",[[-540,86],[-523,118],[-509,126],[-491,131],[-480,130],[-475,125],[-460,90]]],["la",[[-322,46],[-320,59],[-322,63],[-345,70]]]],"water":{"river":[[[98,-804],[106,-761],[108,-742],[95,-697],[94,-672],[100,-653],[141,-560],[147,-539],[151,-511],[150,-472],[134,-412],[135,-393],[138,-368],[149,-337],[164,-314],[183,-294],[206,-277],[227,-268],[251,-261],[389,-237],[460,-220],[491,-218],[552,-226],[591,-221],[646,-208],[717,-182],[754,-175],[783,-171],[828,-172],[972,-194],[1101,-193],[1111,-196],[1117,-204],[1120,-213],[1117,-223],[1109,-232],[1099,-234],[970,-232],[933,-227],[823,-206],[770,-206],[724,-213],[656,-236],[598,-249],[553,-253],[495,-245],[469,-245],[394,-260],[254,-283],[233,-288],[216,-296],[196,-310],[179,-328],[167,-346],[157,-373],[153,-411],[168,-469],[169,-494],[167,-524],[157,-565],[118,-654],[110,-675],[110,-694],[122,-730],[123,-747],[112,-804],[107,-809],[98,-804]]],"lake":[[[137,-879],[141,-926],[138,-937],[132,-947],[121,-957],[92,-974],[61,-987],[35,-995],[8,-1000],[-40,-999],[-67,-995],[-83,-990],[-202,-1128],[-228,-1184],[-241,-1195],[-225,-1075],[-203,-1005],[-169,-905],[-135,-825],[-111,-809],[-1,-792],[27,-793],[57,-798],[84,-806],[98,-814],[113,-830],[130,-858],[137,-879]]],"sea":[[[1022,-1064],[987,-1023],[973,-997],[972,-968],[984,-927],[1000,-898],[1046,-840],[1087,-751],[1088,-692],[1162,-692],[1162,-677],[1088,-677],[1089,-644],[1253,-644],[1284,-681],[1313,-759],[1322,-758],[1292,-677],[1253,-625],[1253,-294],[1211,-286],[1088,-286],[1088,-266],[1190,-266],[1190,-242],[1088,-242],[1085,-133],[1080,-86],[1076,-80],[1061,-94],[1034,-55],[1026,-28],[1036,27],[1078,27],[1037,31],[1040,63],[1026,112],[1001,161],[973,195],[895,262],[784,336],[1330,336],[1330,-1064],[1022,-1064]]],"island":[[[0,-914],[-2,-900],[-25,-890],[-53,-892],[-61,-896],[-59,-922],[-51,-925],[-37,-925],[-6,-918],[0,-914]]]},"blds":[[255,-498,70,44],[204,-480,28,34],[240,-567,50,40],[306,-613,64,42],[403,-432,42,42],[457,-603,36,36],[342,-691,40,28],[223,-690,36,26],[492,-424,40,30],[510,-626,30,26],[332,-524,30,24],[444,-434,26,17],[447,-414,24,17],[456,-476,24,17],[300,-419,26,20],[231,-378,30,30],[307,-370,16,11],[462,-303,52,36],[472,-677,50,32],[522,-300,52,38],[568,-385,34,50],[291,-325,56,24],[582,-494,40,30],[-49,-528,200,112],[88,-475,34,26],[79,-438,46,38],[-149,-375,58,40],[-41,-380,22,15],[4,-361,15,12],[53,-362,22,16],[-99,-272,58,34],[-40,-272,32,22],[-14,-255,24,18],[-212,-427,36,24],[-251,-497,30,24],[-180,-435,24,16],[64,-277,26,16],[136,-310,26,20],[642,36,22,22],[683,56,22,22],[630,100,22,22],[758,-30,34,14],[801,66,26,16],[697,1,16,12],[718,7,14,11],[674,-5,14,10],[899,-77,30,20],[927,-28,28,18],[659,174,30,20],[895,237,50,36],[771,14,14,10],[-41,-19,30,16],[20,-12,14,10],[42,-13,12,10],[64,-13,14,10],[62,9,4,4],[-66,16,10,10],[-46,16,10,10],[-26,16,10,10],[-6,16,10,10],[14,16,10,10],[34,16,10,10],[54,16,10,10],[-62,42,10,10],[-42,42,10,10],[-22,42,10,10],[-2,42,10,10],[18,42,10,10],[38,42,10,10],[58,42,10,10],[31,-168,60,30],[160,30,22,40],[147,-58,24,18],[142,-118,20,16],[-244,152,32,16],[617,-995,34,24],[434,-1046,42,24],[329,-740,18,12],[350,-742,12,10],[372,-743,16,12],[688,-707,56,32],[888,-909,36,26],[952,-971,9,9],[-520,115,9,8],[-504,115,9,8],[-488,115,9,8],[-472,115,9,8],[-520,133,9,8],[-504,133,9,8],[-488,133,9,8],[-472,133,9,8],[-505,95,6,4],[-548,108,10,8],[-685,124,10,8],[-660,126,14,10],[-628,141,4,4],[-662,145,20,8],[-588,172,12,9],[-565,178,22,10],[-420,31,60,4],[-760,225,14,10],[-600,340,18,12],[-856,-74,40,18],[-645,-772,18,13],[-742,-765,14,28],[-710,-772,14,10],[-714,-1041,14,11],[-667,-1051,26,16],[-917,-851,14,11],[-887,-872,30,13],[-840,-1220,14,10],[-512,-1385,9,9],[994,-442,60,34],[1022,-623,40,24],[910,-662,40,22],[1038,-531,48,26],[915,-392,40,24],[867,-291,30,18],[910,-451,24,14],[1031,-366,70,38],[1137,-276,40,12],[1029,-171,40,24],[1063,-688,30,13],[1158,-685,16,11],[1110,-295,20,12],[719,-667,80,28],[804,-657,40,28],[640,-665,30,40],[680,-509,40,26],[708,-560,28,20],[749,-467,22,22],[678,-432,12,10],[719,-404,5,4],[797,-419,28,18],[853,-396,28,56],[818,-350,14,20],[783,-348,16,12],[844,-257,22,14],[790,-255,26,16],[715,-266,18,12],[136,-1005,30,14],[-56,-774,6,4],[-220,-823,50,30],[-102,-692,40,24],[-138,-1076,18,8],[-35,-899,6,6],[-22,-784,4,4],[465,-205,80,46],[409,134,16,10],[308,-68,30,20],[495,-23,50,26]]};
+// ---- Game data (numbers from the Godot reference, see DESIGN.md) ----
+const DECAY = {hunger:5.5, energy:4.5, mental:0.36, hygiene:3.5, thirst:6.0}; // per game hour
+const NEED_NAMES = {hunger:'Hunger', thirst:'Thirst', energy:'Energy', hygiene:'Hygiene', mental:'Mental Health'};
+const NEED_ICON = {hunger:'🍔', thirst:'💧', energy:'⚡', hygiene:'🧼', mental:'🧠', health:'❤️'};
+const SKILLS = {strength:'Strength', speed:'Speed', endurance:'Endurance', intelligence:'Intelligence', charisma:'Charisma', luck:'Luck', driving:'Driving', farming:'Farming', cooking:'Cooking', mechanics:'Mechanics', stealth:'Stealth'};
+const DAYS = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const RENT_WEEKLY = 35000, HOSPITAL_BILL = 20000, START_CASH = 45000;
+const BILLS = [['Electricity',4500],['Phone',2500],['Internet',3000]]; const BILL_LATE_FEE = 1500;
+// Places: id, name, emoji, map x,z (map_v2 metres), open [from,to) hours (to may pass 24), police presence
+const PLACES = {
+  home:    {n:'Maple Court Flat 1A', e:'🏠', x:-41, z:-19, open:[0,24]},
+  shop:    {n:'Corner Shop', e:'🛒', x:20, z:-12, open:[7,23], cctv:true},
+  sal:     {n:"Sal's Hot Dogs", e:'🌭', x:62, z:9, open:[10,18]},
+  bakery:  {n:"Benedetti's Bakery", e:'🥐', x:42, z:-13, open:[7,17]},
+  park:    {n:'City Park', e:'🌳', x:-170, z:0, open:[0,24]},
+  pub:     {n:'The Vale Arms', e:'🍺', x:142, z:-118, open:[12,24]},
+  gym:     {n:'Iron Works Gym', e:'🏋️', x:88, z:-475, open:[6,22]},
+  cafe:    {n:'Bean There Cafe', e:'☕', x:307, z:-370, open:[7,19]},
+  realty:  {n:'Lang & Co Realty', e:'🏢', x:300, z:-419, open:[9,18]},
+  bank:    {n:'First City Bank', e:'🏦', x:403, z:-432, open:[0,24], cctv:true},
+  police:  {n:'Central Police Station', e:'🚓', x:462, z:-303, open:[0,24], police:1},
+  hospital:{n:"St. Mary's Hospital", e:'🏥', x:465, z:-205, open:[0,24]},
+  library: {n:'City Library', e:'📚', x:680, z:-509, open:[9,19]},
+  anchor:  {n:'The Rusty Anchor', e:'⚓', x:845, z:-257, open:[12,26]},
+};
+// Shop items: price in cents. where: now (eat now), bag (carry), fridge
+const ITEMS = {
+  groceries:{n:'Groceries (3 home meals + 2 waters)', p:1800, where:'fridge', fridge:{meal:3,water:2}},
+  big_shop:{n:'Big weekly shop (7 meals + 4 waters)', p:3800, where:'fridge', fridge:{meal:7,water:4}},
+  water_pack:{n:'6-pack of water (fridge)', p:500, where:'fridge', fridge:{water:6}},
+  water:{n:'Bottled water', p:100, where:'bag', fx:{thirst:30}},
+  cola:{n:'Can of cola', p:200, where:'bag', fx:{thirst:18, energy:10}},
+  beer:{n:'Bottle of beer', p:300, where:'bag', fx:{thirst:6, mental:5}},
+  crisps:{n:'Bag of crisps', p:200, where:'bag', fx:{hunger:10}},
+  chocolate:{n:'Chocolate bar', p:200, where:'bag', fx:{hunger:8, mental:3}},
+  apple:{n:'Apple', p:100, where:'bag', fx:{hunger:7}},
+  sandwich_c:{n:'Sandwich to go', p:500, where:'bag', fx:{hunger:28}},
+  meal_deal:{n:'Meal deal', p:600, where:'bag', fx:{hunger:38, energy:6, thirst:10}},
+  sandwich:{n:'Sandwich (eat now)', p:600, where:'now', fx:{hunger:30}},
+  coffee:{n:'Coffee (drink now)', p:400, where:'now', fx:{energy:15, thirst:8}},
+  soap:{n:'Fancy shower gel (use now)', p:800, where:'now', fx:{hygiene:10, mental:3}},
+  hotdog:{n:'Hot dog', p:500, where:'now', fx:{hunger:30}},
+  croissant:{n:'Croissant', p:300, where:'now', fx:{hunger:15, mental:1}},
+  cake:{n:'Slice of cake', p:400, where:'now', fx:{hunger:12, mental:4}},
+  pint:{n:'Pint of beer', p:400, where:'now', fx:{thirst:6, mental:5}},
+  soda:{n:'Soda', p:200, where:'now', fx:{thirst:20}},
+  pie:{n:'Pie & chips', p:900, where:'now', fx:{hunger:40, mental:2}},
+};
+const SHOP_STOCK = {
+  shop:['groceries','big_shop','water_pack','water','cola','beer','crisps','chocolate','apple','sandwich_c','meal_deal','sandwich','coffee','soap'],
+  bakery:['croissant','coffee','sandwich'], cafe:['coffee','sandwich','cake'], pub:['pint','soda','pie'], anchor:['pint','soda'], sal:['hotdog'],
+};
+// People (Maple Street / Elm Row cast from npcs.json + the crime boss). sched: [fromHour,toHour,place] ; to may pass 24
+const PEOPLE = [
+ {id:'sal', n:'Sal Moretti', a:58, job:'Owns Sal\'s Hot Dogs', tr:'gruff, generous', s:[[10,18,'sal'],[19,22,'pub']], line:'"Lunch rush waits for nobody. You want work, kid? Ask."'},
+ {id:'raj', n:'Raj Patel', a:52, job:'Owns the Corner Shop', tr:'hard-working, kind', s:[[7,23,'shop']], line:'"Twenty years behind this counter. Fresh bread came in this morning."'},
+ {id:'anjali', n:'Anjali Patel', a:19, job:'Student', tr:'ambitious, funny', s:[[9,15,'library'],[16,22,'shop']], line:'"Dad thinks I\'ll take over the shop. I want to run a company."'},
+ {id:'grace', n:'Grace Okafor', a:34, job:'Nurse at St. Mary\'s', tr:'caring, exhausted', s:[[7,19,'hospital'],[19,21,'park']], line:'"Twelve-hour shift. Drink some water, you look parched."'},
+ {id:'danny', n:'Danny Kowalczyk', a:27, job:'Warehouse worker (docks)', tr:'funny, impulsive', s:[[18,23,'pub']], away:'at the docks', line:'"Lifted a container by hand today. Okay, a forklift helped."'},
+ {id:'jess', n:'Jess Carter', a:24, job:'Barista at Bean There', tr:'creative, warm', s:[[7,15,'cafe'],[16,19,'park']], line:'"I sketch the customers when it\'s quiet. Don\'t tell anyone."'},
+ {id:'reyes', n:'Officer Luis Reyes', a:41, job:'Police officer', tr:'principled, strict', s:[[8,20,'police']], nodate:true, line:'"Keep your nose clean and we\'ll get on fine."'},
+ {id:'maggie', n:"Margaret 'Maggie' Byrne", a:71, job:'Retired', tr:'chatty, nosy', s:[[9,17,'park']], line:'"Did you hear what happened on Elm Row? No? Sit down, love."'},
+ {id:'tom', n:'Tom Whitaker', a:45, job:'Sleeping rough', tr:'proud, wry', s:[[6,23,'park']], line:'"Lost the job, then the flat. Funny how fast it goes."'},
+ {id:'victor', n:'Victor Lang', a:38, job:'Realtor, Lang & Co', tr:'ambitious, charming', s:[[9,18,'realty']], nodate:true, line:'"Everything in this city has a price. Most people just don\'t know it yet."'},
+ {id:'rosa', n:'Rosa Benedetti', a:56, job:'Owns the bakery', tr:'hard-working, proud', s:[[7,17,'bakery']], line:'"Try the focaccia. My mother\'s recipe."'},
+ {id:'ollie', n:'Ollie Benedetti', a:23, job:'Between jobs', tr:'clever, shy', s:[[11,17,'park'],[18,24,'pub']], line:'"Mum wants me in the bakery. I want... something. Not sure what."'},
+ {id:'marek', n:'Marek Zielinski', a:34, job:'Night nurse', tr:'kind, dependable', s:[[20,32,'hospital']], line:'"Nights are quiet. Mostly."'},
+ {id:'imani', n:'Imani Clarke', a:20, job:'Student', tr:'ambitious, organised', s:[[9,15,'library'],[15,19,'cafe']], line:'"Exams in two weeks. I have a colour-coded plan."'},
+ {id:'chloe', n:'Chloe Fairbanks', a:25, job:'Bartender, Vale Arms', tr:'outgoing, reckless', s:[[17,26,'pub']], line:'"Dare you to sing at open mic."'},
+ {id:'leon', n:'Leon Mensah', a:42, job:'Night security, Lang & Co', tr:'calm, private', s:[[21,30,'realty']], line:'"Night shift. You see things. I don\'t talk about them."'},
+ {id:'sam', n:"Samantha 'Sam' Mensah", a:39, job:'Head librarian', tr:'kind, clever', s:[[9,19,'library']], line:'"Library card\'s free. Knowledge too."'},
+ {id:'hannah', n:'Hannah Price', a:30, job:'Personal trainer', tr:'energetic, blunt', s:[[6,21,'gym']], line:'"One day I\'ll have my own gym. Price Fitness. Remember the name."'},
+ {id:'walter', n:'Walter Gibbs', a:73, job:'Retired', tr:'chatty, generous', s:[[10,13,'park'],[14,18,'pub']], line:'"In my day this was all fields. Well, some of it."'},
+ {id:'nadia', n:'Nadia Rahimi', a:46, job:'Docks manager', tr:'strict, fair', s:[[19,22,'pub']], away:'at the docks', line:'"Hard work gets noticed. Eventually."'},
+ {id:'carlo', n:'Carlo "The Captain" Marino', a:61, job:'Runs things at the Rusty Anchor', tr:'ex-docker, patient, dangerous', s:[[12,26,'anchor']], nodate:true, boss:true, line:'"Come back when people in this town know your name."'},
+];
+const HOUSING = [['Shared flat','Bayside Towers A',18000,'rent only',60],['Studio','Rowan Court',32000,'$70,000',75],['Apartment','Westgate Lofts',52000,'$150,000',85],['House','Oakbridge',76000,'$240,000',95],['Penthouse','Skyline Apartments',160000,'$600,000',100]];
+PLACES.kiosk = {n:'Street Eats kiosk', e:'🥙', x:719, z:-404, open:[0,24]};
+PLACES.salvage = {n:'Marino Marine Salvage', e:'🔧', x:1022, z:-623, open:[0,24], hidden:true};
+// The one business you can buy (Godot business.gd "stand": Street Eats, $2,600). Not Victor's, not Lang & Co's.
+const BIZ = {kiosk: {n:'Street Eats kiosk', place:'kiosk', price:260000, upkeep:1000, unitCost:150, prices:{300:90, 400:70, 500:50}}};
+const STAFF = {tom:{wage:7000, skill:1.5, rel:0.8}, chloe:{wage:8500, skill:2.8, rel:0.88}, jess:{wage:9000, skill:3.0, rel:0.92}};
+// Rank ladder: each tier lists what it needs (rep / net worth / business). Later tiers are stubs for now.
+const RANKS = [
+  {n:'Nobody', need:{}},
+  {n:'Known Face', need:{anyRep:10}},
+  {n:'Hustler', need:{anyRep:25, worth:100000}},
+  {n:'Operator', need:{anyRep:40, ownsBiz:true}},
+  {n:'Boss', need:{anyRep:60, worth:1000000}, stub:true},
+  {n:'Kingpin / Tycoon', need:{anyRep:80, worth:5000000}, stub:true},
+  {n:'Ruler of the City', need:{anyRep:95, worth:20000000}, stub:true},
+];
+if (typeof module !== 'undefined') module.exports = {DECAY, NEED_NAMES, NEED_ICON, SKILLS, DAYS, RENT_WEEKLY, HOSPITAL_BILL, START_CASH, BILLS, BILL_LATE_FEE, PLACES, ITEMS, SHOP_STOCK, PEOPLE, HOUSING, BIZ, STAFF, RANKS};
+
+// ===== Human Sim engine: pure, deterministic, no DOM =====
+// state = {v, world:{t, rng, force, biz}, players:{id:{...}}}
+// applyAction(state, playerId, action) -> {state: newState, events: [{pid, msg, title?, html?}]}
+// Inside one applyAction call W/P/EV point at the cloned state; nothing outside it is touched.
+if (typeof module !== 'undefined') Object.assign(globalThis, require('./data.js'));
+const ENGINE_VERSION = 2;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+let W, P, PID, EV, ST;
+
+function newPlayer(name = 'You') {
+  const rel = {}; PEOPLE.forEach(p => rel[p.id] = {f: (p.id === 'raj' || p.id === 'sal') ? 5 : 0, r: 0, lastTalk: -9999, lastHang: 0, partner: false});
+  const skills = {}; Object.keys(SKILLS).forEach(k => skills[k] = ['driving','farming','mechanics','stealth'].includes(k) ? 0 : 1); skills.luck = 3;
+  return {name, loc: 'home', needs: {hunger: 70, thirst: 80, energy: 85, hygiene: 80, mental: 75}, health: 100,
+    cash: START_CASH, bank: 0, skills, karma: 0, heat: 0, crimes: [], record: [], inv: {}, fridge: {meal: 1, water: 1},
+    job: null, lastShiftDay: 0, rel, rent: {due: 7, paidThrough: 0, evicted: false, back: 0},
+    bills: {next: 28, pending: 0, due: 0}, obj: {groceries: false, job: false, shift: false, rent: false, friend: false},
+    rep: {street: 0, business: 0, civic: 50}, banned: 0, jail: null, pending: null, shift: null, carloDay: 0, bizShiftDay: 0,
+    log: ['Mum and Dad hugged you goodbye and handed you an envelope: $450.00 cash. Rent ($350.00) is due by the end of Day 7.'], shifts: 0, tips: 0};
+}
+function newGame(seed = 12345) {
+  return {v: ENGINE_VERSION, world: {t: 480, rng: seed >>> 0, force: [], biz: {kiosk: {owner: null, price: 400, stock: 0, staff: null, lastPL: null}}}, players: {p1: newPlayer()}};
+}
+
+// ---- deterministic RNG (mulberry32 in state; world.force = queued rolls for tests) ----
+function rnd() {
+  if (W.force && W.force.length) return W.force.shift();
+  let t = (W.rng = (W.rng + 0x6D2B79F5) >>> 0);
+  t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+
+// ---- helpers ----
+const moneyTxt = c => (c < 0 ? '-' : '') + '$' + Math.floor(Math.abs(c) / 100).toLocaleString('en-US') + '.' + String(Math.abs(c) % 100).padStart(2, '0');
+const day = (t = W.t) => Math.floor(t / 1440) + 1;
+const hourF = (t = W.t) => (t % 1440) / 60;
+const clockTxt = (t = W.t) => { const m = t % 1440; return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(Math.floor(m % 60)).padStart(2, '0'); };
+const stars = (pl = P) => Math.ceil(pl.heat / 20);
+function log(msg, pl = P, pid = PID) { pl.log.unshift(`<small class="sub">D${day()} ${clockTxt()}</small> ${msg}`); pl.log = pl.log.slice(0, 30); EV.push({pid, msg}); }
+function popup(title, html, pid = PID) { EV.push({pid, title, html}); }
+function addNeed(k, v, pl = P) { if (k === 'health') pl.health = clamp(pl.health + v, 0, 100); else pl.needs[k] = clamp(pl.needs[k] + v, 0, 100); }
+function applyFx(fx) { for (const k in fx) addNeed(k, fx[k]); }
+function addSkill(k, v) { P.skills[k] = clamp(+(P.skills[k] + v).toFixed(3), 0, 10); }
+function addRep(k, v) { P.rep[k] = clamp(+(P.rep[k] + v).toFixed(2), 0, 100); }
+function refillAll(pl = P) { for (const k in pl.needs) pl.needs[k] = 100; pl.health = 100; }
+const canPay = c => P.cash + Math.max(0, P.bank) >= c;
+function pay(c, first = 'cash') {
+  if (!canPay(c)) return false;
+  if (first === 'cash') { const a = Math.min(P.cash, c); P.cash -= a; P.bank -= (c - a); }
+  else { const a = Math.min(Math.max(0, P.bank), c); P.bank -= a; P.cash -= (c - a); }
+  return true;
+}
+function isOpen(id, t = W.t) { const [a, b] = PLACES[id].open, h = hourF(t); return (h >= a && h < b) || (h + 24 >= a && h + 24 < b); }
+function whereIs(p, t = W.t) { const h = hourF(t); for (const [a, b, l] of p.s) if ((h >= a && h < b) || (h + 24 >= a && h + 24 < b)) return l; return null; }
+const peopleAt = id => PEOPLE.filter(p => whereIs(p) === id);
+function dist(a, b) { const A = PLACES[a], B = PLACES[b]; return Math.hypot(A.x - B.x, A.z - B.z) * 1.3; }
+const walkMin = (id, pl = P) => Math.max(3, Math.round(dist(pl.loc, id) / (80 * (1 + 0.05 * pl.skills.speed))));
+const busMin = (id, pl = P) => Math.round(10 + dist(pl.loc, id) / 500);
+const BUS_FARE = 200;
+function netWorth(pl = P, pid = PID) { let w = pl.cash + pl.bank; for (const k in W.biz) if (W.biz[k].owner === pid) w += BIZ[k].price; return w; }
+function ownsBiz(pid = PID) { return Object.values(W.biz).some(b => b.owner === pid); }
+function rankCheck(r, pl = P, pid = PID) {
+  const n = r.need, anyRep = Math.max(pl.rep.street, pl.rep.business), worth = netWorth(pl, pid);
+  const parts = [];
+  if (n.anyRep) parts.push({t: `Street or Business respect ${n.anyRep}+`, ok: anyRep >= n.anyRep, have: Math.floor(anyRep) + '/' + n.anyRep});
+  if (n.worth) parts.push({t: `Net worth ${moneyTxt(n.worth)}+`, ok: worth >= n.worth, have: moneyTxt(worth)});
+  if (n.ownsBiz) parts.push({t: 'Own a business', ok: ownsBiz(pid), have: ownsBiz(pid) ? 'yes' : 'no'});
+  return {ok: parts.every(p => p.ok), parts};
+}
+function rankOf(pl = P, pid = PID) { let i = 0; while (i + 1 < RANKS.length && !RANKS[i + 1].stub && rankCheck(RANKS[i + 1], pl, pid).ok) i++; return i; }
+
+// ---- time: one shared world clock; every player's needs tick with it ----
+// The acting player uses `mode`; everyone else ticks as idle (or jail).
+function advance(min, mode = 'idle', comfort = 0.75) {
+  let left = min, ok = true;
+  while (left > 0) {
+    const m = Math.min(15, left), h = m / 60; left -= m;
+    const before = day(); W.t += m;
+    if (day() !== before) newDay(before);
+    for (const pid in ST.players) {
+      const pl = ST.players[pid], md = pid === PID ? mode : (pl.jail ? 'jail' : 'idle');
+      if (md === 'hospital') continue;
+      if (tickPlayer(pl, h, md, comfort)) { faint(pl.needs.energy <= 0 ? 'exhaustion' : 'poor health', pl, pid); if (pid === PID) ok = false; }
+    }
+    if (!ok) return false;
+  }
+  return true;
+}
+function tickPlayer(pl, h, mode, comfort) {
+  const n = pl.needs, r = {...DECAY};
+  r.energy *= (1 - 0.03 * pl.skills.endurance);
+  if (n.hunger < 25) r.energy *= 1.5;
+  if (mode === 'work') r.thirst += 4;
+  if (mode === 'walk') r.energy += 1;
+  if (mode === 'sleep') { r.hunger *= 0.5; r.thirst *= 0.4; r.hygiene *= 0.3; r.energy = -12.5 * comfort; r.mental = -1; }
+  r.mental += 1.2 * ['hunger','thirst','energy','hygiene'].filter(k => n[k] < 25).length;
+  for (const k in r) n[k] = clamp(n[k] - r[k] * h, 0, 100);
+  if (mode === 'jail') { n.hunger = Math.max(n.hunger, 40); n.thirst = Math.max(n.thirst, 40); }
+  if (n.hunger <= 0) pl.health -= 3 * h;
+  if (n.thirst <= 10) pl.health -= 2 * h;
+  if (n.hunger > 50 && n.thirst > 50) pl.health += (mode === 'sleep' ? 1.5 : 0.5) * h;
+  pl.health = clamp(pl.health, 0, 100);
+  if (!pl.jail) pl.heat = Math.max(0, pl.heat - h);
+  return mode !== 'sleep' && mode !== 'jail' && (n.energy <= 0 || pl.health <= 0);
+}
+function faint(why, pl = P, pid = PID) {
+  pl.loc = 'hospital'; pl.pending = null; pl.shift = null;
+  const save = PID; PID = pid; const sp = P; P = pl;
+  advance(180, 'hospital'); refillAll(pl); pl.bank -= HOSPITAL_BILL;
+  popup('🏥 You fainted', `<p>You collapsed from ${why} and woke up in St. Mary's Hospital three hours later.</p><p>Grace and the team patched you up: <b>all your needs and health are full again</b>.</p><p>Hospital bill: <b>-${moneyTxt(HOSPITAL_BILL)}</b> from the bank (bank now ${moneyTxt(pl.bank)}).</p>`);
+  log('🏥 Fainted, woke in hospital. All stats refilled.');
+  PID = save; P = sp;
+}
+
+// ---- midnight: businesses (world) then every player's rent and bills ----
+function newDay(ended) {
+  for (const k in W.biz) settleBiz(k, ended);
+  const save = [P, PID];
+  for (const pid in ST.players) { P = ST.players[pid]; PID = pid; playerDay(ended); }
+  [P, PID] = save;
+}
+function playerDay(ended) {
+  const R = P.rent;
+  if (ended >= R.due) {
+    if (R.paidThrough >= R.due) {}
+    else if (canPay(RENT_WEEKLY)) { pay(RENT_WEEKLY, 'bank'); R.paidThrough = R.due; log(`Rent for week ending Day ${R.due} paid automatically: -${moneyTxt(RENT_WEEKLY)}.`); }
+    else { R.back += RENT_WEEKLY; R.evicted = true; addNeed('mental', -10); log(`🔒 You couldn't pay rent. The landlord changed the locks. Pay ${moneyTxt(R.back)} back rent at your door to get back in.`); }
+    R.due += 7;
+  }
+  checkObjectives();
+  const d = day(), B = P.bills;
+  if (d === B.next) { B.pending = BILLS.reduce((a, b) => a + b[1], 0); B.due = d + 3; B.next += 28; log(`🧾 Monthly bills arrived: ${moneyTxt(B.pending)}, due by Day ${B.due}.`); }
+  if (B.pending && d > B.due) { P.bank -= B.pending + BILL_LATE_FEE; log(`🧾 Bills overdue: ${moneyTxt(B.pending)} + ${moneyTxt(BILL_LATE_FEE)} late fee taken from the bank.`); B.pending = 0; }
+  P.banned = 0;
+}
+// Daily P&L for a business: staff sell from stock at the set price; wages + pitch fee; profit to the owner's bank.
+function settleBiz(k, ended) {
+  const b = W.biz[k], D = BIZ[k]; if (!b.owner || !ST.players[b.owner]) return;
+  const pl = ST.players[b.owner];
+  let sold = Math.min(b.stock, b.selfSold || 0), wage = 0, note = ''; b.selfSold = 0;
+  if (b.staff) {
+    const s = STAFF[b.staff];
+    if (rnd() < s.rel) { sold += Math.min(b.stock - sold, Math.round(D.prices[b.price] * (0.7 + 0.1 * s.skill))); wage = s.wage; }
+    else note = ` ${PEOPLE.find(p => p.id === b.staff).n.split(' ')[0]} didn't turn up.`;
+  }
+  b.stock -= sold;
+  const rev = sold * b.price, pl_ = rev - wage - D.upkeep;
+  pl.bank += pl_;
+  b.lastPL = {day: ended, sold, rev, wage, upkeep: D.upkeep, profit: pl_};
+  if (pl_ > 0) pl.rep.business = clamp(pl.rep.business + 1, 0, 100);
+  const sp = [P, PID]; P = pl; PID = b.owner;
+  log(`🥙 Street Eats, Day ${ended}: sold ${sold} (${moneyTxt(rev)}), wages ${moneyTxt(wage)}, pitch ${moneyTxt(D.upkeep)} → ${pl_ >= 0 ? '+' : ''}${moneyTxt(pl_)} to the bank.${note}${b.stock < 20 ? ' Stock is low!' : ''}`);
+  [P, PID] = sp;
+}
+
+// ---- objectives ----
+const OBJ = [['groceries','Buy groceries at the Corner Shop'],['job','Get a job (ask Sal at the hot dog stand)'],['shift','Work your first shift'],['rent','Pay the first week\'s rent ($350) by the end of Day 7 (paying early counts)'],['friend','Make a friend (friendship 25+)']];
+function checkObjectives() {
+  const o = P.obj;
+  if (!o.rent && P.rent.paidThrough >= 7) { o.rent = true; log('✅ Objective done: first week\'s rent paid!'); }
+  if (!o.friend && PEOPLE.some(p => P.rel[p.id].f >= 25)) { o.friend = true; log('✅ Objective done: you made a friend!'); }
+}
+function addRel(id, v, k = 'f') { const r = P.rel[id]; r[k] = clamp(r[k] + v, 0, 100); checkObjectives(); }
+const relLabel = f => f < 10 ? 'Stranger' : f < 25 ? 'Acquaintance' : f < 50 ? 'Friend' : f < 75 ? 'Good friend' : 'Best friend';
+const dateChance = id => clamp(0.4 + 0.05 * P.skills.charisma + (P.rel[id].f - 40) / 100 - (P.needs.hygiene < 40 ? 0.2 : 0), 0.05, 0.95);
+
+// ---- police, Heat (only what police or CCTV see), punishment, jail ----
+function policeCheck() {
+  if (P.heat < 10 || P.jail || P.pending) return;
+  const p = PLACES[P.loc].police ? 1 : (['bank','realty','cafe'].includes(P.loc) ? 0.5 : 0.25);
+  if (rnd() < (P.heat / 100) * p) P.pending = {kind: 'police'};
+}
+const runChance = (pl = P) => clamp(0.35 + 0.05 * pl.skills.speed, 0, 0.85);
+function punish(mult) {
+  const heat = P.heat * mult, st = Math.max(1, Math.ceil(heat / 20)), what = P.crimes.length ? [...new Set(P.crimes.map(c => c.what))].join(', ') : 'evading police';
+  let msg;
+  if (st <= 1) {
+    if (rnd() < (P.record.length ? 0 : 0.25) + 0.06 * P.skills.charisma) msg = `👮 Verbal warning for ${what}. Being polite paid off.`;
+    else { const fine = 2500 + 1000 * P.crimes.length; if (!pay(fine)) P.bank -= fine; msg = `👮 Fined ${moneyTxt(fine)} for ${what}.`; addRep('civic', -3); }
+  } else if (st === 2) { const fine = 15000; if (!pay(fine)) P.bank -= fine; msg = `⚖️ Fined ${moneyTxt(fine)} for ${what}.`; addRep('civic', -5); }
+  else {
+    const hrs = clamp(Math.round(heat / 5), 2, 24);
+    P.record.push({day: day(), what, out: `${hrs} h jail`}); P.crimes = []; P.heat = 0; addRep('civic', -10); addRep('street', 3);
+    P.jail = {left: hrs, sentence: hrs, served: 0, laundry: 0, stars: st}; P.loc = 'police'; P.pending = null;
+    log(`⛓️ Arrested for ${what}: ${hrs} hours in Maple City Jail.`); return;
+  }
+  P.record.push({day: day(), what, out: msg.replace(/^\S+ /, '')}); P.crimes = []; P.heat = 0;
+  popup('Police', `<p>${msg}</p><p>Your Heat is back to zero.</p>`); log(msg);
+}
+const bail = (pl = P) => 12550 * Math.max(1, pl.jail.stars) + 700 * Math.ceil(pl.jail.left);
+function release() {
+  const J = P.jail; P.jail = null; P.loc = 'police';
+  popup('🚪 Released', `<p>Out of Maple City Jail${J.bailed ? ' on bail (' + moneyTxt(J.bailed) + ')' : ''}.</p><p>Sentence: ${J.sentence} h · served ${J.served.toFixed(1)} h · ${J.laundry} laundry shift${J.laundry === 1 ? '' : 's'}.</p>`);
+  log('🚪 Released from jail.');
+}
+
+// ---- Sal's shift ----
+const TOP = {ketchup: '🍅 Ketchup', mustard: '🟡 Mustard', onions: '🧅 Onions', relish: '🥒 Relish'};
+const canShift = () => { const h = hourF(); return P.job === 'hotdog' && P.lastShiftDay !== day() && h >= 10 && h <= 14; };
+function endShift(served, failed, tips) {
+  let base = 4000; if (failed > served) base = Math.round(base * 0.75);
+  P.lastShiftDay = day(); P.shifts++; P.tips += tips; P.shift = null; P.pending = null;
+  const ok = advance(240, 'work');
+  applyFx({energy: -8}); addSkill('cooking', 0.08 * served); addSkill('charisma', 0.03 * served); addSkill('speed', 0.05);
+  P.bank += base; P.cash += tips; addRel('sal', 2); addRep('business', 1); addRep('civic', 0.5);
+  if (!P.obj.shift) { P.obj.shift = true; log('✅ Objective done: first shift worked!'); }
+  const msg = `Shift done. Served ${served}, ruined ${failed}. Wage ${moneyTxt(base)} to the bank, tips ${moneyTxt(tips)} in cash.`;
+  log('🌭 ' + msg); if (ok) popup('🌭 Shift over', `<p>${msg}</p>`);
+}
+
+// ---- the action table ----
+const ACTIONS = {
+  travel({to, how}) {
+    if (P.jail || to === P.loc || !PLACES[to] || PLACES[to].hidden) return;
+    if (how === 'bus' && !pay(BUS_FARE)) return log('You need $2.00 for the bus.');
+    const mins = how === 'bus' ? busMin(to) : walkMin(to);
+    if (!advance(mins, how === 'bus' ? 'idle' : 'walk')) return;
+    P.loc = to; if (how === 'walk') addSkill('speed', 0.002 * mins);
+    log(`${PLACES[to].e} Arrived at ${PLACES[to].n} (${how === 'bus' ? 'bus' : 'walked'}, ${mins} min).`);
+    policeCheck();
+  },
+  wait({h = 1}) { advance(h * 60); log(`⏳ Waited ${h} hour${h > 1 ? 's' : ''}.`); policeCheck(); },
+  buy({item}) {
+    const it = ITEMS[item]; if (!it || !(SHOP_STOCK[P.loc] || []).includes(item) || !isOpen(P.loc)) return;
+    if (P.loc === 'shop' && P.banned) return;
+    if (!pay(it.p)) return log(`Not enough money for ${it.n} (${moneyTxt(it.p)}).`);
+    if (it.where === 'fridge') { for (const k in it.fridge) P.fridge[k] = (P.fridge[k] || 0) + it.fridge[k]; if (!P.obj.groceries) { P.obj.groceries = true; log('✅ Objective done: groceries bought!'); } }
+    else if (it.where === 'bag') P.inv[item] = (P.inv[item] || 0) + 1;
+    else { applyFx(it.fx); advance(10); }
+    log(`Bought ${it.n}: -${moneyTxt(it.p)}${it.where === 'fridge' ? ' (in your fridge)' : it.where === 'bag' ? ' (in your bag)' : ''}.`);
+  },
+  use({item}) { if (!P.inv[item]) return; P.inv[item]--; if (!P.inv[item]) delete P.inv[item]; applyFx(ITEMS[item].fx); advance(5); log(`Used: ${ITEMS[item].n}.`); },
+  home({a}) {
+    const R = P.rent; if (P.loc !== 'home') return;
+    if (R.evicted && a !== 'payback') return;
+    if (a === 'sleep8' || a === 'nap') { const h = a === 'nap' ? 2 : 8; advance(h * 60, 'sleep', 0.75); log(`😴 Slept ${h} hours.`); }
+    if (a === 'shower') { advance(15); P.needs.hygiene = 100; log('🚿 Showered: Hygiene full.'); }
+    if (a === 'cook') { if (!P.fridge.meal) return log('No meals in the fridge. Buy groceries.'); P.fridge.meal--; advance(30); const g = Math.round(35 + P.skills.cooking); applyFx({hunger: g, health: 1}); addSkill('cooking', 0.05); log(`🍳 Cooked a home meal: Hunger +${g}.`); }
+    if (a === 'water') { if (P.fridge.water) P.fridge.water--; advance(2); applyFx({thirst: 30}); log('💧 Drank water: Thirst +30.'); }
+    if (a === 'payback') ACTIONS.payRent({});
+  },
+  payRent() {
+    const R = P.rent; if (P.jail) return;
+    if (R.evicted) { if (!pay(R.back, 'bank')) return log(`You need ${moneyTxt(R.back)} for the back rent.`); log(`🔓 Paid ${moneyTxt(R.back)} back rent. The landlord gave you a new key.`); R.back = 0; R.evicted = false; return; }
+    if (R.paidThrough >= R.due + 7) return log('Rent is already paid two weeks ahead.');
+    if (!pay(RENT_WEEKLY, 'bank')) return log(`Rent is ${moneyTxt(RENT_WEEKLY)}: not enough money.`);
+    R.paidThrough = R.paidThrough >= R.due ? R.due + 7 : R.due;
+    log(`🏠 Rent paid early: -${moneyTxt(RENT_WEEKLY)}. Covered to the end of Day ${R.paidThrough}.`); checkObjectives();
+  },
+  payBills() { const B = P.bills; if (!B.pending) return; if (!pay(B.pending, 'bank')) return log('Not enough money for the bills.'); log(`🧾 Bills paid: -${moneyTxt(B.pending)}.`); B.pending = 0; },
+  bank({a, amt}) {
+    if (P.loc !== 'bank') return;
+    if (a === 'dep') { const c = amt === 'all' ? P.cash : Math.min(P.cash, amt); if (c <= 0) return; P.cash -= c; P.bank += c; log(`🏦 Deposited ${moneyTxt(c)}.`); }
+    else { const c = amt === 'all' ? Math.max(0, P.bank) : amt; if (c <= 0 || P.bank < c) return log('Not enough in the bank.'); P.bank -= c; P.cash += c; log(`🏦 Withdrew ${moneyTxt(c)}.`); }
+    advance(5);
+  },
+  activity({kind}) {
+    const at = {relax: 'park', jog: 'park', bench: 'park', gym: 'gym', gymshower: 'gym', study: 'library', chatbar: ['pub', 'anchor'], checkup: 'hospital', turnin: 'police', listings: 'realty'}[kind];
+    if (!at || ![].concat(at).includes(P.loc) || !isOpen(P.loc)) return;
+    const A = {
+      relax: () => { advance(60); applyFx({mental: 8}); log('🌳 Relaxed in the park: Mental +8.'); },
+      jog: () => { advance(30, 'work'); applyFx({energy: -8, hygiene: -10, mental: 3}); addSkill('speed', 0.08); addSkill('endurance', 0.05); log('🏃 Jogged round the pond: Speed and Endurance up.'); },
+      bench: () => { advance(8 * 60, 'sleep', 0.45); applyFx({mental: -5}); log('🪑 Slept on a park bench. Not great.'); },
+      gym: () => { if (!pay(500)) return log('A gym session is $5.00.'); advance(60, 'work'); applyFx({energy: -10, hygiene: -15, mental: 3}); addSkill('strength', 0.1); addSkill('endurance', 0.05); log('🏋️ Worked out: Strength +0.1.'); },
+      gymshower: () => { advance(15); P.needs.hygiene = 100; log('🚿 Showered at the gym.'); },
+      study: () => { advance(120); applyFx({mental: 2, energy: -4}); addSkill('intelligence', 0.15); log('📚 Studied for 2 hours: Intelligence +0.15.'); },
+      chatbar: () => { advance(60); applyFx({mental: 6}); addSkill('charisma', 0.03); if (P.loc === 'anchor') addRep('street', 0.5); log('🍻 Chatted at the bar: Mental +6.'); },
+      checkup: () => { if (!pay(HOSPITAL_BILL, 'bank')) return log('A check-up costs $200.00.'); advance(60, 'hospital'); refillAll(); log('🏥 Check-up done: all needs and health full.'); },
+      turnin: () => { if (P.heat < 1 && !P.crimes.length) return log('Nobody is looking for you.'); addRep('civic', 2); punish(0.75); },
+      listings: () => popup('🏢 Lang & Co listings', `<p class="sub">Moving house comes in a later version. Today's boards:</p>${HOUSING.map(h => `<div class="kv"><span>${h[0]} · ${h[1]}</span><b>${moneyTxt(h[2])}/wk</b></div>`).join('')}`),
+    };
+    A[kind]();
+  },
+  shoplift() {
+    if (P.loc !== 'shop' || P.banned || !isOpen('shop')) return;
+    const st = P.skills.stealth, cam = clamp(0.4 - 0.03 * st, 0.1, 1), seen = clamp(0.3 - 0.02 * st, 0.05, 1);
+    addSkill('stealth', 0.1); P.karma -= 2; advance(5);
+    if (rnd() < seen) { P.banned = 1; addRel('raj', -10); log('😠 Raj saw you pocket a chocolate bar. He took it back and banned you from the shop until tomorrow.'); return; }
+    P.inv.chocolate = (P.inv.chocolate || 0) + 1; addRep('street', 1);
+    if (rnd() < cam) { P.heat = Math.min(100, P.heat + 10); P.crimes.push({what: 'shoplifting', day: day()}); addRep('civic', -2); log('📹 You pocketed a chocolate bar... and the CCTV caught your face: Heat +10.'); }
+    else log('🍫 You pocketed a chocolate bar. Nobody saw.');
+  },
+  talk({npc, phone}) {
+    const p = PEOPLE.find(q => q.id === npc), r = P.rel[npc]; if (!p || P.jail) return;
+    if (phone ? r.f < 25 : whereIs(p) !== P.loc) return;
+    if (W.t - r.lastTalk < 60) return log(`${p.n.split(' ')[0]} needs a bit of space. Try again later.`);
+    r.lastTalk = W.t; advance(phone ? 10 : 15);
+    const hyg = P.needs.hygiene < 25 ? 0.5 : 1, gain = Math.round((phone ? 2 : 4 + 0.5 * P.skills.charisma) * hyg);
+    addRel(npc, gain); applyFx({mental: phone ? 1 : 2}); addSkill('charisma', 0.03);
+    if (npc === 'reyes') addRep('civic', 1);
+    if (npc === 'carlo') addRep('street', 0.5);
+    const L = ['"Good to see you again."', '"How\'s the new flat treating you?"', '"You should come to the Vale Arms sometime."', '"Busy day. Glad you stopped by."'];
+    const line = p.boss ? (P.rep.street >= 5 ? '"I hear things about you. Benny at the salvage yard could use a runner. Ask me about a delivery."' : p.line) : r.f >= 15 ? `${p.line}<br><br>${L[Math.floor(rnd() * L.length)]}` : p.line;
+    popup(`${phone ? '📱 ' : '💬 '}${p.n}`, `<p>${line}</p><p class="sub">Friendship +${gain}${hyg < 1 ? ' (you smell a bit: halved)' : ''} → ${Math.round(r.f)} (${relLabel(r.f)})</p>`);
+  },
+  hangout({npc}) {
+    const p = PEOPLE.find(q => q.id === npc), r = P.rel[npc]; if (!p || whereIs(p) !== P.loc || r.f < 15) return;
+    if (r.lastHang === day()) return log('You already spent time together today.');
+    r.lastHang = day(); advance(60); addRel(npc, 10); applyFx({mental: 5}); addSkill('charisma', 0.05);
+    log(`🤝 Spent an hour with ${p.n}: friendship +10 (${Math.round(r.f)}).`);
+  },
+  date({npc}) {
+    const p = PEOPLE.find(q => q.id === npc), r = P.rel[npc]; if (!p || p.nodate || whereIs(p) !== P.loc || r.f < 40) return;
+    if (r.lastHang === day()) return log('You already spent time together today.');
+    if (!canPay(2500)) return log('A date costs about $25.00.');
+    r.lastHang = day();
+    if (r.partner || rnd() < dateChance(npc)) {
+      pay(2500); advance(120); addRel(npc, 15, 'r'); addRel(npc, 5); applyFx({mental: 10});
+      let m = `❤️ Date with ${p.n} went well! Romance ${Math.round(r.r)}.`;
+      if (r.r >= 50 && !r.partner) { r.partner = true; m += ` You're now partners!`; }
+      log(m);
+    } else { advance(10); addRel(npc, -3); applyFx({mental: -3}); log(`💔 ${p.n.split(' ')[0]} said "Let's just be friends for now."`); }
+  },
+  hire() { if (P.loc !== 'sal' || P.job || whereIs(PEOPLE[0]) !== 'sal') return; P.job = 'hotdog'; P.obj.job = true; addRel('sal', 3); log('🌭 Sal hired you: $10.00/hr, 4-hour shifts from 10:00, plus tips. ✅ Objective done: got a job!'); },
+  shiftStart({quick}) {
+    if (P.loc !== 'sal' || !canShift()) return log('Shifts start between 10:00 and 14:00, once a day.');
+    if (quick) return endShift(5, 1, 5 * (150 + 15 * P.skills.cooking));
+    const tops = Object.keys(TOP);
+    P.shift = {i: 0, served: 0, failed: 0, tips: 0, board: [], orders: Array.from({length: 6}, () => { const o = tops.filter(() => rnd() < 0.45).slice(0, 3); if (!o.length) o.push(tops[Math.floor(rnd() * 4)]); return o; })};
+    P.pending = {kind: 'shift'};
+  },
+  shiftStep({s}) {
+    const m = P.shift, b = m && m.board; if (!m) return;
+    if (s === 'bun' && !b.length) b.push('bun'); else if (s === 'sausage' && b.length === 1) b.push('sausage'); else if (TOP[s] && b.length >= 2 && !b.includes(s)) b.push(s);
+    else EV.push({pid: PID, msg: s === 'bun' ? 'Bun first, only one.' : s === 'sausage' ? 'Bun first, then the sausage.' : 'Bun and sausage first.'});
+  },
+  shiftBin() { if (P.shift) P.shift.board = []; },
+  shiftServe() {
+    const m = P.shift; if (!m) return; const o = m.orders[m.i], b = m.board, t = b.slice(2);
+    if (b[0] === 'bun' && b[1] === 'sausage' && t.length === o.length && o.every(x => t.includes(x))) { m.served++; const tip = 100 + Math.floor(rnd() * 200) + 20 * Math.floor(P.skills.cooking); m.tips += tip; EV.push({pid: PID, msg: `😋 Perfect! Tip ${moneyTxt(tip)}`}); }
+    else { m.failed++; EV.push({pid: PID, msg: '😕 Wrong order. Ruined.'}); }
+    m.board = []; m.i++;
+    if (m.i >= m.orders.length) endShift(m.served, m.failed, m.tips);
+  },
+  police({choice}) {
+    if (!P.pending || P.pending.kind !== 'police') return; P.pending = null;
+    if (choice === 'cooperate') { addRep('civic', 1); return punish(1); }
+    if (rnd() < runChance()) { P.heat = Math.min(100, P.heat + 15); addSkill('speed', 0.1); addRep('street', 2); addRep('civic', -3); log('🏃 You got away, but the officer saw you run: Heat +15.'); }
+    else { P.heat = Math.min(100, P.heat + 20); log('🚔 Caught! Running made it worse: Heat +20.'); punish(1); }
+  },
+  jail({a}) {
+    const J = P.jail; if (!J) return;
+    if (a === 'wait') { advance(60, 'jail'); J.left -= 1.25; J.served += 1; }
+    if (a === 'laundry') { advance(60, 'jail'); J.left -= 3.25; J.served += 1; J.laundry++; addSkill('strength', 0.03); }
+    if (a === 'bunk') { const h = Math.max(0, J.left) / 1.25; advance(Math.round(h * 60), 'sleep', 0.5); J.served += h; J.left = 0; }
+    if (a === 'bail') { const b = bail(); if (!pay(b, 'bank')) return log(`Bail is ${moneyTxt(b)}: not enough money.`); J.bailed = b; J.left = 0; }
+    if (J.left <= 0) release();
+  },
+  // ---- business: Street Eats kiosk ----
+  bizBuy({biz = 'kiosk'}) {
+    const b = W.biz[biz], D = BIZ[biz]; if (P.loc !== D.place || b.owner) return;
+    if (!pay(D.price, 'bank')) return log(`The kiosk costs ${moneyTxt(D.price)}. Not enough money yet.`);
+    b.owner = PID; b.stock = 40; addRep('business', 10);
+    log(`🥙 You bought the ${D.n} for ${moneyTxt(D.price)}! It came with 40 units of stock. Hire someone to run it, or work it yourself.`);
+  },
+  bizPrice({biz = 'kiosk', price}) { const b = W.biz[biz]; if (b.owner !== PID || !BIZ[biz].prices[price]) return; b.price = +price; log(`🥙 Wrap price set to ${moneyTxt(+price)}.`); },
+  bizStock({biz = 'kiosk', n}) {
+    const b = W.biz[biz], D = BIZ[biz]; if (b.owner !== PID || P.loc !== D.place) return;
+    const cost = n * D.unitCost; if (!pay(cost)) return log(`${n} units cost ${moneyTxt(cost)}.`);
+    b.stock += n; advance(15); log(`📦 Restocked ${n} units: -${moneyTxt(cost)} (stock ${b.stock}).`);
+  },
+  bizHire({biz = 'kiosk', npc}) {
+    const b = W.biz[biz]; if (b.owner !== PID || !STAFF[npc]) return;
+    if (P.rel[npc].f < 10) return log(`${PEOPLE.find(p => p.id === npc).n.split(' ')[0]} doesn't know you well enough yet (friendship 10+).`);
+    b.staff = npc; addRel(npc, 5); if (npc === 'tom') P.karma += 3;
+    log(`🤝 Hired ${PEOPLE.find(p => p.id === npc).n} at ${moneyTxt(STAFF[npc].wage)}/day.`);
+  },
+  bizFire({biz = 'kiosk'}) { const b = W.biz[biz]; if (b.owner !== PID || !b.staff) return; log(`Let ${PEOPLE.find(p => p.id === b.staff).n} go.`); addRel(b.staff, -5); b.staff = null; },
+  bizWork({biz = 'kiosk'}) {
+    const b = W.biz[biz], D = BIZ[biz]; if (b.owner !== PID || P.loc !== D.place) return;
+    if (P.bizShiftDay === day()) return log('You already worked the kiosk today.');
+    const n = Math.min(b.stock - (b.selfSold || 0), Math.round(D.prices[b.price] * 0.5 * (1 + 0.05 * P.skills.charisma)));
+    P.bizShiftDay = day(); b.selfSold = (b.selfSold || 0) + n;
+    advance(240, 'work'); addSkill('cooking', 0.1); addSkill('charisma', 0.05); addRep('business', 1);
+    log(`🥙 Ran the kiosk for 4 hours: sold ${n} wraps (paid in tonight's takings).`);
+  },
+  // ---- Carlo "The Captain" Marino: delivery run (illegal; Heat only if seen) ----
+  carloStart() {
+    if (P.loc !== 'anchor' || whereIs(PEOPLE.find(p => p.id === 'carlo')) !== 'anchor' || P.jail) return;
+    if (P.carloDay === day()) return log('Carlo: "One run a day. Don\'t get greedy."');
+    P.pending = {kind: 'carlo'};
+  },
+  carloRoute({route}) {
+    if (!P.pending || P.pending.kind !== 'carlo') return; P.pending = null;
+    if (route === 'refuse') return log('You told Carlo "not today". He shrugged.');
+    P.carloDay = day();
+    const st = P.skills.stealth, main = route === 'main';
+    const mins = main ? 40 : 70, chance = main ? clamp(0.3 - 0.03 * st, 0.05, 1) : clamp(0.1 - 0.01 * st, 0.02, 1);
+    if (!advance(mins, 'walk')) return;
+    P.loc = 'anchor'; addSkill('stealth', 0.1); P.karma -= 3;
+    let seen = '';
+    if (rnd() < chance) {
+      const h = main ? 10 : 25; P.heat = Math.min(100, P.heat + h); P.crimes.push({what: 'running a package for the Family', day: day()}); addRep('civic', -3);
+      seen = main ? ` 📹 A traffic camera caught your face: Heat +${h}.` : ` 🚓 A patrol saw you hand it over: Heat +${h}.`;
+    }
+    const payout = 15000 + Math.round(rnd() * 5000);
+    P.cash += payout; addRep('street', 8); addRep('civic', -3); addRel('carlo', 4);
+    log(`📦 Delivered Carlo's package to Benny at Marino Marine Salvage (${main ? 'main roads' : 'back alleys'}, ${mins} min). Paid ${moneyTxt(payout)} cash. Street +8, Civic -3.${seen}`);
+  },
+};
+const PENDING_OK = {police: ['police'], shift: ['shiftStep', 'shiftServe', 'shiftBin'], carlo: ['carloRoute']};
+function applyAction(state, pid, action) {
+  ST = structuredClone(state); W = ST.world; P = ST.players[pid]; PID = pid; EV = [];
+  const fn = ACTIONS[action && action.type];
+  if (fn && P && (!P.pending || PENDING_OK[P.pending.kind].includes(action.type))) {
+    const rank0 = rankOf();
+    fn(action);
+    const rank1 = rankOf(); if (rank1 > rank0) { log(`⭐ New rank: ${RANKS[rank1].n}!`); }
+  }
+  const out = {state: ST, events: EV}; ST = W = P = EV = null; return out;
+}
+// read-only helpers for the UI (no mutation)
+function view(state, pid, fn) { const sv = [ST, W, P, PID]; ST = state; W = state.world; P = state.players[pid]; PID = pid; try { return fn(); } finally { [ST, W, P, PID] = sv; } }
+if (typeof module !== 'undefined') module.exports = {applyAction, newGame, newPlayer, view, ACTIONS, ENGINE_VERSION, rankOf, netWorth};
+
+// ===== UI: only dispatches actions and renders state (no game rules here) =====
+const SAVE_KEY = 'humansim-browser-v2';
+const $ = s => document.querySelector(s);
+let GS, ME = 'p1', tab = 'here', popups = [];
+function dispatch(a) {
+  const r = applyAction(GS, ME, a); GS = r.state;
+  for (const e of r.events) if (e.pid === ME) { if (e.title) popups.push(e); else if (e.msg) toast(e.msg); }
+  if (a.type === 'travel' && GS.players[ME].loc === a.to) { tab = 'here'; $('main').scrollTop = 0; }
+  render();
+}
+function save() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(GS)); } catch (e) {} }
+function load() { try { const d = JSON.parse(localStorage.getItem(SAVE_KEY)); if (d && d.v === ENGINE_VERSION && d.players && d.players[ME]) { GS = d; return true; } } catch (e) {} return false; }
+let toastT; function toast(m) { const el = $('#toast'); el.innerHTML = m; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2600); }
+function money(c) { const s = moneyTxt(c); return c < 0 ? `<span class="neg">${s}</span>` : s; }
+const weekday = d => DAYS[(d - 1) % 7];
+function areaOf(x, z) { for (const a of MAP.areas) { const [x0, x1, z0, z1] = a[2]; if (x >= x0 && x <= x1 && z >= z0 && z <= z1) return a[1]; } return 'Maple City'; }
+const fxTxt = fx => Object.entries(fx).map(([k, v]) => `${NEED_NAMES[k] || k} ${v > 0 ? '+' : ''}${v}`).join(', ');
+const q = a => JSON.stringify(a).replace(/"/g, '&quot;');
+const D_ = a => `dispatch(${q(a)})`;
+const B = (label, fn, right = '', cls = '', dis = false) => `<button class="btn ${cls}" ${dis ? 'disabled' : ''} onclick="${fn}"><span>${label}</span><span class="r">${right}</span></button>`;
+const col = v => v > 60 ? 'var(--good)' : v > 30 ? 'var(--warn)' : 'var(--bad)';
+const first = p => p.n.startsWith('Officer') ? 'Reyes' : p.n.startsWith('Carlo') ? 'Carlo' : p.n.split(' ')[0];
+
+// ---- modal ----
+let modalBtns = [];
+function modal(html, btns) { modalBtns = btns; $('#mbody').innerHTML = html; $('#mbtns').innerHTML = btns.map((b, i) => `<button class="btn ${i === 0 ? 'pri' : ''}" onclick="modalBtns[${i}][1]()">${b[0]}</button>`).join(''); $('#modal').classList.add('on'); }
+function closeModal() { $('#modal').classList.remove('on'); modalOpen = null; }
+let modalOpen = null;
+function nextPopup() { popups.shift(); closeModal(); render(); }
+function showModals() {
+  const pd = P.pending;
+  if (pd && pd.kind === 'police') { modalOpen = 'police'; return modal(`<h2>🚓 Police stop</h2><p>A patrol officer recognises you from the camera footage: "Hold it right there."</p><p>Heat: <b class="wanted">${'★'.repeat(stars())}</b> (${Math.round(P.heat)})</p>`, [['🙋 Cooperate politely', () => dispatch({type: 'police', choice: 'cooperate'})], [`🏃 Run for it (${Math.round(runChance() * 100)}%)`, () => dispatch({type: 'police', choice: 'run'})]]); }
+  if (pd && pd.kind === 'carlo') { modalOpen = 'carlo'; return modal(`<h2>📦 A job for the Captain</h2><p>Carlo "The Captain" Marino slides a taped-up box across the table. "Take this to Benny at Marino Marine Salvage. Don't open it."</p><p class="sub">Pays $150-$200 cash, Street respect +8, Civic -3. Heat only if police or a camera see you.</p>`, [[`🛣️ Main roads (40 min, cameras ${Math.round(Math.max(0.05, 0.3 - 0.03 * P.skills.stealth) * 100)}%)`, () => dispatch({type: 'carloRoute', route: 'main'})], [`🐈 Back alleys (70 min, patrol ${Math.round(Math.max(0.02, 0.1 - 0.01 * P.skills.stealth) * 100)}%)`, () => dispatch({type: 'carloRoute', route: 'alley'})], ['Not today', () => dispatch({type: 'carloRoute', route: 'refuse'})]]); }
+  if (pd && pd.kind === 'shift') { modalOpen = 'shift'; return renderShift(); }
+  if (popups.length) { modalOpen = 'popup'; const e = popups[0]; return modal(`<h2>${e.title}</h2>${e.html}`, [['OK', nextPopup]]); }
+  if (modalOpen !== 'ui') closeModal();
+}
+function renderShift() {
+  const m = P.shift, o = m.orders[m.i], b = m.board;
+  const view_ = b.length ? b.map(x => x === 'bun' ? '🍞' : x === 'sausage' ? '🌭' : TOP[x].split(' ')[0]).join(' ') : '<span class="sub">(empty board)</span>';
+  modal(`<h2>🌭 Lunch rush · order ${m.i + 1}/6</h2><p>Customer: "Hot dog with <b>${o.map(t => TOP[t].split(' ')[1].toLowerCase()).join(' + ')}</b>, please."</p><div class="boardv">${view_}</div>
+  <div class="stations"><button onclick='${D_({type: 'shiftStep', s: 'bun'}).replace(/&quot;/g, '"')}'><span>🍞</span>Bun</button><button onclick='${D_({type: 'shiftStep', s: 'sausage'}).replace(/&quot;/g, '"')}'><span>🌭</span>Sausage</button>
+   ${Object.keys(TOP).map(t => `<button onclick='dispatch({"type":"shiftStep","s":"${t}"})'><span>${TOP[t].split(' ')[0]}</span>${TOP[t].split(' ')[1]}</button>`).join('')}</div>
+  <p class="sub">Served ${m.served} · Ruined ${m.failed} · Tips ${moneyTxt(m.tips)}</p>`,
+  [['✅ Serve', () => dispatch({type: 'shiftServe'})], ['🗑️ Bin it, start again', () => dispatch({type: 'shiftBin'})]]);
+}
+
+// ---- render ----
+function render() { save(); view(GS, ME, renderInner); }
+function renderInner() {
+  const n = P.needs, d = day();
+  $('#clock').innerHTML = `Day ${d} · ${clockTxt()} <small>${weekday(d)}</small>`;
+  $('#money').innerHTML = `<span>💵 <b>${money(P.cash)}</b></span><span>🏦 <b>${money(P.bank)}</b></span>${P.heat >= 1 ? `<span class="wanted">${'★'.repeat(Math.max(1, stars()))}</span>` : ''}`;
+  $('#mini').innerHTML = ['health', 'hunger', 'thirst', 'energy', 'hygiene', 'mental'].map(k => { const v = k === 'health' ? P.health : n[k]; return `<div>${NEED_ICON[k]} ${Math.round(v)}<i><b style="width:${v}%;background:${col(v)}"></b></i></div>`; }).join('');
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
+  $('main').innerHTML = ({here: renderHere, map: renderMap, me: renderMe, people: renderPeople, life: renderLife})[tab]();
+  if (tab === 'map') initMap();
+  showModals();
+}
+
+function renderHere() {
+  if (P.jail) { const J = P.jail; return `<div class="card"><div class="place-h"><div class="em">⛓️</div><div><h2>Maple City Jail</h2><div class="sub">A small cell block and yard. No black screens: every hour is yours.</div></div></div>
+    <div class="kv"><span>Time left</span><b>${Math.max(0, J.left).toFixed(2)} h</b></div><div class="kv"><span>Bail</span><b>${money(bail())}</b></div>
+    ${B('⏳ Wait an hour (good behaviour: counts 1.25 h)', D_({type: 'jail', a: 'wait'}), '1 h')}${B('🧺 Prison laundry shift (takes 2 more hours off)', D_({type: 'jail', a: 'laundry'}), '1 h')}
+    ${B('🛏️ Sleep on the bunk until release', D_({type: 'jail', a: 'bunk'}), Math.max(0, J.left / 1.25).toFixed(1) + ' h')}${B('💳 Pay bail at the guard desk', D_({type: 'jail', a: 'bail'}), moneyTxt(bail()), 'pri')}</div>`; }
+  const id = P.loc, Pl = PLACES[id], open = isOpen(id), here = peopleAt(id);
+  let a = '';
+  if (!open) a += `<p>Closed right now. Opens at ${String(Pl.open[0] % 24).padStart(2, '0')}:00.</p>`;
+  else if (id === 'home') {
+    if (P.rent.evicted) a += `<p class="wanted">🔒 Locked out. Back rent owed: ${moneyTxt(P.rent.back)}</p>${B('🔓 Pay back rent', D_({type: 'payRent'}), moneyTxt(P.rent.back), 'pri')}<p class="sub">You can sleep on a bench at City Park.</p>`;
+    else a += B('😴 Sleep 8 hours', D_({type: 'home', a: 'sleep8'}), '8 h', 'pri') + B('💤 Nap', D_({type: 'home', a: 'nap'}), '2 h') + B('🚿 Shower', D_({type: 'home', a: 'shower'}), '15 min') +
+      B('🍳 Cook a meal from the fridge', D_({type: 'home', a: 'cook'}), `${P.fridge.meal || 0} left · 30 min`, '', !P.fridge.meal) + B(P.fridge.water ? '💧 Bottled water from the fridge' : '🚰 Tap water', D_({type: 'home', a: 'water'}), `${P.fridge.water || 0} bottles`) +
+      B('🏠 Pay rent (early is fine)', D_({type: 'payRent'}), moneyTxt(RENT_WEEKLY));
+  } else if (id === 'sal') {
+    a += shopList('sal');
+    if (!P.job) a += B('🙋 Ask Sal for a job', D_({type: 'hire'}), '$10/hr + tips', 'pri', whereIs(PEOPLE[0]) !== 'sal');
+    else { const ok = canShift(); a += B('🌭 Work a shift (hands-on: bun, sausage, toppings)', D_({type: 'shiftStart', quick: false}), ok ? '4 h' : P.lastShiftDay === day() ? 'done today' : '10:00-14:00', 'pri', !ok) + B('⏩ Quick shift (auto)', D_({type: 'shiftStart', quick: true}), '4 h', '', !ok); }
+  } else if (id === 'shop') {
+    if (P.banned) a += `<p class="wanted">Raj has banned you until tomorrow.</p>`;
+    else a += shopList('shop') + B('🍫 Pocket a chocolate bar (crime: CCTV here)', D_({type: 'shoplift'}), `stealth ${P.skills.stealth.toFixed(1)}`, 'crime');
+  } else if (SHOP_STOCK[id]) a += shopList(id);
+  if (open) {
+    const act = (label, kind, right = '', cls = '', dis = false) => B(label, D_({type: 'activity', kind}), right, cls, dis);
+    if (id === 'park') a += act('🌳 Relax on a bench', 'relax', '1 h · Mental +8') + act('🏃 Jog round the pond', 'jog', '30 min') + (P.rent.evicted ? act('🪑 Sleep on a bench', 'bench', '8 h') : '');
+    if (id === 'gym') a += act('🏋️ Workout', 'gym', '$5.00 · 1 h', 'pri') + act('🚿 Shower', 'gymshower', '15 min');
+    if (id === 'library') a += act('📚 Study', 'study', '2 h · free', 'pri');
+    if (id === 'pub' || id === 'anchor') a += act('🍻 Sit at the bar and chat', 'chatbar', '1 h');
+    if (id === 'anchor') { const c = whereIs(PEOPLE.find(p => p.id === 'carlo')) === 'anchor'; a += B('📦 Ask Carlo for a delivery run (illegal)', D_({type: 'carloStart'}), P.carloDay === day() ? 'done today' : '$150-$200', 'crime', !c || P.carloDay === day()); }
+    if (id === 'hospital') a += act('🩺 Full check-up (refills all stats)', 'checkup', moneyTxt(HOSPITAL_BILL), 'pri');
+    if (id === 'bank') a += `<div class="kv"><span>Cash</span><b>${money(P.cash)}</b></div><div class="kv"><span>Bank</span><b>${money(P.bank)}</b></div>
+      <div class="row">${B('Deposit all', D_({type: 'bank', a: 'dep', amt: 'all'}))}${B('Withdraw $50', D_({type: 'bank', a: 'wd', amt: 5000}))}</div><div class="row">${B('Withdraw $20', D_({type: 'bank', a: 'wd', amt: 2000}))}${B('Withdraw all', D_({type: 'bank', a: 'wd', amt: 'all'}))}</div>`;
+    if (id === 'police') a += `<div class="kv"><span>Your Heat</span><b class="${P.heat >= 1 ? 'wanted' : ''}">${Math.round(P.heat)} ${'★'.repeat(stars())}</b></div>` + act('🙋 Turn yourself in (more lenient)', 'turnin', '', '', P.heat < 1 && !P.crimes.length);
+    if (id === 'realty') a += act('📋 Look at the TO LET boards', 'listings');
+    if (id === 'kiosk') a += renderKiosk(true);
+  }
+  a += B('⏳ Wait 1 hour', D_({type: 'wait', h: 1}), clockTxt(W.t + 60));
+  const ppl = here.length ? here.map(p => `<button class="sbtn" onclick="${D_({type: 'talk', npc: p.id})}">💬 ${first(p)}</button>`).join('') : '<span class="sub">Nobody you know is here right now.</span>';
+  return `<div class="card"><div class="place-h"><div class="em">${Pl.e}</div><div><h2>${Pl.n}</h2><div class="sub">${areaOf(Pl.x, Pl.z)} · ${Pl.open[1] - Pl.open[0] >= 24 ? 'open 24 h' : `${Pl.open[0]}:00-${Pl.open[1] % 24}:00`}${Pl.cctv ? ' · 📹 CCTV' : ''}</div></div></div>
+   <h3>People here</h3><div class="chips">${ppl}</div><h3>Do</h3>${a}${B('🗺️ Go somewhere else', "go('map')", '', 'pri')}</div>
+   <div class="card"><h2>Latest</h2><div class="log">${P.log.slice(0, 6).map(l => `<div>${l}</div>`).join('')}</div></div>`;
+}
+function shopList(id) { return SHOP_STOCK[id].map(k => B(ITEMS[k].n + (ITEMS[k].fx ? ` <small class="sub">${fxTxt(ITEMS[k].fx)}</small>` : ''), D_({type: 'buy', item: k}), moneyTxt(ITEMS[k].p))).join(''); }
+
+// Business card: on site (buy / work / restock) or remote (Life tab: price and staff)
+function renderKiosk(onSite) {
+  const b = W.biz.kiosk, Dz = BIZ.kiosk;
+  if (!b.owner) return onSite ? `<p>A kiosk and council trading pitch in Old Town. Cheap to run; one person can do it.</p>${B('🔑 Buy the Street Eats kiosk', D_({type: 'bizBuy'}), moneyTxt(Dz.price), 'pri', !canPay(Dz.price))}` : `<p class="sub">For sale in Old Town: ${moneyTxt(Dz.price)}. Go there to buy it.</p>`;
+  if (b.owner !== ME) return '<p class="sub">Owned by another player.</p>';
+  const L = b.lastPL, st = b.staff ? PEOPLE.find(p => p.id === b.staff) : null;
+  let h = `<div class="kv"><span>Stock</span><b>${b.stock} wraps</b></div><div class="kv"><span>Price</span><b>${moneyTxt(b.price)} (~${Dz.prices[b.price]} a day if staffed)</b></div>
+   <div class="kv"><span>Staff</span><b>${st ? `${st.n} · ${moneyTxt(STAFF[b.staff].wage)}/day` : 'Nobody (no sales unless you work it)'}</b></div>
+   <div class="kv"><span>Last day</span><b>${L ? `Day ${L.day}: sold ${L.sold}, ${L.profit >= 0 ? '+' : ''}${moneyTxt(L.profit)}` : 'No trading yet'}</b></div>
+   <h3>Price</h3><div class="row">${Object.keys(Dz.prices).map(p => `<button class="sbtn ${+p === b.price ? 'pri' : ''}" style="flex:1" onclick="${D_({type: 'bizPrice', price: +p})}">${moneyTxt(+p)}</button>`).join('')}</div>
+   <h3>Staff (one person)</h3>${Object.keys(STAFF).map(k => { const p = PEOPLE.find(x => x.id === k), f = P.rel[k].f; return b.staff === k ? B(`✅ ${p.n}`, D_({type: 'bizFire'}), 'Let go') : B(`Hire ${p.n} <small class="sub">turns up ${Math.round(STAFF[k].rel * 100)}% · skill ${STAFF[k].skill}${f < 10 ? ' · needs friendship 10' : ''}</small>`, D_({type: 'bizHire', npc: k}), moneyTxt(STAFF[k].wage) + '/day', '', f < 10); }).join('')}`;
+  if (onSite) h += `<h3>On site</h3>${B('📦 Restock 50 wraps', D_({type: 'bizStock', n: 50}), moneyTxt(50 * Dz.unitCost))}${B('🥙 Run the kiosk yourself', D_({type: 'bizWork'}), P.bizShiftDay === day() ? 'done today' : '4 h', 'pri', P.bizShiftDay === day())}`;
+  else h += '<p class="sub">Restock and work it on site (Old Town).</p>';
+  return h + `<p class="sub">Takings, wages and the ${moneyTxt(Dz.upkeep)} pitch fee settle at midnight into your bank.</p>`;
+}
+
+function renderMe() {
+  const n = P.needs, bar = (k, v) => `<div class="stat"><span>${NEED_ICON[k]} ${k === 'health' ? 'Health' : NEED_NAMES[k]}</span><div class="bar"><b style="width:${v}%;background:${col(v)}"></b></div><span class="v">${Math.round(v)}</span></div>`;
+  const inv = Object.keys(P.inv).length ? Object.entries(P.inv).map(([k, c]) => B(`${ITEMS[k].n} ×${c} <small class="sub">${fxTxt(ITEMS[k].fx)}</small>`, D_({type: 'use', item: k}), 'Use')).join('') : '<p class="sub">Your bag is empty.</p>';
+  const ri = rankOf(), nx = RANKS[ri + 1], chk = nx && rankCheck(nx);
+  const repBar = (lab, v, c) => `<div class="stat"><span>${lab}</span><div class="bar"><b style="width:${v}%;background:${c}"></b></div><span class="v">${Math.round(v)}</span></div>`;
+  return `<div class="card"><h2>⭐ Rank: ${RANKS[ri].n}</h2><div class="chips" style="margin-bottom:8px">${RANKS.map((r, i) => `<span class="chip" style="${i === ri ? 'background:var(--acc);color:#fff' : i < ri ? 'background:#d8f0e0' : ''}">${r.n}${r.stub ? ' 🔒' : ''}</span>`).join('')}</div>
+   ${nx ? `<h3>Next: ${nx.n}${nx.stub ? ' (coming in a later version)' : ''}</h3>${chk.parts.map(p => `<div class="obj"><span class="ck">${p.ok ? '✅' : '⬜'}</span><span>${p.t} <span class="sub">(${p.have})</span></span></div>`).join('')}` : '<p>You run this city.</p>'}
+   <h3>Reputation</h3>${repBar('🔥 Street respect', P.rep.street, '#d64045')}${repBar('💼 Business respect', P.rep.business, '#2f6fdb')}${repBar('🏛️ Civic / police', P.rep.civic, '#2e9e5b')}
+   <p class="sub">Street: crime and Carlo's jobs. Business: shifts and your kiosk. Civic: staying clean, talking to Officer Reyes, owning up.</p></div>
+  <div class="card"><h2>🧍 You</h2>${bar('health', P.health)}${['hunger', 'thirst', 'energy', 'hygiene', 'mental'].map(k => bar(k, n[k])).join('')}</div>
+  <div class="card"><h2>💰 Money</h2><div class="kv"><span>Cash</span><b>${money(P.cash)}</b></div><div class="kv"><span>Bank</span><b>${money(P.bank)}</b></div><div class="kv"><span>Net worth</span><b>${money(netWorth())}</b></div><div class="kv"><span>Job</span><b>${P.job ? "Sal's Hot Dogs ($10/hr)" : 'Unemployed'}</b></div><div class="kv"><span>Shifts worked · tips</span><b>${P.shifts} · ${money(P.tips)}</b></div></div>
+  <div class="card"><h2>🚓 Police</h2><div class="kv"><span>Heat</span><b class="${P.heat >= 1 ? 'wanted' : ''}">${Math.round(P.heat)}/100 ${P.heat >= 1 ? '★'.repeat(Math.max(1, stars())) : ''}</b></div><div class="kv"><span>Status</span><b>${P.jail ? 'In jail' : P.heat >= 10 ? 'Wanted: police may stop you' : P.heat >= 1 ? 'On camera, cooling off' : 'Clear'}</b></div><div class="kv"><span>Record</span><b>${P.record.length ? P.record.map(r => `D${r.day} ${r.what}: ${r.out}`).join('<br>') : 'Clean'}</b></div><div class="kv"><span>Karma</span><b>${P.karma}</b></div><p class="sub">Heat only rises when police or a CCTV camera actually see you.</p></div>
+  <div class="card"><h2>🎒 Bag</h2>${inv}</div>
+  <div class="card"><h2>📈 Skills</h2>${Object.keys(SKILLS).map(k => `<div class="stat"><span>${SKILLS[k]}</span><div class="bar"><b style="width:${P.skills[k] * 10}%;background:var(--acc)"></b></div><span class="v">${P.skills[k].toFixed(1)}</span></div>`).join('')}</div>`;
+}
+
+const AVC = ['#e76f51', '#2a9d8f', '#e9c46a', '#264653', '#8e7dbe', '#f4a261', '#43aa8b', '#577590'];
+function renderPeople() {
+  const cur = PEOPLE.map(p => ({p, at: whereIs(p)})).sort((a, b) => (b.at === P.loc) - (a.at === P.loc) || P.rel[b.p.id].f - P.rel[a.p.id].f);
+  return `<div class="card"><h2>👥 People</h2><p class="sub">Talk in person (or call friends 25+). Befriend at friendship 15+. Ask on a date at 40+.</p></div>` + cur.map(({p, at}) => {
+    const r = P.rel[p.id], here = at === P.loc && !P.jail;
+    const where = here ? '<b style="color:var(--good)">Here with you</b>' : at ? `At ${PLACES[at].e} ${PLACES[at].n}` : (p.away ? `Away (${p.away})` : 'At home');
+    const acts = [];
+    if (here) acts.push(`<button class="sbtn pri" onclick="${D_({type: 'talk', npc: p.id})}">💬 Talk</button>`);
+    else if (r.f >= 25 && !P.jail) acts.push(`<button class="sbtn" onclick="${D_({type: 'talk', npc: p.id, phone: true})}">📱 Call</button>`);
+    if (!here && at && !P.jail) acts.push(`<button class="sbtn" onclick="openPlace('${at}')">🗺️ Go there</button>`);
+    if (here) acts.push(`<button class="sbtn" ${r.f < 15 ? 'disabled' : ''} onclick="${D_({type: 'hangout', npc: p.id})}">🤝 Befriend</button>`);
+    if (here && !p.nodate) acts.push(`<button class="sbtn" ${r.f < 40 ? 'disabled' : ''} onclick="${D_({type: 'date', npc: p.id})}">❤️ Date${r.f >= 40 ? ` ${Math.round(dateChance(p.id) * 100)}%` : ''}</button>`);
+    return `<div class="card person"><div class="av" style="background:${AVC[PEOPLE.indexOf(p) % AVC.length]}">${p.n.replace(/['"].*?['"] /, '').split(' ').map(w => w[0]).join('').slice(0, 2)}</div><div class="info"><b>${p.n}</b> <span class="sub">${p.a} · ${p.job}</span>
+      <div class="sub">${p.tr} · ${where}</div><div class="stat" style="grid-template-columns:110px 1fr 36px"><span class="sub">${relLabel(r.f)}${r.partner ? ' ❤️ partner' : r.r ? ` · ❤️ ${Math.round(r.r)}` : ''}</span><div class="bar"><b style="width:${r.f}%;background:#e76f8a"></b></div><span class="v">${Math.round(r.f)}</span></div>
+      <div class="acts">${acts.join('')}</div></div></div>`; }).join('');
+}
+
+function renderLife() {
+  const R = P.rent, Bl = P.bills;
+  return `<div class="card"><h2>🎯 Objectives</h2>${OBJ.map(([k, t]) => `<div class="obj"><span class="ck">${P.obj[k] ? '✅' : '⬜'}</span><span>${t}</span></div>`).join('')}</div>
+  <div class="card"><h2>🥙 Business: Street Eats kiosk</h2>${renderKiosk(false)}</div>
+  <div class="card"><h2>🏠 Home: Maple Court Flat 1A</h2><div class="kv"><span>Rent</span><b>${moneyTxt(RENT_WEEKLY)}/week</b></div><div class="kv"><span>Next rent due</span><b>End of Day ${R.due} (${weekday(R.due)})</b></div><div class="kv"><span>Paid up to</span><b>${R.paidThrough ? 'End of Day ' + R.paidThrough : 'Not paid yet'}</b></div>${R.evicted ? `<div class="kv"><span class="wanted">Locked out · back rent</span><b>${money(-R.back)}</b></div>` : ''}
+  ${B(R.evicted ? '🔓 Pay back rent' : '🏠 Pay rent now (bank app)', D_({type: 'payRent'}), moneyTxt(R.evicted ? R.back : RENT_WEEKLY), 'pri', !!P.jail)}<p class="sub">Rent is taken automatically on the due day if you have the money. Can't pay: the landlord changes the locks.</p></div>
+  <div class="card"><h2>🧾 Bills</h2>${Bl.pending ? `<div class="kv"><span>Due by Day ${Bl.due}</span><b>${money(-Bl.pending)}</b></div>${B('Pay bills', D_({type: 'payBills'}), moneyTxt(Bl.pending), 'pri')}` : `<div class="kv"><span>Next monthly bills</span><b>Day ${Bl.next}</b></div>`}${BILLS.map(b => `<div class="kv"><span>${b[0]}</span><b>${moneyTxt(b[1])}</b></div>`).join('')}<p class="sub">Unpaid 3 days after they arrive: taken from the bank (it can go negative) plus a ${moneyTxt(BILL_LATE_FEE)} late fee.</p></div>
+  <div class="card"><h2>⚙️ Game</h2>${B('📖 How to play', 'howTo()')}${B('💾 Save now', "save();toast('Saved.')")}${B('📂 Load last save', "if(load()){toast('Loaded.');render()}")}${B('🆕 New game', 'confirmNew()')}<p class="sub">The game saves itself after every action (in this browser).</p></div>`;
+}
+function confirmNew() { modalOpen = 'ui'; modal('<h2>Start a new life?</h2><p>This replaces your current save.</p>', [['Yes, start over', () => { GS = newGame((Date.now() % 1e9) >>> 0); popups = []; tab = 'here'; closeModal(); render(); howTo(); }], ['Cancel', closeModal]]); }
+const HOWTO = `<ol>
+ <li><b>Here</b> shows where you are and what you can do. Every action takes game time.</li>
+ <li>Keep the top bars up: ❤️ 🍔 💧 ⚡ 🧼 🧠. Hit 0 energy or health and you wake in hospital (all refilled, $200 bill).</li>
+ <li><b>Map</b>: tap a place, then Walk (free) or Bus ($2).</li>
+ <li>At 🌭 Sal's, ask for a job; work 10:00-14:00 by tapping Bun, Sausage, the toppings, Serve.</li>
+ <li>Buy groceries at 🛒 the Corner Shop; cook, shower and sleep at 🏠 home. Pay the $350 rent by the end of Day 7 (<b>Life</b> tab, early counts).</li>
+ <li><b>People</b>: talk, befriend (15+), date (40+).</li>
+ <li>Climb the ranks on <b>Me</b>: buy the 🥙 Street Eats kiosk in Old Town ($2,600), hire one staff, set the price, restock. Or run packages for Carlo at ⚓ the Rusty Anchor (Street respect up, Civic down).</li>
+ <li>Heat ★ only comes when police or CCTV see you. Jail is a few hours: wait, do laundry or pay bail.</li></ol>`;
+function howTo() { modalOpen = 'ui'; modal(`<h2>📖 How to play</h2>${HOWTO}`, [["Let's go", closeModal]]); }
+
+function go(t) { tab = t; if (modalOpen === 'ui') closeModal(); render(); $('main').scrollTop = 0; }
+function openPlace(id) {
+  view(GS, ME, () => {
+    const Pl = PLACES[id]; if (P.jail) return toast("You're in jail.");
+    const here = id === P.loc, ppl = peopleAt(id).map(first);
+    modalOpen = 'ui';
+    modal(`<h2>${Pl.e} ${Pl.n}</h2><p class="sub">${areaOf(Pl.x, Pl.z)} · ${isOpen(id) ? '<b style="color:var(--good)">Open</b>' : 'Closed now'} · ${Math.round(dist(P.loc, id))} m away</p><p>${ppl.length ? 'Here now: ' + ppl.join(', ') : 'Nobody you know is there right now.'}</p>`,
+      here ? [['You are here: open menu', () => go('here')], ['Close', closeModal]] :
+      [[`🚶 Walk · ${walkMin(id)} min · free`, () => { modalOpen = null; dispatch({type: 'travel', to: id, how: 'walk'}); }], [`🚌 Bus · ${busMin(id)} min · $2.00`, () => { modalOpen = null; dispatch({type: 'travel', to: id, how: 'bus'}); }], ['Close', closeModal]]);
+  });
+}
+
+// ---- map (flat SVG from map_v2.json, pan / pinch / zoom) ----
+let mview = {cx: 300, cz: -330, s: 0};
+const AREA_COL = {business: '#d9dde6', shopping: '#efe0cf', poor: '#e6d9cf', medium: '#e3ecd5', rich: '#e9f0dc', farm: '#d8e8bf', port: '#d6d6d6', oldtown: '#eadfd0', lake: '#d9ecd3', southbank: '#e4e6db'};
+const ROAD_W = {hi: 24, ma: 13, co: 8, st: 9, pe: 11, ra: 9, la: 6};
+const mapPlaces = () => Object.keys(PLACES).filter(k => !PLACES[k].hidden);
+function renderMap() {
+  const list = mapPlaces().filter(k => k !== P.loc).sort((a, b) => dist(P.loc, a) - dist(P.loc, b));
+  return `<div class="card" style="padding:8px"><div id="mapwrap"><svg id="msvg" xmlns="http://www.w3.org/2000/svg"></svg><div id="mks"></div><div class="zoom"><button onclick="zoomBy(1.4)">＋</button><button onclick="zoomBy(1/1.4)">－</button><button onclick="centreHere()">📍</button></div></div><p class="sub" style="margin:6px 4px 0">Maple City (map v2). Drag to move, pinch or ＋/－ to zoom, tap a place to go.</p></div>
+  <div class="card"><h2>Places</h2>${list.map(k => B(`${PLACES[k].e} ${PLACES[k].n}${isOpen(k) ? '' : ' <small class="sub">(closed)</small>'}`, `openPlace('${k}')`, `${walkMin(k)} min walk`)).join('')}</div>`;
+}
+function initMap() {
+  const w = $('#mapwrap'), svg = $('#msvg'); if (!w) return;
+  if (!mview.s) mview.s = w.clientWidth / 1100;
+  const pts = a => a.map(p => p.join(',')).join(' ');
+  let g = MAP.areas.map(a => { const [x0, x1, z0, z1] = a[2]; return `<rect x="${x0}" y="${z0}" width="${x1 - x0}" height="${z1 - z0}" fill="${AREA_COL[a[0]] || '#e8e8e0'}"/>`; }).join('');
+  g += ['sea', 'lake', 'river'].map(k => MAP.water[k].map(p => `<polygon points="${pts(p)}" fill="#9cc9e3"/>`).join('')).join('') + MAP.water.island.map(p => `<polygon points="${pts(p)}" fill="#cfe5c4"/>`).join('');
+  g += MAP.blds.map(b => `<rect x="${b[0] - b[2] / 2}" y="${b[1] - b[3] / 2}" width="${b[2]}" height="${b[3]}" fill="#c4bdb0"/>`).join('');
+  g += MAP.roads.map(r => `<polyline points="${pts(r[1])}" fill="none" stroke="${r[0] === 'hi' ? '#f2c14e' : '#ffffff'}" stroke-width="${ROAD_W[r[0]] || 6}" stroke-linecap="round" stroke-linejoin="round"/>`).join('');
+  g += MAP.areas.map(a => { const [x0, x1, z0] = a[2]; return `<text x="${(x0 + x1) / 2}" y="${z0 + 40}" text-anchor="middle" font-size="30" font-weight="700" fill="rgba(0,0,0,.35)">${a[1].split(' - ')[0].split(' (')[0]}</text>`; }).join('');
+  svg.innerHTML = g; placeMap();
+  let ptr = new Map(), last = null, moved = 0;
+  w.onpointerdown = e => { ptr.set(e.pointerId, [e.clientX, e.clientY]); moved = 0; last = null; };
+  w.onpointermove = e => {
+    if (!ptr.has(e.pointerId)) return; const prev = ptr.get(e.pointerId); ptr.set(e.pointerId, [e.clientX, e.clientY]);
+    if (ptr.size === 1) { const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; moved += Math.abs(dx) + Math.abs(dy); if (moved > 8) { if (!w.hasPointerCapture(e.pointerId)) try { w.setPointerCapture(e.pointerId); } catch (_) {} mview.cx -= dx / mview.s; mview.cz -= dy / mview.s; placeMap(); } }
+    else if (ptr.size === 2) { const [a, b] = [...ptr.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]); if (last) zoomBy(d / last); last = d; moved = 99; }
+  };
+  const up = e => { ptr.delete(e.pointerId); last = null; };
+  w.onpointerup = up; w.onpointercancel = up;
+  w.onwheel = e => { e.preventDefault(); zoomBy(e.deltaY < 0 ? 1.15 : 1 / 1.15); };
+  w.onclickcapture = e => { if (moved > 8) { e.stopPropagation(); e.preventDefault(); moved = 0; } };
+}
+function placeMap() {
+  const w = $('#mapwrap'); if (!w) return; const Wd = w.clientWidth, H = w.clientHeight;
+  $('#msvg').setAttribute('viewBox', `${mview.cx - Wd / 2 / mview.s} ${mview.cz - H / 2 / mview.s} ${Wd / mview.s} ${H / mview.s}`);
+  view(GS, ME, () => {
+    const pos = mapPlaces().map(k => ({k, x: (PLACES[k].x - mview.cx) * mview.s + Wd / 2, y: (PLACES[k].z - mview.cz) * mview.s + H / 2}));
+    for (let it = 0; it < 12; it++) for (let i = 0; i < pos.length; i++) for (let j = i + 1; j < pos.length; j++) {
+      const a = pos[i], b = pos[j], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 0.01;
+      if (d < 50) { const f = (50 - d) / 2 / d; a.x -= dx * f; a.y -= dy * f; b.x += dx * f; b.y += dy * f; } }
+    $('#mks').innerHTML = pos.map(({k, x, y}) => { const Pl = PLACES[k];
+      if (x < -30 || y < -30 || x > Wd + 30 || y > H + 30) return '';
+      return `<button class="mk ${k === P.loc ? 'here' : ''} ${isOpen(k) ? '' : 'closed'}" style="left:${x}px;top:${y}px" onclick="openPlace('${k}')" aria-label="${Pl.n}">${Pl.e}</button>${mview.s > 0.9 ? `<div class="mklab" style="left:${x}px;top:${y + 24}px">${Pl.n}</div>` : ''}`; }).join('');
+  });
+}
+function zoomBy(f) { const w = $('#mapwrap'); mview.s = Math.max((w ? w.clientWidth : 400) / 2600, Math.min(4, mview.s * f)); placeMap(); }
+function centreHere() { const Pl = PLACES[GS.players[ME].loc]; mview.cx = Pl.x; mview.cz = Pl.z; placeMap(); }
+
+// ---- boot ----
+function boot() {
+  document.querySelectorAll('nav.tabs button').forEach(b => b.onclick = () => go(b.dataset.t));
+  $('#modal').onclick = e => { if (e.target.id === 'modal' && modalOpen === 'ui') closeModal(); };
+  const had = load(); if (!had) GS = newGame((Date.now() % 1e9) >>> 0);
+  render(); if (!had) howTo();
+}
+window.addEventListener('DOMContentLoaded', boot);
+</script></body></html>
