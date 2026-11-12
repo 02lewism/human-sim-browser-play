@@ -158,14 +158,108 @@ h3.sect{margin:16px 4px 8px;font-size:13px;color:var(--mut);letter-spacing:.12em
 .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}.statgrid div{background:#14183a;border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px}.statgrid b{color:var(--gold2)}
 .choices{display:flex;flex-wrap:wrap;gap:6px}
 .tut{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 6px #f5c04e44,0 0 24px #f5c04e;animation:tutp 1.1s ease-in-out infinite}@keyframes tutp{50%{outline-color:#fff3c4;box-shadow:0 0 0 10px #f5c04e22,0 0 30px #f5c04e}}
-#tutTip{position:fixed;z-index:80;width:240px;background:var(--gold);color:#1b1400;border-radius:14px;padding:8px 12px 2px;font-weight:800;font-size:14px;box-shadow:0 8px 20px #000b;display:flex;flex-direction:column;pointer-events:auto}
-#tutTip::after{content:'';position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-top-color:var(--gold);border-bottom:0}#tutTip.below::after{bottom:auto;top:-8px;border:8px solid transparent;border-bottom-color:var(--gold);border-top:0}
-#tutTip button{align-self:flex-end;background:none;border:0;color:#5a4300;text-decoration:underline;font:700 12px system-ui;min-height:44px;min-width:44px;padding:0 4px}
 .goalcard{display:flex;gap:10px;align-items:center;background:#14183a;border:1px dashed var(--gold);border-radius:14px;padding:10px;margin:8px 0}.gcb{flex:1;min-width:0}.gbar{margin:6px 0 4px}.gbar b{background:var(--gold)}
 .pcar{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;margin:0 -2px}
 .pc{scroll-snap-align:start;flex:0 0 44%;min-height:44px;background:#1b2147;border:2px solid var(--line);border-radius:14px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:3px;color:inherit;font:inherit;cursor:pointer}
 .pc.on{border-color:var(--gold);box-shadow:0 0 12px #f5c04e55}.pc img{width:70px;height:70px;object-fit:contain}.pc b{font:14px Lilita,system-ui;text-align:center}.pc span{font-size:12px}
 .towerbg{border-radius:14px;padding:76px 12px 12px;background-size:cover;background-position:center;margin:8px 0;border:1px solid #8f7bff66}.fin{margin:6px 0}.fin.ready .btn{box-shadow:0 0 14px #f5c04e66}
+
+/* ===== v0.6 ===== */
+#tutTip{display:flex;align-items:center;gap:8px;margin-top:6px;background:var(--gold);color:#1b1400;border-radius:12px;padding:0 4px 0 10px;font-weight:800;font-size:14px;min-height:44px;animation:tutin .3s ease-out}
+#tutTip span{flex:1;line-height:1.2;padding:4px 0}#tutTip .ic{flex:none}
+#tutTip button{flex:none;background:#0000;border:0;color:#5a4300;text-decoration:underline;font:700 12px system-ui;min-height:44px;min-width:44px;padding:0 6px}
+@keyframes tutin{from{opacity:0;transform:translateY(-6px)}}
+.goalpick{outline:3px solid var(--gold);outline-offset:2px;border-radius:50%;box-shadow:0 0 18px #f5c04e88}
+.ph.goalpick{border-radius:14px}
+.mv{font-weight:inherit;transition:color .3s}.mv.up{color:var(--good)}
+body.pulse::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:90;box-shadow:inset 0 0 0 0 #f5c04e00;animation:spulse .9s ease-out}
+@keyframes spulse{0%{box-shadow:inset 0 0 0 0 #f5c04e00}30%{box-shadow:inset 0 0 60px 12px #f5c04e88}100%{box-shadow:inset 0 0 0 0 #f5c04e00}}
+/* showdown v6: the reveal lands below the portraits; defenders red-ringed, hit and knocked out; role beats */
+.arena.v6{display:block;min-height:0;padding:14px 8px 10px}
+.arena.v6 .fightrow{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.arena.v6 .fighter{animation:inL .5s both;animation-delay:var(--d)}.arena.v6 .side.r .fighter{animation-name:inR}
+.arena.v6 .fighter span{white-space:nowrap;font-size:11px}
+.arena.v6 .ring{position:relative;border-radius:50%}
+.arena.v6 .fighter img{width:52px;height:52px;border:3px solid var(--gold);box-shadow:0 0 10px #f5c04e55}
+.arena.v6 .foe img{border-color:#ff4d5e;filter:none}.arena.v6 .foe .ring{box-shadow:0 0 0 2px #ff4d5e,0 0 16px #ff4d5ecc}
+.arena.v6 .foe span{color:#ff9aa5}
+.arena.v6.win .foe .ring{animation:hit .35s 1.15s both,ko .5s 1.5s forwards}
+.arena.v6.lose .side.l .ring{animation:hit .35s 1.15s both,ko .5s 1.5s forwards}
+.arena.v6.win .r-Muscle .ring,.arena.v6.lose .r-Muscle .ring{animation:lunge .45s 1s both}
+@keyframes hit{0%,100%{transform:none}20%{transform:translateX(-6px) rotate(-6deg);filter:brightness(2.2) saturate(.4)}60%{transform:translateX(5px) rotate(4deg)}}
+@keyframes ko{to{transform:translateY(2px) rotate(-12deg) scale(.94)}}
+.arena.v6.win .side.r .fighter{animation:inR .5s both;animation-delay:var(--d)}.arena.v6.lose .side.l .fighter{animation:inL .5s both;animation-delay:var(--d)}.arena.v6 .fighter span{margin-top:5px;position:relative;z-index:2}
+.arena.v6.win .foe img,.arena.v6.lose .side.l img{animation:kodim .5s 1.5s forwards}@keyframes kodim{to{filter:grayscale(.85) brightness(.6)}}
+@keyframes lunge{40%{transform:translateX(26px) scale(1.12)}100%{transform:none}}
+.arena.v6 .ko{position:absolute;right:-8px;top:-6px;background:#ff4d5e;color:#fff;font:14px var(--hf);padding:1px 5px;border-radius:6px;transform:scale(0) rotate(-12deg);animation:pop .3s 1.55s forwards}
+@keyframes pop{to{transform:scale(1) rotate(-12deg)}}
+.arena.v6 .radar{position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--teal);opacity:0;animation:radar 1s .55s 2 ease-out}
+@keyframes radar{0%{opacity:.9;transform:scale(.8)}100%{opacity:0;transform:scale(1.6)}}
+.arena.v6 .r-Lookout .ring{animation:glowT .8s .55s both}@keyframes glowT{50%{box-shadow:0 0 18px #2ee6d6}}
+.arena.v6 .r-Driver img{animation:glowD .8s 2.1s both}@keyframes glowD{50%{box-shadow:0 0 18px #ffd76a;border-color:#fff3c4}}
+.arena.v6 .reveal{position:static;display:block;text-align:center;margin-top:10px;font:34px var(--hf);letter-spacing:.06em;background:none;opacity:0;transform:translateY(14px);animation:revup .5s var(--rd) forwards}
+@keyframes revup{to{opacity:1;transform:none}}
+.arena.v6 .getaway{position:relative;height:16px;margin-top:6px;overflow:hidden}
+.arena.v6 .getaway b{position:absolute;left:-60px;top:3px;width:46px;height:12px;border-radius:7px 10px 4px 4px;background:linear-gradient(90deg,#ffd76a,#f5b52e);box-shadow:0 0 10px #f5c04e;animation:drive .9s 2.1s ease-in forwards}
+.arena.v6 .getaway i{position:absolute;top:8px;height:2px;width:40px;background:#ffd76a88;left:-60px;animation:drive .9s 2.15s ease-in forwards}.arena.v6 .getaway i:nth-child(2){top:4px;animation-delay:2.2s}.arena.v6 .getaway i:nth-child(3){top:12px;animation-delay:2.25s}
+@keyframes drive{to{left:110%}}
+.beats{display:flex;flex-direction:column;gap:4px;margin:8px 0 2px}
+.beat{display:flex;gap:6px;align-items:center;font-size:13px;background:#14183a;border:1px solid var(--line);border-radius:10px;padding:5px 8px;opacity:0;transform:translateX(-10px);animation:beatin .35s var(--bd) forwards}
+.beat .bp{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:top;flex:none}.beat.b-lookout{border-color:#2ee6d666}.beat.b-driver{border-color:#ffd76a66}.beat.b-muscle{border-color:#ff4d5e66}
+@keyframes beatin{to{opacity:1;transform:none}}
+/* endings gallery */
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gcard{position:relative;border-radius:14px;overflow:hidden;background:#0a0d1d;border:1px solid var(--line)}
+.gcard img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.gcard.locked img{filter:brightness(0) contrast(1);opacity:.85}
+.gcard .q{position:absolute;left:0;right:0;top:22%;text-align:center;font:46px var(--hf);color:#2c3466}
+.gcard .gt{position:absolute;left:0;right:0;bottom:0;padding:18px 8px 6px;background:linear-gradient(180deg,#0000,#0d1022f2 50%);display:flex;flex-direction:column;gap:1px}
+.gcard .gt b{font:16px var(--hf);color:var(--gold)}.gcard.locked .gt b{color:var(--mut)}.gcard .gt small{font-size:11px;color:var(--mut);line-height:1.2}.gcard .chip{align-self:flex-start;font-size:10px;padding:1px 6px}
+/* timeline */
+.timeline{display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--line);margin-left:9px;padding-left:10px}
+.tli{position:relative;display:flex;gap:8px;align-items:center;font-size:13px;padding:3px 0}.tli .ic{margin-left:-21px;background:var(--card);border-radius:50%}
+.tli .d{color:var(--mut);font-size:11px;white-space:nowrap;min-width:44px}.tli .t{flex:1}
+/* ===== the hot dog stand minigame ===== */
+#hd{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;gap:6px;padding:10px 10px max(10px,env(safe-area-inset-bottom));padding-top:max(10px,env(safe-area-inset-top));
+ background:radial-gradient(120% 60% at 50% 0%,#3a2a4a,#1a1430 60%,#0d1022);touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+.hdtop{display:flex;align-items:center;gap:8px;font-size:13px}.hdtop .hf{font-size:18px;color:var(--gold2);white-space:nowrap}
+.hdtime{flex:1;height:10px;border-radius:6px;background:#0005;overflow:hidden}.hdtime b{display:block;height:100%;background:linear-gradient(90deg,#3ddc97,#f5c04e);transition:width .1s linear}.hdtime b.low{background:#ff5d73}
+#hdn{color:var(--mut);white-space:nowrap}#hdtips{font-weight:800;min-width:54px;text-align:right}
+.hdcust{display:flex;align-items:flex-end;gap:8px;min-height:118px}
+.hdcust .who{display:flex;flex-direction:column;align-items:center;font-size:12px;font-weight:700;flex:none}
+.hdcust .who img{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:top;border:3px solid #fff3;background:#2a2450}
+.hdcust .walk{animation:walkin .5s ease-out both}.hdcust .walkb{animation:bubblein .3s .35s both}
+.hdcust .who.happy img{border-color:var(--good);animation:bounce .5s}.hdcust .who.sad img{border-color:var(--bad);animation:shake .4s}
+@keyframes walkin{from{transform:translateX(160px);opacity:0}}@keyframes bubblein{from{transform:scale(.6);opacity:0}}
+@keyframes bounce{40%{transform:translateY(-10px)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.hdcust .bubble{position:relative;flex:1;background:#fff;color:#1b1f33;border-radius:16px;padding:8px 10px;min-height:76px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.hdcust .bubble::before{content:'';position:absolute;left:-9px;bottom:16px;border:10px solid transparent;border-right-color:#fff;border-left:0}
+.hdcust .bubble .sub{color:#4a4f6a;font-size:12px;line-height:1.25}
+.oicons{display:flex;gap:4px;align-items:center;flex-wrap:wrap}.oi{position:relative;display:inline-flex}.oi img{width:44px;height:44px;object-fit:contain}.oi b{position:absolute;right:-6px;bottom:-2px;background:#d62828;color:#fff;border-radius:8px;font-size:12px;padding:0 5px}
+.hdhint{min-height:24px;text-align:center;font-weight:800;color:var(--gold2);font-size:15px}
+.hdwork{display:flex;gap:8px;justify-content:center;align-items:center;flex:1;min-height:180px}
+.hdgrill,.hdplate{position:relative;flex:1;max-width:210px;height:min(100%,260px);min-height:170px;border-radius:18px;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 8px}.hdgrill{padding:16% 12% 20%}
+.hdgrill .bg,.hdplate .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;z-index:0}.hdgrill .bg{object-fit:fill;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+.hdgrill .slot{position:relative;z-index:1;flex:1;min-height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.slot .gs{display:flex;flex-direction:column;align-items:center;width:100%;cursor:grab}
+.slot .gs img{width:112px;height:52px;object-fit:contain;filter:drop-shadow(0 2px 2px #0008)}
+.done{position:relative;width:76%;height:7px;border-radius:4px;background:#0009;overflow:hidden}.done i{position:absolute;top:0;bottom:0;background:#3ddc9799}.done b{position:absolute;left:0;top:0;bottom:0;background:#fff;opacity:.85;width:0}
+.smoke{position:absolute;top:-6px;width:18px;height:18px;border-radius:50%;background:#bbb6;filter:blur(4px);animation:smoke 1s infinite}@keyframes smoke{to{transform:translateY(-16px) scale(1.6);opacity:0}}
+.hdplate .dogs{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:60px}
+.dog{position:relative;width:128px;height:60px}.dog .bun{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}.dog .saus{position:absolute;left:12%;top:8%;width:76%;height:70%;object-fit:contain}
+.dog .tops{position:absolute;left:4%;top:12%;width:92%;height:56%;pointer-events:none}
+.hdplate .cup{position:absolute;right:2px;top:2px;z-index:2}.hdplate .cup img{width:40px;height:40px}
+.tray{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.tray .src{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:64px;background:#ffffff10;border:1px solid #ffffff22;border-radius:12px;font-size:11px;font-weight:700;cursor:grab;touch-action:none}
+.tray .src img,.tray .binsvg{width:42px;height:42px;object-fit:contain;pointer-events:none}
+.tray .bin{cursor:default;background:#0003}
+.hdbtns{display:flex;gap:8px}.hdbtns .btn{flex:1;margin:0;justify-content:center}
+.ghost{position:fixed;z-index:95;width:72px;height:72px;object-fit:contain;transform:translate(-50%,-50%) scale(1.15);pointer-events:none;filter:drop-shadow(0 6px 8px #000a)}
+#hd .over{outline:3px dashed var(--gold);outline-offset:-3px;background:#f5c04e22}
+#hd .sel{outline:3px solid var(--teal);outline-offset:-2px}
+#hd .nexttap{outline:3px solid var(--gold);outline-offset:2px;animation:tutp 1.1s ease-in-out infinite}
+@media (max-width:370px){.hdcust .who img{width:68px;height:68px}.oi img{width:38px;height:38px}.dog{width:96px;height:46px}.slot .gs img{width:72px}.tray .src{min-height:58px}}
+@media (min-height:800px){.hdwork{flex-direction:column;align-items:center;gap:4px}.hdgrill,.hdplate{width:100%;max-width:330px;flex:1;min-height:0;height:auto}.hdgrill{max-height:250px;padding:11% 18% 9%}.hdgrill .slot{min-height:40px}.hdplate{max-height:190px}.hdplate .dogs{flex-direction:row;justify-content:center;gap:6px}}
 </style></head><body>
 <div id="app"><header><div class="hrow"><div id="clock" class="clock"></div></div><div id="money" class="money"></div><div id="meters" class="meters"></div><div id="goal"></div></header>
 <main></main>
@@ -174,7 +268,7 @@ h3.sect{margin:16px 4px 8px;font-size:13px;color:var(--mut);letter-spacing:.12em
 <div id="modal"><div class="sheet"><div id="mbody"></div><div id="mbtns"></div></div></div><div id="toasts" class="toasts"></div><div id="fx"></div><div id="title" class="off"></div>
 <script>window.MAP={"extent":{"x_min":-1100.0,"x_max":1330.0,"z_min":-1520.0,"z_max":336.0},"areas":[["business","Downtown - Business District",[175,595,-700,-266]],["shopping","Westgate - Shopping District",[-320,168,-960,-252]],["poor","Bayside - Poor Residential",[595,1050,-133,336]],["medium","Maple Vale - Medium Residential",[-320,252,-360,336]],["rich","Kingsridge Hill - Rich Residential",[210,1050,-1064,-700]],["farm","Oakbridge Countryside - Farmland",[-1100,-320,-1520,480]],["port","Port Maple - Harbour & Industrial Docks",[861,1330,-700,-133]],["oldtown","Old Town & University",[595,861,-700,-168]],["lake","Lake Wren - Lakeside Leisure",[-320,210,-1520,-672]],["southbank","Southbank (in-between: hospital, flats, interchange)",[252,595,-266,336]]],"roads":[["hi",[[-360,-480],[-290,-421],[-234,-362],[-153,-279],[-103,-251],[-47,-236],[38,-223],[123,-204],[175,-189],[330,-138],[360,-131],[385,-130],[690,-145],[741,-151],[784,-162],[802,-169],[819,-178],[834,-190],[846,-203],[873,-238],[913,-312]]],["co",[[-360,-480],[-450,-506],[-480,-519],[-550,-556],[-596,-573],[-632,-580],[-660,-579],[-689,-572],[-760,-546],[-818,-519],[-839,-512],[-862,-509],[-927,-513],[-1005,-523],[-1100,-540]]],["co",[[-360,-480],[-392,-398],[-398,-373],[-401,-347],[-399,-291],[-388,-206],[-348,2],[-348,20],[-355,43],[-362,55],[-378,70],[-390,78],[-405,84],[-452,89],[-504,90],[-628,79],[-683,78],[-900,90],[-1100,95]]],["ra",[[445,-119],[413,-118],[422,-115],[428,-110],[433,-102],[433,-95],[431,-87],[426,-81],[418,-76],[410,-76],[400,-80],[393,-89],[390,-127]]],["ra",[[500,-118],[473,-114],[462,-109],[429,-69],[422,-63],[408,-58],[401,-52],[396,-43],[388,-17]]],["ra",[[445,-137],[414,-140],[422,-141],[429,-146],[434,-154],[435,-161],[434,-169],[429,-176],[421,-181],[413,-182],[402,-178],[395,-170],[390,-132]]],["ra",[[501,-135],[474,-140],[464,-146],[432,-188],[425,-193],[412,-200],[405,-206],[401,-215],[394,-241]]],["ra",[[325,-122],[356,-119],[348,-118],[341,-113],[336,-105],[335,-98],[336,-90],[341,-83],[349,-78],[357,-77],[368,-81],[375,-89],[380,-127]]],["ra",[[269,-124],[296,-119],[306,-113],[338,-71],[345,-66],[358,-59],[365,-53],[369,-44],[376,-18]]],["ra",[[325,-140],[357,-141],[348,-144],[342,-149],[337,-157],[337,-164],[339,-172],[344,-178],[352,-183],[360,-183],[370,-179],[377,-170],[380,-132]]],["ra",[[270,-141],[297,-145],[308,-150],[341,-190],[348,-196],[362,-201],[369,-207],[374,-216],[382,-242]]],["ma",[[-318,-480],[-322,-463],[-331,-450],[-344,-441],[-361,-438],[-376,-441],[-389,-450],[-399,-465],[-402,-480],[-399,-495],[-389,-510],[-376,-519],[-361,-522],[-344,-519],[-331,-510],[-322,-497],[-318,-480]]],["ra",[[-347,-440],[-326,-422],[-314,-415],[-243,-370],[-167,-298]]],["ra",[[-319,-493],[-284,-470],[-266,-453],[-209,-376],[-152,-303]]],["ra",[[-400,-467],[-428,-475],[-439,-481],[-472,-514],[-512,-546]]],["ra",[[-373,-520],[-394,-538],[-405,-544],[-452,-553],[-500,-568]]],["ma",[[963,-336],[962,-329],[958,-323],[952,-319],[944,-318],[937,-319],[931,-324],[928,-330],[927,-336],[928,-342],[931,-348],[937,-353],[944,-354],[952,-353],[958,-349],[962,-343],[963,-336]]],["ma",[[490,-1018],[456,-991],[452,-983],[453,-977],[460,-971],[497,-956],[534,-929],[550,-913],[554,-903],[549,-887],[540,-877],[529,-867],[511,-854],[498,-848],[446,-837],[433,-828],[424,-816],[421,-805],[424,-798],[432,-793],[469,-782],[480,-777],[484,-770],[483,-761],[476,-747],[458,-724],[421,-691],[402,-666],[390,-643],[382,-623],[373,-593],[366,-561],[356,-502],[353,-445],[358,-385],[369,-309],[380,-209],[385,-156],[385,-130],[383,-90],[380,-70],[374,-48],[362,-16],[346,14],[327,39],[303,60],[270,84],[235,106],[212,124],[159,159]]],["ma",[[354,-507],[426,-515],[495,-528],[527,-538],[626,-580],[656,-591],[688,-597],[731,-599],[756,-596],[780,-591],[804,-583],[833,-568],[866,-545],[945,-476]]],["ma",[[969,-700],[956,-630],[949,-558],[945,-476],[948,-364],[948,-350],[945,-336],[944,-252],[939,-201],[933,-173],[922,-153],[863,-75],[825,-20],[728,140],[701,176],[672,210],[626,249],[609,266],[596,286],[574,336]]],["ma",[[-360,-650],[-187,-512],[-124,-443],[-92,-435],[-44,-413],[-28,-407],[7,-401],[48,-399],[63,-399],[83,-403],[169,-427],[252,-442],[354,-469]]],["ma",[[-360,-480],[-330,-620],[-280,-743],[-199,-804],[-183,-795],[-158,-761],[-139,-736],[-123,-731],[-84,-738],[-68,-740],[-8,-740],[23,-746],[52,-757],[75,-770],[102,-794],[111,-799],[132,-807],[155,-811],[194,-817],[230,-819],[322,-812],[397,-819],[424,-812]]],["st",[[-167,-775],[-250,-1005],[-280,-1090],[-301,-1160],[-314,-1217],[-318,-1250],[-318,-1280],[-305,-1331],[-290,-1340],[-268,-1325],[-238,-1274],[-219,-1234],[-178,-1130],[-141,-1039],[-105,-1028],[-74,-1034],[-44,-1036],[-15,-1035],[24,-1029],[52,-1021],[89,-1006],[112,-993],[133,-976],[151,-957],[164,-938],[170,-924],[174,-903],[175,-862],[168,-813]]],["ma",[[-360,-480],[-332,-383],[-316,-348],[-290,-307],[-240,-244],[-186,-183],[-162,-157],[-140,-140],[-107,-124],[-66,-113],[-37,-109],[27,-106],[124,-98],[153,-86],[166,-72],[176,-55],[194,0],[211,47],[213,60],[214,72],[209,98],[197,126],[187,137],[159,159]]],["ma",[[159,159],[73,274],[64,298],[56,336]]],["ma",[[378,-63],[445,-69],[487,-66],[622,-43],[647,-36],[696,-19],[723,-12],[812,0]]],["ma",[[554,-903],[672,-826],[718,-800],[733,-786],[752,-761],[764,-741],[770,-728],[774,-715],[775,-697],[771,-652],[756,-596]]],["st",[[770,-728],[804,-766],[812,-784],[811,-797],[794,-833],[791,-847],[793,-861],[805,-883],[823,-905],[845,-930],[862,-945],[880,-957],[896,-966],[906,-969],[941,-967]]],["st",[[616,-542],[616,-536],[619,-522],[648,-469],[668,-414],[680,-397],[695,-384],[713,-373],[725,-369],[738,-367],[753,-368],[775,-374],[790,-380],[802,-388],[812,-400],[820,-414],[831,-438],[836,-462],[837,-478],[835,-504],[828,-529],[820,-542],[805,-558],[778,-573],[748,-583],[713,-589],[687,-589],[665,-584],[643,-574],[626,-559],[618,-548],[616,-542]]],["st",[[676,-402],[685,-188],[688,-171],[696,-133],[704,-70],[714,-14]]],["la",[[595,-259],[672,-248],[735,-237],[798,-233],[837,-237],[942,-259]]],["co",[[-650,-580],[-676,-651],[-682,-680],[-687,-723],[-687,-757],[-683,-792],[-656,-864],[-650,-888],[-650,-900],[-656,-924],[-691,-982],[-700,-1007],[-698,-1034],[-682,-1079],[-666,-1110],[-639,-1150],[-621,-1169],[-602,-1182],[-572,-1196],[-519,-1213],[-420,-1235],[-389,-1247],[-318,-1280]]],["co",[[-685,-780],[-771,-793],[-822,-805],[-845,-813],[-874,-830],[-915,-869],[-938,-885],[-984,-906],[-1100,-950]]],["co",[[-850,-510],[-810,-320],[-798,-281],[-767,-201],[-752,-140],[-750,-120],[-754,-79],[-794,44],[-800,82],[-797,134],[-790,166],[-780,197],[-767,226],[-752,254],[-732,280],[-697,317],[-629,379],[-587,413],[-534,451],[-480,480]]],["co",[[-700,-1020],[-775,-1052],[-799,-1064],[-830,-1090],[-859,-1124],[-890,-1175],[-903,-1212],[-903,-1236],[-896,-1296],[-900,-1320],[-911,-1345],[-935,-1382],[-988,-1450],[-1060,-1520]]],["co",[[-630,-1160],[-573,-1276],[-542,-1329],[-519,-1359],[-493,-1388],[-462,-1418],[-438,-1439],[-411,-1455],[-368,-1473],[-337,-1480],[-320,-1480],[-312,-1474],[-295,-1445],[-238,-1274]]],["st",[[234,-634],[281,-659],[307,-667],[350,-670],[393,-666],[414,-661],[434,-654],[464,-638],[495,-613],[518,-586],[535,-555],[542,-534],[547,-512],[550,-490],[549,-476],[543,-440],[536,-420],[529,-408],[517,-390],[503,-374],[484,-356],[441,-330]]],["st",[[182,-542],[242,-533],[274,-533],[296,-538],[336,-552],[379,-573],[398,-576],[418,-578],[462,-577],[532,-561]]],["st",[[354,-469],[448,-458],[483,-457],[496,-460],[509,-465],[550,-490]]],["st",[[182,-507],[203,-574],[234,-634]]],["st",[[357,-392],[427,-385],[447,-380],[493,-364]]],["st",[[203,-343],[237,-354],[252,-357],[263,-357],[291,-352],[308,-354],[323,-362],[357,-392]]],["st",[[-295,-757],[-197,-693],[-168,-655],[-141,-619],[-110,-607],[-5,-588],[20,-582],[49,-572],[70,-564],[87,-552],[97,-542],[104,-530],[111,-507],[118,-463],[118,-414]]],["pe",[[-154,-445],[-100,-387],[-66,-368],[-21,-351],[1,-346],[23,-343],[43,-343],[68,-346],[84,-351],[98,-358],[105,-364],[110,-371],[118,-406]]],["st",[[-322,-450],[-143,-305],[-64,-289],[-30,-288],[12,-291],[51,-296],[80,-302],[97,-308],[112,-316],[120,-324],[123,-331],[125,-341],[125,-354],[118,-406]]],["la",[[-28,-407],[0,-469],[35,-578]]],["st",[[-112,-441],[-104,-375],[-98,-350],[-87,-329],[-56,-288]]],["st",[[-110,0],[110,0]]],["la",[[-85,29],[78,29]]],["st",[[-81,-184],[-81,-153],[-87,-125],[-118,81],[-124,117],[-131,145],[-136,159],[-149,181],[-151,188],[-155,207],[-181,283]]],["st",[[103,-113],[115,-50],[110,0],[120,72],[125,93],[136,136],[134,176],[147,231]]],["st",[[-189,-265],[-130,-216],[-112,-211],[-91,-211],[-52,-220],[-28,-223],[15,-217],[41,-210],[56,-204],[70,-197],[91,-187],[124,-166],[142,-151],[178,-98]]],["la",[[-28,-223],[-42,-192],[-44,-184],[-40,-178],[-20,-168]]],["st",[[-119,89],[-47,107],[5,115],[32,117],[48,115],[63,111],[121,80]]],["la",[[-39,109],[-32,143],[-26,153],[-17,161],[8,174]]],["st",[[-151,188],[-66,197],[4,210],[30,211],[68,206],[109,196],[121,190],[134,176]]],["la",[[21,212],[32,244],[38,255],[49,264],[77,276]]],["st",[[-295,79],[-244,121],[-220,138],[-197,155],[-151,188]]],["st",[[-295,-226],[-253,-131],[-253,-112],[-262,-84],[-269,-41],[-274,0],[-295,79]]],["st",[[-181,283],[-91,268],[23,302],[48,310],[77,324],[91,329],[106,331],[140,329]]],["st",[[252,-220],[328,-221],[391,-218],[414,-213],[473,-190],[498,-185],[524,-186],[574,-192]]],["st",[[382,-196],[417,-182],[461,-168],[482,-162],[497,-161],[511,-162],[525,-167],[574,-192]]],["st",[[346,14],[393,61],[413,74],[436,84],[459,90],[475,91],[500,89],[527,82],[544,74],[550,69],[560,56],[562,48],[563,38],[561,17],[546,-56]]],["st",[[483,91],[485,138],[488,161],[499,191],[516,220],[532,238],[545,246],[560,252],[609,266]]],["st",[[280,-70],[322,-28],[331,-15],[346,14]]],["st",[[259,126],[372,202],[419,231],[440,241],[455,245],[470,246],[532,238]]],["st",[[223,115],[259,126]]],["st",[[616,0],[672,14],[729,33],[765,41],[779,42],[794,41],[833,28]]],["st",[[609,56],[666,82],[691,90],[716,96],[748,98],[798,91]]],["st",[[616,126],[685,139],[717,142],[749,142],[770,140],[781,137],[812,119]]],["st",[[700,196],[751,191],[784,183],[812,168],[840,145],[851,131],[857,121],[863,104],[867,86],[868,70],[867,61],[854,28]]],["st",[[896,-119],[938,-70],[976,-33],[997,-3],[1007,21],[1009,35],[1009,61],[1006,88],[1001,112],[993,131],[966,168]]],["la",[[609,56],[626,16],[630,0],[628,-14],[616,-42]]],["st",[[770,70],[788,119],[791,140],[788,161],[770,210]]],["st",[[812,0],[861,-35],[910,-56],[938,-70]]],["la",[[648,-469],[676,-449],[690,-437],[732,-368]]],["la",[[700,-420],[721,-443],[729,-459],[735,-504],[756,-581]]],["la",[[700,-420],[749,-426],[770,-430],[790,-438],[836,-462]]],["la",[[676,-402],[700,-350],[726,-317],[735,-301],[739,-283],[742,-237]]],["la",[[802,-388],[798,-344],[798,-322],[812,-234]]],["la",[[616,-542],[655,-536],[678,-530],[728,-511],[734,-508],[735,-504]]],["la",[[648,-469],[680,-485],[693,-486],[704,-481],[728,-458]]],["la",[[770,-430],[820,-542]]],["la",[[732,-368],[756,-396],[766,-402],[777,-402],[802,-388]]],["la",[[700,-350],[740,-349],[756,-346],[770,-341],[798,-322]]],["la",[[679,-294],[735,-301]]],["st",[[672,210],[728,241],[765,255],[797,264],[812,266],[826,266],[875,252]]],["st",[[728,140],[778,178],[811,200],[828,207],[840,210],[853,210],[910,196]]],["st",[[581,294],[638,288],[679,278],[708,265],[735,244]]],["la",[[609,168],[631,195],[640,203],[650,207],[672,210]]],["st",[[945,-476],[1001,-483],[1030,-483],[1232,-462]]],["st",[[953,-609],[1015,-596],[1067,-594],[1136,-597],[1183,-601],[1208,-606],[1239,-616]]],["st",[[948,-364],[1001,-329],[1029,-317],[1057,-311],[1092,-307],[1155,-308]]],["la",[[969,-658],[1022,-658],[1078,-672]]],["st",[[942,-224],[1070,-251],[1102,-253],[1183,-254]]],["la",[[931,-168],[987,-154],[1043,-154]]],["la",[[1099,-595],[1115,-509],[1120,-469],[1123,-423],[1127,-308]]],["st",[[556,-917],[555,-905],[551,-894],[546,-887],[537,-877],[517,-866],[504,-862],[490,-861],[476,-862],[463,-866],[443,-877],[434,-887],[429,-894],[425,-905],[424,-917],[425,-929],[429,-940],[434,-947],[443,-957],[463,-968],[476,-972],[490,-973],[504,-972],[517,-968],[537,-957],[546,-947],[551,-940],[555,-929],[556,-917]]],["st",[[554,-903],[589,-931],[598,-945],[600,-956],[599,-973],[588,-1001],[578,-1016],[565,-1029],[556,-1036],[546,-1040],[530,-1038],[490,-1018]]],["st",[[424,-798],[307,-872],[284,-882],[245,-896]]],["st",[[451,-980],[414,-989],[399,-994],[355,-1020],[317,-1033],[300,-1036],[283,-1036],[238,-1029]]],["st",[[424,-812],[397,-780],[383,-766],[368,-758],[351,-754],[299,-752],[271,-755],[251,-763],[217,-784]]],["st",[[791,-854],[860,-863],[875,-868],[889,-875],[912,-892],[934,-914],[942,-927],[952,-952]]],["st",[[672,-826],[660,-791],[657,-775],[662,-760],[674,-746],[689,-733],[706,-726],[726,-725],[770,-728]]],["la",[[609,-868],[627,-827],[630,-812],[625,-802],[602,-784]]],["la",[[511,-854],[581,-784]]],["st",[[483,-774],[590,-747],[644,-728]]],["st",[[672,-826],[716,-868],[754,-895],[783,-908],[840,-924]]],["la",[[451,-980],[409,-966],[396,-959],[389,-950],[385,-924]]],["la",[[301,-875],[277,-844],[266,-833],[253,-825],[220,-812]]],["la",[[357,-840],[370,-873],[378,-886],[390,-896],[424,-917]]],["st",[[598,-945],[764,-997],[787,-998],[826,-994]]],["la",[[840,-924],[848,-958],[854,-973],[863,-988],[889,-1022]]],["st",[[896,-519],[889,-443],[887,-374],[888,-336],[892,-286],[897,-265],[906,-249],[914,-242],[942,-224]]],["st",[[953,-553],[1002,-562],[1022,-564],[1041,-563],[1082,-556]]],["la",[[889,-574],[920,-577],[931,-581],[939,-588],[953,-609]]],["st",[[266,-98],[322,-84],[378,-63]]],["st",[[546,-56],[574,-7],[581,14],[582,30],[582,47],[578,70],[573,85],[569,80],[560,56]]],["la",[[164,-938],[130,-945],[123,-949],[112,-959]]],["la",[[-238,-1274],[-174,-1076],[-154,-1022],[-143,-1001],[-126,-1008]]],["la",[[-685,-780],[-713,-803],[-726,-810],[-738,-807],[-752,-792],[-759,-776],[-759,-758],[-740,-700]]],["la",[[-680,-670],[-635,-679],[-615,-686],[-600,-699],[-589,-717],[-582,-737],[-581,-757],[-588,-777],[-610,-820]]],["la",[[-685,80],[-687,98],[-685,105],[-679,110],[-660,120]]],["la",[[-590,85],[-588,140],[-592,162]]],["la",[[-540,86],[-523,118],[-509,126],[-491,131],[-480,130],[-475,125],[-460,90]]],["la",[[-322,46],[-320,59],[-322,63],[-345,70]]]],"water":{"river":[[[98,-804],[106,-761],[108,-742],[95,-697],[94,-672],[100,-653],[141,-560],[147,-539],[151,-511],[150,-472],[134,-412],[135,-393],[138,-368],[149,-337],[164,-314],[183,-294],[206,-277],[227,-268],[251,-261],[389,-237],[460,-220],[491,-218],[552,-226],[591,-221],[646,-208],[717,-182],[754,-175],[783,-171],[828,-172],[972,-194],[1101,-193],[1111,-196],[1117,-204],[1120,-213],[1117,-223],[1109,-232],[1099,-234],[970,-232],[933,-227],[823,-206],[770,-206],[724,-213],[656,-236],[598,-249],[553,-253],[495,-245],[469,-245],[394,-260],[254,-283],[233,-288],[216,-296],[196,-310],[179,-328],[167,-346],[157,-373],[153,-411],[168,-469],[169,-494],[167,-524],[157,-565],[118,-654],[110,-675],[110,-694],[122,-730],[123,-747],[112,-804],[107,-809],[98,-804]]],"lake":[[[137,-879],[141,-926],[138,-937],[132,-947],[121,-957],[92,-974],[61,-987],[35,-995],[8,-1000],[-40,-999],[-67,-995],[-83,-990],[-202,-1128],[-228,-1184],[-241,-1195],[-225,-1075],[-203,-1005],[-169,-905],[-135,-825],[-111,-809],[-1,-792],[27,-793],[57,-798],[84,-806],[98,-814],[113,-830],[130,-858],[137,-879]]],"sea":[[[1022,-1064],[987,-1023],[973,-997],[972,-968],[984,-927],[1000,-898],[1046,-840],[1087,-751],[1088,-692],[1162,-692],[1162,-677],[1088,-677],[1089,-644],[1253,-644],[1284,-681],[1313,-759],[1322,-758],[1292,-677],[1253,-625],[1253,-294],[1211,-286],[1088,-286],[1088,-266],[1190,-266],[1190,-242],[1088,-242],[1085,-133],[1080,-86],[1076,-80],[1061,-94],[1034,-55],[1026,-28],[1036,27],[1078,27],[1037,31],[1040,63],[1026,112],[1001,161],[973,195],[895,262],[784,336],[1330,336],[1330,-1064],[1022,-1064]]],"island":[[[0,-914],[-2,-900],[-25,-890],[-53,-892],[-61,-896],[-59,-922],[-51,-925],[-37,-925],[-6,-918],[0,-914]]]},"blds":[[255,-498,70,44],[204,-480,28,34],[240,-567,50,40],[306,-613,64,42],[403,-432,42,42],[457,-603,36,36],[342,-691,40,28],[223,-690,36,26],[492,-424,40,30],[510,-626,30,26],[332,-524,30,24],[444,-434,26,17],[447,-414,24,17],[456,-476,24,17],[300,-419,26,20],[231,-378,30,30],[307,-370,16,11],[462,-303,52,36],[472,-677,50,32],[522,-300,52,38],[568,-385,34,50],[291,-325,56,24],[582,-494,40,30],[-49,-528,200,112],[88,-475,34,26],[79,-438,46,38],[-149,-375,58,40],[-41,-380,22,15],[4,-361,15,12],[53,-362,22,16],[-99,-272,58,34],[-40,-272,32,22],[-14,-255,24,18],[-212,-427,36,24],[-251,-497,30,24],[-180,-435,24,16],[64,-277,26,16],[136,-310,26,20],[642,36,22,22],[683,56,22,22],[630,100,22,22],[758,-30,34,14],[801,66,26,16],[697,1,16,12],[718,7,14,11],[674,-5,14,10],[899,-77,30,20],[927,-28,28,18],[659,174,30,20],[895,237,50,36],[771,14,14,10],[-41,-19,30,16],[20,-12,14,10],[42,-13,12,10],[64,-13,14,10],[62,9,4,4],[-66,16,10,10],[-46,16,10,10],[-26,16,10,10],[-6,16,10,10],[14,16,10,10],[34,16,10,10],[54,16,10,10],[-62,42,10,10],[-42,42,10,10],[-22,42,10,10],[-2,42,10,10],[18,42,10,10],[38,42,10,10],[58,42,10,10],[31,-168,60,30],[160,30,22,40],[147,-58,24,18],[142,-118,20,16],[-244,152,32,16],[617,-995,34,24],[434,-1046,42,24],[329,-740,18,12],[350,-742,12,10],[372,-743,16,12],[688,-707,56,32],[888,-909,36,26],[952,-971,9,9],[-520,115,9,8],[-504,115,9,8],[-488,115,9,8],[-472,115,9,8],[-520,133,9,8],[-504,133,9,8],[-488,133,9,8],[-472,133,9,8],[-505,95,6,4],[-548,108,10,8],[-685,124,10,8],[-660,126,14,10],[-628,141,4,4],[-662,145,20,8],[-588,172,12,9],[-565,178,22,10],[-420,31,60,4],[-760,225,14,10],[-600,340,18,12],[-856,-74,40,18],[-645,-772,18,13],[-742,-765,14,28],[-710,-772,14,10],[-714,-1041,14,11],[-667,-1051,26,16],[-917,-851,14,11],[-887,-872,30,13],[-840,-1220,14,10],[-512,-1385,9,9],[994,-442,60,34],[1022,-623,40,24],[910,-662,40,22],[1038,-531,48,26],[915,-392,40,24],[867,-291,30,18],[910,-451,24,14],[1031,-366,70,38],[1137,-276,40,12],[1029,-171,40,24],[1063,-688,30,13],[1158,-685,16,11],[1110,-295,20,12],[719,-667,80,28],[804,-657,40,28],[640,-665,30,40],[680,-509,40,26],[708,-560,28,20],[749,-467,22,22],[678,-432,12,10],[719,-404,5,4],[797,-419,28,18],[853,-396,28,56],[818,-350,14,20],[783,-348,16,12],[844,-257,22,14],[790,-255,26,16],[715,-266,18,12],[136,-1005,30,14],[-56,-774,6,4],[-220,-823,50,30],[-102,-692,40,24],[-138,-1076,18,8],[-35,-899,6,6],[-22,-784,4,4],[465,-205,80,46],[409,134,16,10],[308,-68,30,20],[495,-23,50,26]]};
 // ---- Game data (numbers from the Godot reference where they exist; see DESIGN.md) ----
-const VERSION = 'v0.5';
+const VERSION = 'v0.6';
 const DECAY = {hunger:5.5, energy:4.5, mood:0.36}; // per game hour (Godot hunger/energy/mental)
 const NEEDS = ['hunger', 'energy', 'mood'];
 const NEED_NAMES = {hunger:'Hunger', energy:'Energy', mood:'Mood', health:'Health'};
@@ -249,6 +343,7 @@ const PEOPLE = [
  {id:'nadia', n:'Nadia Rahimi', a:46, job:'Docks manager', tr:'strict, fair', s:[[19,22,'pub']], away:'at the docks', line:'"Hard work gets noticed. Eventually."'},
  {id:'vance', n:'Sterling Vance', a:47, job:'Owns Vance Holdings', tr:'slick, ruthless, charming', s:[[9,20,'tower']], nodate:true, rival:true, line:'"Maple City needs one owner. It won\'t be you."'},
  {id:'benny', n:'Benny Doyle', a:55, job:'Runs the salvage yard', tr:'gruff, loyal to Carlo', s:[[6,22,'docks']], nodate:true, line:'"Package? Leave it by the crane. Didn\'t see you."'},
+ {id:'vinnie', n:'Vincent "Vinnie" Russo', a:52, job:'Fixer, knows everyone', tr:'wry, connected', s:[[20,24,'pub']], nodate:true, line:'"I did eleven years for a man who never said thank you. Now I work for people who do."'},
  {id:'carlo', n:'Carlo "The Captain" Marino', a:61, job:'Runs things at the Rusty Anchor', tr:'ex-docker, patient, dangerous', s:[[12,26,'anchor']], nodate:true, boss:true, line:'"Everybody in this city works for somebody. Question is who."'},
 ];
 // Businesses you can own (none are Victor's or Lang & Co's). Each has 3 tiers; the art changes per tier.
@@ -264,7 +359,15 @@ const BIZ = {
     {n:'Club Neon', art:'b_club_t3', cost:1000000, income:35000, upkeep:8000, launder:150000}]},
 };
 const LAUNDER_FEE = 0.10;
-const STAFF = {tom:{wage:7000, skill:1.5, rel:0.8}, chloe:{wage:8500, skill:2.8, rel:0.88}, jess:{wage:9000, skill:3.0, rel:0.92}};
+const STAFF = {tom:{wage:7000, skill:1.5, rel:0.8}, anjali:{wage:7500, skill:2.2, rel:0.86}, chloe:{wage:8500, skill:2.8, rel:0.88}, jess:{wage:9000, skill:3.0, rel:0.92}, hannah:{wage:8000, skill:2.0, rel:0.95}};
+// Partner perks (date someone to romance 50). Every partner also lifts your mood each morning.
+const PARTNER_PERKS = {grace:'Hospital bills half price', jess:'Kiosk +10% customers (her sketches on the menu)', chloe:'+15% to charm in collections', hannah:'Strength +0.05 a day', anjali:'Smarts +0.05 a day', imani:'Smarts +0.05 a day', any:'Mood +8 every morning'};
+// People you hurt come back a few days later
+const GRUDGE_NAMES = {lucky:'Lucky from the pawn shop', enforcer:'The local heavy', benny:'Benny Doyle'};
+// Hot dog stand customers (portraits from the cast)
+const HD_CUSTOMERS = ['maggie', 'walter', 'grace', 'imani', 'anjali', 'marek', 'nadia', 'sam', 'leon', 'rosa'];
+const INVEST = {civic:50, business:35};
+const CLEAN_DIST = 1.5, CLEAN_VALUE = 2, CONTRACT = {base:12000, per:3000}; // districts won by buy-out or community investment pay clean, and pay more
 // Rank ladder. anyRep = best of Street / Business respect. Last two are stubs for now.
 const RANKS = [
   {n:'Nobody', need:{}, teaser:'Fresh off the bus with $450.'},
@@ -272,14 +375,14 @@ const RANKS = [
   {n:'Hustler', need:{anyRep:20}, teaser:'Bigger jobs: Carlo trusts you with collections.'},
   {n:'Operator', need:{anyRep:35, ownsBiz:true}, teaser:'You run a business. Time to build a crew.'},
   {n:'Boss', need:{anyRep:50, worth:600000, crew:2}, teaser:'Your own crew works for you every day.'},
-  {n:'Kingpin', need:{anyRep:65, worth:3000000, districts:4}, teaser:'Four districts pay you every night. Vance is worried.'},
+  {n:'Kingpin', need:{anyRep:65, worth:3300000, districts:4}, teaser:'Four districts pay you every night. Vance is worried.'},
   {n:'Ruler of the City', need:{finale:true, districts:7}, teaser:'Vance is finished. Maple City is yours.'},
 ];
 const LOAN = {max:250000, max2:600000, fee:0.10, weeks:8, lateFee:2500};
 // Crew candidates: Street respect 10+, friendship 20+, $100 to sign them
-const CREW = {danny:{role:'Muscle'}, tom:{role:'Driver'}, ollie:{role:'Lookout'}, chloe:{role:'Talker'}};
+const CREW = {danny:{role:'Muscle'}, tom:{role:'Driver'}, ollie:{role:'Lookout'}, chloe:{role:'Talker'}, vinnie:{role:'Fixer'}};
 // What each crew role changes (numbers shown on every choice they affect)
-const ROLES = {Muscle:'+15% to win fights, +15% to hold turf, +20% to scare', Driver:'Runs and heists 40% faster, 30% less likely to be seen', Lookout:'Halves the chance police or cameras see a job', Talker:'+15% to charm, district buy-outs 20% cheaper'};
+const ROLES = {Muscle:'+15% to win fights, +15% to hold turf, +20% to scare', Driver:'Runs and heists 40% faster, 30% less likely to be seen', Lookout:'Halves the chance police or cameras see a job', Talker:'+15% to charm, district buy-outs 20% cheaper', Fixer:'Heat -30% whenever you are seen, lawyers half price'};
 // District defences, bought with dirty cash: each level +12% to hold the district when attacked
 const DEFENCE = [{n:'Corner lookouts', cost:15000}, {n:'Safehouse', cost:30000}, {n:'Armoured doors', cost:60000}];
 // Endings (the Vance Tower finale branches by how you got there, plus selling out)
@@ -320,13 +423,13 @@ const RIVAL = {id:'vance', n:'Sterling Vance', short:'Vance'};
 const DISTRICT_COL = {business:'#3b5bdb', shopping:'#e8590c', poor:'#c2255c', medium:'#2f9e44', rich:'#f08c00', farm:'#5c940d', port:'#495057', oldtown:'#9c36b5', lake:'#1098ad', southbank:'#868e96'};
 const TYPE_COL = {home:'#8da2fb', shop:'#3ddc97', job:'#ffb02e', leisure:'#2ee6d6', civic:'#74c0fc', biz:'#f5c04e', crime:'#ff4f6d', rival:'#8f7bff'};
 const TYPE_NAME = {home:'Home', shop:'Shop', job:'Job', leisure:'Leisure', civic:'Civic', biz:'Business', crime:'Underworld', rival:'Rival'};
-if (typeof module !== 'undefined') module.exports = {DISTRICTS, RIVAL, LAUNDER_FEE, VERSION, ROLES, DEFENCE, ENDINGS, FINALE, DECAY, NEEDS, NEED_NAMES, SKILLS, DAYS, RENT_WEEKLY, HOSPITAL_BILL, START_CASH, BILLS, BILL_LATE_FEE, PLACES, ITEMS, SHOP_STOCK, PEOPLE, BIZ, STAFF, RANKS, LOAN, CREW, DISTRICT_COL, TYPE_COL, TYPE_NAME};
+if (typeof module !== 'undefined') module.exports = {CONTRACT, CLEAN_DIST, CLEAN_VALUE, PARTNER_PERKS, GRUDGE_NAMES, HD_CUSTOMERS, INVEST, DISTRICTS, RIVAL, LAUNDER_FEE, VERSION, ROLES, DEFENCE, ENDINGS, FINALE, DECAY, NEEDS, NEED_NAMES, SKILLS, DAYS, RENT_WEEKLY, HOSPITAL_BILL, START_CASH, BILLS, BILL_LATE_FEE, PLACES, ITEMS, SHOP_STOCK, PEOPLE, BIZ, STAFF, RANKS, LOAN, CREW, DISTRICT_COL, TYPE_COL, TYPE_NAME};
 
 // ===== Human Sim engine: pure, deterministic, no DOM =====
 // state = {v, world:{t, rng, force, noEvents, biz, crews, districts}, players:{id:{...}}}
 // applyAction(state, playerId, action) -> {state: newState, events: [{pid, msg, ic, tone} | {pid, kind, ...}]}
 if (typeof module !== 'undefined') Object.assign(globalThis, require('./data.js'));
-const ENGINE_VERSION = 5;
+const ENGINE_VERSION = 6;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 let W, P, PID, EV, ST;
 
@@ -341,7 +444,7 @@ function newPlayer(name = 'You') {
     carloDay: 0, protDay: 0, crewJobDay: 0, bizShiftDay: 0, eventDay: 0, runs: 0, protections: 0,
     laundered: 0, dayEarn: 0, bestDay: 0, follow: [], contestDay: -9, rentObj: false, metCarlo: false, skips: 0,
     story: {c: 0, favour: false, loyal: false, broke: false}, vance: {sab: 0, grand: false, evidence: 0, raidDay: 0}, heistDay: -9, researchDay: 0,
-    ending: null, endDay: 0, endSeen: false, stats: {helped: 0, hurt: 0}, choices: [],
+    ending: null, endDay: 0, endSeen: false, stats: {helped: 0, hurt: 0}, choices: [], tl: [], grudges: [],
     ledger: [], dayStart: {money: START_CASH, rep: {street: 0, business: 0, civic: 50}}, summary: null,
     log: ['You stepped off the bus in Maple City with $450.00 and a dream.'], shifts: 0, tips: 0};
 }
@@ -400,7 +503,7 @@ const bizTier = k => BIZ[k].tiers[Math.max(0, W.biz[k].tier - 1)];
 function bizValue(k) { const b = W.biz[k]; let v = 0; for (let i = 0; i < b.tier; i++) v += BIZ[k].tiers[i].cost; return v; }
 const distValue = k => DISTRICTS[k].inc * 25;
 const myDistricts = (pid = PID) => Object.keys(W.districts).filter(k => W.districts[k].control === pid);
-function netWorth(pl = P, pid = PID) { let w = pl.cash + pl.dirty + pl.bank - loanLeft(pl); for (const k in W.biz) if (W.biz[k].owner === pid) w += bizValue(k); for (const k of myDistricts(pid)) w += distValue(k); return w; }
+function netWorth(pl = P, pid = PID) { let w = pl.cash + pl.dirty + pl.bank - loanLeft(pl); for (const k in W.biz) if (W.biz[k].owner === pid) w += bizValue(k); for (const k of myDistricts(pid)) w += distValue(k) * (W.districts[k].clean ? CLEAN_VALUE : 1); return w; }
 const launderCap = (pid = PID) => Object.keys(W.biz).filter(k => W.biz[k].owner === pid).reduce((a, k) => a + bizTier(k).launder, 0);
 function ownsBiz(pid = PID) { return Object.values(W.biz).some(b => b.owner === pid); }
 const crewOf = (pl = P) => pl.crew ? W.crews[pl.crew] : null;
@@ -410,6 +513,12 @@ const hasRole = (r, pl = P) => { const c = crewOf(pl); return !!c && c.members.s
 const roleNpc = (r, pl = P) => { const c = crewOf(pl); const m = c && c.members.find(m => m.role === r); return m ? m.npc : null; };
 const seenMult = (pl = P) => hasRole('Lookout', pl) ? 0.5 : 1;
 const pct = v => Math.round(v * 100);
+// Heat only ever comes from police or cameras seeing you; a Fixer in the crew softens it by 30%
+function addHeat(v, pl = P) { pl.heat = Math.min(100, pl.heat + Math.round(v * (hasRole('Fixer', pl) ? 0.7 : 1))); }
+// "Your story so far": the moments that made this run (Me tab + end screen)
+function moment(t, ic = 'm_check', pl = P) { pl.tl = pl.tl || []; pl.tl.push({d: day(), t, ic}); if (pl.tl.length > 60) pl.tl.splice(1, 1); }
+const partnerOf = (pl = P) => Object.keys(pl.rel).find(k => pl.rel[k].partner) || null;
+const partnerPerk = (id, pl = P) => partnerOf(pl) === id;
 function runInfo(route, pl = P) {
   const main = route === 'main', st = pl.skills.stealth, drv = hasRole('Driver', pl), lk = hasRole('Lookout', pl);
   let mins = main ? 40 : 70, seen = main ? clamp(0.3 - 0.03 * st, 0.05, 1) : clamp(0.1 - 0.01 * st, 0.02, 1); const base = {mins, seen};
@@ -430,6 +539,8 @@ function chanceParts(kind, k) {
     if (kind === 'raid' && P.story.loyal && P.story.c >= 4) o.push(['Carlo\'s men', 0.15]);
     if (kind === 'family') o.push(['The Marino family', 0.25]);
     const vd = Object.values(W.districts).filter(d => d.control === 'vance').length; if (kind !== 'carlohit' && vd) o.push([`Vance holds ${vd} district${vd > 1 ? 's' : ''}`, -0.08 * vd]);
+  } else if (kind === 'grudge') {
+    o.push(['Base', 0.45], [`Crew of ${n}`, 0.1 * n], ['Strength', 0.03 * P.skills.strength]); if (hasRole('Muscle')) o.push(['Muscle', 0.15]);
   } else if (kind === 'hold') {
     const pl = P; o.push(['Base', 0.4], [`Crew of ${n}`, 0.12 * n]); if (hasRole('Muscle', pl)) o.push(['Muscle', 0.15]);
     const d = W.districts[k].def || 0; if (d) o.push([`Defences lv ${d}`, 0.12 * d]); if (pl.story.loyal) o.push(['Carlo backs you', 0.15]);
@@ -531,7 +642,7 @@ function tickPlayer(pl, h, mode, comfort) {
 function faint(why, pl = P, pid = PID) {
   pl.loc = 'hospital'; pl.pending = null; pl.shift = null;
   const sv = [P, PID]; P = pl; PID = pid;
-  advance(180, 'hospital'); refillAll(pl); charge(HOSPITAL_BILL, 'Hospital');
+  advance(180, 'hospital'); refillAll(pl); charge(partnerPerk('grace', pl) ? HOSPITAL_BILL / 2 : HOSPITAL_BILL, 'Hospital');
   popup('You fainted', `<p>You collapsed from ${why} and woke up in St. Mary's Hospital three hours later.</p><p>Grace patched you up: <b>health, hunger, energy and mood are full again</b>.</p><p class="bad">Hospital bill: -${moneyTxt(HOSPITAL_BILL)} (bank)</p>`, 'health');
   log('Fainted, woke up in hospital. All stats refilled.', 'health', 'bad');
   [P, PID] = sv;
@@ -565,8 +676,10 @@ function playerDay(ended) {
   if (d === B.next) { B.pending = BILLS.reduce((a, b) => a + b[1], 0); B.due = d + 3; B.next += 28; log(`Monthly bills arrived: ${moneyTxt(B.pending)}, due by Day ${B.due}.`, 'calendar'); }
   if (B.pending && d > B.due) { charge(B.pending + BILL_LATE_FEE, 'Bills'); log(`Bills overdue: taken from the bank with a ${moneyTxt(BILL_LATE_FEE)} late fee.`, 'calendar', 'bad'); B.pending = 0; }
   P.banned = 0;
+  const pt = partnerOf(); if (pt) { addNeed('mood', 8); if (pt === 'hannah') addSkill('strength', 0.05); if (pt === 'anjali' || pt === 'imani') addSkill('intelligence', 0.05); }
   // districts you control pay dirty cash; your businesses launder dirty cash into the bank
-  let dInc = 0; for (const k of myDistricts()) { earn(DISTRICTS[k].inc, 'District income', 'dirty'); dInc += DISTRICTS[k].inc; }
+  let dInc = 0; for (const k of myDistricts()) { const cl = W.districts[k].clean, inc = cl ? Math.round(DISTRICTS[k].inc * CLEAN_DIST) : DISTRICTS[k].inc; earn(inc, cl ? 'District income (clean)' : 'District income', cl ? 'bank' : 'dirty'); if (!cl) dInc += inc; }
+  const cc = contractPay(); if (cc) earn(cc, 'City contracts', 'bank');
   if (P.story.loyal && dInc) { const tr = Math.round(dInc * 0.2); P.dirty -= tr; ledger(-tr, 'Tribute to Carlo'); }
   const cap = launderCap(), amt = Math.min(P.dirty, cap);
   if (amt > 0) { const clean = Math.round(amt * (1 - LAUNDER_FEE)); P.dirty -= amt; ledger(-amt, 'Dirty cash in'); earn(clean, 'Laundered', 'bank'); P.laundered += amt; log(`Your fronts laundered ${moneyTxt(amt)} of dirty cash: +${moneyTxt(clean)} clean in the bank.`, 'm_clean', 'good'); }
@@ -583,10 +696,10 @@ function settleBiz(k, ended) {
   let sold = 0, rev = 0, wage = 0, note = '', restock = 0;
   if (k === 'kiosk') {
     sold = Math.min(b.stock, b.selfSold || 0); b.selfSold = 0;
-    const demand = D.prices[b.price] * T.mult * (1 + 0.03 * pl.skills.intelligence) * (b.rivalDays > 0 ? 0.7 : 1);
+    const demand = D.prices[b.price] * T.mult * (1 + 0.03 * pl.skills.intelligence) * (b.rivalDays > 0 ? 0.7 : 1) * (partnerPerk('jess', pl) ? 1.1 : 1) * (1 + pl.rep.business / 200);
     if (b.staff) {
       const s = STAFF[b.staff];
-      if (rnd() < s.rel) { sold += Math.min(b.stock - sold, Math.round(demand * (0.7 + 0.1 * s.skill))); wage = s.wage; }
+      if (rnd() < s.rel) { sold += Math.min(b.stock - sold, Math.round(demand * (0.7 + 0.1 * s.skill))); wage = staffWage(b.staff, pl); }
       else note = ` ${first(npc(b.staff))} didn't turn up.`;
     }
     b.stock -= sold; if (b.rivalDays > 0) b.rivalDays--; rev = sold * b.price;
@@ -615,6 +728,13 @@ function rivalMove(ended) {
   if (rnd() < hold) log(`Vance's men came for ${DISTRICTS[k].n}. Your crew held it.`, 'm_shield', 'good', pl, owner);
   else { D[k].control = 'vance'; D[k].since = ended; const sv = [P, PID]; P = pl; PID = owner; addRep('street', -3); [P, PID] = sv; log(`Vance's men took ${DISTRICTS[k].n} from you! Street -3.`, 'm_flag', 'bad', pl, owner); }
 }
+// community investment: the legit way to take a Vance district (INVEST: Civic 50 + Business 35, clean money, 2-day cooldown like a contest)
+// city contracts: a trusted legit owner (same INVEST bar) gets council work, more for each district won peacefully
+function contractPay(pl = P, pid = PID) { if (pl.rep.civic < INVEST.civic || pl.rep.business < INVEST.business || !ownsBiz(pid)) return 0; return CONTRACT.base + CONTRACT.per * myDistricts(pid).filter(k => W.districts[k].clean).length; }
+const investCost = k => Math.round(distValue(k) * 0.8);
+function investReq(k) { const d = W.districts[k]; if (d.control !== 'vance') return {ok: false, why: 'Only Vance\'s districts need winning over.'};
+  if (P.rep.civic < INVEST.civic) return {ok: false, why: `Needs Civic respect ${INVEST.civic}: the neighbourhood has to trust you.`};
+  if (P.rep.business < INVEST.business) return {ok: false, why: `Needs Business respect ${INVEST.business}.`}; return {ok: true}; }
 const contestChance = k => partsChance(chanceParts('contest', k));
 const buyPrice = k => Math.round(distValue(k) / 2 * (hasRole('Talker') ? 0.8 : 1));
 const holdChance = (k, pl, pid) => { const sv = [P, PID]; P = pl; PID = pid; try { return partsChance(chanceParts('hold', k), 0.05, 0.95); } finally { [P, PID] = sv; } };
@@ -643,29 +763,31 @@ function punish(mult) {
     else { const fine = 2500 + 1000 * P.crimes.length; if (!pay(fine, 'cash', 'Fines')) charge(fine, 'Fines'); msg = `Fined ${moneyTxt(fine)} for ${what}.`; addRep('civic', -3); }
   } else if (st === 2) { const fine = 15000; if (!pay(fine, 'cash', 'Fines')) charge(fine, 'Fines'); msg = `Fined ${moneyTxt(fine)} for ${what}.`; addRep('civic', -5); }
   else {
-    const hrs = clamp(Math.round(heat / 5), 2, 24);
+    const hrs = Math.min(5, (st >= 5 ? 4 : st === 4 ? 3 : 2) + (P.record.length >= 3 ? 1 : 0));
     P.record.push({day: day(), what, out: `${hrs} h jail`}); P.crimes = []; P.heat = 0; addRep('civic', -10); addRep('street', 3);
     P.jail = {left: hrs, sentence: hrs, served: 0, laundry: 0, stars: st}; P.loc = 'police'; P.pending = null;
-    log(`Arrested for ${what}: ${hrs} hours in Maple City Jail.`, 'lock', 'bad');
+    log(`Arrested for ${what}: ${hrs} hours in Maple City Jail. Call a lawyer, try a bribe, or do the time.`, 'lock', 'bad'); moment(`Arrested for ${what}`, 'lock');
     if (P.dirty > 0) { log(`The police seized ${moneyTxt(P.dirty)} of dirty cash you were carrying.`, 'm_dirty', 'bad'); ledger(-P.dirty, 'Seized by police'); P.dirty = 0; }
     return;
   }
   P.record.push({day: day(), what, out: msg}); P.crimes = []; P.heat = 0;
   popup('Police', `<p>${msg}</p><p>Your Heat is back to zero.</p>`, 'civic'); log(msg, 'civic', 'bad');
 }
-const bail = (pl = P) => 12550 * Math.max(1, pl.jail.stars) + 700 * Math.ceil(pl.jail.left);
+const bail = (pl = P) => Math.round((5000 * Math.max(1, pl.jail.stars) + 500 * Math.ceil(pl.jail.left)) * (hasRole('Fixer', pl) ? 0.5 : 1));
+const bribeCost = (pl = P) => 3000 * Math.max(1, pl.jail.stars);
+const bribeChance = (pl = P) => clamp(0.4 + 0.06 * pl.skills.charisma + (pl.rel.vinnie && pl.rel.vinnie.f >= 20 ? 0.2 : 0), 0.05, 0.9);
 function release() {
-  const J = P.jail; P.jail = null; P.loc = 'police';
-  popup('Released', `<p>Out of Maple City Jail${J.bailed ? ' on bail (' + moneyTxt(J.bailed) + ')' : ''}.</p><p>Sentence ${J.sentence} h · served ${J.served.toFixed(1)} h · ${J.laundry} laundry shift${J.laundry === 1 ? '' : 's'}.</p>`, 'check');
+  const J = P.jail; P.jail = null; P.loc = 'police'; moment(J.bribed ? 'Bribed your way out of jail' : J.bailed ? 'A lawyer got you out' : 'Did your time and walked out', 'check');
+  popup('Released', `<p>Out of Maple City Jail${J.bailed ? ', thanks to your lawyer (' + moneyTxt(J.bailed) + ')' : J.bribed ? ' through a door a guard forgot to lock' : ''}.</p><p>Sentence ${J.sentence} h · served ${J.served.toFixed(1)} h · ${J.laundry} laundry shift${J.laundry === 1 ? '' : 's'}.</p>`, 'check');
   log('Released from jail.', 'check');
 }
 
 // ---- Sal's shift ----
 const TOP = {ketchup: 'Ketchup', mustard: 'Mustard', onions: 'Onions', relish: 'Relish'};
 const canShift = () => { const h = hourF(); return P.job === 'hotdog' && P.lastShiftDay !== day() && h >= 10 && h <= 14; };
-function endShift(served, failed, tips) {
-  let base = 4000; if (failed > served) base = Math.round(base * 0.75);
-  P.lastShiftDay = day(); P.shifts++; P.tips += tips; P.shift = null; P.pending = null;
+function endShift(served, failed, tips, mult = 1) {
+  let base = Math.round(4000 * mult); if (failed > served) base = Math.round(base * 0.75);
+  P.lastShiftDay = day(); P.shifts++; P.tips += tips; P.shift = null; P.pending = null; if (P.shifts === 1) moment('First shift at Sal\'s Hot Dogs', 'hotdog');
   const ok = advance(240, 'work');
   applyFx({energy: -8}); addSkill('cooking', 0.08 * served); addSkill('charisma', 0.03 * served); addSkill('speed', 0.05);
   earn(base, "Wages (Sal's)", 'bank'); earn(tips, 'Tips'); addRel('sal', 2); addRep('business', 2); addRep('civic', 0.5);
@@ -675,7 +797,8 @@ function endShift(served, failed, tips) {
 function addRel(id, v, k = 'f') { const r = P.rel[id]; r[k] = clamp(r[k] + v, 0, 100); }
 const relLabel = f => f < 10 ? 'Stranger' : f < 25 ? 'Acquaintance' : f < 50 ? 'Friend' : f < 75 ? 'Good friend' : 'Best friend';
 const dateChance = id => clamp(0.4 + 0.05 * P.skills.charisma + (P.rel[id].f - 40) / 100 - (P.needs.mood < 30 ? 0.2 : 0), 0.05, 0.95);
-const protChance = how => clamp(how === 'scare' ? 0.35 + 0.08 * P.skills.strength + (hasRole('Muscle') ? 0.2 : crewSize() ? 0.1 : 0) : 0.35 + 0.08 * P.skills.charisma + (hasRole('Talker') ? 0.15 : 0), 0.05, 0.95);
+const protChance = how => clamp(how === 'scare' ? 0.35 + 0.08 * P.skills.strength + (hasRole('Muscle') ? 0.2 : crewSize() ? 0.1 : 0) : 0.35 + 0.08 * P.skills.charisma + (hasRole('Talker') ? 0.15 : 0) + (partnerPerk('chloe') ? 0.15 : 0), 0.05, 0.95);
+const staffWage = (id, pl = P) => Math.round(STAFF[id].wage * (pl.rel[id] && pl.rel[id].f >= 50 ? 0.8 : 1));
 const crewFee = (pl = P) => [10000, 30000, 60000, 100000][Math.min(3, crewSize(pl))];
 // a business owner can borrow more to expand
 const loanMax = () => ownsBiz() ? LOAN.max2 : LOAN.max;
@@ -699,11 +822,14 @@ const EVENTS = {
   vance_sab1: {story: true, fits: () => P.vance.sab === 0 && ownsBiz() && day() >= 5, who: 'vance', t: 'Sabotage!', d: 'Health inspectors swarm your business, tipped off by an anonymous caller. A violet Vance Holdings card is tucked under the till.', opts: [['Pay the "fine" ($150)', 'pay', [['cash', -15000]]], ['Fight it in court', 'court', [['business', 3], ['evid', 1], ['business', 'sales x0.6, 2 days']]], ['Send your crew to find the snitch', 'crew', [['street', 3], ['evid', 1], ['crew', 'needs a crew']]]]},
   vance_sab2: {story: true, fits: () => P.vance.sab === 1 && rankOf() >= 4, who: 'vance', t: 'Vance strikes again', d: 'A fire in the bins behind your fronts. Nobody hurt, but tonight\'s takings went up in smoke, and a district of yours is next unless you answer.', opts: [['Rebuild and add security ($300)', 'pay', [['cash', -30000], ['business', 2], ['unlock', '+1 defence on a district']]], ['Hit back at his van', 'hit', [['street', 4], ['heat', 'if seen']]]]},
   vance_grand: {story: true, fits: () => !P.vance.grand && rankOf() >= 5 && !P.ending, who: 'vance', t: 'Vance\'s final offer', d: '"Everything you own, for twice what it\'s worth. Take it and leave Maple City tonight. Or stay, and lose it all at my tower."', opts: [['Never. See you at the tower.', 'no', [['street', 3], ['business', 2]]], ['Take the money and leave town', 'sell', [['cash', 'X'], ['end', 'Ending: Sold Out']]]]},
+  grudge: {follow: true, t: 'Someone you hurt is back', d: '', opts: [['Make amends ($100)', 'amends', [['cash', -10000], ['civic', 3], ['street', -1]]], ['Stand your ground', 'stand', [['street', 3], ['health', 'risk']]]]},
   // follow-ups (only scheduled, never random)
   walter_thanks: {follow: true, t: 'Walter tracks you down', who: 'walter', d: '"You returned my wallet! Nobody does that any more. Please, take this."', opts: [['Thank you, Walter', 'ok', [['cash', 5000], ['f', 10], ['civic', 1]]]]},
   wallet_recog: {follow: true, t: 'Someone recognises the wallet', who: 'maggie', d: 'Maggie Byrne spots Walter\'s wallet in your hand. "That\'s Walter\'s! I\'d know it anywhere."', opts: [['Give the money back', 'pay', [['cash', '-X'], ['civic', 2]]], ['Deny everything', 'deny', [['civic', -4], ['f', -20]]]]},
   cop_again: {follow: true, t: 'The same officer is back', who: 'reyes', d: '"Same again? $150 this time, or that footage turns up on Reyes\'s desk."', opts: [['Pay $150', 'pay', [['cash', -15000], ['civic', -3]]], ['Refuse', 'refuse', [['heat', 15]]]]},
 };
+function grudge(who, what) { P.grudges = P.grudges || []; if (!P.grudges.some(g => g.who === who && !g.done)) P.grudges.push({who, what, day: day(), done: false}); }
+const grudgeDue = () => (P.grudges || []).find(g => !g.done && day() - g.day >= 3);
 function maybeEvent() {
   if (W.noEvents || P.pending || P.jail || P.intro || P.eventDay === day()) return;
   if (!P.shifts && !P.runs) return; // no surprises until the first job is done
@@ -712,12 +838,17 @@ function maybeEvent() {
   if (fi >= 0) { const f = P.follow.splice(fi, 1)[0]; P.eventDay = day(); P.pending = {kind: 'event', id: f.id, who: EVENTS[f.id].who, cash: f.cash || 0}; return; }
   const sid = Object.keys(EVENTS).find(k => EVENTS[k].story && EVENTS[k].fits());
   if (sid) { P.eventDay = day(); P.pending = {kind: 'event', id: sid, who: EVENTS[sid].who, cash: sid === 'vance_grand' ? grandOffer() : 0}; return; }
+  const gd = grudgeDue(); if (gd && rnd() < 0.5) { P.eventDay = day(); P.pending = {kind: 'event', id: 'grudge', who: gd.who, cash: 0}; return; }
   if (rnd() > 0.25) return;
-  const fits = Object.keys(EVENTS).filter(k => !EVENTS[k].follow && !EVENTS[k].story && EVENTS[k].fits()); if (!fits.length) return;
-  const id = fits[Math.floor(rnd() * fits.length)]; P.eventDay = day();
-  let who = EVENTS[id].who || null; if (id === 'friendloan') { const fr = PEOPLE.filter(p => P.rel[p.id].f >= 20 && !p.boss && !p.rival && p.id !== 'victor'); who = fr[Math.floor(rnd() * fr.length)].id; }
+  // no repeats: the wallet turns up once a game, other surprises wait at least 3 days before they can happen again
+  const EL = P.evLast = P.evLast || {}, fresh = k => day() - (EL[k] === undefined ? -99 : EL[k]) >= (k === 'wallet' ? 4 : 3);
+  const fits = Object.keys(EVENTS).filter(k => !EVENTS[k].follow && !EVENTS[k].story && EVENTS[k].fits() && fresh(k)); if (!fits.length) return;
+  const id = fits[Math.floor(rnd() * fits.length)]; P.eventDay = day(); EL[id] = day();
+  let who = EVENTS[id].who || null, item = null;
+  if (id === 'wallet') { P.walletN = (P.walletN || 0) + 1; if (P.walletN > 1) { const own = PEOPLE.filter(p => !p.boss && !p.rival && !['victor', 'carlo', 'vinnie', 'walter', 'reyes'].includes(p.id) && p.id !== 'sal'); const pool = own.length ? own : PEOPLE.filter(p => !p.boss && !p.rival); who = pool[Math.floor(rnd() * pool.length)].id; item = ['purse', 'wallet', 'phone'][P.walletN % 3]; } }
+  if (id === 'friendloan') { const fr = PEOPLE.filter(p => P.rel[p.id].f >= 20 && !p.boss && !p.rival && p.id !== 'victor'); who = fr[Math.floor(rnd() * fr.length)].id; }
   const cash = id === 'wallet' ? 4000 + Math.round(rnd() * 200) * 100 : id === 'vance_offer' ? Math.round(bizValue('kiosk') * 1.5) : 0;
-  P.pending = {kind: 'event', id, who, cash};
+  P.pending = {kind: 'event', id, who, cash, item};
 }
 
 // next interesting moment for "Skip": a shift, Carlo, the place opening, or the morning
@@ -754,7 +885,7 @@ function endGame(id, cash = 0) {
     for (const k in W.districts) if (W.districts[k].control === 'vance' || (id === 'captain' && W.districts[k].control === 'carlo')) { W.districts[k].control = PID; W.districts[k].since = day(); }
     W.rival.beaten = PID;
   }
-  P.ending = id; P.endDay = day(); P.endSeen = false;
+  P.ending = id; P.endDay = day(); P.endSeen = false; moment(`Ending: ${E.n}`, 'm_crown');
   P.log.unshift({d: day(), c: clockTxt(), msg: `Ending: ${E.n}. ${E.how}.`, ic: 'm_crown', tone: E.tone === 'bad' ? 'bad' : 'good'});
   EV.push({pid: PID, kind: 'ending', id});
 }
@@ -762,7 +893,7 @@ function endGame(id, cash = 0) {
 // ---- the action table ----
 const ACTIONS = {
   start({path, look}) {
-    if (!P.intro) return; P.intro = false; P.choices.push(path === 'street' ? 'Started with Carlo' : 'Started at Sal\'s'); P.path = path === 'street' ? 'street' : 'legit'; P.look = look === 'f' ? 'f' : 'm';
+    if (!P.intro) return; P.intro = false; P.choices.push(path === 'street' ? 'Started with Carlo' : 'Started at Sal\'s'); moment('Stepped off the bus in Maple City with $450', 'here'); P.path = path === 'street' ? 'street' : 'legit'; P.look = look === 'f' ? 'f' : 'm';
     log(P.path === 'street' ? 'You chose the street: Carlo "The Captain" Marino has work for you.' : "You chose the honest way: Sal is hiring.", P.path === 'street' ? 'street' : 'business', 'good');
   },
   travel({to, how}) {
@@ -835,7 +966,7 @@ const ACTIONS = {
     addSkill('stealth', 0.1); P.karma -= 2; advance(5);
     if (rnd() < seen) { P.banned = 1; addRel('raj', -10); log('Raj saw you. He took it back and banned you until tomorrow.', 'heat', 'bad'); return; }
     P.inv.chocolate = (P.inv.chocolate || 0) + 1; addRep('street', 1);
-    if (rnd() < cam) { P.heat = Math.min(100, P.heat + 10); P.crimes.push({what: 'shoplifting', day: day()}); addRep('civic', -2); log('Pocketed a chocolate bar... and the CCTV caught your face: Heat +10.', 'heat', 'bad'); }
+    if (rnd() < cam) { addHeat(10); P.crimes.push({what: 'shoplifting', day: day()}); addRep('civic', -2); log('Pocketed a chocolate bar... and the CCTV caught your face: Heat +10.', 'heat', 'bad'); }
     else log('Pocketed a chocolate bar. Nobody saw.', 'street', 'good');
   },
   talk({npc: id, phone}) {
@@ -843,10 +974,11 @@ const ACTIONS = {
     if (phone ? r.f < 25 : whereIs(p) !== P.loc) return;
     if (W.t - r.lastTalk < 60) return log(`${first(p)} needs a bit of space. Try again later.`, 'people');
     r.lastTalk = W.t; advance(phone ? 10 : 15);
-    const gain = Math.round((phone ? 2 : 4 + 0.5 * P.skills.charisma) * (P.needs.mood < 25 ? 0.5 : 1));
+    // a respected local (Civic) makes friends faster
+    const gain = Math.round((phone ? 2 : 4 + 0.5 * P.skills.charisma) * (P.needs.mood < 25 ? 0.5 : 1) * (1 + Math.max(0, P.rep.civic) / 100));
     addRel(id, gain); applyFx({mood: phone ? 1 : 2}); addSkill('charisma', 0.03);
     if (id === 'reyes') addRep('civic', 1);
-    if (id === 'carlo') { addRep('street', 0.5); P.metCarlo = true; }
+    if (id === 'carlo') { addRep('street', 0.5); if (!P.metCarlo) moment('Met Carlo "The Captain" Marino', 'street'); P.metCarlo = true; }
     const L = ['"Good to see you again."', '"How\'s the new flat treating you?"', '"You should come to the Vale Arms sometime."', '"Busy day. Glad you stopped by."'];
     const VL = ['"Enjoy your little kiosk while it lasts."', '"Everyone sells to me in the end. Name your price."', '"Carlo is yesterday. I am tomorrow."'];
     const line = p.rival ? (myDistricts().length ? '"You took what is mine. I will take it back."' : VL[Math.floor(rnd() * VL.length)]) : p.boss ? (P.rep.street >= 5 ? '"I hear good things. Benny at the salvage yard always needs a runner."' : p.line) : r.f >= 15 ? `${p.line}<br><br>${L[Math.floor(rnd() * L.length)]}` : p.line;
@@ -866,43 +998,45 @@ const ACTIONS = {
     if (r.partner || rnd() < dateChance(id)) {
       pay(2500, 'cash', 'Dates'); advance(120); addRel(id, 15, 'r'); addRel(id, 5); applyFx({mood: 10});
       let m = `Date with ${first(p)} went well! Romance ${Math.round(r.r)}.`;
-      if (r.r >= 50 && !r.partner) { r.partner = true; m += ' You\'re now partners!'; }
+      if (r.r >= 50 && !r.partner && !partnerOf()) { r.partner = true; m += ` You're now partners! Perk: ${PARTNER_PERKS[id] || PARTNER_PERKS.any}.`; moment(`Got together with ${first(p)}`, 'health'); }
       log(m, 'health', 'good');
     } else { advance(10); addRel(id, -3); applyFx({mood: -3}); log(`${first(p)} said "Let's just be friends for now."`, 'people', 'bad'); }
   },
-  hire() { if (P.loc !== 'sal' || P.job || whereIs(PEOPLE[0]) !== 'sal') return; P.job = 'hotdog'; addRel('sal', 3); log("Sal hired you: $10.00/hr, 4-hour shifts from 10:00, plus tips.", 'business', 'good'); },
+  hire() { if (P.loc !== 'sal' || P.job || whereIs(PEOPLE[0]) !== 'sal') return; P.job = 'hotdog'; addRel('sal', 3); moment('Got a job at Sal\'s Hot Dogs', 'business'); log("Sal hired you: $10.00/hr, 4-hour shifts from 10:00, plus tips.", 'business', 'good'); },
   shiftStart({quick}) {
     if (P.loc !== 'sal' || !canShift()) return log('Shifts start between 10:00 and 14:00, once a day.', 'business');
-    if (quick) return endShift(5, 1, 5 * (150 + 15 * P.skills.cooking));
-    const tops = Object.keys(TOP);
-    P.shift = {i: 0, served: 0, failed: 0, tips: 0, board: [], orders: Array.from({length: 6}, () => { const o = tops.filter(() => rnd() < 0.45).slice(0, 3); if (!o.length) o.push(tops[Math.floor(rnd() * 4)]); return o; })};
+    if (quick) { if (P.shifts < 3) return log('Auto shifts unlock after 3 hands-on shifts.', 'business'); return endShift(3, 0, 3 * (90 + 10 * P.skills.cooking), 0.85); }
+    const tops = Object.keys(TOP), n = P.shifts === 0 ? 2 : 3;
+    P.shift = {orders: Array.from({length: n}, (_, i) => { const dogs = i === 0 || rnd() < 0.55 ? 1 : 2, t = P.shifts === 0 && i === 0 ? ['ketchup'] : tops.filter(() => rnd() < 0.35).slice(0, 2), drink = P.shifts === 0 && i === 0 ? false : rnd() < 0.5;
+      return {dogs, tops: t, drink, who: HD_CUSTOMERS[Math.floor(rnd() * HD_CUSTOMERS.length)]}; }), started: W.t};
     P.pending = {kind: 'shift'};
   },
-  shiftStep({s}) {
-    const m = P.shift, b = m && m.board; if (!m) return;
-    if (s === 'bun' && !b.length) b.push('bun'); else if (s === 'sausage' && b.length === 1) b.push('sausage'); else if (TOP[s] && b.length >= 2 && !b.includes(s)) b.push(s);
-    else EV.push({pid: PID, msg: s === 'bun' ? 'Bun first, only one.' : s === 'sausage' ? 'Bun first, then the sausage.' : 'Bun and sausage first.', ic: 'hunger', tone: 'bad'});
-  },
-  shiftBin() { if (P.shift) P.shift.board = []; },
-  shiftServe() {
-    const m = P.shift; if (!m) return; const o = m.orders[m.i], b = m.board, t = b.slice(2);
-    if (b[0] === 'bun' && b[1] === 'sausage' && t.length === o.length && o.every(x => t.includes(x))) { m.served++; const tip = 100 + Math.floor(rnd() * 200) + 20 * Math.floor(P.skills.cooking); m.tips += tip; EV.push({pid: PID, msg: `Perfect! Tip ${moneyTxt(tip)}`, ic: 'cash', tone: 'good'}); }
-    else { m.failed++; EV.push({pid: PID, msg: 'Wrong order. Ruined.', ic: 'hunger', tone: 'bad'}); }
-    m.board = []; m.i++;
-    if (m.i >= m.orders.length) endShift(m.served, m.failed, m.tips);
+  // results: one per customer {ok, perfect, secs}; tips scale with speed (full under 8 s, none after 25 s) and a perfect cook
+  shiftDone({results = []}) {
+    const m = P.shift; if (!m) return; let served = 0, failed = 0, tips = 0;
+    m.orders.forEach((o, i) => { const r = results[i] || {}; if (!r.ok) { failed++; return; } served++;
+      const speed = clamp(1 - ((+r.secs || 30) - 8) / 17, 0, 1); tips += Math.round(((120 + 260 * speed) * (r.perfect ? 1.2 : 1) + (o.drink ? 50 : 0)) * o.dogs * 0.8) + 20 * Math.floor(P.skills.cooking); });
+    endShift(served, failed, tips);
   },
   police({choice}) {
     if (!P.pending || P.pending.kind !== 'police') return; P.pending = null;
     if (choice === 'cooperate') { addRep('civic', 1); return punish(1); }
-    if (rnd() < runChance()) { P.heat = Math.min(100, P.heat + 15); addSkill('speed', 0.1); addRep('street', 2); addRep('civic', -3); log('You got away, but the officer saw you run: Heat +15.', 'heat', 'bad'); }
-    else { P.heat = Math.min(100, P.heat + 20); log('Caught! Running made it worse: Heat +20.', 'heat', 'bad'); punish(1); }
+    if (rnd() < runChance()) { addHeat(15); addSkill('speed', 0.1); addRep('street', 2); addRep('civic', -3); log('You got away, but the officer saw you run: Heat +15.', 'heat', 'bad'); }
+    else { addHeat(20); log('Caught! Running made it worse: Heat +20.', 'heat', 'bad'); punish(1); }
   },
   jail({a}) {
     const J = P.jail; if (!J) return;
     if (a === 'wait') { advance(60, 'jail'); J.left -= 1.25; J.served += 1; }
-    if (a === 'laundry') { advance(60, 'jail'); J.left -= 3.25; J.served += 1; J.laundry++; addSkill('strength', 0.03); }
+    if (a === 'laundry') { advance(60, 'jail'); J.left -= 2.5; J.served += 1; J.laundry++; addSkill('strength', 0.03); }
     if (a === 'bunk') { const h = Math.max(0, J.left) / 1.25; advance(Math.round(h * 60), 'sleep', 0.5); J.served += h; J.left = 0; }
-    if (a === 'bail') { const b = bail(); if (!pay(b, 'bank', 'Bail')) return log(`Bail is ${moneyTxt(b)}: not enough money.`, 'lock', 'bad'); J.bailed = b; J.left = 0; }
+    if (a === 'bail' || a === 'lawyer') { const b = bail(); if (!pay(b, 'bank', 'Lawyer')) return log(`A lawyer costs ${moneyTxt(b)} in clean money.`, 'lock', 'bad'); advance(30, 'jail'); J.bailed = b; J.left = 0; }
+    if (a === 'bribe') { const b = bribeCost(); if (!pay(b, 'cash', 'Bribes')) return log(`The guard wants ${moneyTxt(b)}.`, 'lock', 'bad'); advance(15, 'jail');
+      if (rnd() < bribeChance()) { addRep('civic', -3); J.bribed = true; J.left = 0; log('The guard pockets the cash and leaves a door unlocked.', 'lock', 'good'); }
+      else { J.left += 1; J.sentence += 1; log('The guard took the money and reported you: +1 hour.', 'lock', 'bad'); } }
+    if (a === 'yard') { advance(60, 'jail'); J.left -= 1.5; J.served += 1; J.yard = (J.yard || 0) + 1; addRel('vinnie', 12); addSkill('strength', 0.02);
+      const v = P.rel.vinnie.f; log(v >= 20 ? 'Vinnie "The Fixer" Russo shares his cigarettes. "You need a guy who knows guys? Look me up at the Vale Arms."' : 'An old-timer called Vinnie sizes you up in the yard. "First time? Keep your head down."', 'people', 'good'); }
+    if (a === 'recruit') { if (P.rel.vinnie.f < 20 || hasRole('Fixer')) return; let c = crewOf(); if (!c) { const cid = 'crew_' + PID; W.crews[cid] = c = {id: cid, name: 'Your crew', boss: PID, members: [], respect: 0, bank: 0}; P.crew = cid; }
+      c.members.push({npc: 'vinnie', role: 'Fixer', since: day(), owner: null}); addRep('street', 3); moment('Vinnie "The Fixer" joined the crew (met inside)', 'm_crew'); log('Vinnie joins your crew as your Fixer: Heat -30% when seen, lawyers half price.', 'm_crew', 'good'); }
     if (J.left <= 0) release();
   },
   // ---- business: Street Eats kiosk ----
@@ -910,7 +1044,7 @@ const ACTIONS = {
     const b = W.biz[biz], D = BIZ[biz]; if (!D || P.loc !== D.place || b.owner) return;
     const T = D.tiers[0];
     if (!pay(T.cost, 'bank', 'Bought a business')) return log(`${T.n} costs ${moneyTxt(T.cost)} in clean money. Not enough yet.`, 'cash', 'bad');
-    b.owner = PID; b.tier = 1; if (biz === 'kiosk') b.stock = 40; addRep('business', 8);
+    b.owner = PID; b.tier = 1; if (biz === 'kiosk') b.stock = 40; addRep('business', 8); moment(`Bought ${T.n}`, 'trophy');
     log(`You own ${T.n}!${biz === 'kiosk' ? ' It came with 40 wraps. Hire someone, set a price, or run it yourself.' : ' It pays every night and launders dirty cash.'}`, 'trophy', 'good');
   },
   bizUpgrade({biz = 'kiosk'}) {
@@ -929,8 +1063,8 @@ const ACTIONS = {
   bizHire({biz = 'kiosk', npc: id}) {
     const b = W.biz[biz]; if (b.owner !== PID || !STAFF[id]) return;
     if (P.rel[id].f < 10) return log(`${first(npc(id))} doesn't know you well enough yet (friendship 10+).`, 'people', 'bad');
-    b.staff = id; addRel(id, 5); if (id === 'tom') P.karma += 3;
-    log(`Hired ${npc(id).n} at ${moneyTxt(STAFF[id].wage)}/day.`, 'people', 'good');
+    b.staff = id; addRel(id, 5); if (id === 'tom') P.karma += 3; moment(`Hired ${first(npc(id))} to run the kiosk`, 'people');
+    log(`Hired ${npc(id).n} at ${moneyTxt(staffWage(id))}/day${P.rel[id].f >= 50 ? ' (a friend: 20% off)' : ''}.`, 'people', 'good');
   },
   bizFire({biz = 'kiosk'}) { const b = W.biz[biz]; if (b.owner !== PID || !b.staff) return; log(`Let ${first(npc(b.staff))} go.`, 'people'); addRel(b.staff, -5); b.staff = null; },
   bizWork({biz = 'kiosk'}) {
@@ -953,10 +1087,10 @@ const ACTIONS = {
     P.carloDay = day();
     const main = route === 'main', ri = runInfo(route), mins = ri.mins, chance = ri.seen;
     if (!advance(mins, 'walk')) return;
-    P.loc = 'anchor'; addSkill('stealth', 0.15); P.karma -= 3; P.runs++;
+    P.loc = 'anchor'; addSkill('stealth', 0.15); P.karma -= 3; P.runs++; if (P.runs === 1) moment('First package run for Carlo', 'package');
     let seen = '';
     if (rnd() < chance) {
-      const h = main ? 10 : 25; P.heat = Math.min(100, P.heat + h); P.crimes.push({what: 'running a package for the Family', day: day()}); addRep('civic', -3);
+      const h = main ? 10 : 25; addHeat(h); P.crimes.push({what: 'running a package for the Family', day: day()}); addRep('civic', -3);
       seen = main ? ` A traffic camera caught your face: Heat +${h}.` : ` A patrol saw the hand-over: Heat +${h}.`;
     }
     const payout = 15000 + Math.round(rnd() * 5000);
@@ -970,12 +1104,12 @@ const ACTIONS = {
     P.protDay = day(); P.protections++; advance(60, 'walk'); P.loc = 'anchor';
     if (rnd() < protChance(how)) {
       const amt = how === 'scare' ? 25000 : 20000; earn(amt, "Carlo's jobs", 'dirty'); addRep('street', how === 'scare' ? 4 : 3); addRep('civic', how === 'scare' ? -4 : -1); addRel('carlo', 5);
-      if (how === 'scare') P.stats.hurt++;
+      if (how === 'scare') { P.stats.hurt++; grudge('lucky', 'scared him into paying'); }
       log(`Lucky's Pawn paid up (${how === 'scare' ? 'scared' : 'charmed'}). +${moneyTxt(amt)} dirty cash.`, 'cash', 'good');
     } else {
       let m = how === 'scare' ? 'Lucky laughed you out of the shop.' : 'Lucky wasn\'t buying the charm.';
       addRep('street', -1);
-      if (how === 'scare' && rnd() < 0.3 * seenMult()) { P.heat = Math.min(100, P.heat + 25); P.crimes.push({what: 'demanding money with menaces', day: day()}); addRep('civic', -4); m += ' A passing patrol saw you shouting: Heat +25.'; }
+      if (how === 'scare' && rnd() < 0.3 * seenMult()) { addHeat(25); P.crimes.push({what: 'demanding money with menaces', day: day()}); addRep('civic', -4); m += ' A passing patrol saw you shouting: Heat +25.'; }
       log(m, 'street', 'bad');
     }
   },
@@ -994,7 +1128,7 @@ const ACTIONS = {
     let c = crewOf(); if (c && c.members.some(m => m.npc === id)) return;
     const fee = crewFee(); if (!pay(fee, 'cash', 'Crew signing')) return log(`Signing someone up costs ${moneyTxt(fee)}.`, 'cash', 'bad');
     if (!c) { const cid = 'crew_' + PID; W.crews[cid] = c = {id: cid, name: `${P.name === 'You' ? 'Your' : P.name + "'s"} crew`, boss: PID, members: [], respect: 0, bank: 0}; P.crew = cid; }
-    c.members.push({npc: id, role: CREW[id].role, since: day(), owner: null}); addRep('street', 3);
+    c.members.push({npc: id, role: CREW[id].role, since: day(), owner: null}); addRep('street', 3); moment(`${first(p)} joined the crew as ${CREW[id].role}`, 'm_crew');
     log(`${p.n} joined your crew as your ${CREW[id].role}!`, 'crew', 'good');
   },
   crewJob() {
@@ -1008,14 +1142,18 @@ const ACTIONS = {
   eventChoice({c}) {
     const e = P.pending; if (!e || e.kind !== 'event') return; P.pending = null;
     const later = (id, n = 2, cash = 0) => P.follow.push({id, day: day() + n, cash});
-    if (e.id === 'wallet') { if (c === 'return') { P.karma += 5; addRep('civic', 3); addRel('walter', 10); log('You handed the wallet to Walter. Civic +3.', 'check', 'good'); later('walter_thanks'); P.stats.helped++; } else { earn(e.cash, 'Found money', 'dirty'); P.karma -= 5; addRep('street', 1); log(`You kept ${moneyTxt(e.cash)}. Karma takes a hit.`, 'm_dirty'); P.stats.hurt++; if (rnd() < 0.5) later('wallet_recog', 2, e.cash); } }
+    if (e.id === 'wallet') { if (c === 'return') { const ow = e.who || 'walter'; P.karma += 5; addRep('civic', 3); addRel(ow, 10); log(`You handed it back to ${first(npc(ow))}. Civic +3.`, 'check', 'good'); if (ow === 'walter') later('walter_thanks'); P.stats.helped++; } else { earn(e.cash, 'Found money', 'dirty'); P.karma -= 5; addRep('street', 1); log(`You kept ${moneyTxt(e.cash)}. Karma takes a hit.`, 'm_dirty'); P.stats.hurt++; if ((e.who || 'walter') === 'walter' && rnd() < 0.5) later('wallet_recog', 2, e.cash); } }
+    if (e.id === 'grudge') { const g = (P.grudges || []).find(x => x.who === e.who && !x.done); if (g) g.done = true; const nm = GRUDGE_NAMES[e.who] || 'He';
+      if (c === 'amends') { if (!pay(10000, 'cash', 'Making amends')) charge(10000, 'Making amends'); addRep('civic', 3); addRep('street', -1); P.stats.helped++; moment(`Made peace with ${nm}`, 'people'); log(`You made peace with ${nm}. Civic +3.`, 'people', 'good'); }
+      else { const won = rnd() < partsChance(chanceParts('grudge')); showdown(`${nm} wants payback`, 'grudge', null, [e.who], won);
+        if (won) { addRep('street', 3); moment(`Stood up to ${nm}`, 'm_contest'); log(`${nm} backed off for good. Street +3.`, 'm_contest', 'good'); } else { addNeed('health', -20); const l = Math.min(P.cash, 5000); P.cash -= l; if (l) ledger(-l, 'Robbed'); moment(`${nm} got his payback`, 'health'); log(`${nm} got his payback: Health -20${l ? ', -' + moneyTxt(l) : ''}.`, 'health', 'bad'); } } }
     if (e.id === 'walter_thanks') { earn(5000, 'Rewards'); addRel('walter', 10); addRep('civic', 1); log('Walter gave you $50.00 and a hug.', 'cash', 'good'); }
     if (e.id === 'wallet_recog') { if (c === 'pay') { if (!pay(e.cash, 'cash', 'Paid back')) { addRep('civic', -4); addRel('walter', -20); return log('You couldn\'t pay it back. Word gets around.', 'civic', 'bad'); } addRep('civic', 2); log('You gave Walter his money back. Awkward, but fair.', 'civic', 'good'); } else { addRep('civic', -4); addRel('walter', -20); log('You denied it. Walter believes Maggie.', 'civic', 'bad'); } }
     if (e.id === 'cop') { if (c === 'pay') { if (!pay(10000, 'cash', 'Bribes')) return log('You don\'t have $100.', 'cash', 'bad'); P.heat = 0; P.crimes = []; addRep('civic', -5); addRep('street', 2); log('The footage went missing. Heat 0, Civic -5.', 'heat'); later('cop_again', 3); } else if (c === 'report') { addRep('civic', 6); addRep('street', -3); P.vance.evidence = Math.min(FINALE.evidence, P.vance.evidence + 1); P.stats.helped++; log('Reyes thanked you, and mentioned the officer was on Vance\'s payroll. Civic +6, Street -3, evidence +1.', 'civic', 'good'); } else log('You walked away.', 'civic'); }
-    if (e.id === 'cop_again') { if (c === 'pay' && pay(15000, 'cash', 'Bribes')) { addRep('civic', -3); log('Paid again. He smiles. He\'ll be back.', 'heat'); } else { P.heat = Math.min(100, P.heat + 15); P.crimes.push({what: 'bribing an officer', day: day()}); log('He reported you: Heat +15.', 'heat', 'bad'); } }
-    if (e.id === 'rival') { const b = W.biz.kiosk; if (c === 'war') { b.price = 300; addRep('business', 2); log('Price war! Wraps at $3.00. Vance\'s van left town.', 'business', 'good'); } else if (c === 'carlo') { addRep('street', 3); addRep('civic', -3); log('Carlo\'s people had a word. The van packed up overnight.', 'street', 'good'); if (rnd() < 0.2) { P.heat += 10; log('A patrol saw the "word": Heat +10.', 'heat', 'bad'); } } else { b.rivalDays = 3; log('Your sales will dip for 3 days.', 'business', 'bad'); } }
+    if (e.id === 'cop_again') { if (c === 'pay' && pay(15000, 'cash', 'Bribes')) { addRep('civic', -3); log('Paid again. He smiles. He\'ll be back.', 'heat'); } else { addHeat(15); P.crimes.push({what: 'bribing an officer', day: day()}); log('He reported you: Heat +15.', 'heat', 'bad'); } }
+    if (e.id === 'rival') { const b = W.biz.kiosk; if (c === 'war') { b.price = 300; addRep('business', 2); log('Price war! Wraps at $3.00. Vance\'s van left town.', 'business', 'good'); } else if (c === 'carlo') { addRep('street', 3); addRep('civic', -3); log('Carlo\'s people had a word. The van packed up overnight.', 'street', 'good'); if (rnd() < 0.2) { addHeat(10); log('A patrol saw the "word": Heat +10.', 'heat', 'bad'); } } else { b.rivalDays = 3; log('Your sales will dip for 3 days.', 'business', 'bad'); } }
     if (e.id === 'vance_offer') { P.choices.push(c === 'sell' ? 'Sold the kiosk to Vance' : 'Turned down Vance\'s kiosk offer'); if (c === 'sell') { const b = W.biz.kiosk; earn(e.cash, 'Sold to Vance', 'bank'); Object.assign(b, {owner: null, tier: 0, staff: null, stock: 0, lastPL: null}); addRep('business', -5); log(`You sold Street Eats to Vance for ${moneyTxt(e.cash)}.`, 'cash'); } else { addRep('street', 2); addRep('business', 1); log('"You\'ll regret that," Vance smiles.', 'm_crown'); } }
-    const S = P.story, V = P.vance, ch = t => P.choices.push(t);
+    const S = P.story, V = P.vance, ch = t => { P.choices.push(t); moment(t, EVENTS[e.id] && EVENTS[e.id].who === 'vance' ? 'm_crown' : 'street'); };
     if (e.id === 'carlo1') { S.c = 1; if (c === 'yes') { S.favour = true; addRep('street', 3); addRel('carlo', 10); ch('Did Carlo\'s favour'); log('Carlo: "I won\'t forget it." Collections are open to you now.', 'street', 'good'); } else { addRel('carlo', -5); ch('Refused Carlo\'s favour'); log('Carlo shrugged. "Your loss."', 'street'); } }
     if (e.id === 'carlo2') { S.c = 2; if (c === 'yes') { addRep('street', 4); addRel('carlo', 10); ch('Joined the Family for dinner'); } else { addRel('carlo', -5); ch('Left the Family dinner early'); } log('Benny has dock heists for you now (Marino Marine Salvage, needs a crew).', 'package', 'good'); }
     if (e.id === 'carlo3') { S.c = 3; if (c === 'loyal') { S.loyal = true; ch('Stayed loyal to Carlo'); log('You kiss the ring. A fifth of your district cash goes to Carlo; his men back you against Vance.', 'street', 'good'); } else { S.broke = true; addRep('street', 5); addRel('carlo', -40); ch('Broke away from Carlo'); log('You walked out on the Captain. His turf is open to you now, and he will want his due.', 'street', 'bad'); } }
@@ -1023,14 +1161,14 @@ const ACTIONS = {
     if (e.id === 'carlo4b') { S.c = 4;
       if (c === 'pay') { if (!pay(30000, 'cash', 'Paid off Carlo')) { addNeed('health', -30); log('You couldn\'t pay. They roughed you up: Health -30.', 'health', 'bad'); } else log('You paid. Benny nods: "For now."', 'street'); ch('Paid off Carlo\'s heavies'); }
       else { const won = crewSize() > 0 && rnd() < partsChance(chanceParts('carlohit')); showdown('Carlo\'s heavies', 'carlohit', null, ['benny', 'enforcer'], won); ch('Fought Carlo\'s heavies');
-        if (won) { addRep('street', 5); P.stats.hurt++; log('Your crew sent Carlo\'s heavies running. Street +5.', 'm_contest', 'good'); } else { addNeed('health', -30); const lost = Math.round(P.dirty / 2); P.dirty -= lost; if (lost) ledger(-lost, 'Taken by Carlo\'s men'); log(`They beat you and took ${moneyTxt(lost)} of dirty cash. Health -30.`, 'health', 'bad'); } } }
+        if (won) { addRep('street', 5); P.stats.hurt++; grudge('benny', 'sent him running'); log('Your crew sent Carlo\'s heavies running. Street +5.', 'm_contest', 'good'); } else { addNeed('health', -30); const lost = Math.round(P.dirty / 2); P.dirty -= lost; if (lost) ledger(-lost, 'Taken by Carlo\'s men'); log(`They beat you and took ${moneyTxt(lost)} of dirty cash. Health -30.`, 'health', 'bad'); } } }
     if (e.id === 'vance_sab1') { V.sab = 1;
       if (c === 'pay') { if (!pay(15000, 'cash', 'Fines')) charge(15000, 'Fines'); ch('Paid Vance\'s inspectors'); log('Paid the "fine". The inspectors left smiling.', 'cash'); }
       else if (c === 'court') { addRep('business', 3); V.evidence = Math.min(FINALE.evidence, V.evidence + 1); W.biz.kiosk.rivalDays = Math.max(W.biz.kiosk.rivalDays, 2); ch('Took Vance\'s inspectors to court'); log('You won in court, and the case papers point to Vance Holdings. Evidence +1. Sales dip for 2 days.', 'business', 'good'); }
       else { if (!crewSize()) { if (!pay(15000, 'cash', 'Fines')) charge(15000, 'Fines'); return log('No crew to send. You paid the fine instead.', 'cash', 'bad'); } addRep('street', 3); V.evidence = Math.min(FINALE.evidence, V.evidence + 1); ch('Hunted down Vance\'s snitch'); log('Your crew found the snitch: a Vance Holdings intern, with receipts. Evidence +1.', 'm_crew', 'good'); } }
     if (e.id === 'vance_sab2') { V.sab = 2;
       if (c === 'pay') { if (!pay(30000, 'cash', 'Repairs')) charge(30000, 'Repairs'); addRep('business', 2); const k = myDistricts()[0]; if (k) W.districts[k].def = Math.min(3, (W.districts[k].def || 0) + 1); ch('Rebuilt after Vance\'s fire'); log(`Rebuilt with better security${k ? ': +1 defence in ' + DISTRICTS[k].n : ''}.`, 'm_shield', 'good'); }
-      else { addRep('street', 4); ch('Hit back at Vance\'s van'); P.stats.hurt++; if (rnd() < 0.3 * seenMult()) { P.heat = Math.min(100, P.heat + 15); P.crimes.push({what: 'criminal damage', day: day()}); log('You torched his van, and a camera saw it: Heat +15.', 'heat', 'bad'); } else log('Vance\'s van burned. Nobody saw a thing.', 'street', 'good'); } }
+      else { addRep('street', 4); ch('Hit back at Vance\'s van'); P.stats.hurt++; if (rnd() < 0.3 * seenMult()) { addHeat(15); P.crimes.push({what: 'criminal damage', day: day()}); log('You torched his van, and a camera saw it: Heat +15.', 'heat', 'bad'); } else log('Vance\'s van burned. Nobody saw a thing.', 'street', 'good'); } }
     if (e.id === 'vance_grand') { V.grand = true; if (c === 'sell') { ch('Sold everything to Vance'); return endGame('sellout', e.cash); } ch('Turned down Vance\'s final offer'); addRep('street', 3); addRep('business', 2); log('"Then I will see you at the tower." The showdown is on: Vance Tower, Old Town.', 'm_crown', 'good'); }
     if (e.id === 'friendloan') { const p = npc(e.who); if (c === 'lend') { if (!pay(5000, 'cash', 'Lent to friends')) return log('You don\'t have $50.', 'cash', 'bad'); addRel(e.who, 15); P.karma += 3; P.stats.helped++; log(`${first(p)} hugged you. Friendship +15.`, 'people', 'good'); if (rnd() < 0.6) { earn(6000, 'Repaid by friends'); log(`${first(p)} paid you back $60.00 straight away.`, 'cash', 'good'); } } else { addRel(e.who, -5); log(`${first(p)} understood. Mostly.`, 'people'); } }
   },
@@ -1041,18 +1179,25 @@ const ACTIONS = {
     if (how === 'buy') {
       if (d.control) return log('Vance won\'t sell. You\'ll have to take it.', 'm_crown', 'bad');
       if (!pay(buyPrice(k), 'bank', 'District buy-outs')) return log(`Buying out ${D.n} costs ${moneyTxt(buyPrice(k))} in clean money.`, 'cash', 'bad');
-      P.contestDay = day(); advance(60); d.control = PID; d.since = day(); addRep('business', 4);
-      P.choices.push(`Bought out ${D.n}`);
+      P.contestDay = day(); advance(60); d.control = PID; d.clean = true; d.since = day(); addRep('business', 4);
+      P.choices.push(`Bought out ${D.n}`); moment(`Bought out ${D.n}`, 'm_flag');
       return log(`You bought out the local businesses: ${D.n} is yours! +${moneyTxt(D.inc)} a night.`, 'm_flag', 'good');
+    }
+    if (how === 'invest') {
+      const q = investReq(k); if (!q.ok) return log(q.why, 'civic', 'bad');
+      if (!pay(investCost(k), 'bank', 'Community investment')) return log(`Winning ${D.n} over costs ${moneyTxt(investCost(k))} in clean money.`, 'cash', 'bad');
+      P.contestDay = day(); advance(120); d.control = PID; d.clean = true; d.since = day(); d.def = Math.max(d.def || 0, 1); addRep('civic', 4); addRep('business', 3); P.stats.helped += 2;
+      P.choices.push(`Won ${D.n} over peacefully`); moment(`Won ${D.n} over with community investment`, 'm_flag');
+      return log(`New shops, a youth club, fixed street lights: ${D.n} chose you over Vance. +${moneyTxt(D.inc)} a night.`, 'm_flag', 'good');
     }
     if (!crewSize()) return log('You need at least one crew member to muscle in.', 'm_crew', 'bad');
     P.contestDay = day(); if (!advance(120, 'work')) return;
     d.hot = day() + 1; const wasCarlo = d.control === 'carlo', ch = contestChance(k), patrol = rnd() < 0.3 * seenMult();
-    if (patrol) { P.heat = Math.min(100, P.heat + 20); P.crimes.push({what: 'gang violence', day: day()}); addRep('civic', -3); log('A patrol saw the fight: Heat +20.', 'heat', 'bad'); }
+    if (patrol) { addHeat(20); P.crimes.push({what: 'gang violence', day: day()}); addRep('civic', -3); log('A patrol saw the fight: Heat +20.', 'heat', 'bad'); }
     const won = rnd() < ch; showdown(`Muscle in: ${D.n}`, 'contest', k, wasCarlo ? ['benny'] : wasVance ? ['enforcer', 'vance'] : ['enforcer'], won, patrol ? 'A patrol saw the fight: Heat +20.' : hasRole('Lookout') ? 'Your Lookout kept the police away.' : '');
     if (won) {
-      P.stats.hurt++;
-      d.control = PID; d.since = day(); d.def = 0; addRep('street', 3); addRep('civic', -2);
+      P.stats.hurt++; if (!wasVance && !wasCarlo) grudge('enforcer', `drove his crew out of ${D.n}`); moment(`Took ${D.n} by force`, 'm_flag');
+      d.control = PID; d.clean = false; d.since = day(); d.def = 0; addRep('street', 3); addRep('civic', -2);
       log(`Your crew took ${D.n}! +${moneyTxt(D.inc)} dirty cash a night.`, 'm_flag', 'good');
       if (wasVance) popup('Vance is not amused', `<p>A text from an unknown number: <i>"${D.n} was mine. Enjoy it while it lasts."</i></p><p class="sub">Vance strikes back every other night. A bigger crew holds districts better.</p>`, 'm_crown');
     } else { addRep('street', -2); addNeed('health', -15); log(`${wasVance ? 'Vance\'s' : 'The local'} heavies drove your crew out of ${D.n}. Street -2.`, 'm_contest', 'bad'); }
@@ -1071,7 +1216,7 @@ const ACTIONS = {
     if (day() - P.heistDay < 2) return log('Benny: "Lie low. Next shipment in a couple of days."', 'package');
     P.heistDay = day(); const drv = hasRole('Driver'); if (!advance(drv ? 108 : 180, 'work')) return;
     const ch = partsChance(chanceParts('heist')), seen = rnd() < 0.35 * seenMult(), won = rnd() < ch;
-    if (seen) { P.heat = Math.min(100, P.heat + 20); P.crimes.push({what: 'robbing a shipment', day: day()}); addRep('civic', -3); }
+    if (seen) { addHeat(20); P.crimes.push({what: 'robbing a shipment', day: day()}); addRep('civic', -3); }
     showdown('Dock heist', 'heist', null, ['enforcer'], won, seen ? 'A harbour camera caught the van: Heat +20.' : hasRole('Lookout') ? 'Your Lookout spotted every camera.' : '');
     if (won) { const amt = 40000 + Math.round(rnd() * 300) * 100; earn(amt, 'Dock heists', 'dirty'); addRep('street', 4); addRel('benny', 5); P.stats.hurt++; log(`Heist done: +${moneyTxt(amt)} dirty cash, Street +4.${seen ? ' A camera saw the van: Heat +20.' : ''}`, 'package', 'good'); }
     else { addNeed('health', -20); addRep('street', -2); log(`The guards fought you off. Health -20, Street -2.${seen ? ' A camera saw the van: Heat +20.' : ''}`, 'm_contest', 'bad'); }
@@ -1090,7 +1235,7 @@ const ACTIONS = {
     if (P.vance.raidDay === day()) return log('Your crew needs a day to regroup.', 'm_crew', 'bad');
     P.vance.raidDay = day(); advance(120, 'work');
     const kind = how === 'family' ? 'family' : 'raid', won = rnd() < partsChance(chanceParts(kind)), seen = rnd() < seenMult();
-    if (seen) { P.heat = Math.min(100, P.heat + 30); P.crimes.push({what: 'storming Vance Tower', day: day()}); addRep('civic', -8); }
+    if (seen) { addHeat(30); P.crimes.push({what: 'storming Vance Tower', day: day()}); addRep('civic', -8); }
     showdown(how === 'family' ? 'The Marino family vs Vance' : 'Raid on Vance Tower', kind, null, ['enforcer', 'vance'], won, seen ? 'The tower\'s cameras saw everything: Heat +30.' : 'Your Lookout cut the tower cameras.');
     if (won) { P.stats.hurt += 3; addRep('street', 10); if (how === 'family') { P.stats.hurt++; P.choices.push('Betrayed Carlo and took the family'); return endGame('captain'); } P.choices.push('Raided Vance Tower'); return endGame('warlord'); }
     addNeed('health', -40); addRep('street', -5); const mine = myDistricts(); if (mine.length) { const k = mine[Math.floor(rnd() * mine.length)]; W.districts[k].control = 'vance'; W.districts[k].hot = day() + 1; log(`The raid failed. Vance took ${DISTRICTS[k].n} in revenge. Health -40.`, 'm_contest', 'bad'); } else log('The raid failed. Health -40.', 'm_contest', 'bad');
@@ -1115,7 +1260,7 @@ const ACTIONS = {
   },
   ackSummary() { P.summary = null; },
 };
-const PENDING_OK = {police: ['police'], shift: ['shiftStep', 'shiftServe', 'shiftBin'], carlo: ['carloRoute'], prot: ['protChoice'], event: ['eventChoice']};
+const PENDING_OK = {police: ['police'], shift: ['shiftDone'], carlo: ['carloRoute'], prot: ['protChoice'], event: ['eventChoice']};
 function applyAction(state, pid, action) {
   ST = structuredClone(state); W = ST.world; P = ST.players[pid]; PID = pid; EV = [];
   const fn = ACTIONS[action && action.type];
@@ -1124,21 +1269,21 @@ function applyAction(state, pid, action) {
     const rank0 = rankOf();
     fn(action);
     checkGoals(); maybeEvent();
-    const rank1 = rankOf(); P.rankBest = rank1; if (rank1 > rank0) EV.push({pid: PID, kind: 'rank', rank: rank1});
+    const rank1 = rankOf(); P.rankBest = rank1; if (rank1 > rank0) { EV.push({pid: PID, kind: 'rank', rank: rank1}); moment(`Became ${RANKS[rank1].n}`, 'm_rank' + rank1); }
   }
   const out = {state: ST, events: EV}; ST = W = P = EV = null; return out;
 }
 // read-only helpers for the UI (no mutation)
 function view(state, pid, fn) { const sv = [ST, W, P, PID]; ST = state; W = state.world; P = state.players[pid]; PID = pid; try { return fn(); } finally { [ST, W, P, PID] = sv; } }
-if (typeof module !== 'undefined') module.exports = {applyAction, newGame, newPlayer, view, ACTIONS, ENGINE_VERSION, rankOf, netWorth, curGoal, nextStop, myDistricts, contestChance, crewFee, loanMax, rankCheck, runInfo, chanceParts, partsChance, finaleReq, finaleOpen, holdChance};
+if (typeof module !== 'undefined') module.exports = {contractPay, investCost, investReq, bail, bribeCost, bribeChance, partnerOf, staffWage, applyAction, newGame, newPlayer, view, ACTIONS, ENGINE_VERSION, rankOf, netWorth, curGoal, nextStop, myDistricts, contestChance, crewFee, loanMax, rankCheck, runInfo, chanceParts, partsChance, finaleReq, finaleOpen, holdChance};
 
 // ===== UI: only dispatches actions and renders state (no game rules here) =====
-const SAVE_KEY = 'humansim-browser-v5';
+const SAVE_KEY = 'humansim-browser-v6';
 const $ = s => document.querySelector(s);
 let GS, ME = 'p1', tab = 'here', popups = [], modalOpen = null, modalBtns = [], goalOpen = false, trip = null;
 const A = n => `assets/${n}.webp`;
 const M_ART = ['sleep', 'calendar', 'check', 'crew', 'loan', 'lock', 'trophy', 'sound_on', 'sound_off'], F_ART = ['package', 'hotdog', 'croissant', 'chocolate', 'groceries'];
-const artName = n => /^[bpmfie]_/.test(n) ? n : M_ART.includes(n) ? 'm_' + n : F_ART.includes(n) ? 'f_' + n : 'i_' + n;
+const artName = n => /^[bpmfieg]_/.test(n) ? n : M_ART.includes(n) ? 'm_' + n : F_ART.includes(n) ? 'f_' + n : 'i_' + n;
 const ic = (n, c = '') => `<img class="ic ${c}" src="${A(artName(n))}" alt="">`;
 const bArt = id => { if (id === 'tower') return A('b_rival'); const bk = Object.keys(BIZ).find(k => BIZ[k].place === id); if (bk && GS) { const b = GS.world.biz[bk]; return A(BIZ[bk].tiers[Math.max(0, b.tier - 1)].art); } return A('b_' + id); };
 const pArt = id => A('p_' + id);
@@ -1183,7 +1328,7 @@ function dispatch(a) {
   if (after.t - before.t >= 90) { const c = $('#clock'); c.classList.remove('fast'); void c.offsetWidth; c.classList.add('fast'); }
   const rd = ['street', 'business', 'civic'].map(k => [k, +(after.rep[k] - before.rep[k]).toFixed(1)]).filter(x => Math.abs(x[1]) >= 0.5);
   if (rd.length) toast(rd.map(([k, v]) => `${ic(k, 's')} <b class="${v > 0 ? 'good' : 'bad'}">${v > 0 ? '+' : ''}${v}</b> ${k[0].toUpperCase() + k.slice(1)}`).join(' &nbsp; '), null, rd.every(x => x[1] > 0) ? 'good' : 'bad');
-  const gain = after.cash + after.bank + after.dirty - before.cash - before.bank - before.dirty; if (gain > 0) beep('coin'); if (gain >= 20000) buzz(40);
+  const gain = after.cash + after.bank + after.dirty - before.cash - before.bank - before.dirty; if (gain > 0) beep('coin'); if (gain >= 20000) { buzz(40); pulse(); }
   if (a.type === 'travel' && after.loc === a.to) {
     if (tab === 'map' && trip) { trip.to = a.to; animateTrip(); }
     else { tab = 'here'; render(); $('main').scrollTop = 0; }
@@ -1221,10 +1366,10 @@ function showModals() { setTimeout(tutApply, 0);
     return modal(`<h2><img class="por s" src="${pArt('carlo')}" alt=""> A job for the Captain</h2><p>Carlo slides a taped-up box across the table. "Take this to Benny at Marino Marine Salvage. Don't open it."</p><p class="sub">Pays $150-$200 dirty cash · Street +4 · Heat only if police or a camera see you.</p><div class="hints">${roleLine}</div>`, [[`Back alleys · ${ra.mins} min · patrol risk ${Math.round(ra.seen * 100)}%`, () => dispatch({type: 'carloRoute', route: 'alley'})], [`Main roads · ${rm.mins} min · camera risk ${Math.round(rm.seen * 100)}%`, () => dispatch({type: 'carloRoute', route: 'main'}), 'crime'], ['Not today', () => dispatch({type: 'carloRoute', route: 'refuse'}), '']]); }
   if (pd && pd.kind === 'prot') { modalOpen = 'prot'; const mu = crewOf() && crewOf().members.some(m => m.role === 'Muscle'), ta = crewOf() && crewOf().members.some(m => m.role === 'Talker'), lk = crewOf() && crewOf().members.some(m => m.role === 'Lookout');
     return modal(`<h2><img class="por s" src="${pArt('carlo')}" alt=""> Collection day</h2><p>"Lucky at the pawn shop is behind on his... insurance. Go and collect."</p><p class="sub">Intimidate: $250 dirty, Street +4 (Strength). Charm: $200 dirty, Street +3 (Charisma). A failed threat may be seen by a patrol (Heat +25).</p><div class="hints"><span class="hint ${mu ? 'good' : ''}">${ic('m_crew', 's')}Muscle ${mu ? '+20% intimidate' : '(Danny): +20% intimidate'}</span><span class="hint ${ta ? 'good' : ''}">${ic('m_crew', 's')}Talker ${ta ? '+15% charm' : '(Chloe): +15% charm'}</span><span class="hint ${lk ? 'good' : ''}">${ic('m_crew', 's')}Lookout ${lk ? 'patrol risk 15%' : '(Ollie): halves patrol risk'}</span></div>`, [[`Charm him · ${Math.round(protChance('charm') * 100)}%`, () => dispatch({type: 'protChoice', how: 'charm'})], [`Intimidate · ${Math.round(protChance('scare') * 100)}%`, () => dispatch({type: 'protChoice', how: 'scare'}), 'crime'], ['Skip it', () => dispatch({type: 'protChoice', how: 'skip'}), '']]); }
-  if (pd && pd.kind === 'event') { modalOpen = 'event';     const E = EVENTS[pd.id], who = pd.who ? npc(pd.who) : null; const d = pd.id === 'friendloan' ? `${who.n}: "Could you lend me $50 till payday? I'm stuck."` : pd.id === 'wallet' ? `${E.d} Inside: ${moneyTxt(pd.cash)}.` : pd.id === 'vance_offer' || pd.id === 'vance_grand' ? `${E.d} <b class="gold">${moneyTxt(pd.cash)}</b>` : E.d;
-    return modal(`${E.story ? `<div class="story">${E.who === 'vance' ? 'THE VANCE ARC' : 'THE CARLO STORY'} · ${pd.id.startsWith('carlo') ? 'Chapter ' + (P.story.c + 1) : 'Chapter ' + (P.vance.sab + 1)}</div>` : ''}<h2>${who ? `<img class="por s" src="${pArt(who.id)}" alt="">` : ic('calendar', 'xl')} ${E.t}</h2><p>${d}</p><p class="sub">Each choice shows what it will do.</p>`, E.opts.map(([l, c, h], i) => [`${l}${hintHtml(h, pd)}`, () => dispatch({type: 'eventChoice', c}), i === 0 ? 'pri' : '']));
+  if (pd && pd.kind === 'event') { modalOpen = 'event';     const E = EVENTS[pd.id], who = pd.who ? (npc(pd.who) || {id: pd.who, n: GRUDGE_NAMES[pd.who] || 'A stranger'}) : null; const gd = pd.id === 'grudge' ? (P.grudges || []).find(x => x.who === pd.who && !x.done) : null; const d = pd.id === 'grudge' ? `${GRUDGE_NAMES[pd.who] || 'Someone'} is waiting for you. A few days ago you ${gd ? gd.what : 'hurt him'}. He hasn't forgotten.` : pd.id === 'friendloan' ? `${who.n}: "Could you lend me $50 till payday? I'm stuck."` : pd.id === 'wallet' ? `Fat with cash. The card says ${who ? who.n : 'Walter Gibbs'}. Inside: ${moneyTxt(pd.cash)}.` : pd.id === 'vance_offer' || pd.id === 'vance_grand' ? `${E.d} <b class="gold">${moneyTxt(pd.cash)}</b>` : E.d;
+    return modal(`${E.story ? `<div class="story">${E.who === 'vance' ? 'THE VANCE ARC' : 'THE CARLO STORY'} · ${pd.id.startsWith('carlo') ? 'Chapter ' + (P.story.c + 1) : 'Chapter ' + (P.vance.sab + 1)}</div>` : ''}<h2>${who ? `<img class="por s" src="${pArt(who.id)}" alt="">` : ic('calendar', 'xl')} ${pd.id === 'wallet' && pd.item ? E.t.replace('wallet', pd.item) : E.t}</h2><p>${pd.id === 'wallet' && pd.item ? d.replace('Fat with cash', pd.item === 'purse' ? 'Heavy with cash' : 'Stuffed with cash') : d}</p><p class="sub">Each choice shows what it will do. None is the right one.</p>`, E.opts.map(([l, c, h], i) => [`${pd.id === 'wallet' && who ? l.replace('Walter', first(who)) : l}${hintHtml(h, pd)}`, () => dispatch({type: 'eventChoice', c}), '']));
   }
-  if (pd && pd.kind === 'shift') { modalOpen = 'shift'; return renderShift(); }
+  if (pd && pd.kind === 'shift') { modalOpen = 'shift'; $('#modal').classList.remove('on'); return hdOpen(); }
   if (popups.length) { modalOpen = 'popup'; const e = popups[0];
     if (e.kind === 'showdown') return showdownModal(e);
     if (e.kind === 'ending') return endingCard(e.id);
@@ -1243,16 +1388,6 @@ function showSummary() {
   const el = $('#cnt'), v = +el.dataset.v, t0 = performance.now();
   const step = t => { const k = Math.min(1, (t - t0) / 900); el.textContent = (v >= 0 ? '+' : '') + moneyTxt(Math.round(v * k)); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step);
 }
-function renderShift() {
-  const m = P.shift, o = m.orders[m.i], b = m.board;
-  const TC = {ketchup: '#e03131', mustard: '#f5c04e', onions: '#f1e3c6', relish: '#5c940d'};
-  const view_ = b.length ? b.map(x => x === 'bun' ? '<b class="chip">Bun</b>' : x === 'sausage' ? ic('hotdog', 'l') : `<span class="dot" style="background:${TC[x]}" title="${x}"></span>`).join('') : '<span class="sub">Empty board</span>';
-  modal(`<h2>${ic('hotdog', 'xl')} Lunch rush · ${m.i + 1}/6</h2><p>"Hot dog with <b class="gold">${o.map(t => TOP[t].toLowerCase()).join(' + ')}</b>, please."</p><div class="boardv">${view_}</div>
-  <div class="stations"><button data-s="bun" onclick='dispatch({"type":"shiftStep","s":"bun"})'>${ic('croissant', 'l')}Bun</button><button data-s="sausage" onclick='dispatch({"type":"shiftStep","s":"sausage"})'>${ic('hotdog', 'l')}Sausage</button>
-   ${Object.keys(TOP).map(t => `<button data-s="${t}" onclick='dispatch({"type":"shiftStep","s":"${t}"})'><span class="dot" style="background:${TC[t]}"></span>${TOP[t]}</button>`).join('')}</div>
-  <p class="sub">Served ${m.served} · Ruined ${m.failed} · Tips ${moneyTxt(m.tips)}</p>`,
-  [['Serve', () => dispatch({type: 'shiftServe'})], ['Bin it, start again', () => dispatch({type: 'shiftBin'}), '']]);
-}
 
 // ---- intro ----
 let introPage = 0, introLook = 'm';
@@ -1266,24 +1401,46 @@ function introPick(path) { modalOpen = null; introPage = 0; dispatch({type: 'sta
 
 // ---- showdowns: crew portraits vs defenders, then the outcome and which roles helped ----
 function showdownModal(e) {
-  const roleFx = {Muscle: '+15% fight', Driver: 'faster getaway', Lookout: 'watches for police', Talker: 'talks down guards'};
-  const used = e.parts.filter(x => ['Muscle', 'Driver', "Carlo's men", 'The Marino family'].includes(x[0]) || x[0].startsWith('Crew'));
-  modal(`<h2>${ic('m_contest', 'xl')} ${e.title}</h2><div class="arena ${e.win ? 'win' : 'lose'}"><div class="side l">${(e.crew.length ? e.crew : [{npc: null, role: 'You'}]).map((m, i) => `<div class="fighter" style="animation-delay:${i * 120}ms"><img src="${m.npc ? pArt(m.npc) : meArt()}" alt=""><span>${m.role}</span></div>`).join('')}</div><div class="vs">VS</div><div class="side r">${e.foes.map((f, i) => `<div class="fighter" style="animation-delay:${i * 120}ms"><img src="${pArt(f)}" alt=""><span>${f === 'vance' ? 'Vance' : f === 'benny' ? "Carlo's men" : 'Guards'}</span></div>`).join('')}</div>
-   <div class="reveal ${e.win ? 'good' : 'bad'}">${e.win ? 'VICTORY' : 'DEFEAT'}</div></div>
+  const foeName = f => f === 'vance' ? 'Vance' : f === 'benny' ? (e.title.includes('payback') ? 'Benny' : "Carlo's men") : f === 'lucky' ? 'Lucky' : 'Guards';
+  const crew = e.crew.length ? e.crew : [{npc: null, role: 'You'}], has = r => crew.find(m => m.role === r), nm = m => m.npc ? npc(m.npc).n.split(' ')[0].replace(/"/g, '') : 'You';
+  // the beats, in order: Lookout scouts, Talker distracts, Muscle charges, the outcome, then the Driver gets everyone away
+  const beats = [];
+  if (has('Lookout')) beats.push(['lookout', has('Lookout'), `${nm(has('Lookout'))} (Lookout) watches the corners: the chance of being seen is halved`]);
+  if (has('Talker')) beats.push(['talker', has('Talker'), `${nm(has('Talker'))} (Talker) keeps the guards talking`]);
+  if (has('Muscle')) beats.push(['muscle', has('Muscle'), `${nm(has('Muscle'))} (Muscle) leads the charge: +15%`]);
+  if (has('Fixer')) beats.push(['fixer', has('Fixer'), `${nm(has('Fixer'))} (Fixer) knows which cops to call: Heat -30%`]);
+  if (has('Driver')) beats.push(['driver', has('Driver'), `${nm(has('Driver'))} (Driver) has the engine running: ${e.win ? 'a clean getaway' : 'gets everyone out alive'}`]);
+  const T = {lookout: 0.55, talker: 0.8, muscle: 1.0, fixer: 1.2, driver: 2.1}, rev = 1.6;
+  modal(`<h2>${ic('m_contest', 'xl')} ${e.title}</h2><div class="arena v6 ${e.win ? 'win' : 'lose'}"><div class="fightrow"><div class="side l">${crew.map((m, i) => `<div class="fighter r-${m.role}" style="--d:${i * 120}ms"><div class="ring"><img src="${m.npc ? pArt(m.npc) : meArt()}" alt="">${m.role === 'Lookout' ? '<i class="radar"></i>' : ''}</div><span>${m.role}</span></div>`).join('')}</div><div class="vs">VS</div>
+   <div class="side r">${e.foes.map((f, i) => `<div class="fighter foe" style="--d:${i * 120}ms"><div class="ring"><img src="${pArt(f)}" alt="">${e.win ? '<b class="ko">KO</b>' : ''}</div><span>${foeName(f)}</span></div>`).join('')}</div></div>
+   ${has('Driver') ? '<div class="getaway"><i></i><i></i><i></i><b></b></div>' : ''}
+   <div class="reveal ${e.win ? 'good' : 'bad'}" style="--rd:${rev}s">${e.win ? 'VICTORY' : 'DEFEAT'}</div></div>
+   ${beats.length ? `<div class="beats">${beats.map(([k, m, t]) => `<div class="beat b-${k}" style="--bd:${T[k]}s"><img class="bp" src="${m.npc ? pArt(m.npc) : meArt()}" alt=""><span>${t}</span></div>`).join('')}</div>` : ''}
    <div class="odds"><span>Your odds</span><div class="bar"><b style="width:${Math.round(e.chance * 100)}%"></b></div><b>${Math.round(e.chance * 100)}%</b></div>
    <div class="hints">${e.parts.map(([l, v]) => `<span class="hint ${v >= 0 ? 'good' : 'bad'}">${l} ${v >= 0 ? '+' : ''}${Math.round(v * 100)}%</span>`).join('')}</div>
-   ${e.crew.length ? `<p class="sub">${e.crew.map(m => `<b>${npc(m.npc).n.split(' ')[0]}</b> (${m.role}): ${roleFx[m.role]}`).join(' · ')}</p>` : ''}${e.extra ? `<p class="sub">${e.extra}</p>` : ''}`, [[e.win ? 'Nice' : 'Regroup', nextPopup]]);
+   ${e.extra ? `<p class="sub">${e.extra}</p>` : ''}`, [[e.win ? 'Nice' : 'Regroup', nextPopup]]);
+  if (e.win) setTimeout(() => pulse(), rev * 1000);
 }
 const TONE = {good: ['Good ending', 'good'], neutral: ['Neutral ending', 'gold'], bad: ['Bad ending', 'bad']};
-function endingCard(id) { const E = ENDINGS[id], [tl, tc] = TONE[E.tone];
+const seenEndings = () => { try { return JSON.parse(localStorage.getItem('hs-endings') || '[]'); } catch (e) { return []; } };
+function unlockEnding(id) { const a = seenEndings(); if (!a.includes(id)) { a.push(id); localStorage.setItem('hs-endings', JSON.stringify(a)); } }
+function endingsGallery() { const got = seenEndings(), ids = Object.keys(ENDINGS);
+  $('#title').classList.add('off'); modalOpen = 'ui';
+  modal(`<h2>${ic('m_crown', 'xl')} Endings ${got.filter(x => ENDINGS[x]).length}/${ids.length}</h2><p class="sub">Unlocked endings stay here across every game.</p><div class="gallery">${ids.map(id => { const E = ENDINGS[id], on = got.includes(id), [tl, tc] = TONE[E.tone];
+    return `<div class="gcard ${on ? 'on' : 'locked'}"><img src="${A(E.art)}" alt="">${on ? '' : `<span class="q">?</span>`}<div class="gt"><span class="chip ${tc === 'good' ? '' : tc === 'bad' ? 'bad' : 'pink'}">${tl}</span><b>${on ? E.n : 'Locked'}</b><small>${on ? E.how : 'Hint: ' + ENDING_HINTS[id]}</small></div></div>`; }).join('')}</div>`, [['Back', () => { closeModal(); showTitle(); }]]); }
+const ENDING_HINTS = {tycoon: 'a deal with a gold pen', reformer: 'the press loves evidence', warlord: 'a crew of three and a lot of nerve', captain: 'what if you turned on the Captain?', sellout: 'everyone has a price'};
+function endingCard(id) { const E = ENDINGS[id], [tl, tc] = TONE[E.tone]; unlockEnding(id);
   modal(`<div class="ending"><img src="${A(E.art)}" alt=""><div class="et"><span class="chip ${tc === 'good' ? '' : tc === 'bad' ? 'bad' : 'pink'}">${tl}</span><h1>${E.n}</h1><div class="sub">${E.how}</div></div></div><p>${E.d}</p>`, [['See your story', () => { popups.shift(); endScreen(); }]]); }
+function timelineHtml(n = 8, chrono = false) { const tl = chrono ? (P.tl || []).slice() : (P.tl || []).slice(-n).reverse(); if (!tl.length) return '<p class="sub">Your story starts now.</p>';
+  return `<div class="timeline">${tl.map(m => `<div class="tli">${ic(m.ic, 's')}<span class="d">Day ${m.d}</span><span class="t">${m.t}</span></div>`).join('')}</div>`; }
 function endScreen() { view(GS, ME, () => {
   const E = ENDINGS[P.ending] || null, ruler = rankOf() >= 6;
   const st = [['Days', day()], ['Empire value', money(netWorth())], ['Districts', `${myDistricts().length}/10`], ['Street', Math.round(P.rep.street)], ['Business', Math.round(P.rep.business)], ['Civic', Math.round(P.rep.civic)], ['People helped', P.stats.helped], ['People hurt', P.stats.hurt], ['Runs for Carlo', P.runs], ['Shifts at Sal\'s', P.shifts], ['Dirty cash laundered', moneyTxt(P.laundered)], ['Crew', crewSize()]];
   modalOpen = 'ui';
   modal(`<div class="endscreen" style="background-image:linear-gradient(180deg,#0d102200,#0d1022 80%),url(${A(ruler ? 'e_ruler' : E ? E.art : 'e_ruler')})"><div class="sub" style="letter-spacing:.2em;font-weight:800">${ruler ? 'RULER OF THE CITY' : 'YOUR STORY'}</div><h1>${E ? E.n : RANKS[rankOf()].n}</h1><div class="sub">${P.path === 'street' ? 'Started with Carlo "The Captain" Marino' : "Started at Sal's Hot Dogs"} · ${E ? E.how : 'still writing it'}</div></div>
    <div class="statgrid">${st.map(([k, v]) => `<div><span>${k}</span><b>${v}</b></div>`).join('')}</div>
-   <h3>Choices that made you</h3><div class="choices">${P.choices.map(c => `<span class="chip">${c}</span>`).join('') || '<span class="sub">None yet.</span>'}</div>`,
+   <h3>Choices that made you</h3><div class="choices">${P.choices.map(c => `<span class="chip">${c}</span>`).join('') || '<span class="sub">None yet.</span>'}</div>
+   <h3>Your story so far</h3>${timelineHtml(99, true)}`,
    [['Keep playing', () => { closeModal(); dispatch({type: 'endSeen'}); }], ['New game', () => { closeModal(); confirmNew(); }, '']]);
 }); }
 // ---- guided first 10 minutes: point at the exact button to tap next (skippable) ----
@@ -1291,14 +1448,15 @@ let tutOff = localStorage.getItem('hs-tut-off') === '1';
 function tutTarget() {
   if (!GS || tutOff) return null; const P = GS.players[ME]; if (!P || P.intro || P.jail || P.goal >= 5 || $('#title:not(.off)') || $('#fx.on')) return null;
   const W = GS.world, g = view(GS, ME, () => curGoal()), mo = $('#modal.on');
-  if (P.pending && P.pending.kind === 'shift') { const m = P.shift, o = m.orders[m.i], b = m.board; const need = !b.includes('bun') ? 'bun' : !b.includes('sausage') ? 'sausage' : o.find(t => !b.includes(t));
-    return need ? [`.stations button[data-s="${need}"]`, need === 'bun' ? 'Start with a bun' : need === 'sausage' ? 'Then the sausage' : `Add ${TOP[need].toLowerCase()}`] : ['#mbtns .btn:first-child', 'Serve it!']; }
+  if (P.pending && P.pending.kind === 'shift') return null; // the minigame has its own hint line
   if (P.pending && P.pending.kind === 'carlo') return ['#mbtns .btn:first-child', 'Back alleys: slower but safer'];
   if (mo) { if (modalOpen === 'ui' && trip === null && $('#mbtns .btn') && /Walk/.test($('#mbtns').textContent)) return ['#mbtns .btn:first-child', 'Walk there (free)']; if (['popup', 'summary'].includes(modalOpen)) return ['#mbtns .btn:first-child', 'Tap to continue']; return null; }
   const go = g.go || (g.id === 'day100' ? (P.path === 'street' ? 'anchor' : 'sal') : null); if (!go) return null;
+  if (P.loc !== go && tab === 'here' && document.querySelector('main [data-act="openPlace"]')) return ['main [data-act="openPlace"]', `Head to ${PLACES[go].n}`];
   if (P.loc !== go) { if (tab !== 'map') return ['nav.tabs button[data-t="map"]', `Open the map to find ${PLACES[go].n}`]; return [`.mk[data-k="${go}"]`, `Tap ${PLACES[go].n}`]; }
   if (tab !== 'here') return ['nav.tabs button[data-t="here"]', 'Back to where you are'];
   const sel = {hired: '[data-act="hire"]:not([disabled])', shift: '[data-act="shiftStart"]:not([disabled])', meetCarlo: '.ph[data-npc="carlo"]', run: '[data-act="carloStart"]:not([disabled])', day100: P.path === 'street' ? '[data-act="carloStart"]:not([disabled])' : '[data-act="shiftStart"]:not([disabled])'}[g.id];
+  const gs = view(GS, ME, () => goalSel()); if (gs && document.querySelector(gs) && !(sel && document.querySelector('main ' + sel))) return [gs, document.querySelector(gs).querySelector('.lab') ? 'This gets you closer: ' + document.querySelector(gs).querySelector('.lab').firstChild.textContent.trim() : 'This is next'];
   if (sel && document.querySelector('main ' + sel)) return ['main ' + sel, {hired: 'Ask Sal for a job', shift: 'Work your first shift', meetCarlo: 'Say hello to Carlo', run: 'Take the delivery job', day100: 'Earn more today'}[g.id]];
   if (document.querySelector('main [data-act="skip"]')) return ['main [data-act="skip"]', 'Skip ahead: time flies to the next moment'];
   return null;
@@ -1309,26 +1467,76 @@ function tutApply() {
   const el = document.querySelector(t[0]); if (!el) { if (tip) tip.remove(); return; }
   if (el.closest('main') && !el.closest('#mapwrap')) { const r0 = el.getBoundingClientRect(), mr = $('main').getBoundingClientRect(); if (r0.bottom > mr.bottom - 10 || r0.top < mr.top) el.scrollIntoView({block: 'center'}); }
   el.classList.add('tut');
-  if (!tip) { tip = document.createElement('div'); tip.id = 'tutTip'; document.body.appendChild(tip); }
-  tip.innerHTML = `<span>${t[1]}</span><button onclick="tutSkip()">Skip tutorial</button>`;
-  const r = el.getBoundingClientRect(), th = 80, below = r.top < 140;
-  tip.style.left = Math.min(window.innerWidth - 250, Math.max(8, r.left + r.width / 2 - 120)) + 'px'; tip.style.top = (below ? r.bottom + 10 : r.top - th - 6) + 'px'; tip.className = below ? 'below' : '';
+  if (!tip) { tip = document.createElement('div'); tip.id = 'tutTip'; $('#goal').after(tip); }
+  const html = `${ic('here', 's')}<span>${t[1]}</span><button onclick="tutSkip()">Skip tutorial</button>`; if (tip.dataset.h !== html) { tip.innerHTML = html; tip.dataset.h = html; }
 }
 function tutSkip() { tutOff = true; localStorage.setItem('hs-tut-off', '1'); tutApply(); }
 
 // ---- render ----
+// money count-up: the HUD rolls from the old value to the new one
+const MV = {}; let mvAnim = [];
+const mv = (k, v) => { const from = MV[k] == null ? v : MV[k]; MV[k] = v; if (from !== v) mvAnim.push([k, from, v]); return `<b class="mv${(from !== v ? from : v) < 0 ? ' neg' : ''}" data-k="${k}">${moneyTxt(from)}</b>`; };
+function countUp() { const list = mvAnim; mvAnim = []; if (!list.length) return; const t0 = performance.now();
+  const step = t => { const k = Math.min(1, (t - t0) / 650), e = 1 - Math.pow(1 - k, 3); for (const [key, a, b] of list) { const el = document.querySelector(`.mv[data-k="${key}"]`); if (!el) continue; const v = Math.round(a + (b - a) * e); el.textContent = moneyTxt(v); el.classList.toggle('neg', v < 0); el.classList.toggle('up', b > a && k < 1); } if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step); }
+function pulse() { const p = document.body; p.classList.remove('pulse'); void p.offsetWidth; p.classList.add('pulse'); setTimeout(() => p.classList.remove('pulse'), 900); }
 function render() { save(); view(GS, ME, renderInner); setTimeout(tutApply, 0); }
+// the gold "primary" style belongs to the one action that moves the current goal forward (none if nothing here does)
+// where the current goal wants you: its own place, or for crew goals wherever a possible recruit is right now
+// crew goals: the person you are befriending gets Hang out / Recruit buttons right in the Here list
+function staffPick() { return Object.keys(STAFF).filter(id => P.rel[id]).sort((a, b) => P.rel[b].f - P.rel[a].f)[0]; }
+function crewGoalActs(here) { const g = curGoal();
+  if (g.id === 'staff' && W.biz.kiosk.owner === PID && !W.biz.kiosk.staff) { const id = staffPick(); if (id && P.rel[id].f >= 10) return B(`Hire ${first(npc(id))} to run the kiosk<small>${moneyTxt(staffWage(id))} a day · sells while you are away</small>`, D_({type: 'bizHire', biz: 'kiosk', npc: id}), '', 'biz', false, 'people'); return ''; }
+  if (g.id !== 'crew1' && g.id !== 'crew2') return ''; const c = crewOf(), mem = c ? c.members.map(m => m.npc) : [];
+  return here.filter(p => CREW[p.id] && !mem.includes(p.id)).map(p => { const r = P.rel[p.id], nm = first(p);
+    if (r.f >= 20 && Math.max(P.rep.street, P.rep.business) >= 10) return B(`Recruit ${nm} to your crew<small>${CREW[p.id].role}</small>`, D_({type: 'crewRecruit', npc: p.id}), moneyTxt(crewFee()), 'crime', false, 'm_crew');
+    if (r.f >= 15 && r.lastHang !== day()) return B(`Hang out with ${nm}<small>1 h · Friendship +10 (${Math.round(r.f)}/20 to recruit)</small>`, D_({type: 'hangout', npc: p.id}), '', '', false, 'people');
+    return ''; }).join(''); }
+function goalPlace() { const g = curGoal();
+  if (g.id === 'staff' && W.biz.kiosk.owner === PID) { const id = staffPick(), p = id && npc(id); if (p && P.rel[id].f < 10 && whereIs(p)) return {k: whereIs(p), why: `${first(p)} is there now: friendship 10 and you can hire them (${Math.round(P.rel[id].f)}/10)`}; }
+  if (g.id === 'upgrade') { const b = W.biz.kiosk, T = BIZ.kiosk.tiers; if (b.owner === PID && b.tier < T.length && P.bank + P.cash < T[b.tier].cost) { const k = P.job && P.lastShiftDay !== day() ? 'sal' : 'anchor'; return {k, why: `Save up ${moneyTxt(T[b.tier].cost)} for the upgrade: ${k === 'sal' ? 'work a shift' : 'Carlo pays well'}`}; } }
+  if (g.go) return {k: g.go};
+  if (g.id === 'day100') { const k = P.path === 'street' || !P.job ? 'anchor' : (P.lastShiftDay === day() ? 'anchor' : 'sal'); return {k, why: k === 'sal' ? 'A shift at Sal\'s pays toward your $100 today' : 'Carlo\'s jobs pay toward your $100 today'}; }
+  if (g.id === 'crew1' || g.id === 'crew2') { const c = crewOf(), mem = c ? c.members.map(m => m.npc) : [];
+    const cand = Object.keys(CREW).map(id => npc(id)).filter(p => p && !mem.includes(p.id) && P.rel[p.id] && whereIs(p)).sort((a, b) => P.rel[b.id].f - P.rel[a.id].f)[0];
+    if (cand) return {k: whereIs(cand), why: `${cand.n.split(' ')[0].replace(/"/g, '')} is there now: get to know them (friendship 20) to recruit`}; }
+  return null; }
+function goalSel() {
+  const g = curGoal(), en = ':not([disabled])';
+  const gp = goalPlace(); if (gp && gp.k !== P.loc && !P.jail && document.querySelector('main [data-act="openPlace"]')) return 'main [data-act="openPlace"]';
+  if (g.id === 'launder') return 'main [data-act="skip"]';
+  const M = {hired: '[data-act="hire"]', shift: '[data-act="shiftStart"]', meetCarlo: '.ph[data-npc="carlo"]', run: '[data-act="carloStart"][onclick*="run"]', prot: '[data-act="carloStart"][onclick*="prot"]',
+    day100: P.path === 'street' ? '[data-act="carloStart"][onclick*="run"]' : '[data-act="shiftStart"]', loan: '[data-act="loanTake"]', biz1: '[data-act="bizBuy"]', staff: '[data-act="bizHire"]', launder: '[data-act="carloLaunder"]',
+    upgrade: '[data-act="bizUpgrade"], [data-act="bizBuy"]', crew1: '[data-act="crewRecruit"]', crew2: '[data-act="crewRecruit"]', finale: '[data-act="finale"]', district1: '[data-act="contest"]', kingpin: '[data-act="contest"]', ruler: '[data-act="contest"]'}[g.id];
+  const sel = M ? M.split(', ').map(x => 'main ' + x + (x.startsWith('.ph') ? '' : en)).join(', ') : null;
+  // the goal's own action is locked behind a requirement: light up the action that gets you there instead
+  const FB = {prot: '[data-act="carloStart"][onclick*="run"]', launder: '[data-act="carloStart"][onclick*="run"]'}[g.id];
+  if (sel && !document.querySelector(sel) && FB) return FB.split(', ').map(x => 'main ' + x + en).join(', ');
+  if (g.id === 'staff' && !(sel && document.querySelector(sel))) { const id = staffPick(), ph = id && document.querySelector(`main .ph[data-npc="${id}"]`); if (ph) return W.t - P.rel[id].lastTalk >= 60 ? `main .ph[data-npc="${id}"]` : 'main [data-act="skip"]'; }
+  if ((g.id === 'crew1' || g.id === 'crew2') && !(sel && document.querySelector(sel))) { const c = crewOf(), mem = c ? c.members.map(m => m.npc) : []; const ph = [...document.querySelectorAll('main .ph[data-npc]')].find(e => CREW[e.dataset.npc] && !mem.includes(e.dataset.npc)); if (document.querySelector('main [data-act="hangout"]:not([disabled])')) return 'main [data-act="hangout"]'; if (ph) return W.t - P.rel[ph.dataset.npc].lastTalk >= 60 ? `main .ph[data-npc="${ph.dataset.npc}"]` : 'main [data-act="skip"]'; }
+  return sel;
+}
+function goalHighlight() {
+  document.querySelectorAll('main .btn.pri').forEach(b => b.classList.remove('pri'));
+  document.querySelectorAll('main .goalpick').forEach(b => b.classList.remove('goalpick'));
+  const sel = goalSel(); if (!sel) return; const all = [...document.querySelectorAll(sel)];
+  // a loan goal: light the biggest loan, the one that actually buys the business
+  const el = curGoal().id === 'loan' ? all[all.length - 1] : all[0]; if (!el) return;
+  if (el.classList.contains('btn')) el.classList.add('pri'); else el.classList.add('goalpick');
+}
 function renderInner() {
   const n = P.needs, d = day();
   $('#clock').innerHTML = `Day ${d} · ${clockTxt()}<small>${weekday(d)}</small><span class="ver">${VERSION}</span>`;
-  $('#money').innerHTML = `<span id="mcash" title="Clean cash">${ic('cash', 's')}${money(P.cash)}</span>${P.dirty ? `<span id="mdirty" class="dirty" title="Dirty cash">${ic('m_dirty', 's')}${money(P.dirty)}</span>` : ''}<span id="mbank" title="Bank">${ic('bank', 's')}${money(P.bank)}</span>${P.heat > 0 ? `<span id="mheat" class="wanted" title="Heat">${ic('heat', 's')}${Math.ceil(P.heat)}</span>` : ''}`;
+  $('#money').innerHTML = `<span id="mcash" title="Clean cash">${ic('cash', 's')}${mv('cash', P.cash)}</span>${P.dirty ? `<span id="mdirty" class="dirty" title="Dirty cash">${ic('m_dirty', 's')}${mv('dirty', P.dirty)}</span>` : ''}<span id="mbank" title="Bank">${ic('bank', 's')}${mv('bank', P.bank)}</span>${P.heat > 0 ? `<span id="mheat" class="wanted" title="Heat">${ic('heat', 's')}${Math.ceil(P.heat)}</span>` : ''}`;
+  countUp();
   $('#meters').innerHTML = [['health', P.health], ['hunger', n.hunger], ['energy', n.energy], ['mood', n.mood]].map(([k, v]) => `<div class="meter" title="${NEED_NAMES[k]}">${ic(k, 's')}<i><b style="width:${v}%;background:${col(v)}"></b></i></div>`).join('');
-  const g = curGoal(), rentWarn = !P.rentObj && d >= 4 && P.rent.paidThrough < 7 ? ' <span class="rw bad">Rent due Day 7</span>' : '';
+  const g = curGoal(), R_ = P.rent, rentWarn = R_.back > 0 ? ' <span class="rw bad">Rent overdue</span>' : R_.paidThrough < R_.due && R_.due - d <= 3 ? ` <span class="rw bad">Rent due Day ${R_.due}</span>` : '';
   $('#goal').innerHTML = P.intro ? '' : `<div class="goalbar ${goalOpen ? 'open' : ''}" onclick="goalOpen=!goalOpen;render()">${ic('trophy', 'l')}<div class="gt"><div class="gl">NEXT GOAL <span class="rw">${rewardTxt(g.rw)}</span>${rentWarn}</div><div class="gn">${g.t}</div>${goalOpen ? `<div class="gh">${g.hint}</div>${g.go && g.go !== P.loc ? `<button class="sbtn pri" onclick="event.stopPropagation();goalOpen=false;openPlace('${g.go}')">${ic('map', 's')} Go to ${PLACES[g.go].n}</button>` : ''}` : ''}</div><span class="chev">${goalOpen ? '-' : '+'}</span></div>`;
   document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('on', b.dataset.t === tab));
   $('main').classList.toggle('mapmode', tab === 'map');
   $('main').innerHTML = ({here: renderHere, map: renderMap, me: renderMe, people: renderPeople, empire: renderEmpire})[tab]();
   if (tab === 'map') initMap();
+  goalHighlight();
   showModals();
 }
 function goalInfo() { goalOpen = true; render(); }
@@ -1337,10 +1545,15 @@ function heroCard(id) {
   return `<div class="hero" style="--tc:${TYPE_COL[Pl.t]}"><img class="b" src="${bArt(id)}" alt=""><div class="ht"><span class="chip tchip" style="--tc:${TYPE_COL[Pl.t]}">${TYPE_NAME[Pl.t]}</span><h1>${Pl.n}</h1><div class="sub">${areaOf(Pl.x, Pl.z)} · ${Pl.open[1] - Pl.open[0] >= 24 ? 'open 24 h' : `${Pl.open[0]}:00-${Pl.open[1] % 24}:00`}${Pl.cctv ? ' · CCTV' : ''}</div><div class="sub">${Pl.d}</div></div></div>`;
 }
 function renderHere() {
-  if (P.jail) { const J = P.jail; return `<div class="card"><div class="hero" style="--tc:#ff4f6d"><img class="b" src="${bArt('jail')}" alt=""><div class="ht"><span class="chip tchip" style="--tc:#ff4f6d">Jail</span><h1>Maple City Jail</h1><div class="sub">Short and fair: every hour is yours to use.</div></div></div>
-    <div class="kv"><span>Time left</span><b>${Math.max(0, J.left).toFixed(2)} h</b></div><div class="kv"><span>Bail</span><b>${money(bail())}</b></div>
-    ${B('Wait an hour<small>Good behaviour: counts as 1.25 h</small>', D_({type: 'jail', a: 'wait'}), '1 h', '', false, 'sleep')}${B('Prison laundry shift<small>Takes 2 extra hours off</small>', D_({type: 'jail', a: 'laundry'}), '1 h', '', false, 'street')}
-    ${B('Sleep on the bunk until release', D_({type: 'jail', a: 'bunk'}), Math.max(0, J.left / 1.25).toFixed(1) + ' h', '', false, 'sleep')}${B('Pay bail', D_({type: 'jail', a: 'bail'}), moneyTxt(bail()), 'pri', false, 'cash')}</div>`; }
+  if (P.jail) { const J = P.jail, v = P.rel.vinnie.f, fx = hasRole('Fixer');
+    return `<div class="card"><div class="hero" style="--tc:#ff4f6d"><img class="b" src="${bArt('jail')}" alt=""><div class="ht"><span class="chip tchip" style="--tc:#ff4f6d">Jail</span><h1>Maple City Jail</h1><div class="sub">${J.sentence} h for ${P.record.length ? P.record[P.record.length - 1].what : 'your crimes'}. Short, and every hour is a choice.</div></div></div>
+    <div class="kv"><span>Time left</span><b>${Math.max(0, J.left).toFixed(1)} h</b></div>
+    <h3>Get out now</h3>${B(`Call a lawyer<small>Out in 30 min · clean money${fx ? ' · Fixer: half price' : ''}</small>`, D_({type: 'jail', a: 'lawyer'}), moneyTxt(bail()), '', false, 'civic')}
+    ${B(`Bribe a guard<small>${Math.round(bribeChance() * 100)}% · fail: the money is gone and +1 h${v >= 20 ? ' · Vinnie knows him: +20%' : ''}</small>`, D_({type: 'jail', a: 'bribe'}), moneyTxt(bribeCost()), 'crime', false, 'm_dirty')}
+    <h3>Do the time</h3>${B(`Yard time<small>Counts 1.5 h · ${v >= 20 ? 'Vinnie is a friend now' : 'an old-timer called Vinnie watches you'}</small>`, D_({type: 'jail', a: 'yard'}), '1 h', '', false, 'people')}
+    ${v >= 20 && !fx ? B(`Recruit Vinnie as your Fixer<small>${ROLES.Fixer} · no fee</small>`, D_({type: 'jail', a: 'recruit'}), '', 'crime', false, 'm_crew') : ''}
+    ${B('Prison laundry shift<small>Good behaviour: knocks 2.5 h off · Strength</small>', D_({type: 'jail', a: 'laundry'}), '1 h', '', false, 'street')}
+    ${B('Sleep it off on the bunk<small>Until release</small>', D_({type: 'jail', a: 'bunk'}), Math.max(0, J.left / 1.25).toFixed(1) + ' h', '', false, 'sleep')}</div>`; }
   const id = P.loc, Pl = PLACES[id], open = isOpen(id), here = peopleAt(id);
   let a = '';
   const act = (label, kind, right = '', cls = '', dis = false, icon = '') => B(label, D_({type: 'activity', kind}), right, cls, dis, icon);
@@ -1352,7 +1565,7 @@ function renderHere() {
       B(`Pay rent early<small>${P.rent.paidThrough >= P.rent.due ? 'This week is paid' : 'Due end of Day ' + P.rent.due}</small>`, D_({type: 'payRent'}), moneyTxt(RENT_WEEKLY), '', false, 'bank');
   } else if (id === 'sal') {
     if (!P.job) a += B('Ask Sal for a job<small>$10/hr, 4 h shifts, plus tips</small>', D_({type: 'hire'}), '', 'pri', whereIs(PEOPLE[0]) !== 'sal', 'business');
-    else { const ok = canShift(); a += B('Work a shift<small>Hands-on: build each hot dog</small>', D_({type: 'shiftStart', quick: false}), ok ? '4 h' : P.lastShiftDay === day() ? 'done today' : '10:00-14:00', 'pri', !ok, 'hotdog') + B('Quick shift<small>Auto-play, average tips</small>', D_({type: 'shiftStart', quick: true}), '4 h', '', !ok, 'business'); }
+    else { const ok = canShift(); a += B(`Work a shift<small>Grill, build and serve: about 40 s · faster and neater = bigger tips</small>`, D_({type: 'shiftStart', quick: false}), ok ? '4 h' : P.lastShiftDay === day() ? 'done today' : '10:00-14:00', '', !ok, 'hotdog') + (P.shifts >= 3 ? B('Auto shift<small>Skip the minigame · about 15% less pay, small tips</small>', D_({type: 'shiftStart', quick: true}), '4 h', '', !ok, 'business') : `<p class="sub">Auto shifts unlock after 3 hands-on shifts (${P.shifts}/3).</p>`); }
     a += shopList('sal');
   } else if (id === 'shop') {
     if (P.banned) a += `<p class="wanted">Raj has banned you until tomorrow.</p>`;
@@ -1378,7 +1591,7 @@ function renderHere() {
   }
   const ns = nextStop(); if (ns) a += B(`Skip to ${day(ns.t) > day() ? 'tomorrow ' : ''}${clockTxt(ns.t)}<small>${ns.sleep ? 'Sleep until morning' : 'Next: ' + ns.why}</small>`, D_({type: 'skip'}), '', '', false, 'm_skip');
   const ppl = here.length ? `<div class="people-here">${here.map(p => `<button class="ph" data-npc="${p.id}" onclick="${D_({type: 'talk', npc: p.id})}"><img class="por" src="${pArt(p.id)}" alt="">${first(p)}</button>`).join('')}</div>` : '<p class="sub">Nobody you know is here right now.</p>';
-  return `<div class="card">${heroCard(id)}<h3>People here</h3>${ppl}<h3>Do</h3>${a}${B('Go somewhere else', "go('map')", '', 'pri', false, 'map')}</div>
+  return `<div class="card">${heroCard(id)}<h3>People here</h3>${ppl}<h3>Do</h3>${a}${crewGoalActs(here)}${(() => { const g = curGoal(), gp = goalPlace(); if (!gp || gp.k === P.loc || !PLACES[gp.k]) return ''; return B(`Go to ${PLACES[gp.k].n}<small>${gp.why || 'For your goal: ' + g.t}</small>`, `openPlace('${gp.k}')`, '', '', false, 'map'); })()}${B('Go somewhere else', "go('map')", '', '', false, 'map')}</div>
    <div class="card"><h2>${ic('calendar')} Latest</h2><div class="log">${P.log.slice(0, 5).map(l => typeof l === 'string' ? `<div>${l}</div>` : `<div>${ic(l.ic || 'here', 's')}<span><span class="sub">D${l.d} ${l.c}</span> <span class="${l.tone === 'bad' ? 'bad' : l.tone === 'good' ? 'good' : ''}">${l.msg}</span></span></div>`).join('')}</div></div>`;
 }
 function progRow(t, v, max, have, ok) { return `<div class="chk">${ic(ok ? 'm_check' : 'm_lock', 's')}<span class="t">${t}<br><span class="sub">${have}</span></span><div class="bar"><b style="width:${Math.min(100, Math.max(0, v) / max * 100)}%;background:${ok ? 'var(--good)' : 'var(--gold)'}"></b></div></div>`; }
@@ -1400,7 +1613,7 @@ function loanCard(onSite) {
   if (!loanEligible()) return `<p class="sub">${ic('lock', 's')} Loans need proof of income: work one shift at Sal's or one job for Carlo.</p>`;
   return `<h3>Business loan</h3><p class="sub">10% flat fee, repaid weekly over ${LOAN.weeks} weeks. Missing a payment costs Business respect.</p>` + [100000, 200000, view(GS, ME, () => loanMax())].map(v => { const t = Math.round(v * 1.1); return B(`Borrow ${moneyTxt(v)}<small>${moneyTxt(Math.ceil(t / 8 / 100) * 100)}/week · ${moneyTxt(t)} total</small>`, D_({type: 'loanTake', amt: v}), '', v === view(GS, ME, () => loanMax()) ? 'pri' : 'biz', false, 'loan'); }).join('');
 }
-function kioskEst(b) { const D = BIZ.kiosk, T = D.tiers[b.tier - 1], s = b.staff ? STAFF[b.staff] : null; const demand = D.prices[b.price] * T.mult * (1 + 0.03 * P.skills.intelligence) * (b.rivalDays > 0 ? 0.7 : 1); const sold = s ? Math.min(b.stock, Math.round(demand * (0.7 + 0.1 * s.skill))) : 0; return sold * b.price - (s ? s.wage : 0) - T.upkeep; }
+function kioskEst(b) { const D = BIZ.kiosk, T = D.tiers[b.tier - 1], s = b.staff ? STAFF[b.staff] : null; const demand = D.prices[b.price] * T.mult * (1 + 0.03 * P.skills.intelligence) * (b.rivalDays > 0 ? 0.7 : 1); const sold = s ? Math.min(b.stock, Math.round(demand * (0.7 + 0.1 * s.skill))) : 0; return sold * b.price - (s ? staffWage(b.staff) : 0) - T.upkeep; }
 const bizEst = k => { const b = W.biz[k]; if (!b.tier) return 0; return k === 'kiosk' ? kioskEst(b) : BIZ[k].tiers[b.tier - 1].income - BIZ[k].tiers[b.tier - 1].upkeep; };
 const tierPips = (n, of) => `<span class="pips">${Array.from({length: of}, (_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</span>`;
 const cleanHave = () => P.cash + Math.max(0, P.bank);
@@ -1419,8 +1632,8 @@ function bizCard(k, onSite) {
   if (k !== 'kiosk') return h;
   const st = b.staff ? npc(b.staff) : null;
   h += `<h3>Price per wrap</h3><div class="seg">${Object.keys(D.prices).map(p => `<button class="sbtn ${+p === b.price ? 'pri' : ''}" onclick="${D_({type: 'bizPrice', price: +p})}">${moneyTxt(+p)}</button>`).join('')}</div>
-   <h3>Staff</h3>${st ? `<div class="person"><img class="por s" src="${pArt(b.staff)}" alt=""><div class="info"><b>${st.n}</b><div class="sub">${moneyTxt(STAFF[b.staff].wage)}/day · turns up ${Math.round(STAFF[b.staff].rel * 100)}%</div></div><button class="sbtn" onclick="${D_({type: 'bizFire'})}">Let go</button></div>` :
-     `<p class="bad">Nobody runs it: no sales unless you work it yourself.</p>` + Object.keys(STAFF).map(s2 => { const p = npc(s2), f = P.rel[s2].f; return `<div class="person ${f < 10 ? 'dim' : ''}" style="margin:8px 0"><img class="por s" src="${pArt(s2)}" alt=""><div class="info"><b>${p.n}</b><div class="sub">${moneyTxt(STAFF[s2].wage)}/day · skill ${STAFF[s2].skill}${f < 10 ? ` · <span class="bad">friendship ${Math.round(f)}/10</span>` : ''}</div></div><button class="sbtn pri" ${f < 10 ? 'disabled' : ''} onclick="${D_({type: 'bizHire', npc: s2})}">Hire</button></div>`; }).join('')}
+   <h3>Staff</h3>${st ? `<div class="person"><img class="por s" src="${pArt(b.staff)}" alt=""><div class="info"><b>${st.n}</b><div class="sub">${moneyTxt(staffWage(b.staff))}/day · turns up ${Math.round(STAFF[b.staff].rel * 100)}%</div></div><button class="sbtn" onclick="${D_({type: 'bizFire'})}">Let go</button></div>` :
+     `<p class="bad">Nobody runs it: no sales unless you work it yourself.</p>` + Object.keys(STAFF).map(s2 => { const p = npc(s2), f = P.rel[s2].f; return `<div class="person ${f < 10 ? 'dim' : ''}" style="margin:8px 0"><img class="por s" src="${pArt(s2)}" alt=""><div class="info"><b>${p.n}</b><div class="sub">${moneyTxt(staffWage(s2))}/day${f >= 50 ? ' (friend)' : ''} · skill ${STAFF[s2].skill}${f < 10 ? ` · <span class="bad">friendship ${Math.round(f)}/10</span>` : ''}</div></div><button class="sbtn pri" ${f < 10 ? 'disabled' : ''} onclick="${D_({type: 'bizHire', npc: s2})}">Hire</button></div>`; }).join('')}
    <div class="kv"><span>${ic('package', 's')} Wraps in stock</span><b class="${b.stock < 30 ? 'bad' : ''}">${b.stock}</b></div>`;
   if (onSite) h += B('Restock 50 wraps', D_({type: 'bizStock', n: 50}), moneyTxt(50 * D.unitCost), '', false, 'package') + B('Run it yourself<small>Sales paid in tonight\'s takings</small>', D_({type: 'bizWork'}), P.bizShiftDay === day() ? 'done today' : '4 h', 'biz', P.bizShiftDay === day(), 'business');
   else h += '<p class="sub">Restock and work it on site (Old Town).</p>';
@@ -1434,6 +1647,7 @@ function renderMe() {
    <div class="ladder">${RANKS.map((r, i) => `<div class="${i < ri ? 'done' : i === ri ? 'cur' : ''}"><img src="${A(r.stub && i > ri ? 'm_lock' : 'm_rank' + i)}" alt="">${r.n.split(' ')[0]}</div>`).join('')}</div>
    ${nx ? `<h3>Next: ${nx.n}${nx.stub ? ' · coming soon' : ''}</h3>${chk.parts.map(p => `<div class="chk">${ic(p.ok ? 'm_check' : 'm_lock', 's')}<span class="t">${p.t}<br><span class="sub">${p.have}</span></span><div class="bar"><b style="width:${Math.min(100, p.v / p.max * 100)}%;background:${p.ok ? 'var(--good)' : 'var(--gold)'}"></b></div></div>`).join('')}<div class="teaser">${ic('m_rank' + (ri + 1))}<span><b>Unlocks:</b> ${nx.teaser}</span></div>` : '<p class="gold">You rule Maple City.</p>'}</div>
   ${P.ending ? `<div class="card">${B(`Your story<small>${ENDINGS[P.ending].n} · days, money, choices</small>`, 'endScreen()', '', 'pri', false, 'm_trophy')}</div>` : ''}
+  <div class="card"><h2>${ic('m_calendar')} Your story so far</h2>${timelineHtml(8)}${(P.tl || []).length > 8 ? B('See the whole story', 'storyAll()', '', '', false, 'm_trophy') : ''}</div>
   <div class="card"><h2>Respect</h2>${[['street', 'Street', '#ff4f6d'], ['business', 'Business', '#4f8bff'], ['civic', 'Civic', '#3ddc97']].map(([k, l, c]) => `<div class="stat"><span class="k">${ic(k, 's')} ${l}</span><div class="bar"><b style="width:${P.rep[k]}%;background:${c}"></b></div><span class="v">${Math.round(P.rep[k])}</span></div>`).join('')}<p class="sub">Street: crime and Carlo's jobs. Business: work and your kiosk. Civic: staying clean, helping people, owning up.</p></div>
   <div class="card"><h2><img class="por s" src="${meArt()}" alt=""> You</h2>${bar('health', P.health)}${NEEDS.map(k => bar(k, n[k])).join('')}
    <div class="kv"><span>${ic('cash', 's')} Cash</span><b>${money(P.cash)}</b></div><div class="kv"><span>${ic('bank', 's')} Bank</span><b>${money(P.bank)}</b></div><div class="kv"><span>Net worth</span><b>${money(netWorth())}</b></div><div class="kv"><span>Job</span><b>${P.job ? "Sal's Hot Dogs" : 'None'}</b></div></div>
@@ -1442,6 +1656,7 @@ function renderMe() {
   <div class="card"><h2>Skills</h2>${Object.keys(SKILLS).map(k => `<div class="stat"><span class="k">${SKILLS[k]}</span><div class="bar"><b style="width:${P.skills[k] * 10}%;background:var(--teal)"></b></div><span class="v">${P.skills[k].toFixed(1)}</span></div>`).join('')}</div>`;
 }
 
+function storyAll() { view(GS, ME, () => { modalOpen = 'ui'; modal(`<h2>${ic('m_calendar', 'xl')} Your story so far</h2>${timelineHtml(99, true)}`, [['Close', closeModal, '']]); }); }
 function renderPeople() {
   const cur = PEOPLE.map(p => ({p, at: whereIs(p)})).sort((a, b) => (b.at === P.loc) - (a.at === P.loc) || P.rel[b.p.id].f - P.rel[a.p.id].f);
   const cr = crewOf();
@@ -1461,6 +1676,8 @@ function personSheet(id) { view(GS, ME, () => {
   if (here && !p.nodate) acts.push(B(`Ask on a date<small>${r.f >= 40 ? Math.round(dateChance(id) * 100) + '% chance' : 'Needs friendship 40'}</small>`, `closeModal();${D_({type: 'date', npc: id})}`, '$25.00', '', r.f < 40, 'health'));
   if (here && CREW[id] && !inCrew) acts.push(B(`Recruit to your crew<small>${CREW[id].role} · needs friendship 20, Street or Business 10</small>`, `closeModal();${D_({type: 'crewRecruit', npc: id})}`, moneyTxt(crewFee()), 'crime', r.f < 20 || Math.max(P.rep.street, P.rep.business) < 10, 'm_crew'));
   if (CREW[id]) acts.push(`<p class="sub">${ic('m_crew', 's')} <b>${CREW[id].role}:</b> ${ROLES[CREW[id].role]}</p>`);
+  if (!p.nodate) acts.push(`<p class="sub">${ic('health', 's')} <b>${r.partner ? 'Partner perk' : 'As a partner'}:</b> ${PARTNER_PERKS[id] || PARTNER_PERKS.any}${r.partner ? '' : ' (romance 50 on dates)'}</p>`);
+  if (STAFF[id]) acts.push(`<p class="sub">${ic('business', 's')} <b>Can run your kiosk:</b> ${moneyTxt(staffWage(id))}/day${r.f >= 50 ? ' (friend rate, 20% off)' : ' · friends (50+) work for 20% less'}</p>`);
   modalOpen = 'ui';
   modal(`<div class="person"><img class="por l" src="${pArt(id)}" alt=""><div class="info"><h2 style="margin:0">${p.n}</h2><div class="sub">${p.a} · ${p.job}</div><div class="sub">${p.tr}</div><div class="stat"><span class="sub" style="width:96px">${relLabel(r.f)}${r.partner ? ' · partner' : ''}</span><div class="bar"><b style="width:${r.f}%;background:var(--pink)"></b></div><span class="v">${Math.round(r.f)}</span></div></div></div>${acts.join('') || '<p class="sub">They\'re not around right now.</p>'}`, [['Close', closeModal, '']]);
 }); }
@@ -1484,7 +1701,7 @@ function renderEmpire() {
    <div class="kv"><span>Income per day (est.)</span><b class="${perDay >= 0 ? 'good' : 'bad'}">${perDay >= 0 ? '+' : ''}${moneyTxt(perDay)}</b></div></div>
   <h3 class="sect">Properties</h3>${propSection()}
   <div class="card"><h2>${ic('m_dirty')} Dirty money</h2><div class="kv"><span>Dirty cash</span><b>${money(P.dirty)}</b></div><div class="kv"><span>Your fronts launder per night</span><b>${moneyTxt(launderCap())}</b></div><p class="sub">Crime pays dirty cash. It buys street things, but rent, the bank, businesses and buy-outs need clean money. Each night your businesses launder dirty cash into the bank (10% fee). If you're jailed, the police seize it.</p></div>
-  <div class="card"><h2>${ic('m_flag')} Turf</h2><div class="kv"><span>Your districts</span><b>${mine.length ? mine.map(k => DISTRICTS[k].n).join(', ') : 'none yet'}</b></div><div class="kv"><span>${ic('p_vance', 's')} Sterling Vance</span><b class="bad">${vance.length} districts</b></div>${B('Open the city map', "go('map')", '', 'pri', false, 'map')}</div>
+  <div class="card"><h2>${ic('m_flag')} Turf</h2><div class="kv"><span>Your districts</span><b>${mine.length ? mine.map(k => DISTRICTS[k].n).join(', ') : 'none yet'}</b></div><div class="kv"><span>${ic('p_vance', 's')} Sterling Vance</span><b class="bad">${vance.length} districts</b></div><div class="kv"><span>${ic('civic', 's')} City contracts per night</span><b>${contractPay() ? moneyTxt(contractPay()) : `<small class="sub">Civic ${INVEST.civic} + Business ${INVEST.business}</small>`}</b></div>${B('Open the city map', "go('map')", '', 'pri', false, 'map')}</div>
   <div class="card"><h2>${ic('m_crew')} Your crew</h2>${cr && cr.members.length ? cr.members.map(m => `<div class="person" style="margin:6px 0"><img class="por s" src="${pArt(m.npc)}" alt=""><div class="info"><b>${npc(m.npc).n}</b><div class="sub">${m.role} · ${ROLES[m.role]}</div></div></div>`).join('') + B('Send the crew on jobs<small>$50-$80 dirty each, once a day</small>', D_({type: 'crewJob'}), P.crewJobDay === day() ? 'done today' : '', 'crime', P.crewJobDay === day() || !!P.jail, 'street') : `<p class="sub">No crew yet. Needs Street or Business respect 10 and friendship 20.</p>${Object.keys(CREW).map(id => `<div class="person" style="margin:6px 0"><img class="por s" src="${pArt(id)}" alt=""><div class="info"><b>${npc(id).n} · ${CREW[id].role}</b><div class="sub">${ROLES[CREW[id].role]}</div></div></div>`).join('')}`}</div>
   <div class="card"><h2>${ic('m_loan')} Bank loan</h2>${loanCard(false)}</div>
   <div class="card"><h2>${ic('b_home')} Home & rent</h2><div class="kv"><span>${ic(P.rentObj ? 'check' : 'calendar', 's')} Objective: first week's rent by Day 7</span><b class="${P.rentObj ? 'good' : ''}">${P.rentObj ? 'done' : 'open'}</b></div><div class="kv"><span>Maple Court Flat 1A</span><b>${moneyTxt(RENT_WEEKLY)}/week</b></div><div class="kv"><span>Paid up to</span><b class="${R.paidThrough >= R.due ? 'good' : ''}">${R.paidThrough ? 'End of Day ' + R.paidThrough : 'Not paid yet'} (due end of Day ${R.due})</b></div>${R.evicted ? `<div class="kv"><span class="wanted">Locked out · back rent</span><b>${money(-R.back)}</b></div>` : ''}
@@ -1527,7 +1744,7 @@ function renderMap() {
   const mine = myDistricts(), inc = mine.reduce((a, k) => a + DISTRICTS[k].inc, 0), vc = Object.values(W.districts).filter(d => d.control === 'vance').length;
   const cc = Object.values(W.districts).filter(d => d.control === 'carlo').length, nn = Object.values(W.districts).filter(d => !d.control).length;
   return `<div id="mapwrap"><svg id="msvg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="16"/></filter><filter id="edge" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.5"/></filter></defs><image href="${A('map_base')}" x="0" y="0" width="${MW}" height="${MH}"/><g id="dists"></g><path id="trip" d="" fill="none" stroke="#f5c04e" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 12"/></svg><div id="banners"></div><div id="mks"></div>
-   <button class="turf ${turfOpen ? 'open' : ''}" onclick="turfOpen=!turfOpen;render()" aria-label="Turf summary"><span class="tl">${ic('m_flag', 's')}<b>${mine.length}</b><i class="dotc" style="background:#f5c04e"></i><img class="ic s round" src="${pArt('vance')}" alt=""><b>${vc}</b><span class="chev">${turfOpen ? '-' : '+'}</span></span>${turfOpen ? `<span class="td"><span><i class="dotc" style="background:#f5c04e"></i>You: ${mine.length} · <b class="good">+${moneyTxt(inc)}</b>/night</span><span><i class="dotc" style="background:#8f7bff"></i>Sterling Vance: ${vc}</span><span><i class="dotc" style="background:#ff4f6d"></i>Carlo: ${cc}</span><span><i class="dotc" style="background:#cfd3ff"></i>Up for grabs: ${nn}</span></span>` : ''}</button>
+   <button class="turf ${turfOpen ? 'open' : ''}" onclick="turfOpen=!turfOpen;render()" aria-label="Turf summary"><span class="tl">${ic('m_flag', 's')}<i class="dotc" style="background:#f5c04e"></i><b>${mine.length}</b><img class="ic s round" src="${pArt('vance')}" alt=""><b>${vc}</b><span class="chev">${turfOpen ? '-' : '+'}</span></span>${turfOpen ? `<span class="td"><span><i class="dotc" style="background:#f5c04e"></i>You: ${mine.length} · <b class="good">+${moneyTxt(inc)}</b>/night</span><span><i class="dotc" style="background:#8f7bff"></i>Sterling Vance: ${vc}</span><span><i class="dotc" style="background:#ff4f6d"></i>Carlo: ${cc}</span><span><i class="dotc" style="background:#cfd3ff"></i>Up for grabs: ${nn}</span></span>` : ''}</button>
    <div class="zoom"><button onclick="zoomBy(1.4)" aria-label="Zoom in">+</button><button onclick="zoomBy(1/1.4)" aria-label="Zoom out">-</button><button onclick="centreHere()" aria-label="Find me">${ic('here', 's')}</button><button onclick="placesList()" aria-label="Places list">${ic('map', 's')}</button></div></div>`;
 }
 function placesList() { view(GS, ME, () => { const list = Object.keys(PLACES).filter(k => k !== P.loc).sort((a, b) => dist(P.loc, a) - dist(P.loc, b)); modalOpen = 'ui';
@@ -1535,11 +1752,14 @@ function placesList() { view(GS, ME, () => { const list = Object.keys(PLACES).fi
 function mapSize() { const w = $('#mapwrap'), m = $('main'); const h = m.clientHeight - parseFloat(getComputedStyle(m).paddingBottom) - parseFloat(getComputedStyle(m).paddingTop); w.style.height = Math.max(300, h) + 'px'; return [w.clientWidth, w.clientHeight]; }
 function clampView() { const w = $('#mapwrap'); if (!w) return; const Wd = w.clientWidth, H = w.clientHeight, min = Math.max(Wd / MW, H / MH);
   mview.s = clamp(mview.s, min, 3); const hw = Wd / 2 / mview.s, hh = H / 2 / mview.s; mview.x = clamp(mview.x, hw, MW - hw); mview.y = clamp(mview.y, hh, MH - hh); }
+let turfT = 0;
+function collapseTurf() { if (!turfOpen) return; turfOpen = false; const t = $('.turf'); if (t) { t.classList.remove('open'); const d = t.querySelector('.td'); if (d) d.remove(); const c = t.querySelector('.chev'); if (c) c.textContent = '+'; } }
 function initMap() {
+  clearTimeout(turfT); if (turfOpen) turfT = setTimeout(collapseTurf, 3000);
   const w = $('#mapwrap'); if (!w) return; const [Wd, H] = mapSize();
   if (!mview.s) { mview.s = Math.max(Wd / MW, H / MH); const Pl = PLACES[GS.players[ME].loc]; mview.x = Pl.mx; mview.y = Pl.my; }
   let ptr = new Map(), last = null, moved = 0;
-  w.onpointerdown = e => { ptr.set(e.pointerId, [e.clientX, e.clientY]); moved = 0; last = null; };
+  w.onpointerdown = e => { if (!e.target.closest('.turf')) collapseTurf(); ptr.set(e.pointerId, [e.clientX, e.clientY]); moved = 0; last = null; };
   w.onpointermove = e => {
     if (!ptr.has(e.pointerId)) return; const prev = ptr.get(e.pointerId); ptr.set(e.pointerId, [e.clientX, e.clientY]);
     if (ptr.size === 1) { const dx = e.clientX - prev[0], dy = e.clientY - prev[1]; moved += Math.abs(dx) + Math.abs(dy); if (moved > 8) { mview.x -= dx / mview.s; mview.y -= dy / mview.s; placeMap(); } }
@@ -1614,6 +1834,7 @@ function districtSheet(k) { view(GS, ME, () => {
   if (d.control !== ME) {
     const ch = Math.round(contestChance(k) * 100), pr = Math.round(30 * (hasRole('Lookout') ? 0.5 : 1));
     if (crewSize()) acts += `<div class="hints">${chanceParts('contest', k).map(([l, v]) => `<span class="hint ${v >= 0 ? 'good' : 'bad'}">${l} ${v >= 0 ? '+' : ''}${Math.round(v * 100)}%</span>`).join('')}</div>`;
+    if (d.control === 'vance') { const iq = investReq(k); acts += B(`Win it over peacefully<small>${iq.ok ? `Shops, a youth club, street lights · 2 h · pays clean, +50% · Civic +4` : iq.why}</small>`, `closeModal();${D_({type: 'contest', district: k, how: 'invest'})}`, moneyTxt(investCost(k)), 'biz', !!bl || !iq.ok, 'civic'); }
     acts += B(`Muscle in with your crew<small>${crewSize() ? `${ch}% chance · 2 h · a patrol may see it ${pr}% (Heat +20)${hasRole('Lookout') ? ' · Lookout' : ''}` : 'Needs at least one crew member'}</small>`, `closeModal();${D_({type: 'contest', district: k, how: 'muscle'})}`, '', 'crime', !!bl || !crewSize(), 'm_contest');
     if (!d.control) acts += B(`Buy out the local businesses<small>Clean money · certain</small>`, `closeModal();${D_({type: 'contest', district: k, how: 'buy'})}`, moneyTxt(buyPrice(k)), 'biz', !!bl || !canPay(buyPrice(k)), 'm_chest');
     if (bl) acts += `<p class="sub">${ic('lock', 's')} ${bl}</p>`;
@@ -1635,6 +1856,7 @@ function showTitle() {
   t.style.backgroundImage = `linear-gradient(180deg,#0d102200 40%,#0d1022 95%),url(${A('title_bg')})`;
   t.innerHTML = `<div class="logo">HUMAN SIM<small>MAPLE CITY</small></div>
    <div class="tbtns"><p class="tagline">From nobody to ruler of the city.<br>Work, hustle, build an empire.</p>${has && GS ? `<button class="btn pri" onclick="hideTitle(true)"><span class="lab" style="text-align:center">Continue · Day ${GS.world ? Math.floor(GS.world.t / 1440) + 1 : 1}</span></button>` : ''}<button class="btn ${has ? '' : 'pri'}" onclick="titleNew()"><span class="lab" style="text-align:center">New game</span></button>
+   <button class="btn" onclick="endingsGallery()">${ic('m_crown', 'l')}<span class="lab">Endings<small>${seenEndings().filter(x => ENDINGS[x]).length}/${Object.keys(ENDINGS).length} unlocked</small></span></button>
    <button class="btn" onclick="toggleSound();showTitle()">${ic(SOUND ? 'm_sound_on' : 'm_sound_off', 'l')}<span class="lab">Sound ${SOUND ? 'on' : 'off'}</span></button><p class="sub">${VERSION} · art made for this game</p></div>`;
   t.classList.remove('off');
 }
@@ -1649,4 +1871,124 @@ function boot() {
   window.addEventListener('resize', () => setTimeout(tutApply, 50));
 }
 window.addEventListener('DOMContentLoaded', boot);
+
+// ===== Sal's Hot Dogs: a drag-and-drop minigame (pointer events, works with touch and mouse) =====
+// The engine deals the orders (P.shift.orders) and scores the results (shiftDone); this file only plays them.
+// Drag a sausage onto the grill, watch the doneness bar, drag buns to the plate, drop the cooked sausage in,
+// drag sauces on, grab a drink, serve. Tap-then-tap also works (tap a source, then tap where it goes).
+const HD_COOK = 4, HD_OK = [1, 1.45], HD_BURN = 1.85, HD_LIMIT = 40;
+const HD_TOP_COL = {ketchup: '#d62828', mustard: '#f2b705', onions: '#9c5b20', relish: '#4f9d2d'};
+let HD = null;
+const HD_BIN = '<svg viewBox="0 0 48 48" class="binsvg"><path d="M12 14h24l-2.5 28h-19z" fill="#5b6178" stroke="#1b1f33" stroke-width="2.5" stroke-linejoin="round"/><rect x="9" y="9" width="30" height="6" rx="2" fill="#7a819c" stroke="#1b1f33" stroke-width="2.5"/><path d="M19 5h10v4H19z" fill="#7a819c" stroke="#1b1f33" stroke-width="2.5"/><path d="M19 20v17M24 20v17M29 20v17" stroke="#1b1f33" stroke-width="2.5" stroke-linecap="round"/></svg>';
+const hdSpeed = () => window.HD_SPEED || 1;
+function hdOpen() {
+  if (HD && HD.live) return; const m = P.shift; if (!m) return;
+  HD = {live: true, orders: m.orders, i: 0, t: 0, last: performance.now(), grill: [null, null, null], plate: {dogs: [], drink: false}, res: [], custAt: 0, tips: 0, sel: null, msg: null, msgUntil: 0, first: P.shifts === 0, cooking: P.skills.cooking};
+  const el = document.createElement('div'); el.id = 'hd'; document.body.appendChild(el);
+  el.innerHTML = `<div class="hdtop"><b class="hf">Sal's Hot Dogs</b><div class="hdtime"><b id="hdbar"></b></div><span id="hdn"></span><span class="gold" id="hdtips">$0.00</span></div>
+   <div class="hdcust" id="hdcust"></div>
+   <div class="hdhint" id="hdhint"></div>
+   <div class="hdwork"><div class="hdgrill dz" data-z="grill"><img class="bg" src="${A('g_grill')}" alt="">${[0, 1, 2].map(i => `<div class="slot dz" data-z="grill" data-g="${i}"></div>`).join('')}</div>
+    <div class="hdplate dz" data-z="plate"><img class="bg" src="${A('g_plate')}" alt=""><div class="dogs" id="hddogs"></div><div class="cup" id="hdcup"></div></div></div>
+   <div class="tray">${[['raw', 'Sausage'], ['bun', 'Bun'], ['ketchup', 'Ketchup'], ['mustard', 'Mustard'], ['onions', 'Onions'], ['relish', 'Relish'], ['soda', 'Drink'], ['bin', 'Bin']].map(([k, n]) => `<div class="src ${k === 'bin' ? 'dz bin' : ''}" data-src="${k === 'bin' ? '' : k}" ${k === 'bin' ? 'data-z="bin"' : ''} role="button" aria-label="${n}">${k === 'bin' ? HD_BIN : `<img src="${A('g_' + k)}" alt="">`}<span>${n}</span></div>`).join('')}</div>
+   <div class="hdbtns"><button class="btn" id="hdclear"><span class="lab" style="text-align:center">Clear plate</span></button><button class="btn pri" id="hdserve"><span class="lab" style="text-align:center">Serve</span></button></div>`;
+  el.querySelector('#hdclear').onclick = () => { HD.plate = {dogs: [], drink: false}; hdDraw(); };
+  el.querySelector('#hdserve').onclick = hdServe;
+  el.addEventListener('pointerdown', hdDown);
+  hdNextCustomer(true); requestAnimationFrame(hdTick);
+}
+function hdNextCustomer(first) {
+  const o = HD.orders[HD.i]; HD.custAt = HD.t; HD.plate = {dogs: [], drink: false};
+  const c = $('#hdcust'); if (!o) return;
+  const icons = [`<span class="oi"><img src="${A('g_dog')}" alt="">${o.dogs > 1 ? `<b>x${o.dogs}</b>` : ''}</span>`, ...o.tops.map(t => `<span class="oi"><img src="${A('g_' + t)}" alt=""></span>`), o.drink ? `<span class="oi"><img src="${A('g_soda')}" alt=""></span>` : ''].join('');
+  const words = `${o.dogs > 1 ? 'Two hot dogs' : 'A hot dog'}${o.tops.length ? ' with ' + o.tops.join(' and ') : ', plain'}${o.drink ? ', and a drink' : ''}, please.`;
+  c.innerHTML = `<div class="who walk"><img src="${pArt(o.who)}" alt=""><span>${npc(o.who).n.split(' ')[0].replace(/'/g, '')}</span></div><div class="bubble walkb" aria-label="${words}"><div class="oicons">${icons}</div><div class="sub">${words}</div></div>`;
+  hdDraw();
+}
+function hdTick(now) {
+  if (!HD || !HD.live) return; const dt = Math.min(0.1, (now - HD.last) / 1000) * hdSpeed(); HD.last = now; HD.t += dt;
+  for (const g of HD.grill) if (g) g.d += dt / HD_COOK;
+  if (HD.t >= HD_LIMIT) return hdFinish(true);
+  hdDraw(true); requestAnimationFrame(hdTick);
+}
+const hdState = d => d < HD_OK[0] ? 'raw' : d >= HD_BURN ? 'burnt' : 'cooked';
+function hdDogHtml(dog, i) {
+  const tops = dog.tops.map((t, k) => t === 'ketchup' || t === 'mustard' ? `<path d="M14 ${20 + k * 3} q8 -9 16 0 t16 0 t16 0 t16 0" stroke="${HD_TOP_COL[t]}" stroke-width="4" fill="none" stroke-linecap="round"/>` : t === 'onions' ? `<g fill="none" stroke="${HD_TOP_COL[t]}" stroke-width="2.5">${[18, 34, 50, 66].map(x => `<path d="M${x} 16 q4 -6 8 0"/>`).join('')}</g>` : `<g fill="${HD_TOP_COL[t]}">${[20, 30, 42, 54, 66, 74].map((x, j) => `<circle cx="${x}" cy="${15 + (j % 2) * 5}" r="2.6"/>`).join('')}</g>`).join('');
+  return `<div class="dog dz" data-z="plate" data-b="${i}"><img class="bun" src="${A('g_bun')}" alt="">${dog.s != null ? `<img class="saus" src="${A('g_' + hdState(dog.s))}" alt="">` : ''}<svg viewBox="0 0 96 40" class="tops">${tops}</svg></div>`;
+}
+function hdDraw(light) {
+  const H = HD, o = H.orders[H.i]; if (!o && !light) return;
+  const left = Math.max(0, HD_LIMIT - H.t); $('#hdbar').style.width = (left / HD_LIMIT * 100) + '%'; $('#hdbar').className = left < 10 ? 'low' : '';
+  $('#hdn').textContent = `Customer ${Math.min(H.i + 1, H.orders.length)}/${H.orders.length} · ${Math.ceil(left)}s`; $('#hdtips').textContent = moneyTxt(H.tips);
+  document.querySelectorAll('#hd .slot').forEach((el, i) => { const g = H.grill[i];
+    const html = g ? `<div class="gs" data-src="grill:${i}"><img src="${A('g_' + hdState(g.d))}" alt=""><div class="done"><i style="left:${HD_OK[0] / HD_BURN * 100}%;width:${(HD_OK[1] - HD_OK[0]) / HD_BURN * 100}%"></i><b style="width:${Math.min(100, g.d / HD_BURN * 100)}%"></b></div>${g.d >= HD_BURN ? '<span class="smoke"></span>' : ''}</div>` : '';
+    if (el.dataset.h !== html) { el.innerHTML = html; el.dataset.h = html; } });
+  const dh = H.plate.dogs.map(hdDogHtml).join(''), dd = $('#hddogs'); if (dd.dataset.h !== dh) { dd.innerHTML = dh; dd.dataset.h = dh; }
+  const ch = H.plate.drink ? `<img src="${A('g_soda')}" alt="">` : '', cu = $('#hdcup'); if (cu.dataset.h !== ch) { cu.innerHTML = ch; cu.dataset.h = ch; }
+  // the hint line: what to do next (always on, so nobody is lost)
+  let hint = '', tgt = null;
+  if (H.msg && H.t < H.msgUntil) hint = H.msg;
+  else if (o) { const p = H.plate, cookedOn = H.grill.findIndex(g => g && g.d >= HD_OK[0] && g.d < HD_BURN), burnt = H.grill.findIndex(g => g && g.d >= HD_BURN), filled = p.dogs.filter(d => d.s != null).length, onGrill = H.grill.filter(Boolean).length;
+    const need = o.dogs - filled - H.grill.filter(g => g && g.d < HD_BURN).length;
+    if (burnt >= 0) { hint = 'Burnt! Drag it to the bin'; tgt = '.bin'; }
+    else if (cookedOn >= 0 && p.dogs.some(d => d.s == null)) { hint = 'Cooked: drag it into the bun'; tgt = `.slot[data-g="${cookedOn}"]`; }
+    else if (need > 0) { hint = `Drag a sausage onto the grill${o.dogs > 1 ? ` (${o.dogs} needed)` : ''}`; tgt = '[data-src="raw"]'; }
+    else if (p.dogs.length < o.dogs) { hint = 'Drag a bun onto the plate'; tgt = '[data-src="bun"]'; }
+    else if (onGrill && filled < o.dogs) { hint = 'Wait for the green zone on the bar...'; }
+    else { const miss = o.tops.find(t => p.dogs.some(d => d.s != null && !d.tops.includes(t)));
+      if (miss) { hint = `Drag the ${miss} onto the hot dog`; tgt = `[data-src="${miss}"]`; }
+      else if (o.drink && !p.drink) { hint = 'Grab a drink for the plate'; tgt = '[data-src="soda"]'; }
+      else { hint = 'Serve it!'; tgt = '#hdserve'; } } }
+  const hh = $('#hdhint'); if (hh.textContent !== hint) hh.textContent = hint;
+  document.querySelectorAll('#hd .nexttap').forEach(e => { if (!tgt || !e.matches(tgt)) e.classList.remove('nexttap'); });
+  if (tgt && (H.first || /Burnt/.test(hint))) { const t = document.querySelector('#hd ' + tgt); if (t) t.classList.add('nexttap'); }
+}
+// ---- drag and drop ----
+let hdDrag = null;
+function hdDown(e) {
+  const s = e.target.closest('[data-src]'); const z = e.target.closest('.dz');
+  if (!s || !s.dataset.src) { if (z && HD.sel) { hdDrop(HD.sel, z); HD.sel = null; document.querySelectorAll('#hd .sel').forEach(x => x.classList.remove('sel')); } return; }
+  e.preventDefault(); const src = s.dataset.src, img = s.querySelector('img');
+  const g = document.createElement('img'); g.className = 'ghost'; g.src = img ? img.src : ''; document.body.appendChild(g);
+  hdDrag = {src, g, x0: e.clientX, y0: e.clientY, moved: false, el: s}; hdMove(e);
+  window.addEventListener('pointermove', hdMove); window.addEventListener('pointerup', hdUp, {once: true}); window.addEventListener('pointercancel', hdUp, {once: true});
+}
+function hdMove(e) { const d = hdDrag; if (!d) return; if (Math.hypot(e.clientX - d.x0, e.clientY - d.y0) > 8) d.moved = true;
+  d.g.style.left = e.clientX + 'px'; d.g.style.top = (e.clientY - 30) + 'px';
+  const z = document.elementFromPoint(e.clientX, e.clientY - 30); document.querySelectorAll('#hd .over').forEach(x => x.classList.remove('over')); const dz = z && z.closest('.dz'); if (dz && d.moved) dz.classList.add('over'); }
+function hdUp(e) {
+  const d = hdDrag; hdDrag = null; window.removeEventListener('pointermove', hdMove); if (!d) return; d.g.remove(); document.querySelectorAll('#hd .over').forEach(x => x.classList.remove('over'));
+  if (!d.moved) { HD.sel = d.src; document.querySelectorAll('#hd .sel').forEach(x => x.classList.remove('sel')); d.el.classList.add('sel'); return; }   // tap: select, then tap the target
+  const z = document.elementFromPoint(e.clientX, e.clientY - 30); const dz = z && z.closest('.dz'); if (dz) hdDrop(d.src, dz);
+}
+function hdSay(m) { HD.msg = m; HD.msgUntil = HD.t + 1.6; }
+function hdDrop(src, dz) {
+  const H = HD, zone = dz.dataset.z, p = H.plate;
+  if (src === 'raw') { if (zone !== 'grill') return hdSay('Sausages go on the grill'); let i = dz.dataset.g != null ? +dz.dataset.g : -1; if (i < 0 || H.grill[i]) i = H.grill.findIndex(x => !x); if (i < 0) return hdSay('The grill is full'); H.grill[i] = {d: 0}; beep('tap'); }
+  else if (src.startsWith('grill:')) { const i = +src.split(':')[1], g = H.grill[i]; if (!g) return;
+    if (zone === 'bin') { H.grill[i] = null; return hdDraw(); }
+    if (zone !== 'plate') return; let b = dz.dataset.b != null ? +dz.dataset.b : -1; if (b < 0 || p.dogs[b].s != null) b = p.dogs.findIndex(x => x.s == null);
+    if (b < 0) return hdSay('Put a bun on the plate first'); if (g.d < HD_OK[0]) hdSay('Still raw! That will not please anyone'); p.dogs[b].s = g.d; H.grill[i] = null; beep('tap'); }
+  else if (src === 'bun') { if (zone !== 'plate') return hdSay('Buns go on the plate'); if (p.dogs.length >= 2) return hdSay('Two buns is the most a plate holds'); p.dogs.push({s: null, tops: []}); }
+  else if (HD_TOP_COL[src]) { if (zone !== 'plate') return; const t = dz.dataset.b != null ? [p.dogs[+dz.dataset.b]] : p.dogs; const ok = t.filter(x => x && x.s != null); if (!ok.length) return hdSay('Sauce goes on a hot dog, not an empty bun'); ok.forEach(x => { if (!x.tops.includes(src)) x.tops.push(src); }); beep('tap'); }
+  else if (src === 'soda') { if (zone !== 'plate') return; p.drink = true; }
+  hdDraw();
+}
+function hdServe() {
+  const H = HD, o = H.orders[H.i]; if (!o || H.busy) return; const p = H.plate, secs = H.t - H.custAt;
+  if (!p.dogs.length) return hdSay('The plate is empty');
+  const cooked = p.dogs.every(d => d.s != null && d.s >= HD_OK[0] && d.s < HD_BURN), perfect = cooked && p.dogs.every(d => d.s <= HD_OK[1]);
+  const ok = p.dogs.length === o.dogs && cooked && p.dogs.every(d => d.tops.length === o.tops.length && o.tops.every(t => d.tops.includes(t))) && p.drink === o.drink;
+  H.res.push({ok, perfect, secs: Math.round(secs * 10) / 10});
+  const sp = Math.max(0, Math.min(1, 1 - (secs - 8) / 17)), tip = ok ? Math.round(((120 + 260 * sp) * (perfect ? 1.2 : 1) + (o.drink ? 50 : 0)) * o.dogs * 0.8) + 20 * Math.floor(H.cooking) : 0; H.tips += tip;
+  const why = ok ? (perfect ? 'Perfect!' : 'Thanks!') : !cooked ? (p.dogs.some(d => d.s != null && d.s >= HD_BURN) ? 'This is burnt...' : p.dogs.some(d => d.s == null) ? 'Where is the sausage?' : 'This is raw!') : p.dogs.length !== o.dogs ? `I asked for ${o.dogs}...` : p.drink !== o.drink ? (o.drink ? 'And my drink?' : 'I did not order a drink') : 'That is not what I ordered.';
+  const b = document.querySelector('#hdcust .bubble'); if (b) b.innerHTML = `<b class="${ok ? 'good' : 'bad'} hf" style="font-size:22px">${why}</b>${ok ? `<div class="gold">Tip ${moneyTxt(tip)}${secs < 10 ? ' · fast!' : ''}</div>` : ''}`;
+  document.querySelector('#hdcust .who').classList.add(ok ? 'happy' : 'sad'); if (ok) { beep('coin'); if (perfect) buzz(30); } else beep('bad');
+  H.busy = true; setTimeout(() => { H.busy = false; H.i++; if (H.i >= H.orders.length) return hdFinish(false); hdNextCustomer(); }, 1100 / Math.min(4, hdSpeed()));
+}
+function hdFinish(timeUp) {
+  const H = HD; if (!H || !H.live) return; H.live = false; while (H.res.length < H.orders.length) H.res.push({ok: false});
+  const el = $('#hd'); if (el) el.remove(); HD = null; dispatch({type: 'shiftDone', results: H.res});
+  if (timeUp) toast('Time is up: the queue went elsewhere.', 'calendar', 'bad');
+}
 </script></body></html>
